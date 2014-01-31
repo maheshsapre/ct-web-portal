@@ -7,8 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> 
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="js/select2/select2.css" cache="false">
+  <link rel="stylesheet" href="css/plugin.css">
   <link rel="stylesheet" href="css/font.css" cache="false">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">  
   <!--[if lt IE 9]>
     <script src="js/ie/respond.min.js" cache="false"></script>
     <script src="js/ie/html5.js" cache="false"></script>
@@ -16,7 +18,7 @@
 </head>
 <body>
   <!-- header -->
-	<header id="header" class="navbar hidden-print">
+  <header id="header" class="navbar">
     <ul class="nav navbar-nav navbar-avatar pull-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">            
@@ -105,19 +107,12 @@
       <i class="icon-search text-muted"></i>
       <input type="text" class="input-sm form-control" placeholder="Search">
     </form>
-	</header>
+  </header>
   <!-- / header -->
   <!-- nav -->
-  <nav id="nav" class="nav-primary hidden-xs nav-vertical hidden-print">
+  <nav id="nav" class="nav-primary hidden-xs nav-vertical">
     <ul class="nav" data-spy="affix" data-offset-top="50">
       <li><a href="index.html"><i class="icon-dashboard icon-xlarge"></i><span>Dashboard</span></a></li>
-      <li class="active">
-        <a href="mail.html">
-          <b class="badge bg-danger pull-right">5</b>
-          <i class="icon-envelope-alt icon-xlarge"></i>
-          <span>Mail</span>
-        </a>
-      </li>
       <li class="dropdown-submenu">
         <a href="#"><i class="icon-th icon-xlarge"></i><span>Elements</span></a>
         <ul class="dropdown-menu">
@@ -136,7 +131,7 @@
           <li><a href="table.html">Table</a></li>
         </ul>
       </li>
-      <li><a href="form.html"><i class="icon-edit icon-xlarge"></i><span>Form</span></a></li>
+      <li class="active"><a href="form.html"><i class="icon-edit icon-xlarge"></i><span>Form</span></a></li>
       <li><a href="chart.html"><i class="icon-signal icon-xlarge"></i><span>Chart</span></a></li>
       <li class="dropdown-submenu">
         <a href="#"><i class="icon-link icon-xlarge"></i><span>Others</span></a>
@@ -156,113 +151,94 @@
     </ul>
   </nav>
   <!-- / nav -->
-  <section id="content" class="bg-white">
-    <div class="page-title clearfix hidden-print"><button class="btn btn-sm btn-info pull-right" onClick="window.print();">Print</button><span class="h3">Invoice</span></div>
-    <section class="padder m-t">
-      <i class="icon-apple icon-3x"></i>
+  <section id="content">
+    <section class="main padder">
+      <div class="clearfix">
+        <h4><i class="icon-edit"></i>Form</h4>
+      </div>
       <div class="row">
-        <div class="col-xs-6">
-          <h4>Apple Inc.</h4>
-          <p><a href="http://www.apple.com">www.apple.com</a></p>
-          <p>1 Infinite Loop <br>
-            95014 Cuperino, CA<br>
-            United States
-          </p>
-          <p>
-            Telephone:  800-692-7753<br>
-            Fax:  800-692-7753
-          </p>
+        <div class="col-sm-6">
+          <section class="panel">
+            <div class="panel-body">
+              <form class="form-horizontal" method="get" data-validate="parsley">      
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Photo</label>
+                  <div class="col-lg-9 media">
+                    <div class="bg-light pull-left text-center media-large thumb-large"><i class="icon-user inline icon-light icon-3x m-t-large m-b-large"></i></div>
+                    <div class="media-body">
+                      <input type="file" name="file" title="Change" class="btn btn-sm btn-info m-b-small"><br>
+                      <button class="btn btn-sm btn-default">Delete</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Email</label>
+                  <div class="col-lg-8">
+                    <input type="text" name="email" placeholder="test@example.com" class="bg-focus form-control" data-required="true" data-type="email">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Password</label>
+                  <div class="col-lg-8">
+                    <input type="password" name="password" placeholder="Password" class="bg-focus form-control">
+                    <div class="line line-dashed m-t-large"></div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Username</label>
+                  <div class="col-lg-8">
+                    <input type="text" name="username" placeholder="Username" data-required="true" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Account</label>
+                  <div class="col-lg-4">
+                    <select name="account" class="form-control">
+                      <option value="1">Editor</option>
+                      <option value="0">Admin</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Registered</label>
+                  <div class="col-lg-9">
+                    <input type="text" class="combodate form-control" data-format="DD-MM-YYYY" data-template="D  MMM  YYYY" name="datetime" value="21-12-2012">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Profile</label>
+                  <div class="col-lg-8">
+                    <textarea placeholder="Profile" rows="5" class="form-control" data-trigger="keyup" data-rangelength="[20,200]"></textarea>
+                    <div class="checkbox">
+                      <label>
+                        <input name="agree" type="checkbox"> Agree the <a href="#">terms and policy</a>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-9 col-lg-offset-3">                      
+                    <button type="submit" class="btn btn-white">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </section>
+       
         </div>
-        <div class="col-xs-6 text-right">
-          <p class="h4">#9048392</p>
-          <h5>29th Mar 2013</h5>           
-        </div>
-      </div>          
-      <div class="well m-t">
-        <div class="row">
-          <div class="col-xs-6">
-            <strong>TO:</strong>
-            <h4>John Smith</h4>
-            <p>
-              2nd Floor<br>
-              St John Street, Aberdeenshire 2541<br>
-              United Kingdom<br>
-              Phone: 031-432-678<br>
-              Email: youemail@gmail.com<br>
-            </p>
-          </div>
-          <div class="col-xs-6">
-            <strong>SHIP TO:</strong>
-            <h4>John Smith</h4>
-            <p>
-              2nd Floor<br>
-              St John Street, Aberdeenshire 2541<br>
-              United Kingdom<br>
-              Phone: 031-432-678<br>
-              Email: youemail@gmail.com<br>
-            </p>
+        <div class="col-sm-6">
+          <div class="panel">
+            <div class="clearfix panel-body">
+        
+            
+            </div>
           </div>
         </div>
       </div>
-      <p class="m-t m-b">Order date: <strong>26th Mar 2013</strong><br>
-          Order status: <span class="label bg-success">Shipped</span><br>
-          Order ID: <strong>#9399034</strong>
-      </p>
-      <div class="line"></div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th width="60">QTY</th>
-            <th>DESCRIPTION</th>
-            <th width="140">UNIT PRICE</th>
-            <th width="90">TOTAL</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>iPhone 5 32GB White & Silver (GSM) Unlocked</td>
-            <td>$749.00</td>
-            <td>$749.00</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>iPad mini with Wi-Fi 32GB - White & Silver</td>
-            <td>$429.00</td>
-            <td>$858.00</td>
-          </tr>
-          <tr>
-            <td colspan="3" class="text-right"><strong>Subtotal</strong></td>
-            <td>$1607.00</td>
-          </tr>
-          <tr>
-            <td colspan="3" class="text-right no-border"><strong>Shipping</strong></td>
-            <td>$0.00</td>
-          </tr>
-          <tr>
-            <td colspan="3" class="text-right no-border"><strong>VAT Included in Total</strong></td>
-            <td>$0.00</td>
-          </tr>
-          <tr>
-            <td colspan="3" class="text-right no-border"><strong>Total</strong></td>
-            <td><strong>$1607.00</strong></td>
-          </tr>
-        </tbody>
-      </table>
-          
     </section>
   </section>
-  <!-- footer -->
-  <footer id="footer" class="hidden-print">
-    <div class="text-center padder clearfix">
-      <p>
-        <small>&copy; first 2013, Mobile first web app framework base on Bootstrap</small><br><br>
-        <a href="#" class="btn btn-xs btn-circle btn-twitter"><i class="icon-twitter"></i></a>
-        <a href="#" class="btn btn-xs btn-circle btn-facebook"><i class="icon-facebook"></i></a>
-        <a href="#" class="btn btn-xs btn-circle btn-gplus"><i class="icon-google-plus"></i></a>
-      </p>
-    </div>
-  </footer>
+
   <!-- / footer -->
 	<script src="js/jquery.min.js"></script>
   <!-- Bootstrap -->
@@ -270,10 +246,21 @@
   <!-- app -->
   <script src="js/app.js"></script>
   <script src="js/app.plugin.js"></script>
-  <script src="js/app.data.js"></script>  
-  <!-- Sparkline Chart -->
-  <script src="js/charts/sparkline/jquery.sparkline.min.js"></script>
-  <!-- Easy Pie Chart -->
-  <script src="js/charts/easypiechart/jquery.easy-pie-chart.js"></script>
+  <script src="js/app.data.js"></script>
+  <!-- fuelux -->
+  <script src="js/fuelux/fuelux.js"></script>
+  <!-- datepicker -->
+  <script src="js/datepicker/bootstrap-datepicker.js"></script>
+  <!-- slider -->
+  <script src="js/slider/bootstrap-slider.js"></script>
+  <!-- file input -->  
+  <script src="js/file-input/bootstrap.file-input.js"></script>
+  <!-- combodate -->
+  <script src="js/combodate/moment.min.js"></script>
+  <script src="js/combodate/combodate.js"></script>
+  <!-- parsley -->
+  <script src="js/parsley/parsley.min.js"></script>
+  <!-- select2 -->
+  <script src="js/select2/select2.min.js"></script>
 </body>
 </html>

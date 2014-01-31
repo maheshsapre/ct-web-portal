@@ -305,7 +305,8 @@ $(document).ready(function() {
 	    });
 	});
 
-	// datatable
+	// datatable 
+	// todo: Modify this method to load data for orders.
 	$('[data-ride="datatables"]').each(function() {
 		var oTable = $(this).dataTable( {
 			"bProcessing": true,
@@ -313,11 +314,13 @@ $(document).ready(function() {
 			"sDom": "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'row'<'col-sm-6'i><'col col-sm-6'p>>",
 			"sPaginationType": "full_numbers",
 			"aoColumns": [
-				{ "mData": "engine" },
-				{ "mData": "browser" },
-				{ "mData": "platform" },
-				{ "mData": "version" },
-				{ "mData": "grade" }
+				{ "mData": "order_id" },
+				{ "mData": "perk" },
+				{ "mData": "order_date" },
+				{ "mData": "shipment_charges_applicable" },
+				{ "mData": "shipment_paid" },
+				{ "mData": "amount_difference" },
+				{ "mData": "order_status" }    
 			]
 		} );
 	});

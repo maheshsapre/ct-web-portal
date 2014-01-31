@@ -2,13 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Mobile first web app theme | first</title>
+  <title>Gecko</title>
   <meta name="description" content="mobile first, app, web app, responsive, admin dashboard, flat, flat ui">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> 
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/font.css" cache="false">
   <link rel="stylesheet" href="css/style.css">
+
+
+
+  <link rel="stylesheet" href="js/select2/select2.css" cache="false">
+  <link rel="stylesheet" href="css/plugin.css">
+  <link rel="shortcut icon" href="http://geckotag.me/wp-content/themes/GeckoTheme/favicon.ico" />
   <!--[if lt IE 9]>
     <script src="js/ie/respond.min.js" cache="false"></script>
     <script src="js/ie/html5.js" cache="false"></script>
@@ -16,47 +22,58 @@
 </head>
 <body>
   <!-- header -->
-  <header id="header" class="navbar bg bg-black">
-    <a href="docs.html" class="btn btn-link pull-right m-t-mini"><i class="icon-question icon-xlarge text-default"></i></a>
-    <a class="navbar-brand" href="#">first</a>
+  <header id="header" class="navbar">
+    <a href="docs.html" class="btn btn-link pull-right m-t-mini"></a>
+    <a class="navbar-brand" href="#"><img style="width:100px;height:30px;" src="images/gecko_logo.png"></img></a>
   </header>
   <!-- / header -->
   <section id="content">
     <div class="main padder">
       <div class="row">
+        <div class="col-lg-6">
         <div class="col-lg-4 col-lg-offset-4 m-t-large">
-          <section class="panel">
+          <section class="panel" style="width:450px;float:left;">
             <header class="panel-heading text-center">
               Sign up
             </header>
-            <form action="index.html" class="panel-body">
+
+            <form  action="index.html" class="panel-body" data-validate="parsley">
               <div class="block">
-                <label class="control-label">Display name</label>
-                <input type="text" placeholder="eg. Your name or company" class="form-control">
+                <label class="control-label">First name</label>
+                <input type="text" placeholder="first name" class="form-control" data-required="true">
+              </div>
+              <div class="block">
+                <label class="control-label">Last name</label>
+                <input type="text" placeholder="last name" class="form-control" data-required="true">
               </div>
               <div class="block">
                 <label class="control-label">Your email address</label>
-                <input type="email" placeholder="test@example.com" class="form-control">
+                <input type="text" name="email" placeholder="test@example.com" class="form-control" data-required="true" data-type="email" readonly="readonly">
               </div>
+
               <div class="block">
-                <label class="control-label">Type a password</label>
-                <input type="password" id="inputPassword" placeholder="Password" class="form-control">
+                <label class="control-label">Password</label>
+                <input type="password" id="inputPassword" placeholder="password" data-required="true" class="form-control">
               </div>
-              <div class="checkbox">
+               <div class="block">
+                <label class="control-label">Confirm Password</label>
+                <input type="password" id="inputPassword1" placeholder="password" data-required="true" class="form-control" data-equalto="#inputPassword">
+              </div>
+             <!--  <div class="checkbox">
                 <label>
                   <input type="checkbox"> Agree the <a href="#">terms and policy</a>
                 </label>
-              </div>
+              </div> -->
               <button type="submit" class="btn btn-info">Sign up</button>
-              <div class="line line-dashed"></div>
-              <div class="row">
+              <!-- <div class="line line-dashed"></div> -->
+            <!--   <div class="row">
                 <div class="col-sm-6 text-center">
                    <a href="#" class="btn btn-facebook btn-circle btn-sm"><i class="icon-facebook"></i>Sign up with Facebook</a>
                 </div>
                 <div class="col-sm-6 text-center">
                   <a href="#" class="btn btn-twitter btn-circle btn-sm"><i class="icon-twitter"></i>Sign up with Twitter</a>
                 </div>
-              </div>
+              </div> -->
               <div class="line line-dashed"></div>
               <p class="text-muted text-center"><small>Already have an account?</small></p>
               <a href="signin.html" class="btn btn-white btn-block">Sign in</a>
@@ -64,16 +81,56 @@
           </section>
         </div>
       </div>
+          <div class="col-lg-6">
+            <div class="col-lg-offset-4 m-t-large">
+          <!-- .crousel slide -->
+          <section class="panel">
+            <div class="carousel slide auto panel-body" id="c-slide">
+                <ol class="carousel-indicators out">
+                  <li data-target="#c-slide" data-slide-to="0" class=""></li>
+                  <li data-target="#c-slide" data-slide-to="1" class="active"></li>
+                  <li data-target="#c-slide" data-slide-to="2" class=""></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="item active">
+                    <p class="text-center">
+                      <em class="h4 text-mute">Save your time</em><br>
+                      <small class="text-muted">Many components</small>
+                    </p>
+                  </div>
+                  <div class="item">
+                    <p class="text-center">
+                      <em class="h4 text-mute">Nice and easy to use</em><br>
+                      <small class="text-muted">Full documents</small>
+                    </p>
+                  </div>
+                  <div class="item">
+                    <p class="text-center">
+                      <em class="h4 text-mute">Mobile header first</em><br>
+                      <small class="text-muted">Mobile/Tablet/Desktop</small>
+                    </p>
+                  </div>
+                </div>
+                <a class="left carousel-control" href="#c-slide" data-slide="prev">
+                  <i class="icon-chevron-left"></i>
+                </a>
+                <a class="right carousel-control" href="#c-slide" data-slide="next">
+                  <i class="icon-chevron-right"></i>
+                </a>
+            </div>
+          </section>
+        </div>
+      </div>
+      </div>
     </div>
   </section>
   <!-- footer -->
   <footer id="footer">
     <div class="text-center padder clearfix">
       <p>
-        <small>&copy; first 2013, Mobile first web app framework base on Bootstrap</small><br><br>
-        <a href="#" class="btn btn-xs btn-circle btn-twitter"><i class="icon-twitter"></i></a>
-        <a href="#" class="btn btn-xs btn-circle btn-facebook"><i class="icon-facebook"></i></a>
-        <a href="#" class="btn btn-xs btn-circle btn-gplus"><i class="icon-google-plus"></i></a>
+        <small>&copy; Connovate Technology Pvt. Ltd. 2014</small><br><br>
+        <a href="https://www.twitter.com/mygeckotag" class="btn btn-xs btn-circle btn-twitter"><i class="icon-twitter"></i></a>
+        <a href="https://www.facebook.com/mygeckotag" class="btn btn-xs btn-circle btn-facebook"><i class="icon-facebook"></i></a>
       </p>
     </div>
   </footer>
@@ -85,5 +142,29 @@
   <script src="js/app.js"></script>
   <script src="js/app.plugin.js"></script>
   <script src="js/app.data.js"></script>
+    <script src="js/parsley/parsley.min.js"></script>
+
+    <script src="js/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="js/bootstrap.js"></script>
+  <!-- app -->
+  <script src="js/app.js"></script>
+  <script src="js/app.plugin.js"></script>
+  <script src="js/app.data.js"></script>
+  <!-- fuelux -->
+  <script src="js/fuelux/fuelux.js"></script>
+  <!-- datepicker -->
+  <script src="js/datepicker/bootstrap-datepicker.js"></script>
+  <!-- slider -->
+  <script src="js/slider/bootstrap-slider.js"></script>
+  <!-- file input -->  
+  <script src="js/file-input/bootstrap.file-input.js"></script>
+  <!-- combodate -->
+  <script src="js/combodate/moment.min.js"></script>
+  <script src="js/combodate/combodate.js"></script>
+  <!-- parsley -->
+
+  <!-- select2 -->
+  <script src="js/select2/select2.min.js"></script>
 </body>
 </html>
