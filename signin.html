@@ -31,6 +31,7 @@
             <header class="panel-heading text-center">
               Sign in
             </header>
+			
             <form action="dashboard.html" class="panel-body">
               <div class="block">
                 <label class="control-label">Email</label>
@@ -45,8 +46,13 @@
                   <input type="checkbox"> Keep me logged in
                 </label>
               </div>
+			  <div class="alert alert-danger ">
+				<button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+				<i class="icon-ban-circle icon-large"></i><strong>Validation failed!</strong> Did you enter correct email and password?
+			 </div>
               <a href="#" class="pull-right m-t-mini"><small>Forgot password?</small></a>
               <button type="submit" class="btn btn-info">Sign in</button>
+			  
               <div class="line line-dashed"></div>
         
               <p class="text-muted text-center"><small>Do not have an account?</small></p>

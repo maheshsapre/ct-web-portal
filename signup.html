@@ -36,7 +36,6 @@
             <header class="panel-heading text-center">
               Sign up
             </header>
-
             <form  action="dashboard.html" class="panel-body" data-validate="parsley">
               <div class="block">
                 <label class="control-label">First name</label>
@@ -59,21 +58,11 @@
                 <label class="control-label">Confirm Password</label>
                 <input type="password" id="inputPassword1" placeholder="password" data-required="true" class="form-control" data-equalto="#inputPassword">
               </div>
-             <!--  <div class="checkbox">
-                <label>
-                  <input type="checkbox"> Agree the <a href="#">terms and policy</a>
-                </label>
-              </div> -->
+			  <div class="alert alert-danger ">
+				<button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+				<i class="icon-ban-circle icon-large"></i><strong>Validation failed!</strong> Did you enter correct email and password?
+			 </div>
               <button type="submit" class="btn btn-info">Sign up</button>
-              <!-- <div class="line line-dashed"></div> -->
-            <!--   <div class="row">
-                <div class="col-sm-6 text-center">
-                   <a href="#" class="btn btn-facebook btn-circle btn-sm"><i class="icon-facebook"></i>Sign up with Facebook</a>
-                </div>
-                <div class="col-sm-6 text-center">
-                  <a href="#" class="btn btn-twitter btn-circle btn-sm"><i class="icon-twitter"></i>Sign up with Twitter</a>
-                </div>
-              </div> -->
               <div class="line line-dashed"></div>
               <p class="text-muted text-center"><small>Already have an account?</small></p>
               <a href="signin.html" class="btn btn-white btn-block">Sign in</a>
