@@ -12,105 +12,77 @@
   <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/ajax.css">
   <link rel="shortcut icon" href="images/favicon.ico" />
-   <script src="js/me.ui.js"></script>
-<script src="js/config.js"></script>
-<script src="js/orders.js"></script>
-<script type="text/javascript">
-
-</script>
-
+  <script src="js/me.ui.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/datatable3.js"></script>
   <!--[if lt IE 9]>
     <script src="js/ie/respond.min.js" cache="false"></script>
     <script src="js/ie/html5.js" cache="false"></script>
-  <![endif]-->
-</head>
-<body class="navbar-fixed" onload="myFunction()">
-  <!-- header -->
-    <div id="loading"></div> 
-	<header id="header" class="navbar">
-    <ul class="nav navbar-nav hidden-xs pull-right">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">            
-          <span class="hidden-xs-only" id="me"></span>
-          <b class="caret hidden-xs-only"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="https://geckotag.zendesk.com">Help</a></li>
-          <li><a href="javascript:logout();">Logout</a></li>
-        </ul>
-      </li>
-    </ul>
-    <a class="navbar-brand" href="#"><img class="col-lg-6" src="images/gecko_logo.png"></img></a>
-    <button type="button" class="btn btn-link pull-left nav-toggle visible-xs" data-toggle="class:slide-nav slide-nav-left" data-target="body">
-      <i class="icon-reorder icon-xlarge text-default"></i>
-    </button>
-   
-	</header>
-  <!-- / header -->
-  <!-- nav -->
- <nav id="nav" class="nav-primary hidden-xs nav-vertical">
-    <ul class="nav" data-spy="affix" data-offset-top="50">
-      <li  id="admin" style="display: none;"><a href="dashboard.html"><i class="icon-dashboard icon-xlarge"></i><span>Dashboard</span></a></li>
-      
-      <li id="admin3" style="display: none;" class="dropdown-submenu">
-        <a href="orders.html "><i class="icon-list icon-xlarge"></i><span>Orders</span></a>
-        
-      </li>
-      <li class="dropdown-submenu"><a id="admin2" style="display: none;" href="#"><i class="icon-edit icon-xlarge"></i><span>Account</span></a>
-      <ul class="dropdown-menu">
-          <li><a href="personalinfo.html">Personal Information</a></li>
-          <li><a href="addresses.html">Addresses</a></li>
-           <li><a href="changePassword.html">Change Password</a></li>
-        </ul>
-      </li>
-     <li><a href="backers.html?page=1" id="admin1" style="display: none;"><i class="icon-list icon-xlarge"></i><span>Backers</span></a></li>
-   
-    </ul>
-  </nav>
-  <!-- / nav -->
-  <section id="content">
-    <section class="main padder">
-   
-          <!-- .breadcrumb -->
-          <ul class="breadcrumb">
-            <li><a href="#"><i class="icon-home"></i>Home</a></li>
-           <!--  <li><a href="#"><i class="icon-list-ul"></i>Elements</a></li> -->
-            <li class="active">Orders</li>
+    <![endif]-->
+  </head>
+  <body class="navbar-fixed" onload="myFunction()">
+    <!-- header -->
+        <div id="loading"></div> 
+    <header id="header" class="navbar">
+      <ul class="nav navbar-nav hidden-xs pull-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">            
+            <span class="hidden-xs-only" id="me"></span>
+            <b class="caret hidden-xs-only"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="https://geckotag.zendesk.com">Help</a></li>
+            <li><a href="signin.html">Logout</a></li>
           </ul>
-          <!-- / .breadcrumb -->
+        </li>
+      </ul>
+      <a class="navbar-brand" href="#"><img class="col-lg-6" src="images/gecko_logo.png"></img></a>
+      <button type="button" class="btn btn-link pull-left nav-toggle visible-xs" data-toggle="class:slide-nav slide-nav-left" data-target="body">
+        <i class="icon-reorder icon-xlarge text-default"></i>
+      </button>
+
+    </header>
+    <!-- / header -->
+    <!-- nav -->
+    <nav id="nav" class="nav-primary hidden-xs nav-vertical">
+      <ul class="nav" data-spy="affix" data-offset-top="50">
+        <li class="active"><a href="dashboard.html"><i class="icon-dashboard icon-xlarge"></i><span>Dashboard</span></a></li>
+
+        <li class="dropdown-submenu">
+          <a href="orders.html" id="admin3" style="display: none;"><i class="icon-list icon-xlarge"></i><span>Orders</span></a>
+
+        </li>
+        <li class="dropdown-submenu"><a id="admin2" style="display: none;" href="#"><i class="icon-edit icon-xlarge"></i><span>Account</span></a>
+          <ul class="dropdown-menu">
+            <li><a href="personalinfo.html">Personal Information</a></li>
+            <li><a href="addresses.html">Addresses</a></li>
+            <li><a href="changePassword.html">Change Password</a></li>
+          </ul>
+        </li>
+        <li><a href="backers.html?page=1"><i class="icon-list icon-xlarge"></i><span>Backers</span></a></li>
+
+      </ul>
+    </nav>
+    <!-- / nav -->
+    <section id="content">
+      <section class="main padder">
+
+        <!-- .breadcrumb -->
+        <ul class="breadcrumb">
+          <li><a href="#"><i class="icon-home"></i>Home</a></li>
+          <!--  <li><a href="#"><i class="icon-list-ul"></i>Elements</a></li> -->
+          <li class="active">Dashboard</li>
+          <li class="active">Pending action gecko team</li>
+
+        </ul>
+        <!-- / .breadcrumb -->
         
-	<div class="clearfix">
-				<h4>Orders</h4>
-			</div>
-      <div class="row">
-    
-        <div class="col-lg-12">
-          
-          <section class="panel padder">
-		  <div class="clearfix">
-				<p></p>
-			</div>
-      <div id="alert">
-			
-    </div>
-		<!-- 	<div class="alert alert-danger">
-				<button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
-				<i class="icon-ban-circle icon-large"></i><strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
-			</div>
-			<div class="alert alert-success">
-			<button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
-			<i class="icon-ok-sign icon-large"></i><strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important alert message</a>.
-			</div>
-			<div class="alert alert-info">
-			<button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
-			<i class="icon-info-sign icon-large"></i><strong>Heads up!</strong> This <a href="#" class="alert-link">alert needs your attention</a>, but it's not super important.
-			</div> -->
-		  
-          </section>
+        <div class="clearfix">
+          <h4>Pending Action</h4>
         </div>
-      </div>   
-      <div class="row">
-        <div class="col-lg-12">
+        
+        <div class="row">
+          <div class="col-lg-12">
           <div class="btn-group" >
                   <button  id="action" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
                   <ul class="dropdown-menu">
@@ -119,52 +91,57 @@
                     <li><a data-toggle="modal"href="#modalnumber" onclick="javascript:order('3');">Pending Action - Gecko Team </a></li>
                     <li><a data-toggle="modal" href="#modalnumber" onclick="javascript:order('4');">Pending Shipment - All issues resolved </a></li>
                     <li><a data-toggle="modal" href="#modalnumber" onclick="javascript:order('5');">Shipped / Delivered </a></li>
+                  
                    
                   </ul>
                 </div>
               </div>
               <br/>
-    <div class="col-lg-12">
+               <div class="col-lg-12">
                <div><a id="decrement" class="btn btn-white btn-xs" href="javascript:decrement();">Previous<a><a id="increment"class="btn btn-white btn-xs"  href="javascript:increment();">Next</a></div>
              </div>
-        <div class="col-lg-12">
-          
-          <section class="panel">
-			
-            <div style="overflow-x:auto;" class="table-responsive">
-              <table class="table table-striped m-b-none" data-ride="datatables" id="orders">
-                <thead>
-                 <tr>
-                  <th width="10%">Order ID</th>
-                  <th width="10%">Order Source</th>
-                  <th width="10%">Pledge Id</th>
-                  <th width="10%">order_date</th>
+          <div class="col-lg-12">
+
+            <section class="panel">
+             
+              <div  style="overflow-x:auto;" class="table-responsive">
+                <table  class="table table-striped m-b-none" id="example" data-ride="datatables3">
+                  <thead>
+                   <tr>
+                     <th></th>
+                     <th width="10%">Pledge Id</th>
+                      <th width="10%">Backer Email</th>
                        <th width="10%">Perk</th>
-                  <th width="10%">quantity</th>
-                  <th width="10%">Amount</th>
-                   <th width="10%">amount_difference</th>
-                  <th width="15%">shipping_applicable</th>
-                  <th width="15%">shipping_paid</th>
-                      <th width="10%">order_status</th>
-                  <th width="10%">notes</th>
-                  <th width="10%">perk_id</th>
-                
-                  <th width="10%">backer_id</th>
-                  <th width="10%">address_id</th>
-               
-                  <th width="10%">created_at</th>
-                  <th width="10%">updated_at</th>
-                   <th width="10%">update Adddress</th>
-                  </tr>
-                </thead>
-                <tbody>
+                       <th width="10%">Order Date</th>
+                     <th width="10%">Amount</th>
+                     <th width="10%">Amount Difference</th>
+           
+                     <th width="10%">Shipping Applicable</th>
+
+                     <th width="10%">Shipping Paid</th>
+                            <th width="10%">Order Status</th>
+                             <th width="10%">Notes</th> 
+                     <th width="10%">Backer Id</th>
+                     <th width="10%">Created At</th>
+                       <th width="10%">Order Id</th>
+                   
+                   
+                    
+                     <th width="10%">Order Source</th>
+              
+                     <th width="10%">Perk Id</th>
+                     <th width="10%">Quantity</th>
+                  
+                     <th width="10%">Updated At</th>
+                      <th width="10%">Address Id</th>
+                     
+                     <th width="80%">admin</th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                  
                 </tbody>
-                <tfoot>
-                  <tr>
-                    <th style="text-align:right" colspan="6">Total Amount:</th>
-                    <th></th>
-                  </tr>
-                </tfoot>
+
               </table>
             </div>
           </section>
@@ -172,7 +149,7 @@
       </div>
     </section>
   </section>
- <div id="modalnumber"  class="modal fade">
+  <div id="modalnumber"  class="modal fade">
 
     <div   class="modal-dialog">
       <div class="modal-content">
@@ -182,7 +159,7 @@
         </div>
         <div  class="modal-body">
          <div class="panel-body">
-          <form class="form-horizontal"  action="javascript: orderStatus();" id="updateStatus" data-validate="parsley">  
+          <form class="form-horizontal"  action="javascript: orderStatus();" data-validate="parsley">  
               <div class="form-group">
                   <label class="control-label">Notes:</label>
                   <textarea class="form-control" name="notes" placeholder="Content" id="myNotes" rows="5"></textarea>
@@ -200,22 +177,24 @@
           </div>
         </form>
       </div>
+
   <div id="modal"  class="modal fade">
 
     <div   class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><i class="icon-remove"></i></button>
-          <h4 class="modal-title" id="myModalLabel">Update Address</h4>
+          <h4 class="modal-title" id="myModalLabel">Edit Address</h4>
         </div>
         <div  class="modal-body">
          <div class="panel-body">
           <form class="form-horizontal"  action="javascript: updateAddresses();" id="updateAddresses" data-validate="parsley">  
             
 
-              <input type="hidden"  name="address_id" id="address_id" placeholder="" class="bg-focus form-control">
+              <input type="hidden" name="address_id" id="address_id" placeholder="" class="bg-focus form-control">
 
-  
+
+           
             <div class="form-group">
               <label class="control-label">Name</label>
 
@@ -226,32 +205,32 @@
             <div class="form-group">
               <label class="control-label">Address</label>
 
-              <input type="text" name="address_line_1" id="address_line_1" placeholder="Address Line 1" class="bg-focus form-control">
+              <input type="text" name="address_line_1"  placeholder="Address Line 1" id="address_line_1" class="bg-focus form-control">
 
 
             </div>
             <div class="form-group">
               <label class="control-label"></label>
 
-              <input type="text" name="address_line_2"  id="address_line_2" placeholder="Address Line 2" class="bg-focus form-control"   >
+              <input type="text" name="address_line_2"  id="address_line_2" placeholder="Address Line 2" class="bg-focus form-control" data-required="true"  >
               
             </div>
-               <table>
+              <table>
               <tr>
                 <td>
             <div class="form-group">
               <label class="control-label">City</label>
               
               <input type="text" name="city" placeholder="City" id="city" class="bg-focus form-control">
-
+             
 
             </div>
           </td>
           <td>
-            <div class="form-group" style="padding-left:80px;">
+            <div style="padding-left:80px;" class="form-group">
               <label class="control-label">State/Province</label>
 
-              <input type="text" name="state" placeholder="State/Province" id="state" class="bg-focus form-control">
+              <input type="text" name="state"  id="state" placeholder="State/Province" class="bg-focus form-control">
 
 
             </div>
@@ -262,13 +241,13 @@
             <div class="form-group">
               <label class="control-label">Zip/Postal Code</label>
 
-              <input type="text" data-type="number" name="zip_code" id="zip_code" placeholder="Zip/Postal Code" class="bg-focus form-control">
+              <input type="text" id="zip_code" data-type="number" name="zip_code" placeholder="Zip/Postal Code" class="bg-focus form-control">
 
             </div>
-            </td>
-            <td >
+          </td>
+          <td>
             <div style="padding-left:80px;padding-top:10px;" class="form-group">
-              <label  class="control-label">Country</label>
+              <label class="control-label">Country</label>
 
                   <!--   <select name="gender" class="form-control">
                       <option value="0">Select</option>
@@ -277,8 +256,9 @@
                     </select> -->
 
                     <div class="m-b">
-                      <select id="select2-option" name="country" id="country" style="width:260px">
-                       <option value="">Country...</option>
+                      <select id="select2-option" name="country"  style="width:260px">
+                   
+<option value="">Country...</option>
 <option value="Afganistan">Afghanistan</option>
 <option value="Albania">Albania</option>
 <option value="Algeria">Algeria</option>
@@ -511,7 +491,7 @@
 <option value="Ukraine">Ukraine</option>
 <option value="United Arab Erimates">United Arab Emirates</option>
 <option value="United Kingdom">United Kingdom</option>
-<option value="United States of America">United States of America</option>
+<option value="United States">United States of America</option>
 <option value="Uraguay">Uruguay</option>
 <option value="Uzbekistan">Uzbekistan</option>
 <option value="Vanuatu">Vanuatu</option>
@@ -526,15 +506,19 @@
 <option value="Zaire">Zaire</option>
 <option value="Zambia">Zambia</option>
 <option value="Zimbabwe">Zimbabwe</option>
+
+                       
                       </select>
                     </div>
 
                   </div>
                 </td>
-                  </table>
+              </table>
                   <div class="form-group">
                     <label class="control-label">Phone/Mobile Number</label>
-                    <input type="text" name="phone_no" data-type="phone" id="phone_no" placeholder="Phone/Mobile Number" class="bg-focus form-control"/>
+
+                    <input type="text" name="phone_no" data-type="phone" id="phone_no" placeholder="Phone/Mobile Number" class="bg-focus form-control">
+
                   </div>
                   <input type="hidden" id="updateAddress_authentication_token" name="authentication_token" value="">
 
@@ -549,60 +533,147 @@
           </div>
         </form>
       </div>
-  <!-- footer -->
-  <footer id="footer">
-    <div class="text-center padder clearfix">
-      <p>
-        <small>&copy; Connovate Technology Pvt. Ltd. 2014</small><br><br>
-        <a href="https://www.twitter.com/mygeckotag" class="btn btn-xs btn-circle btn-twitter"><i class="icon-twitter"></i></a>
-        <a href="https://www.facebook.com/mygeckotag" class="btn btn-xs btn-circle btn-facebook"><i class="icon-facebook"></i></a>
-      </p>
-    </div>
-  </footer>
-  <!-- / footer -->
-	<script src="js/jquery.min.js"></script>
-  <!-- Bootstrap -->
-  <script src="js/bootstrap.js"></script>
-  <!-- fuelux -->
-  <script src="js/fuelux/fuelux.js"></script>
-  <script src="js/underscore-min.js"></script>
-  <!-- datatables -->
-  <script src="js/datatables/jquery.dataTables.min.js"></script>
-  <!-- Sparkline Chart -->
-  <script src="js/charts/sparkline/jquery.sparkline.min.js"></script>
-  <!-- Easy Pie Chart -->
-  <script src="js/charts/easypiechart/jquery.easy-pie-chart.js"></script>
+
+      <div id="modalShipping"  class="modal fade">
+
+        <div   class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><i class="icon-remove"></i></button>
+              <h4 class="modal-title" id="myModalLabel">Add Order</h4>
+            </div>
+            <div  class="modal-body">
+             <div class="panel-body">
+              <form class="form-horizontal"  action="javascript:addOrder();" id="addOrder" data-validate="parsley">  
+
+
+                  <input type="hidden" name="backer_id" id="backer_id" placeholder="" class="bg-focus form-control">
+                  
+
+
+                
+                  <input type="hidden" name="address_id" id="address_Orderid" placeholder="" class="bg-focus form-control">
+                  
+
+                
+            <!--       <input type="hidden" name="order_source" id="order_source" class="bg-focus form-control"> -->
+                  
+
+             
+              <!--   <div class="form-group">
+                  <label class="control-label">Pledge Id</label>
+
+                  <input type="text" name="reference_no" id="refrence_number" placeholder="Address Line 1" class="bg-focus form-control">
+
+
+                </div> -->
+                <div class="form-group">
+                  <label class="control-label">Amount</label>
+
+                  <input type="text" name="amount" placeholder="amount" class="bg-focus form-control">
+
+
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Perk</label>
+                  <div class="m-b">
+                    <select id="select2-option" name="perk" style="width:260px">
+                      <optgroup label="Select a perk">
+                        <option value="DSLR Camera Trigger Cable">DSLR Camera Trigger Cable</option>
+                        <option value="Early Gecko">Early Gecko</option>
+                        <option value="Gecko ">Gecko </option>
+                        <option value="Gecko * 2">Gecko * 2</option>
+                        <option value="Gecko * 4">Gecko * 4</option>
+                        <option value="Gecko * 6">Gecko * 6</option>
+                        <option value="Gecko Gateway Coupon">Gecko Gateway Coupon</option>
+                        <option value="Gecko Re-Seller Pack">Gecko Re-Seller Pack</option>
+                        <option value="Gecko Trio">Gecko Trio </option>
+                        <option value="Luggage Tag">Luggage Tag</option>
+                        <option value="Pink Gecko * 1">Pink Gecko * 1 </option>
+                        <option value="VB Geeks">VB Geeks </option>
+                        <option value="Pink Gecko * 1">Shipping Charges</option>
+                      </optgroup>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Notes</label>
+                  <textarea class="form-control" name="notes" placeholder="Content" rows="3"></textarea>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-sm btn-default">Save</button>
+                <button type="button" class="btn btn-sm btn-primary" id="closeButton" data-dismiss="modal">Close</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div>
+        </form>
+      </div>
+      <!-- footer -->
+      <div id="modal3" class="modal fade">
+    <form class="m-b-none">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><i class="icon-remove"></i></button>
+            <h4 class="modal-title" id="myModalLabel">Post your first idea</h4>
+          </div>
+          <div class="modal-body">
+            
+            <div class="block">
+              <label class="control-label">Content</label>
+              <textarea class="form-control" placeholder="Content" rows="5"></textarea>
+            </div>
+           
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Save</button>
+            <button type="button" class="btn btn-sm btn-primary" data-loading-text="Publishing...">Publish</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div>
+    </form>
+  </div>
+</div>
+      <form id="pendingActionGeckoTeam">
+       <input type="hidden" id="order_status_type" name="order_status_type" value="">
+           <input type="hidden" id="pageId" name="page" value="">
+     </form>
+     <footer id="footer">
+      <div class="text-center padder clearfix">
+        <p>
+          <small>&copy; Connovate Technology Pvt. Ltd. 2014</small><br><br>
+          <a href="https://www.twitter.com/mygeckotag" class="btn btn-xs btn-circle btn-twitter"><i class="icon-twitter"></i></a>
+          <a href="https://www.facebook.com/mygeckotag" class="btn btn-xs btn-circle btn-facebook"><i class="icon-facebook"></i></a>
+        </p>
+      </div>
+    </footer>
+    <!-- / footer -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="js/bootstrap.js"></script>
+    <!-- fuelux -->
+    <script src="js/fuelux/fuelux.js"></script>
+    <script src="js/underscore-min.js"></script>
+    <!-- datatables -->
+    <script src="js/datatables/jquery.dataTables.min.js"></script>
+    <!-- Sparkline Chart -->
+    <script src="js/charts/sparkline/jquery.sparkline.min.js"></script>
+    <!-- Easy Pie Chart -->
+    <script src="js/charts/easypiechart/jquery.easy-pie-chart.js"></script>
       <script src="js/parsley/parsley.min.js"></script>
-  <!-- app -->
-  <script src="js/app.js"></script>
-  <script src="js/app.plugin.js"></script>
-  <script src="js/app.data.js"></script>
-   <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <!-- app -->
+    <script src="js/app.js"></script>
+    <script src="js/app.plugin.js"></script>
+
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="js/jquery_cookie.js"></script>
     <script src="js/jquery.serialize-object.compiled.js"></script>
-  <script type="text/javascript">
-   role();
-setCurrentUserName();
-function urlParameterValue( name ){
-    name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");  
-    var regexS = "[\\?&]"+name+"=([^&#]*)";  
-    var regex = new RegExp( regexS );  
-    var results = regex.exec( window.location.href ); 
-    if( results == null )    return "";  
-    else    return results[1];}
-    var id = urlParameterValue( 'id' );
-    if(id!=""){
-    getBackerOrdersId(id);
-    }
- if(getRoles()!="admin"){
-getBackerOrders();
-}
- $(document).ready(function()
-{
-
-            $('#admin3').addClass("active")
-});
-</script>
-<script src="js/bootbox.min.js"></script>
-</body>
-</html>
+    <script type="text/javascript">
+    setCurrentUserName();
+    pendingActionGeckoTeam();
+    </script>
+    <script src="js/app.data.js"></script>
+    <script src="js/bootbox.min.js"></script>
+  </body>
+  </html>

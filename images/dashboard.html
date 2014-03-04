@@ -1,4 +1,4 @@
-<html>
+<html lang="en">
 <head>
        <script src="js/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
@@ -30,7 +30,7 @@
 #percent { position:absolute; display:inline-block; top:3px; left:48%; }
 </style>
 </head>
-<body class="navbar-fixed" onload="myFunction()">
+<body class="navbar-fixed">
   <!-- header -->
    <div id="loading"></div> 
 	<header id="header" class="navbar">
@@ -46,7 +46,7 @@
         </ul>
       </li>
     </ul>
-    <a class="navbar-brand" href="#"><img class="col-lg-6" src="images/gecko_logo.png"></img></a>
+    <a class="navbar-brand" href="#"><img class="col-lg-6" src="images/gecko_logo.png"/></a>
     <button type="button" class="btn btn-link pull-left nav-toggle visible-xs" data-toggle="class:slide-nav slide-nav-left" data-target="body">
       <i class="icon-reorder icon-xlarge text-default"></i>
     </button>
@@ -56,13 +56,13 @@
   <!-- nav -->
 <nav id="nav" class="nav-primary hidden-xs nav-vertical">
     <ul class="nav" data-spy="affix" data-offset-top="50">
-      <li  id="admin"  style="display: none;"><a onClick="javascript:activeDashboard();" href="dashboard.html"><i class="icon-dashboard icon-xlarge"></i><span>Dashboard</span></a></li>
+      <li class="active" id="admin" style="display: none;"><a href="dashboard.html"><i class="icon-dashboard icon-xlarge"></i><span>Dashboard</span></a></li>
       
       <li class="dropdown-submenu">
         <a href="orders.html"  id="admin3" style="display: none;"><i class="icon-list icon-xlarge"></i><span>Orders</span></a>
         
       </li>
-      <li class="dropdown-submenu"><a  id="admin3" style="display: none;" href="#"><i class="icon-edit icon-xlarge"></i><span>Account</span></a>
+      <li class="dropdown-submenu"><a href="#"><i class="icon-edit icon-xlarge"></i><span>Account</span></a>
       <ul class="dropdown-menu">
           <li><a href="personalinfo.html">Personal Information</a></li>
           <li><a href="addresses.html">Addresses</a></li>
@@ -82,7 +82,7 @@
             <li class="active">Dashboard</li>
           </ul>
       <div class="clearfix">
-        <h4><img  style="width:50px;height:50px;" src="images/indiegogo-logo.png"></img> Indiegogo Campaign Dashboard</h4>
+        <h4><img  style="width:50px;height:50px;" src="images/indiegogo-logo.png"/> Indiegogo Campaign Dashboard</h4>
       </div>
 	   <div class="row">
 
@@ -108,10 +108,9 @@
                   <i class="icon-info-sign grey"></i> Order Accepted / Imported
                 </a>
                 <a href="pendingActionCustomer.html?page=1" class="list-group-item">
-                 <i class="icon-chevron-right"></i>
+                  <i class="icon-chevron-right"></i>
                   <span class="badge" id="pendingActionCustomer"></span>
                   <i class="icon-external-link orange"></i> Pending Action - Customer
-                  <button data-toggle="modal" href="#modal" class="btn btn-default btn-xs">Notify</button>
                 </a>
                 <a href="pendingActionGeckoTeam.html?page=1" class="list-group-item">
                   <i class="icon-chevron-right"></i>
@@ -123,7 +122,7 @@
                   <span class="badge" id="pendingShipment"></span>
                   <i class="icon-ok-sign green"></i> Pending Shipment - All issues resolved
                 </a>
-                <a href="shipmentDone.hml?page=1" class="list-group-item">
+                <a href="shipmentDone.html?page=1" class="list-group-item">
                   <i class="icon-chevron-right"></i>
                   <span class="badge" id="shipped"></span>
                   <i class="icon-smile yellow"></i> Shipped / Delivered
@@ -196,15 +195,6 @@
                   <span class="badge" id="dslr_camera"></span>
                   <i class="icon-smile yellow"></i>Dslr camera
                 </a>
-                 <a href="#" class="list-group-item">
-                  <span class="badge" id="undefined"></span>
-                  <i class="icon-smile yellow"></i>undefined
-                </a>
-                  <a href="#" class="list-group-item">
-                  <span class="badge" id="shipping_charges"></span>
-                  <i class="icon-smile yellow"></i>Shipping charges
-                </a>
-                 
               </div>
 			</div>
           </section>
@@ -228,10 +218,10 @@
                   </div>
                 </div>
 				</form>
-<!-- <div id="progress">
+<div id="progress">
         <div id="bar"></div>
         <div id="percent">0%</div >
-</div> -->
+</div>
 <br/>
     
  <div class="alert alert-danger" id="uploadError" style="display:none;">
@@ -250,72 +240,6 @@
 	  </div>  
    </section>
   </section>
-<!--   <div id="modalnumber"  class="modal fade">
-
-    <div   class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><i class="icon-remove"></i></button>
-          <h4 class="modal-title" id="myModalLabel">Notes</h4>
-        </div>
-        <div  class="modal-body">
-         <div class="panel-body">
-          <form class="form-horizontal"  action="javascript:orderStatus();" data-validate="parsley">  
-              <div class="form-group">
-                  <label class="control-label">Notes:</label>
-                  <textarea class="form-control" name="notes" placeholder="Content" id="myNotes" rows="5"></textarea>
-                </div>
-                  <input type="hidden" id="updateAddress_authentication_token" name="authentication_token" value="">
-
-
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-default">Save</button>
-                <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Close</button>
-              </div>
-            </div><!-- /.modal-content -->
-     <!--      </div>
-        </form>
-      </div>  -->
-
-  <div id="modal"  class="modal fade">
-
-    <div   class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><i class="icon-remove"></i></button>
-          <h4 class="modal-title" id="myModalLabel">Send Email to backers</h4>
-        </div>
-        <div  class="modal-body">
-         <div class="panel-body">
-          <form class="form-horizontal"  action="javascript:sendEmailToBackers();" id="sendEmail" data-validate="parsley">  
-            
-
-             
-                      <select id="select2-option" name="email_type" id="email_type" style="width:260px">
-                        <optgroup  label="Email Format">
-                          <option value="welcome_email">welcome_email</option>
-                          <option value="confirmation_email">confirmation_email</option>
-                        </optgroup>
-                      </select>
-
-
-           
-        
-                  <input type="hidden" id="updateAddress_authentication_token" name="authentication_token" value="">
-
-
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-default">Send</button>
-                <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Cancel</button>
-              </div>
-            </div><!-- /.modal-content -->
-          </div>
-        </form>
-      </div>
   <!-- footer -->
   <footer id="footer">
     <div class="text-center padder clearfix">
@@ -353,13 +277,6 @@ role();
 $("#order_source").val("igg");
 $("#api_key").val(getKey());
 getFileAction();
-
-$(document).ready(function()
-{
-
-            
-            $('#admin').addClass("active")
-});
 </script>
 <script>
 
@@ -367,7 +284,6 @@ $(document).ready(function()
 <script type="text/javascript">
 function submit(){
  $("#fileButton").click();
- $("#backerCsv").append('<div id="loader"></div> ');
 }
 </script>
 </body>

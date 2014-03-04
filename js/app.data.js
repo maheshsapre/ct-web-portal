@@ -1,5 +1,57 @@
-$(document).ready(function() {
+var addressId;
+var opendingActionCustomer;
+ var filters=new Array();
+var addressIdArray=new Array();
+var i=0;
+var gfull;
+ function appendAddress(id){
+ callAPI("/v1/addresses/{0}/address.json".f(id), "GET",getKeyQueryFormat(), onSuccessGetDetails, onApiError);
+ }
 
+ function onSuccessGetDetails(response){
+console.log(response.data);
+$("#name").val(response.data.name);
+$("#address_line_1").val(response.data.address_line_1);
+$("#address_line_2").val(response.data.address_line_2);
+$("#city").val(response.data.city);
+$("#state").val(response.data.state);
+$("#zip_code").val(response.data.zip_code);
+$("#phone_no").val(response.data.phone);
+var str=response.data.country;
+str = str.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+    return letter.toUpperCase();
+});
+$("#select2-option > option").each(function() {
+	if(str==this.value)
+   document.getElementById('select2-option').selectedIndex = this.index;
+});
+
+
+ }
+
+ function toggleCheckbox(gfull){
+console.log(gfull);
+ 
+            
+             
+              var found = jQuery.inArray(gfull, filters);
+              console.log(found);
+              if (found >= 0) {
+    // Element was found, remove it.
+				    filters.splice(found, 1);
+				} else {
+				    // Element was not found, add it.
+				    filters.push(gfull);
+				}
+}
+function drawDatatable(tableData){
+
+	console.log("am in app.data.js");
+	console.log(tableData);
+  //backerInfo=getBackerInformation();
+  backerOrder=getBackerOrdersAction();
+
+  
 	 $('#docs pre code').each(function(){
 	    var $this = $(this);
 	    var t = $this.html();
@@ -307,25 +359,469 @@ $(document).ready(function() {
 
 	// datatable 
 	// todo: Modify this method to load data for orders.
+
 	$('[data-ride="datatables"]').each(function() {
 		var oTable = $(this).dataTable( {
 			"bProcessing": true,
-			"sAjaxSource": "js/data/datatable.json",
+			//"bRetrieve":true,
+			"aaData":  tableData,
+			"sDom": "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'row'<'col-sm-6'i><'col col-sm-6'p>>",
+			"sPaginationType": "full_numbers",
+				"bPaginate": false,
+			 "fnDrawCallback": function () {
+            $("[data-ride='datatables'] tbody tr td:nth-child(11)").click(function () {
+                var position = oTable.fnGetPosition(this); // getting the clicked row position
+                console.log(position[0]);
+                RowID = oTable.fnGetData(position[0]); 
+                console.log(RowID.address_id);
+                $("#address_id").val(RowID.address_id);
+                $("#address_Orderid").val(RowID.address_id);
+                $("#backer_id").val(RowID.backer_id);
+                $("#order_source").val(RowID.order_source);
+                $("#refrence_number").val(RowID.reference_no);
+                  appendAddress(RowID.address_id);
+               // getting the value of the first (invisible) column
+                // HTML 5 Session Storage;
+            });
+        },
+        fnRowCallback: function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+    // Row click
+    // $(nRow).on('click', function() {
+    //   console.log('Row Clicked. Look I have access to all params, thank You closures.', this, aData, iDisplayIndex, iDisplayIndexFull);
+    // });
+ 
+    // Cell click
+    // $('td', nRow).on('click', function() {
+    //   console.log('Col Clicked.', this, aData, iDisplayIndex, iDisplayIndexFull);
+    // });
+  },
+			"aoColumns": [
+				{ "mData": "id",
+				"bVisible":    false },
+				{ "mData": "order_source",
+				"bVisible":    false },
+				{ "mData": "reference_no" },
+				{ "mData": "order_date" },
+				 { "mData": "perk.name" } ,
+				{ "mData": "quantity" },
+				{ "mData": "amount" },
+					{ "mData": "amount_difference" },  
+				{ "mData": "shipping_applicable" },
+				{ "mData": "shipping_paid" }, 
+				{ "mData": "order_status.name" }, 
+				   { "mData": "notes" },  
+			
+				
+				{ "mData": "perk_id",
+				"bVisible":    false  },  
+				{ "mData": "backer_id",
+				"bVisible":    false  },
+				{ "mData": "address_id",
+				"bVisible":    false  }, 
+				
+				
+				{ "mData": "created_at" ,
+				"bVisible":    false },   
+				{ "mData": "updated_at",
+				"bVisible":    false  },
+				{
+                "mData": null,
+                "sClass": "center",
+                "sDefaultContent": '<a style="color:red;"  data-toggle="modal" href="#modal"><i data-toggle="tooltip" data-placement="bottom" title="Update Address" class="icon-external-link"></i></a></p> '
+            }
+			],
+		
+			"sDefaultContent": '<a href="" class="editor_edit">Edit</a> / <a href="" class="editor_remove">Delete</a>',
+			 "fnFooterCallback": function ( nRow, aaData, iStart, iEnd, aiDisplay ) {
+            /*
+             * Calculate the total market share for all browsers in this table (ie inc. outside
+             * the pagination)
+             */
+            
+            var iTotalMarket = 0;
+            for ( var i=0 ; i<aaData.length ; i++ )
+            {
+                 iTotalMarket = parseInt(aaData[i].amount) + iTotalMarket;
+            
+            }
+            /* Calculate the market share for browsers on this page */
+            var iPageMarket = 0;
+            for ( var i=iStart ; i<iEnd ; i++ )
+            {
+                iPageMarket += aaData[ aiDisplay[i] ][5]*1;
+            }
+             
+            /* Modify the footer row to match what we want */
+            var nCells = nRow.getElementsByTagName('th');
+            nCells[1].innerHTML = iTotalMarket;
+        }
+		} );
+//oTable.fnReloadAjax(oTable.oSettings());
+	});
+
+$('[data-ride="datatables2"]').each(function() {
+		var oTable = $(this).dataTable( {
+			"bProcessing": true,
+			"aaData":tableData,
+			"sDom": "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'row'<'col-sm-6'i><'col col-sm-6'p>>",
+			"sPaginationType": "full_numbers",
+				"bPaginate": false,
+			 "fnDrawCallback": function () {
+            $("[data-ride='datatables2'] tbody tr td:nth-child(3)").click(function () {
+                var position = oTable.fnGetPosition(this); // getting the clicked row position
+                console.log(position[0]);
+                RowID = oTable.fnGetData(position); 
+                console.log(RowID);// getting the value of the first (invisible) column
+                sessionStorage.setItem("ModuleDetailID", RowID.ModuleDetailID); // HTML 5 Session Storage;
+            });
+           
+          
+        },
+			"aoColumns": [
+				{ "mData": "id",
+				"bVisible":    false  },
+				{ "mData": "first_name" },
+				{ "mData": "last_name" },
+				{ "mData": "email" }
+				
+			],
+			"aoColumnDefs":[{
+				"aTargets": [ 3 ]
+				, "bSortable": false
+				, "mRender": function ( url, type, full )  {
+					
+					return  '<a style="color:blue" href="orders.html?id='+full.id+'&page=1">' + url + '</a>';
+				}
+			},
+			]
+		} );
+	 
+	});
+	// select2 
+	$('[data-ride="datatables3"]').each(function() {
+		var oTable = $(this).dataTable( {
+			"bDestroy":true,
+			"bProcessing": true,
+			"aaData":tableData,
+			"bRetrieve":true,
+			"sDom": "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'row'<'col-sm-6'i><'col col-sm-6'p>>",
+			"sPaginationType": "full_numbers",
+				"bPaginate": false,
+			"bPaginate": false,
+			  "aoColumnDefs": [
+            { "bSortable": false, "aTargets": [ 0 ] }
+        ],
+       
+       "fnDrawCallback": function () {
+            $("#example tbody tr td:nth-child(12)").click(function () {
+                var position = oTable.fnGetPosition(this); // getting the clicked row position
+                console.log(position[0]);
+                RowID = oTable.fnGetData(position[0]); 
+                console.log(RowID.address_id);
+                $("#address_id").val(RowID.address_id);
+
+                $("#address_Orderid").val(RowID.address_id);
+                $("#backer_id").val(RowID.backer_id);
+                $("#order_source").val(RowID.order_source);
+                $("#refrence_number").val(RowID.reference_no);
+               // getting the value of the first (invisible) column
+                
+                  appendAddress(RowID.address_id);
+            });
+        },
+
+        "aaSorting": [[1, 'asc']],
+			"aoColumns": [
+			 {
+                "mData": null,
+                "sClass": "center",
+                "sDefaultContent": '<input id="checked" type="checkbox" </input>'
+            },
+                { "mData": "reference_no" } ,
+                { "mData": "backer.email" } ,
+                  { "mData": "perk.name" } ,
+                { "mData": "order_date" },
+				{ "mData": "amount" } ,
+				{ "mData": "amount_difference" },
+				{ "mData": "shipping_applicable" },
+				{ "mData": "shipping_paid" },
+				{ "mData": "order_status.name" },
+					{ "mData": "notes" } ,
+				{ "mData": "backer_id",
+				"bVisible":    false  } ,
+				{ "mData": "created_at",
+				"bVisible":    false  } ,
+				{ "mData": "id",
+				"bVisible":    false  },
+				{ "mData": "order_source",
+				"bVisible":    false   } ,
+				{ "mData": "address_id",
+				"bVisible":    false  },
+				{ "mData": "perk_id",
+				"bVisible":    false  } ,
+				
+				{ "mData": "quantity",
+				"bVisible":    false  },
+				
+				{ "mData": "updated_at" ,
+				"bVisible":    false },
+                {
+                "mData": null,
+                "sClass": "center",
+                "sDefaultContent": '<a style="color:red;"  data-toggle="modal"  href="#modal"><i data-toggle="tooltip" data-placement="bottom" title="Update Address" class="icon-edit-sign"></i></a><a style="color:blue;"  data-toggle="modal" href="#modalShipping"><i data-toggle="tooltip" data-placement="bottom" title="Add order" class="icon-external-link"></i></a> '
+            }
+			],
+			"aoColumnDefs":[{
+				"aTargets": [ 2 ]
+				, "bSortable": false
+				, "mRender": function ( url, type, full )  {
+					return  '<a style="color:blue" href="orders.html?id='+full.backer_id+'&page=1">' + url + '</a>';
+				}
+			},
+			{
+				"aTargets": [ 0 ]
+				, "bSortable": false
+				, "mRender": function ( url, type, full )  {
+					gfull=full;
+					return  '<input id="checked" onchange="toggleCheckbox('+gfull.id+')" type="checkbox" </input>';
+
+				}
+			},]
+
+		} );
+});
+
+	 
+
+$('[data-ride="datatables4"]').each(function() {
+		var oTable = $(this).dataTable( {
+			"bProcessing": true,
+			"aaData":tableData,
+			"bRetrieve":true,
+			"sDom": "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'row'<'col-sm-6'i><'col col-sm-6'p>>",
+			"sPaginationType": "full_numbers",
+				"bPaginate": false,
+			  "aoColumnDefs": [
+            { "bSortable": false, "aTargets": [ 0 ] }
+        ],
+			  "aoColumns": [
+			 { "mData": "reference_no" } ,
+                { "mData": "backer.email" } ,
+                      { "mData": "perk.name" } ,
+                { "mData": "order_date" },
+				{ "mData": "amount" } ,
+				{ "mData": "amount_difference" },
+				{ "mData": "shipping_applicable" },
+				{ "mData": "shipping_paid" },
+				{ "mData": "order_status.name" },
+					{ "mData": "notes" } ,
+				{ "mData": "backer_id",
+				"bVisible":    false  } ,
+				{ "mData": "created_at",
+				"bVisible":    false  } ,
+				{ "mData": "id",
+				"bVisible":    false  },
+				{ "mData": "order_source",
+				"bVisible":    false   } ,
+				{ "mData": "address_id",
+				"bVisible":    false  },
+				{ "mData": "perk_id",
+				"bVisible":    false  } ,
+				
+				{ "mData": "quantity",
+				"bVisible":    false  },
+				
+				{ "mData": "updated_at" ,
+				"bVisible":    false }
+			],
+			"aoColumnDefs":[{
+				"aTargets": [ 1 ]
+				, "bSortable": false
+				, "mRender": function ( url, type, full )  {
+					return  '<a style="color:blue" href="orders.html?id='+full.backer_id+'&page=1">' + url + '</a>';
+				}
+			},
+			]
+
+		} );
+
+	});
+
+$('[data-ride="datatables5"]').each(function() {
+		var oTable = $(this).dataTable( {
+			"bProcessing": true,
+			"aaData":tableData,
+			"sDom": "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'row'<'col-sm-6'i><'col col-sm-6'p>>",
+			"sPaginationType": "full_numbers",
+				"bPaginate": false,
+			  "aoColumnDefs": [
+            { "bSortable": false, "aTargets": [ 0 ] }
+        ],
+			  "aoColumns": [
+				 { "mData": "reference_no" } ,
+                { "mData": "backer.email" } ,
+                      { "mData": "perk.name" } ,
+                { "mData": "order_date" },
+				{ "mData": "amount" } ,
+				{ "mData": "amount_difference" },
+				{ "mData": "shipping_applicable" },
+				{ "mData": "shipping_paid" },
+				{ "mData": "order_status.name" },
+					{ "mData": "notes" } ,
+				{ "mData": "backer_id",
+				"bVisible":    false  } ,
+				{ "mData": "created_at",
+				"bVisible":    false  } ,
+				{ "mData": "id",
+				"bVisible":    false  },
+				{ "mData": "order_source",
+				"bVisible":    false   } ,
+				{ "mData": "address_id",
+				"bVisible":    false  },
+				{ "mData": "perk_id",
+				"bVisible":    false  } ,
+				
+				{ "mData": "quantity",
+				"bVisible":    false  },
+				
+				{ "mData": "updated_at" ,
+				"bVisible":    false }
+			],
+			"aoColumnDefs":[{
+				"aTargets": [ 1 ]
+				, "bSortable": false
+				, "mRender": function ( url, type, full )  {
+					return  '<a style="color:blue" href="orders.html?id='+full.backer_id+'&page=1">' + url + '</a>';
+				}
+			}]
+
+		} );
+
+	});
+
+$('[data-ride="datatables6"]').each(function() {
+		var oTable = $(this).dataTable( {
+			"bProcessing": true,
+			"aaData":  tableData,
+			"sDom": "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'row'<'col-sm-6'i><'col col-sm-6'p>>",
+			"sPaginationType": "full_numbers",
+				"bPaginate": false,
+			  "aoColumnDefs": [
+            { "bSortable": false, "aTargets": [ 0 ] }
+        ],
+			  "aoColumns": [
+				 { "mData": "reference_no" } ,
+                { "mData": "backer.email" } ,
+                      { "mData": "perk.name" } ,
+                { "mData": "order_date" },
+				{ "mData": "amount" } ,
+				{ "mData": "amount_difference" },
+				{ "mData": "shipping_applicable" },
+				{ "mData": "shipping_paid" },
+				{ "mData": "order_status.name" },
+					{ "mData": "notes" } ,
+				{ "mData": "backer_id",
+				"bVisible":    false  } ,
+				{ "mData": "created_at",
+				"bVisible":    false  } ,
+				{ "mData": "id",
+				"bVisible":    false  },
+				{ "mData": "order_source",
+				"bVisible":    false   } ,
+				{ "mData": "address_id",
+				"bVisible":    false  },
+				{ "mData": "perk_id",
+				"bVisible":    false  } ,
+				
+				{ "mData": "quantity",
+				"bVisible":    false  },
+				
+				{ "mData": "updated_at" ,
+				"bVisible":    false }
+			],
+			"aoColumnDefs":[{
+				"aTargets": [ 1 ]
+				, "bSortable": false
+				, "mRender": function ( url, type, full )  {
+					return  '<a style="color:blue" href="orders.html?id='+full.backer_id+'&page=1">' + url + '</a>';
+				}
+			}]
+
+		} );
+
+	});
+
+$('[data-ride="datatables7"]').each(function() {
+		var oTable = $(this).dataTable( {
+			"bProcessing": true,
+			"aaData": tableData,
+			"sDom": "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'row'<'col-sm-6'i><'col col-sm-6'p>>",
+			"sPaginationType": "full_numbers",
+				"bPaginate": false,
+			  "aoColumnDefs": [
+            { "bSortable": false, "aTargets": [ 0 ] }
+        ],
+			  "aoColumns": [
+				 { "mData": "reference_no" } ,
+                { "mData": "backer.email" } ,
+                      { "mData": "perk.name" } ,
+                { "mData": "order_date" },
+				{ "mData": "amount" } ,
+				{ "mData": "amount_difference" },
+				{ "mData": "shipping_applicable" },
+				{ "mData": "shipping_paid" },
+				{ "mData": "order_status.name" },
+					{ "mData": "notes" } ,
+				{ "mData": "backer_id",
+				"bVisible":    false  } ,
+				{ "mData": "created_at",
+				"bVisible":    false  } ,
+				{ "mData": "id",
+				"bVisible":    false  },
+				{ "mData": "order_source",
+				"bVisible":    false   } ,
+				{ "mData": "address_id",
+				"bVisible":    false  },
+				{ "mData": "perk_id",
+				"bVisible":    false  } ,
+				
+				{ "mData": "quantity",
+				"bVisible":    false  },
+				
+				{ "mData": "updated_at" ,
+				"bVisible":    false }
+			],
+			"aoColumnDefs":[{
+				"aTargets": [ 1 ]
+				, "bSortable": false
+				, "mRender": function ( url, type, full )  {
+					return  '<a style="color:blue" href="orders.html?id='+full.backer_id+'&page=1">' + url + '</a>';
+				}
+			},
+			]
+
+		} );
+
+	});
+
+$('#csvErrorTable').each(function() {
+	console.log(tableData);
+		var oTable = $(this).dataTable( {
+			"bProcessing": true,
+			"aaData":tableData,
 			"sDom": "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'row'<'col-sm-6'i><'col col-sm-6'p>>",
 			"sPaginationType": "full_numbers",
 			"aoColumns": [
-				{ "mData": "order_id" },
-				{ "mData": "perk" },
-				{ "mData": "order_date" },
-				{ "mData": "shipment_charges_applicable" },
-				{ "mData": "shipment_paid" },
-				{ "mData": "amount_difference" },
-				{ "mData": "order_status" }    
+				{ "mData": "line" },
+				{ "mData": "pledge_id" },
+				{ "mData": "error" }
+				
 			]
+			
 		} );
+	 
 	});
 
-	// select2 
 
    if ($.fn.select2) {
         $("#select2-option").select2();
@@ -335,5 +831,7 @@ $(document).ready(function() {
         );
     }
 
+  
 
-});
+}
+ 

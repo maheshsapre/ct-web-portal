@@ -1,0 +1,52 @@
+div#loading {
+  position:fixed;
+    top: 50%;
+    left: 50%;
+    width:30em;
+    height:18em;
+    margin-top: -9em; /*set to a negative number 1/2 of your height*/
+    margin-left: -15em; 
+    margin: auto;
+    z-index: 1000;
+    background: url('../images/282.png') no-repeat;
+    cursor: wait;
+    top: 50%;
+    left: 50%;
+  }
+
+  #basicInfo,#deviceLocation,#deviceAccess,#deviceFirmware,#new,#adminInfo {
+   font-family: verdana,arial,sans-serif;
+   font-size:11px;
+   color:#333333;
+   border-width: 1px;
+   border-color: #666666;
+   border-collapse: collapse;
+ }
+ #basicInfo th,#deviceLocation th, #deviceAccess th,#deviceFirmware th,#new th,#adminInfo th{
+   border-width: 1px;
+   padding: 8px;
+   border-style: solid;
+   border-color: #233445;
+   background-color:#ffffff;
+ }
+ #basicInfo td, #deviceLocation td,#deviceAccess td,#deviceFirmware td,#new td,#adminInfo td{
+   border-width: 1px;
+   padding: 8px;
+   border-style: solid;
+   border-color: #666666;
+   background-color: #ffffff;
+
+
+ }
+
+ div#loader {
+ position:fixed;
+    width:30em;
+    height:18em;
+    margin: auto;
+    z-index: 1000;
+    background: url('../images/ajax-loader.gif') no-repeat;
+    cursor: wait;
+    top: 30%;
+    left: 80%;
+  }
