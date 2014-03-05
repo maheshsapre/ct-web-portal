@@ -341,8 +341,9 @@ console.log(role);
  if(role=="admin"){
   $("#admin").show();
     $("#admin1").show();
-    $("#action").show();
-       
+  
+    $("#warning").hide();
+    $("#saveOrders").hide();   
 }
 else{
    

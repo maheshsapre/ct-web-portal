@@ -99,31 +99,30 @@
           <section class="panel-body ">
             <div class="col-lg-12">
               <header class="panel-heading bg bg-inverse">
-                Summarized by Order Status
+                Summarized by Order Status<button data-toggle="modal" href="#modal" class="btn btn-default btn-xs pull-right">Mass Notification</button>
               </header>
               <div class="list-group">
-                <a href="orderAccepted.html?page=1" class="list-group-item">
+                <a href="orders.html?page=1&orderStatus=1" class="list-group-item">
                   <i class="icon-chevron-right"></i>
                   <span class="badge" id="orderAccepted"></span>
                   <i class="icon-info-sign grey"></i> Order Accepted / Imported
                 </a>
-                <a href="pendingActionCustomer.html?page=1" class="list-group-item">
+                <a href="orders.html?page=1&orderStatus=2" class="list-group-item">
                  <i class="icon-chevron-right"></i>
                   <span class="badge" id="pendingActionCustomer"></span>
                   <i class="icon-external-link orange"></i> Pending Action - Customer
-                  <button data-toggle="modal" href="#modal" class="btn btn-default btn-xs">Notify</button>
                 </a>
-                <a href="pendingActionGeckoTeam.html?page=1" class="list-group-item">
+                <a href="orders.html?page=1&orderStatus=3" class="list-group-item">
                   <i class="icon-chevron-right"></i>
                   <span class="badge" id="pendingActionGeckoTeam"></span>
                   <i class="icon-bell red"></i> Pending Action - Gecko Team
                 </a>
-                <a href="pendingShipment.html?page=1" class="list-group-item">
+                <a href="orders.html?page=1&orderStatus=4" class="list-group-item">
                   <i class="icon-chevron-right"></i>
                   <span class="badge" id="pendingShipment"></span>
                   <i class="icon-ok-sign green"></i> Pending Shipment - All issues resolved
                 </a>
-                <a href="shipmentDone.hml?page=1" class="list-group-item">
+                <a href="orders.html?page=1&orderStatus=5" class="list-group-item">
                   <i class="icon-chevron-right"></i>
                   <span class="badge" id="shipped"></span>
                   <i class="icon-smile yellow"></i> Shipped / Delivered
@@ -247,6 +246,23 @@
           </section>
         </section>
 		  </div>
+               <div class="col-sm-6">
+           <section class="panel">
+          <section class="panel-body ">
+            <div class="col-lg-12">
+                <div class="form-group">
+           <p><b>Delete Backer Data</b></p>
+                  <div class="col-lg-9 media">
+                    <div class="media-body">
+                     
+                         <a class="btn btn-danger" href="javascript:deleteBackerData();">Delete</a>
+                            
+                    </div>
+                  </div>
+<br/>
+          </section>
+        </section>
+      </div>
 	  </div>  
    </section>
   </section>
@@ -294,10 +310,10 @@
 
              
                       <select id="select2-option" name="email_type" id="email_type" style="width:260px">
-                        <optgroup  label="Email Format">
-                          <option value="welcome_email">welcome_email</option>
-                          <option value="confirmation_email">confirmation_email</option>
-                        </optgroup>
+                          <option  value="">Choose type</option>
+                          <option value="welcome_email">Welcome email</option>
+                          <option value="confirmation_email">Confirmation email</option>
+                     
                       </select>
 
 

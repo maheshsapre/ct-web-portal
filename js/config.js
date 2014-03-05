@@ -5,7 +5,7 @@ var MESSAGE =
 
 var CONFIG = 
 {
-	url: "http://dev-api.connovatech.com:3001",
+	url: "http://test-env-v-0-0-124-4.elasticbeanstalk.com",
 	contentType: "application/json",	/* Consider as default parameter for web-portal */
 	dataType: "json",					/* Consider as default parameter for web-portal */
 	isDebugging : true,
@@ -26,7 +26,7 @@ var SERVER_RESPONSE =
 			[
 					{"id_0": 0,   "message_0": "No connection.\n Please verify Network"},
 					{"id_401": 401, "message_401": "Invalid credentials"},
-					{"id_404": 404, "message_404": "Requested page not found."},
+					{"id_404": 404, "message_404": ""},
 					{"id_422": 422, "message_422": ""},
 					{"id_500": 500, "message_500": "Internal Server Error.\n"},
 			],

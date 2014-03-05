@@ -210,3 +210,16 @@ function  sendEmail(param){
 function onSuccessSendEmail(response){
   bootbox.alert("Mails have been set successfully");
 }
+
+function deleteBackerData(){
+    bootbox.confirm("Do you want to delete the backer information?", function(result) {
+if(result==true){
+    callAPI("/v1/backers/delete_all.json", "DELETE", "", onSuccessDeleteBackerData, onApiError); 
+    }
+});
+   
+}
+
+function onSuccessDeleteBackerData(response){
+  window.location="dashboard.html";
+}

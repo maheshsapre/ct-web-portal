@@ -42,19 +42,19 @@
               Sign up
             </header>
             <form  action="javascript:signup();" class="panel-body" id="signUpForm" data-validate="parsley">
-              <div class="block">
+            
+                    <div class="block">
+                <label class="control-label">Your email address</label>
+                <input type="text" name="email" id="email" placeholder="test@example.com" class="form-control" data-required="true" data-type="email" readonly >
+              </div>
+            <div class="block">
                 <label class="control-label">First name</label>
-                <input type="text" name="first_name" placeholder="first name" class="form-control" data-required="true">
+                <input type="text" name="first_name" id="first_name" placeholder="first name" class="form-control" data-required="true">
               </div>
               <div class="block">
                 <label class="control-label">Last name</label>
-                <input type="text" name="last_name" placeholder="last name" class="form-control" data-required="true">
+                <input type="text" name="last_name" id="last_name" placeholder="last name" class="form-control" data-required="true">
               </div>
-              <div class="block">
-                <label class="control-label">Your email address</label>
-                <input type="text" name="email" placeholder="test@example.com" class="form-control" data-required="true" data-type="email" >
-              </div>
-
               <div class="block">
                 <label class="control-label">Password</label>
                 <input type="password" name="password" id="inputPassword" placeholder="password" data-required="true" class="form-control">
@@ -63,6 +63,7 @@
                 <label class="control-label">Confirm Password</label>
                 <input type="password" name="confirmation_password" id="inputPassword1" placeholder="password" data-required="true" class="form-control" data-equalto="#inputPassword">
               </div>
+              <input type="hidden" value="" id="registration_token" name="registration_token"/> 
 			 <!--  <div class="alert alert-danger ">
 				<button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
 				<i class="icon-ban-circle icon-large"></i><strong>Validation failed!</strong> Did you enter correct email and password?
@@ -193,5 +194,26 @@
     <script src="js/jquery_cookie.js"></script>
     <script src="js/jquery.serialize-object.compiled.js"></script>
 <script src="js/bootbox.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function()
+{ 
+
+       var nb = urlParameterValue( 'nb' );
+       var param={
+        registration_token:nb
+       };
+       if(nb==""){
+        bootbox.alert("Looks like the link you have used is not proper. If you are a Gecko backer and trying to register for the first time please contact support@geckotag.me");
+       }
+       else{
+          $("#registration_token").val(nb);
+        callAPI("/v1/backers/{0}/backer_information.json".f(nb), "GET", "", onSuccessGetBackerInfo, onApiError);
+       }
+ 
+
+});
+
+   
+</script>
 </body>
 </html>

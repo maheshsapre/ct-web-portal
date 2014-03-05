@@ -466,6 +466,7 @@ $('[data-ride="datatables2"]').each(function() {
 			"sDom": "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'row'<'col-sm-6'i><'col col-sm-6'p>>",
 			"sPaginationType": "full_numbers",
 				"bPaginate": false,
+
 			 "fnDrawCallback": function () {
             $("[data-ride='datatables2'] tbody tr td:nth-child(3)").click(function () {
                 var position = oTable.fnGetPosition(this); // getting the clicked row position
@@ -511,7 +512,30 @@ $('[data-ride="datatables2"]').each(function() {
 			  "aoColumnDefs": [
             { "bSortable": false, "aTargets": [ 0 ] }
         ],
-       
+        "fnFooterCallback": function ( nRow, aaData, iStart, iEnd, aiDisplay ) {
+            /*
+             * Calculate the total market share for all browsers in this table (ie inc. outside
+             * the pagination)
+             */
+            
+            var iTotalMarket = 0;
+            for ( var i=0 ; i<aaData.length ; i++ )
+            {
+                 iTotalMarket = parseInt(aaData[i].amount) + iTotalMarket;
+              
+            
+            }
+            /* Calculate the market share for browsers on this page */
+            var iPageMarket = 0;
+            for ( var i=iStart ; i<iEnd ; i++ )
+            {
+                iPageMarket += aaData[ aiDisplay[i] ][5]*1;
+            }
+             
+            /* Modify the footer row to match what we want */
+            var nCells = nRow.getElementsByTagName('th');
+            nCells[1].innerHTML = iTotalMarket;
+        },
        "fnDrawCallback": function () {
             $("#example tbody tr td:nth-child(12)").click(function () {
                 var position = oTable.fnGetPosition(this); // getting the clicked row position
@@ -530,7 +554,7 @@ $('[data-ride="datatables2"]').each(function() {
             });
         },
 
-        "aaSorting": [[1, 'asc']],
+        "aaSorting": [[15, 'asc']],
 			"aoColumns": [
 			 {
                 "mData": null,
@@ -539,14 +563,14 @@ $('[data-ride="datatables2"]').each(function() {
             },
                 { "mData": "reference_no" } ,
                 { "mData": "backer.email" } ,
-                  { "mData": "perk.name" } ,
+                { "mData": "perk.name" } ,
                 { "mData": "order_date" },
 				{ "mData": "amount" } ,
 				{ "mData": "amount_difference" },
 				{ "mData": "shipping_applicable" },
 				{ "mData": "shipping_paid" },
 				{ "mData": "order_status.name" },
-					{ "mData": "notes" } ,
+				{ "mData": "notes" } ,
 				{ "mData": "backer_id",
 				"bVisible":    false  } ,
 				{ "mData": "created_at",
@@ -568,7 +592,7 @@ $('[data-ride="datatables2"]').each(function() {
                 {
                 "mData": null,
                 "sClass": "center",
-                "sDefaultContent": '<a style="color:red;"  data-toggle="modal"  href="#modal"><i data-toggle="tooltip" data-placement="bottom" title="Update Address" class="icon-edit-sign"></i></a><a style="color:blue;"  data-toggle="modal" href="#modalShipping"><i data-toggle="tooltip" data-placement="bottom" title="Add order" class="icon-external-link"></i></a> '
+                "sDefaultContent": '<a style="color:red;"  data-toggle="modal"  href="#modal"><i data-toggle="tooltip" data-placement="bottom" title="Update Address" class="icon-edit-sign"></i></a>'
             }
 			],
 			"aoColumnDefs":[{
@@ -589,6 +613,7 @@ $('[data-ride="datatables2"]').each(function() {
 			},]
 
 		} );
+
 });
 
 	 

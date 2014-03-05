@@ -98,33 +98,33 @@ function onSuccessAddNewOrder(response){
 
 }
 
-function order(i){
-  orderId=i;
-  //setOrderStatusId(i);
- } 
+// function order(i){
+//   orderId=i;
+//   //setOrderStatusId(i);
+//  } 
 
-function orderStatus(){
-  notes=$("#myNotes").val();
-  if(filters.length==0){
-    bootbox.alert("Please select the checkbox");
-  }
-	else{
-	a=filters.toString();
-	 var param = {
-               "order_ids" : a,
-               "notes":notes,
-               "order_status_id" : orderId
-                };
+// function orderStatus(){
+//   notes=$("#myNotes").val();
+//   if(filters.length==0){
+//     bootbox.alert("Please select the checkbox");
+//   }
+// 	else{
+// 	a=filters.toString();
+// 	 var param = {
+//                "order_ids" : a,
+//                "notes":notes,
+//                "order_status_id" : orderId
+//                 };
                
-                param=JSON.stringify(param);
-                console.log(param);
-    callAPI("/v1/orders/update_order_status.json", "PUT",param, onSuccessOrderStatus, onApiError);  
-  }        
-}
+//                 param=JSON.stringify(param);
+//                 console.log(param);
+//     callAPI("/v1/orders/update_order_status.json", "PUT",param, onSuccessOrderStatus, onApiError);  
+//   }        
+// }
 
-function onSuccessOrderStatus(response){
-window.location="pendingActionGeckoTeam.html?page=1";
-}
+// function onSuccessOrderStatus(response){
+// window.location="pendingActionGeckoTeam.html?page=1";
+// }
 
 
 
