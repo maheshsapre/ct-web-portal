@@ -102,12 +102,23 @@ function onSuccessStatusSummary(response){
 if(orderStatus.shipped!=0)
   $("#shipped").addClass("badge bg-success");
 
+if(orderStatus.incomplete_address!=0)
+  $("#inCompleteAddress").addClass("badge bg-success");
+
+if(orderStatus.undefined_perk!=0)
+  $("#PerkNotMentioned").addClass("badge bg-success");
+
+if(orderStatus.shipping_not_paid!=0)
+  $("#ShippingNotPaid").addClass("badge bg-success");
+
 $("#orderAccepted").html(orderStatus.order_accepted);
 $("#pendingActionCustomer").html(orderStatus.pending_action_customer);
 $("#pendingActionGeckoTeam").html(orderStatus.pending_action_gecko_team);
 $("#pendingShipment").html(orderStatus.pending_shippment);
 $("#shipped").html(orderStatus.shipped);
-
+$("#inCompleteAddress").html(orderStatus.incomplete_address);
+$("#PerkNotMentioned").html(orderStatus.undefined_perk);
+$("#ShippingNotPaid").html(orderStatus.shipping_not_paid);
 }
 
 function onSuccessPerksummary(response){
@@ -208,17 +219,24 @@ function  sendEmail(param){
 }
 
 function onSuccessSendEmail(response){
-  bootbox.alert("Mails have been set successfully");
+     bootbox.alert("Mails have been sent successfully", function(result) 
+    {  
+      if(result==undefined){
+     window.location=window.location.href;
+    }
+      });
 }
 
 function deleteBackerData(){
-    bootbox.confirm("Do you want to delete the backer information?", function(result) {
-if(result==true){
-    callAPI("/v1/backers/delete_all.json", "DELETE", "", onSuccessDeleteBackerData, onApiError); 
-    }
-});
-   
+var txt=$("#validateDeleteText").val();
+if(txt=="Delete backer information"){
+     callAPI("/v1/backers/delete_all.json", "DELETE", "", onSuccessDeleteBackerData, onApiError); 
 }
+else{
+   bootbox.alert("Enter the proper text");
+}
+}
+
 
 function onSuccessDeleteBackerData(response){
   window.location="dashboard.html";

@@ -81,7 +81,7 @@ function onSuccessUpdateBackerAddresses(response){
 }
 
 function addOrder(){
-	var $form = $("#addOrder");
+	var $form = $("#addOrderForm");
   var $inputs = $form.find("input, select, button, textarea");
   var param =  $form.serializeObject(); 
   console.log(param);
@@ -94,7 +94,13 @@ function  addNewOrder(id,param){
 
 function onSuccessAddNewOrder(response){
 	console.log(response.data);
-     bootbox.alert("updated");
+       bootbox.alert("Order has been added successfully", function(result) 
+    {  
+      if(result==undefined){
+       window.location=window.location.href;
+      }
+     });
+
 
 }
 
