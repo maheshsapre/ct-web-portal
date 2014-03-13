@@ -2,24 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Gecko</title>
+  <title>Gecko - Make your smartphone smarter</title>
   <meta name="description" content="mobile first, app, web app, responsive, admin dashboard, flat, flat ui">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> 
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/font.css" cache="false">
   <link rel="stylesheet" href="css/style.css">
-
+  <link rel="stylesheet" href="css/ajax.css">
 
 
   <link rel="stylesheet" href="js/select2/select2.css" cache="false">
   <link rel="stylesheet" href="css/plugin.css">
  <link rel="shortcut icon" href="images/favicon.ico" />
- <script src="js/signup.js"></script>
-<script src="js/me.ui.js"></script>
-<script src="js/config.js"></script>
-  <!--[if lt IE 9]>
-
+  <script src="js/signup.js"></script>
+  <script src="js/me.ui.js"></script>
+  <script src="js/config.js"></script>
   <!--[if lt IE 9]>
     <script src="js/ie/respond.min.js" cache="false"></script>
     <script src="js/ie/html5.js" cache="false"></script>
@@ -35,57 +33,53 @@
   <section id="content">
     <div class="main padder">
       <div class="row">
-        <div class="col-lg-6">
-        <div class="col-lg-4 col-lg-offset-4 m-t-large">
-          <section class="panel" style="width:450px;float:left;">
+          <div class="col-lg-6">
+        <div class="col-lg-8 col-lg-offset-4 m-t-large">
+          <section class="panel">
             <header class="panel-heading text-center">
               Sign up
             </header>
-            <form  action="javascript:signup();" class="panel-body" id="signUpForm" data-validate="parsley">
-            
-                    <div class="block">
-                <label class="control-label">Your email address</label>
-                <input type="text" name="email" id="email" placeholder="test@example.com" class="form-control" data-required="true" data-type="email" readonly >
-              </div>
-            <div class="block">
-                <label class="control-label">First name</label>
-                <input type="text" name="first_name" id="first_name" placeholder="first name" class="form-control" data-required="true">
-              </div>
-              <div class="block">
-                <label class="control-label">Last name</label>
-                <input type="text" name="last_name" id="last_name" placeholder="last name" class="form-control" data-required="true">
-              </div>
-              <div class="block">
-                <label class="control-label">Password</label>
-                <input type="password" name="password" id="inputPassword" placeholder="password" data-required="true" class="form-control">
-              </div>
-               <div class="block">
-                <label class="control-label">Confirm Password</label>
-                <input type="password" name="confirmation_password" id="inputPassword1" placeholder="password" data-required="true" class="form-control" data-equalto="#inputPassword">
-              </div>
-              <input type="hidden" value="" id="registration_token" name="registration_token"/> 
-			 <!--  <div class="alert alert-danger ">
-				<button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
-				<i class="icon-ban-circle icon-large"></i><strong>Validation failed!</strong> Did you enter correct email and password?
-			 </div> -->
-              <button type="submit" class="btn btn-info">Sign up</button>
-              <div class="line line-dashed"></div>
-              <p class="text-muted text-center"><small>Already have an account?</small></p>
-              <a href="signin.html" class="btn btn-white btn-block">Sign in</a>
-            </form>
+       <form  action="javascript:signup();" class="panel-body" id="signUpForm" data-validate="parsley">
+
+                  <div class="block">
+                    <label class="control-label">Your email address</label>
+                    <input type="text" name="email" id="email" placeholder="test@example.com" class="form-control" data-required="true" data-type="email" readonly >
+                  </div>
+                  <div class="block">
+                    <label class="control-label">First name</label>
+                    <input type="text" name="first_name" id="first_name" placeholder="first name" class="form-control" data-required="true">
+                  </div>
+                  <div class="block">
+                    <label class="control-label">Last name</label>
+                    <input type="text" name="last_name" id="last_name" placeholder="last name" class="form-control" data-required="true">
+                  </div>
+                  <div class="block">
+                    <label class="control-label">Password</label>
+                    <input type="password" name="password" id="inputPassword" placeholder="password" data-required="true" class="form-control">
+                  </div>
+                  <div class="block">
+                    <label class="control-label">Confirm Password</label>
+                    <input type="password" name="password_confirmation" id="inputPassword1" placeholder="password" data-required="true" class="form-control" data-equalto="#inputPassword"></input>
+                  </div>
+      <input type="hidden" value="" id="registration_token" name="registration_token"/>
+      <button type="submit" class="btn btn-info">Sign up</button>
+      <div class="line line-dashed"></div>
+      <p class="text-muted text-center"><small>Already have an account?</small></p>
+      <a href="signin.html" class="btn btn-white btn-block">Sign in</a>
+    </form>
           </section>
         </div>
       </div>
-          <div class="col-lg-6">
-            <div class="col-lg-offset-4 m-t-large">
+        <div class="col-lg-6">
+           <div class="col-lg-offset-4 m-t-large">
           <!-- .crousel slide -->
           <section class="panel">
             <div class="carousel slide auto panel-body" id="c-slide">
                 <ol class="carousel-indicators out">
-                  <li data-target="#c-slide" data-slide-to="0" class=""></li>
-                  <li data-target="#c-slide" data-slide-to="1" class="active"></li>
+                  <li data-target="#c-slide" data-slide-to="0" class="active"></li>
+                  <li data-target="#c-slide" data-slide-to="1" class=""></li>
                   <li data-target="#c-slide" data-slide-to="2" class=""></li>
-                    <li data-target="#c-slide" data-slide-to="3" class=""></li>
+          <li data-target="#c-slide" data-slide-to="3" class=""></li>
           <li data-target="#c-slide" data-slide-to="4" class=""></li>
           <li data-target="#c-slide" data-slide-to="5" class=""></li>
           <li data-target="#c-slide" data-slide-to="6" class=""></li>
@@ -93,26 +87,26 @@
                 <div class="carousel-inner">
                   <div class="item active">
                     <p class="text-center">
-                        <img src="images/banner1.jpg"/>
+            <img src="images/banner1.jpg"/>
                       <em class="h4 text-mute">Save your time</em><br>
                       <small class="text-muted">Many components</small>
                     </p>
                   </div>
                   <div class="item">
                     <p class="text-center">
-                        <img src="images/banner2.jpg"/>
+            <img src="images/banner2.jpg"/>
                       <em class="h4 text-mute">Nice and easy to use</em><br>
                       <small class="text-muted">Full documents</small>
                     </p>
                   </div>
                   <div class="item">
                     <p class="text-center">
-                      <img src="images/banner3.jpg"/>
+            <img src="images/banner3.jpg"/>
                       <em class="h4 text-mute">Mobile header first</em><br>
                       <small class="text-muted">Mobile/Tablet/Desktop</small>
                     </p>
                   </div>
-                   <div class="item">
+          <div class="item">
                     <p class="text-center">
             <img src="images/banner4.jpg"/>
                       <em class="h4 text-mute">Mobile header first</em><br>
@@ -126,7 +120,7 @@
                       <small class="text-muted">Mobile/Tablet/Desktop</small>
                     </p>
                   </div>
-                   <div class="item">
+          <div class="item">
                     <p class="text-center">
             <img src="images/banner6.jpg"/>
                       <em class="h4 text-mute">Mobile header first</em><br>
@@ -142,78 +136,54 @@
                 </a>
             </div>
           </section>
-        </div>
       </div>
-      </div>
+    </div>
     </div>
   </section>
   <!-- footer -->
   <footer id="footer">
     <div class="text-center padder clearfix">
       <p>
-        <small>&copy; Connovate Technology Pvt. Ltd. 2014</small><br><br>
+         <small>&copy; Connovate Technology Pvt. Ltd. 2014</small><br><br>
         <a href="https://www.twitter.com/mygeckotag" class="btn btn-xs btn-circle btn-twitter"><i class="icon-twitter"></i></a>
         <a href="https://www.facebook.com/mygeckotag" class="btn btn-xs btn-circle btn-facebook"><i class="icon-facebook"></i></a>
       </p>
     </div>
   </footer>
   <!-- / footer -->
-	<script src="js/jquery.min.js"></script>
+  <script src="js/jquery.min.js"></script>
   <!-- Bootstrap -->
+        <script src="js/parsley/parsley.min.js"></script>
   <script src="js/bootstrap.js"></script>
   <!-- app -->
+
   <script src="js/app.js"></script>
   <script src="js/app.plugin.js"></script>
   <script src="js/app.data.js"></script>
-    <script src="js/parsley/parsley.min.js"></script>
-
-    <script src="js/jquery.min.js"></script>
-  <!-- Bootstrap -->
-  <script src="js/bootstrap.js"></script>
-  <!-- app -->
-  <script src="js/app.js"></script>
-  <script src="js/app.plugin.js"></script>
-  <script src="js/app.data.js"></script>
-  <!-- fuelux -->
-  <script src="js/fuelux/fuelux.js"></script>
-  <!-- datepicker -->
-  <script src="js/datepicker/bootstrap-datepicker.js"></script>
-  <!-- slider -->
-  <script src="js/slider/bootstrap-slider.js"></script>
-  <!-- file input -->  
-  <script src="js/file-input/bootstrap.file-input.js"></script>
-  <!-- combodate -->
-  <script src="js/combodate/moment.min.js"></script>
-  <script src="js/combodate/combodate.js"></script>
-  <!-- parsley -->
-
-  <!-- select2 -->
-<script src="js/select2/select2.min.js"></script>
-
-  <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+   <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="js/jquery_cookie.js"></script>
     <script src="js/jquery.serialize-object.compiled.js"></script>
-<script src="js/bootbox.min.js"></script>
-<script type="text/javascript">
+    <script src="js/bootbox.min.js"></script>
+    <script type="text/javascript">
 $(document).ready(function()
 { 
 
-       var nb = urlParameterValue( 'nb' );
-       var param={
-        registration_token:nb
-       };
-       if(nb==""){
-        bootbox.alert("Looks like the link you have used is not proper. If you are a Gecko backer and trying to register for the first time please contact support@geckotag.me");
-       }
-       else{
-          $("#registration_token").val(nb);
-        callAPI("/v1/backers/{0}/backer_information.json".f(nb), "GET", "", onSuccessGetBackerInfo, onApiError);
-       }
- 
+ var nb = urlParameterValue( 'nb' );
+ var param={
+  registration_token:nb
+};
+if(nb==""){
+  bootbox.alert("Looks like the link you have used is not proper. If you are a Gecko backer and trying to register for the first time please contact support@geckotag.me");
+}
+else{
+  $("#registration_token").val(nb);
+  callAPI("/v1/backers/{0}/backer_information.json".f(nb), "GET", "", onSuccessGetBackerInfo, onApiError);
+}
+
 
 });
 
-   
+
 </script>
 </body>
 </html>

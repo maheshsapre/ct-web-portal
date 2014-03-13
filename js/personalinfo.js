@@ -20,5 +20,8 @@ function updatePersonalInfo(param) {
 }
 
 function onSuccessupdatePersonalInfo(response) {  
+  console.log(response.data.first_name); 
+  setCurrentUser(response.data.first_name);
+  setCurrentUserName();
    bootbox.alert("updated");
   }

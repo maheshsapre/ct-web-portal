@@ -5,7 +5,7 @@ var MESSAGE =
 
 var CONFIG = 
 {
-	url: "http://test-env-v-0-0-124-4.elasticbeanstalk.com",
+	url: "http://dev-api.connovatech.com:3001",
 	contentType: "application/json",	/* Consider as default parameter for web-portal */
 	dataType: "json",					/* Consider as default parameter for web-portal */
 	isDebugging : true,

@@ -10,9 +10,16 @@ function changePassword()
 }
 
 function changePasswordInfo(param) {
-  callAPI("/v1/backers/current_backer.json", "PUT", param, onSuccessChangePasswordInfo, onApiError);
+  callAPI("/v1/backers/current_backer/change_password.json", "PUT", param, onSuccessChangePasswordInfo, onApiError);
 }
 
-function  onSuccessChangePasswordInfo(response) {  
-   bootbox.alert("updated");
+function  onSuccessChangePasswordInfo(response) { 
+      bootbox.alert("Password has been changed successfully.Please Login", function(result) 
+    {  
+      if(result==undefined){
+       window.location="signin.html";
+      }
+     });
+
+
   }

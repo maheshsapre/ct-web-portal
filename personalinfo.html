@@ -52,7 +52,7 @@
         <a href="orders.html" id="admin2" style="display: none;"><i class="icon-list icon-xlarge"></i><span>Orders</span></a>
         
       </li>
-      <li class="dropdown-submenu"><a id="admin3" style="display: none;" href="#"><i class="icon-edit icon-xlarge"></i><span>Account</span></a>
+      <li id="highlightAccount" class="dropdown-submenu"><a id="admin3" style="display: none;" href="#"><i class="icon-edit icon-xlarge"></i><span>Account</span></a>
       <ul class="dropdown-menu">
           <li><a href="personalinfo.html">Personal Information</a></li>
           <li style="display:none;"><a href="addresses.html">Addresses</a></li>
@@ -163,11 +163,12 @@
   <script type="text/javascript">
    $(document).ready(function()
 {
-
-            $('#admin3').addClass("active")
+             $("#admin3").show();
+            $("#admin2").show();
+            $('#highlightAccount').addClass("active")
 });
 getCurrentUser();
- role();
+
 </script>
 <script src="js/bootbox.min.js"></script>
 </body>

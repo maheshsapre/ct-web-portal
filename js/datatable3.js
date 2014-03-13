@@ -40,13 +40,14 @@ function pendingActionGeckoTeam()
   var $inputs = $form.find("input, select, button, textarea");
   $("#order_status_type").val("Pending Action - Gecko Team");
     $("#pageId").val(page);
+    $("#api_key").val(getKey());
   var param =  $form.serializeObject();  
   getPendingActionGeckoTeam(param);
 }
 
 function getPendingActionGeckoTeam(param) {
   console.log(param);
-  callAPI("/v1/orders/order_status_details.json", "GET",param, onSuccessgetPendingActionGeckoTeam, onApiError);
+ callAPI("/v1/orders/order_status_details.json", "GET",param, onSuccessgetPendingActionGeckoTeam, onApiError);
 }
 
 function onSuccessgetPendingActionGeckoTeam(response) {  
@@ -81,7 +82,7 @@ function onSuccessUpdateBackerAddresses(response){
 }
 
 function addOrder(){
-	var $form = $("#addOrder");
+	var $form = $("#addOrderForm");
   var $inputs = $form.find("input, select, button, textarea");
   var param =  $form.serializeObject(); 
   console.log(param);
@@ -94,7 +95,13 @@ function  addNewOrder(id,param){
 
 function onSuccessAddNewOrder(response){
 	console.log(response.data);
-     bootbox.alert("updated");
+       bootbox.alert("Order has been added successfully", function(result) 
+    {  
+      if(result==undefined){
+       window.location=window.location.href;
+      }
+     });
+
 
 }
 

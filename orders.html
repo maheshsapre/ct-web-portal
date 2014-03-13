@@ -16,7 +16,7 @@
   <script src="js/me.ui.js"></script>
 
   <script src="js/config.js"></script>
- 
+ <script src="js/app.data.js"></script>
 
   <script type="text/javascript">
 
@@ -118,7 +118,7 @@
             <p>Please click on <b>submit</b> button after making the necessary changes.</p>
           </div>
 
-          <a style="width:200px;"  data-toggle="modal" class="btn btn-success" href="#modalComment">Submit Changes</a>
+<a style="width:200px;"  class="btn btn-success" href="javascript:saveOrderChanges();">Submit Changes</a>
           <div class="clearfix">
             <p></p>
           </div>
@@ -157,26 +157,26 @@
           <table  class="table table-striped m-b-none" id="example" data-ride="datatables3">
             <thead>
              <tr>
-              <th></th>
+              <th width="5%"></th>
               <th width="10%">Pledge Id</th>
               <th width="10%">Backer Email</th>
               <th width="10%">Perk</th>
               <th width="10%">Order Date</th>
-              <th width="10%">Amount</th>
+              <th width="5%">Amount</th>
               <th width="10%">Amount Difference</th>
               <th width="10%">Shipping Applicable</th>
               <th width="10%">Shipping Paid</th>
               <th width="10%">Order Status</th>
               <th width="10%">Notes</th>
-              <th width="10%">Backer Id</th>
-              <th width="10%">Created At</th> 
-              <th width="10%">Order ID</th>
-              <th width="10%">Order Source</th>
-              <th width="10%">Address Id</th>
-              <th width="10%">Perk Id</th>
-              <th width="10%">quantity</th>
-              <th width="10%">Updated At</th>
-              <th id="columnAdmin" width="80%">Update</th>
+              <th width="0%">Backer Id</th>
+              <th width="0%">Created At</th> 
+              <th width="0%">Order ID</th>
+              <th width="0%">Order Source</th>
+              <th width="0%">Address Id</th>
+              <th width="0%">Perk Id</th>
+              <th width="0%">quantity</th>
+              <th width="0%">Updated At</th>
+              <th  width="10%">Update</th>
                <!--<th width="10%">update Adddress</th>-->
            
               
@@ -574,34 +574,54 @@
   </form>
 </div>
 
-<div id="modalComment"  class="modal fade">
+
+<div id="modalAddPerk"  class="modal fade">
+
   <div   class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><i class="icon-remove"></i></button>
-        <h4 class="modal-title" id="myModalLabel">Comments</h4>
+        <h4 class="modal-title" id="myModalLabel">Add Perk</h4>
       </div>
       <div  class="modal-body">
        <div class="panel-body">
-        <form class="form-horizontal"  action="javascript:saveOrderChanges();" id="saveOrderChanges" data-validate="parsley">  
+        <form class="form-horizontal"  action="javascript:addNewPerk();" id="addPerk" data-validate="parsley">  
+          <input type="hidden" name="order_id" id="order_idPerk" placeholder="" class="bg-focus form-control">
+         
           <div class="form-group">
-            <label class="control-label">Comment:</label>
-            <textarea class="form-control" name="notes" placeholder="Content" id="myNotes" rows="5"></textarea>
+            <label class="control-label">Perk</label>
+            <div class="m-b">
+              <select id="select2-option" name="perk" style="width:260px">
+                <optgroup label="Select a perk">
+                  <option value="DSLR Camera Trigger Cable">DSLR Camera Trigger Cable</option>
+                  <option value="Early Gecko">Early Gecko</option>
+                  <option value="Gecko ">Gecko </option>
+                  <option value="Gecko * 2">Gecko * 2</option>
+                  <option value="Gecko * 4">Gecko * 4</option>
+                  <option value="Gecko * 6">Gecko * 6</option>
+                  <option value="Gecko Gateway Coupon">Gecko Gateway Coupon</option>
+                  <option value="Gecko Re-Seller Pack">Gecko Re-Seller Pack</option>
+                  <option value="Gecko Trio">Gecko Trio </option>
+                  <option value="Luggage Tag">Luggage Tag</option>
+                  <option value="Pink Gecko * 1">Pink Gecko * 1 </option>
+                  <option value="VB Geeks">VB Geeks </option>
+                  <option value="Shipping Charges">Shipping Charges</option>
+                </optgroup>
+              </select>
+            </div>
           </div>
-          <input type="hidden" id="saveOrder_authentication_token" name="authentication_token" value="">
-
-
+      
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-sm btn-default">Save</button>
-        <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Close</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div>
-</form>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-sm btn-default">Save</button>
+          <button type="button" class="btn btn-sm btn-primary" id="closeButton" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div>
+  </form>
 </div>
-
+</div>
+</div>
 <div id="modalShipping"  class="modal fade">
 
   <div   class="modal-dialog">
@@ -612,7 +632,7 @@
       </div>
       <div  class="modal-body">
        <div class="panel-body">
-        <form class="form-horizontal"  action="javascript:addOrder();" id="addOrder" data-validate="parsley">  
+        <form class="form-horizontal"  action="javascript:addOrder();" id="addOrderForm" data-validate="parsley">  
           <input type="hidden" name="backer_id" id="backer_id" placeholder="" class="bg-focus form-control">
           <input type="hidden" name="address_id" id="address_Orderid" placeholder="" class="bg-focus form-control">
           <div class="form-group">
@@ -636,7 +656,7 @@
                   <option value="Luggage Tag">Luggage Tag</option>
                   <option value="Pink Gecko * 1">Pink Gecko * 1 </option>
                   <option value="VB Geeks">VB Geeks </option>
-                  <option value="Pink Gecko * 1">Shipping Charges</option>
+                  <option value="Shipping Charges">Shipping Charges</option>
                 </optgroup>
               </select>
             </div>
@@ -650,14 +670,209 @@
           <button type="submit" class="btn btn-sm btn-default">Save</button>
           <button type="button" class="btn btn-sm btn-primary" id="closeButton" data-dismiss="modal">Close</button>
         </div>
+         
       </div><!-- /.modal-content -->
     </div>
-  </form>
+     </form>
 </div>
+</div>
+</div>
+<div id="modalSelectPerks"  class="modal fade">
+
+  <div   class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><i class="icon-remove"></i></button>
+        <h4 class="modal-title" id="myModalLabel">Select the perks</h4>
+      </div>
+      <div  class="modal-body">
+       <div class="panel-body">
+        <form class="form-horizontal"  action="javascript:addPerks();" id="addOrderForm" data-validate="parsley">  
+          <div class="form-group">
+            <label class="control-label"></label>
+            <div class="m-b">
+               <div class="row">
+         <div class="col-lg-6">
+              <select id="select3-option" name="perk">
+                <optgroup label="Select a perk">
+                  <option value="">Select</option>
+                   <option onClick="javascript:selectedPerk1('5',1);" value="1">Detachable Key Chain</option>
+                  <option onClick="javascript:selectedPerk1('8','2');" value="2">DSLR Camera Trigger Cable</option>
+                  <option onClick="javascript:selectedPerk1('20','3');" value="3">Early Gecko</option>
+                  <option  onClick="javascript:selectedPerk1('25','4');" value="4">Gecko </option>
+                  <option onClick="javascript:selectedPerk1('40','5');" value="5">Gecko * 2</option>
+                  <option onClick="javascript:selectedPerk1('75','6');" value="6">Gecko * 4</option>
+                 <option onClick="javascript:selectedPerk1('75','6');" value="6">Gecko * 4</option>
+                  <option onClick="javascript:selectedPerk1('100','7');" value="7">Gecko * 6</option>
+                  <option onClick="javascript:selectedPerk1('7','8');" value="8">Gecko Gateway Coupon</option>
+                  <option onClick="javascript:selectedPerk1('995','9');" value="9">Gecko Geek</option>
+                  <option onClick="javascript:selectedPerk1('995','10');" value="10">Gecko Re-Seller Pack</option>
+                  <option onClick="javascript:selectedPerk1('60','11');" value="11">Gecko Trio </option>
+                  <option onClick="javascript:selectedPerk1('5','12');" value="12">Luggage Tag</option>
+                  <option onClick="javascript:selectedPerk1('25','13');" value="13">Pink Gecko * 1 </option>
+                  <option onClick="javascript:selectedPerk1('200','14');" value="14">VB Geeks </option>
+                </optgroup>
+              </select>
+            </div>
+              <div class="col-lg-2">
+              <div id="perkValue1"></div>
+            </div></div>
+            </div>
+
+              <div class="m-b">
+                <div class="row">
+         <div class="col-lg-6">
+              <select id="select4-option" name="perk">
+                <optgroup label="Select a perk">
+                  <option  value="">Select</option>
+                   <option onClick="javascript:selectedPerk2('5','1');" value="1">Detachable Key Chain</option>
+                  <option onClick="javascript:selectedPerk2('8','2');" value="2">DSLR Camera Trigger Cable</option>
+                  <option onClick="javascript:selectedPerk2('20','3');" value="3">Early Gecko</option>
+                  <option  onClick="javascript:selectedPerk2('25','4');" value="4">Gecko </option>
+                  <option onClick="javascript:selectedPerk2('40','5');" value="5">Gecko * 2</option>
+                  <option onClick="javascript:selectedPerk2('75','6');" value="6">Gecko * 4</option>
+                  <option onClick="javascript:selectedPerk2('75','6');" value="6">Gecko * 4</option>
+                  <option onClick="javascript:selectedPerk2('100','7');" value="7">Gecko * 6</option>
+                  <option onClick="javascript:selectedPerk2('7','8');" value="8">Gecko Gateway Coupon</option>
+                  <option onClick="javascript:selectedPerk2('995','9');" value="9">Gecko Geek</option>
+                  <option onClick="javascript:selectedPerk2('995','10');" value="10">Gecko Re-Seller Pack</option>
+                  <option onClick="javascript:selectedPerk2('60','11');" value="11">Gecko Trio </option>
+                  <option onClick="javascript:selectedPerk2('5','12');" value="12">Luggage Tag</option>
+                  <option onClick="javascript:selectedPerk2('25','13');" value="13">Pink Gecko * 1 </option>
+                  <option onClick="javascript:selectedPerk2('200','14');" value="14">VB Geeks </option>
+                </optgroup>
+              </select>
+                       </div>
+              <div class="col-lg-2">
+              <div id="perkValue2"></div>
+            </div></div>
+            </div>
+              <div class="m-b" >
+                <div class="row">
+         <div class="col-lg-6">
+              <select id="select5-option" name="perk">
+                <optgroup label="Select a perk">
+                  <option  value="">Select</option>
+                   <option onClick="javascript:selectedPerk3('5','1');" value="1">Detachable Key Chain</option>
+                  <option onClick="javascript:selectedPerk3('8','2');" value="2">DSLR Camera Trigger Cable</option>
+                  <option onClick="javascript:selectedPerk3('20','3');" value="3">Early Gecko</option>
+                  <option  onClick="javascript:selectedPerk3('25','4');" value="4">Gecko </option>
+                  <option onClick="javascript:selectedPerk3('40','5');" value="5">Gecko * 2</option>
+                  <option onClick="javascript:selectedPerk3('75','6');" value="6">Gecko * 4</option>
+                   <option onClick="javascript:selectedPerk3('75','6');" value="6">Gecko * 4</option>
+                  <option onClick="javascript:selectedPerk3('100','7');" value="7">Gecko * 6</option>
+                  <option onClick="javascript:selectedPerk3('7','8');" value="8">Gecko Gateway Coupon</option>
+                  <option onClick="javascript:selectedPerk3('995','9');" value="9">Gecko Geek</option>
+                  <option onClick="javascript:selectedPerk3('995','10');" value="10">Gecko Re-Seller Pack</option>
+                  <option onClick="javascript:selectedPerk3('60','11');" value="11">Gecko Trio </option>
+                  <option onClick="javascript:selectedPerk3('5','12');" value="12">Luggage Tag</option>
+                  <option onClick="javascript:selectedPerk3('25','13');" value="13">Pink Gecko * 1 </option>
+                  <option onClick="javascript:selectedPerk3('200','14');" value="14">VB Geeks </option>
+                </optgroup>
+              </select>
+                       </div>
+              <div class="col-lg-2">
+              <div id="perkValue3"></div>
+            </div></div>
+            </div>
+              <div class="m-b" >
+                <div class="row">
+         <div class="col-lg-6">
+              <select id="select6-option" name="perk">
+                <optgroup label="Select a perk">
+                  <option  value="">Select</option>
+                   <option onClick="javascript:selectedPerk4('5','1');" value="1">Detachable Key Chain</option>
+                  <option onClick="javascript:selectedPerk4('8','2');" value="2">DSLR Camera Trigger Cable</option>
+                  <option onClick="javascript:selectedPerk4('20','3');" value="3">Early Gecko</option>
+                  <option  onClick="javascript:selectedPerk4('25','4');" value="4">Gecko </option>
+                  <option onClick="javascript:selectedPerk4('40','5');" value="5">Gecko * 2</option>
+                  <option onClick="javascript:selectedPerk4('75','6');" value="6">Gecko * 4</option>
+                 <option onClick="javascript:selectedPerk4('75','6');" value="6">Gecko * 4</option>
+                  <option onClick="javascript:selectedPerk4('100','7');" value="7">Gecko * 6</option>
+                  <option onClick="javascript:selectedPerk4('7','8');" value="8">Gecko Gateway Coupon</option>
+                  <option onClick="javascript:selectedPerk4('995','9');" value="9">Gecko Geek</option>
+                  <option onClick="javascript:selectedPerk4('995','10');" value="10">Gecko Re-Seller Pack</option>
+                  <option onClick="javascript:selectedPerk4('60','11');" value="11">Gecko Trio </option>
+                  <option onClick="javascript:selectedPerk4('5','12');" value="12">Luggage Tag</option>
+                  <option onClick="javascript:selectedPerk4('25','13');" value="13">Pink Gecko * 1 </option>
+                  <option onClick="javascript:selectedPerk4('200','14');" value="14">VB Geeks </option>
+                </optgroup>
+              </select>
+                       </div>
+              <div class="col-lg-2">
+              <div id="perkValue4"></div>
+            </div></div>
+            </div>
+              <div class="m-b">
+                <div class="row">
+         <div class="col-lg-6">
+              <select id="select7-option" name="perk">
+                <optgroup label="Select a perk">
+                  <option  value="">Select</option>
+                   <option onClick="javascript:selectedPerk5('5','1');" value="1">Detachable Key Chain</option>
+                  <option onClick="javascript:selectedPerk5('8','2');" value="2">DSLR Camera Trigger Cable</option>
+                  <option onClick="javascript:selectedPerk5('20','3');" value="3">Early Gecko</option>
+                  <option  onClick="javascript:selectedPerk5('25','4');" value="4">Gecko </option>
+                  <option onClick="javascript:selectedPerk5('40','5');" value="5">Gecko * 2</option>
+                  <option onClick="javascript:selectedPerk5('75','6');" value="6">Gecko * 4</option>
+                  <option onClick="javascript:selectedPerk5('100','7');" value="7">Gecko * 6</option>
+                  <option onClick="javascript:selectedPerk5('7','8');" value="8">Gecko Gateway Coupon</option>
+                  <option onClick="javascript:selectedPerk5('995','9');" value="9">Gecko Geek</option>
+                  <option onClick="javascript:selectedPerk5('995','10');" value="10">Gecko Re-Seller Pack</option>
+                  <option onClick="javascript:selectedPerk5('60','11');" value="11">Gecko Trio </option>
+                  <option onClick="javascript:selectedPerk5('5','12');" value="12">Luggage Tag</option>
+                  <option onClick="javascript:selectedPerk5('25','13');" value="13">Pink Gecko * 1 </option>
+                  <option onClick="javascript:selectedPerk5('200','14');" value="14">VB Geeks </option>
+                </optgroup>
+              </select>
+                       </div>
+              <div class="col-lg-2">
+              <div id="perkValue5"></div>
+            </div></div>
+            </div>
+               <div class="m-b">
+                <div class="row">
+         <div class="col-lg-6">
+              <select id="select8-option" name="perk">
+                <optgroup label="Select a perk">
+                  <option  value="">Select</option>
+                   <option onClick="javascript:selectedPerk6('5','1');" value="1">Detachable Key Chain</option>
+                  <option onClick="javascript:selectedPerk6('8','2');" value="2">DSLR Camera Trigger Cable</option>
+                  <option onClick="javascript:selectedPerk6('20','3');" value="3">Early Gecko</option>
+                  <option  onClick="javascript:selectedPerk6('25','4');" value="4">Gecko </option>
+                  <option onClick="javascript:selectedPerk6('40''5');" value="5">Gecko * 2</option>
+                 <option onClick="javascript:selectedPerk6('75','6');" value="6">Gecko * 4</option>
+                  <option onClick="javascript:selectedPerk6('100','7');" value="7">Gecko * 6</option>
+                  <option onClick="javascript:selectedPerk6('7','8');" value="8">Gecko Gateway Coupon</option>
+                  <option onClick="javascript:selectedPerk6('995','9');" value="9">Gecko Geek</option>
+                  <option onClick="javascript:selectedPerk6('995','10');" value="10">Gecko Re-Seller Pack</option>
+                  <option onClick="javascript:selectedPerk6('60','11');" value="11">Gecko Trio </option>
+                  <option onClick="javascript:selectedPerk6('5','12');" value="12">Luggage Tag</option>
+                  <option onClick="javascript:selectedPerk6('25','13');" value="13">Pink Gecko * 1 </option>
+                  <option onClick="javascript:selectedPerk6('200','14');" value="14">VB Geeks </option>
+                </optgroup>
+              </select>
+                        </div>
+              <div class="col-lg-2">
+              <div id="perkValue6"></div>
+            </div></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-sm btn-default">Save</button>
+          <button type="button" class="btn btn-sm btn-primary" id="closeButton" data-dismiss="modal">Close</button>
+        </div>
+         
+      </div><!-- /.modal-content -->
+    </div>
+     </form>
+</div>
+
 
 <form id="pendingActionGeckoTeam">
  <input type="hidden" id="order_status_type" name="order_status_type" value="">
  <input type="hidden" id="pageId" name="page" value="">
+ <input type="hidden" id="api_key" name="api_key" value="">
 </form>
 <!-- footer -->
 <footer id="footer">
@@ -700,14 +915,14 @@
 <!-- app -->
 <script src="js/app.js"></script>
 <script src="js/app.plugin.js"></script>
-<script src="js/app.data.js"></script>
+
    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="js/jquery_cookie.js"></script>
     <script src="js/jquery.serialize-object.compiled.js"></script>
 <script type="text/javascript">
-role();
-setCurrentUserName();
 
+setCurrentUserName();
+loggedInrole();
 var id = urlParameterValue( 'id' );
 if(id!=""){
   $("#orderPopup").hide();
@@ -723,6 +938,8 @@ if(id!=""){
 
     $('#admin3').addClass("active")
   });
+clearPerksModalDialog();
+ resetPerkValueArray()
   </script>
 
   <script src="js/bootbox.min.js"></script>

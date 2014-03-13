@@ -21,7 +21,6 @@ function getRoles() {
 }
 
 function setRole(value) {
-  console.log(value);
   $.cookie("xsTr", value, { expires: 5 }); // 5 days expiry
 }
 
@@ -115,7 +114,6 @@ function getOrderStatus() {
 }
 
 function setOrderStatus(value) {
-  console.log(value);
    $.cookie.json = true;
   $.cookie("xsTS", value, { expires: 5 }); // 5 days expiry
 }
@@ -130,7 +128,6 @@ function getOrderStatusId() {
 }
 
 function setOrderStatusId(value) {
-  console.log(value);
    $.cookie.json = true;
   $.cookie("xsTI", value, { expires: 5 }); // 5 days expiry
 }
@@ -162,7 +159,6 @@ function getBackerOrdersAction() {
 }
 
 function setBackerOrdersAction(value) {
-  console.log(value);
    $.cookie.json = true;
   $.cookie("xsTO", value, { expires: 5 }); // 5 days expiry
 }
@@ -248,7 +244,7 @@ function onSuccessGetCurrentUser(response) {
 }
 
 function setCurrentUserName(){
-
+     $("#me").empty();
     $("<label />", { text: getCurrentUserName() }).appendTo("#me");
 }
 
@@ -334,10 +330,9 @@ window.location="orders.html";
 }
 }
 
-function role(){
+function loggedInrole(){
 
 role=getRoles();
-console.log(role);
  if(role=="admin"){
   $("#admin").show();
     $("#admin1").show();
@@ -374,7 +369,7 @@ function logout(){
 function myFunction()
   {   
     var val=getKey();
-    console.log(val);
+  
     if(val==""||val==undefined)
     {  
       window.location="signin.html";

@@ -99,7 +99,7 @@
           <section class="panel-body ">
             <div class="col-lg-12">
               <header class="panel-heading bg bg-inverse">
-                Summarized by Order Status<button data-toggle="modal" href="#modal" class="btn btn-default btn-xs pull-right">Mass Notification</button>
+                Summarized by Order Status<button data-toggle="modal" id="massNotification" href="#modal" class="btn btn-default btn-xs pull-right">Mass Notification</button>
               </header>
               <div class="list-group">
                 <a href="orders.html?page=1&orderStatus=1" class="list-group-item">
@@ -126,6 +126,21 @@
                   <i class="icon-chevron-right"></i>
                   <span class="badge" id="shipped"></span>
                   <i class="icon-smile yellow"></i> Shipped / Delivered
+                </a>
+                 <a href="orders.html?page=1&orderStatus=6" class="list-group-item">
+                  <i class="icon-chevron-right"></i>
+                  <span class="badge" id="inCompleteAddress"></span>
+                  <i class="icon-smile yellow"></i> Incomplete Address
+                </a>
+                 <a href="orders.html?page=1&orderStatus=7" class="list-group-item">
+                  <i class="icon-chevron-right"></i>
+                  <span class="badge" id="PerkNotMentioned"></span>
+                  <i class="icon-smile yellow"></i> Perk not mentioned
+                </a>
+                <a href="orders.html?page=1&orderStatus=8" class="list-group-item">
+                  <i class="icon-chevron-right"></i>
+                  <span class="badge" id="ShippingNotPaid"></span>
+                  <i class="icon-smile yellow"></i> Shipping not paid
                 </a>
               </div>
 			</div>
@@ -255,7 +270,7 @@
                   <div class="col-lg-9 media">
                     <div class="media-body">
                      
-                         <a class="btn btn-danger" href="javascript:deleteBackerData();">Delete</a>
+                         <a class="btn btn-danger" id="deleteButton" data-toggle="modal" href="#modalDelete">Delete</a>
                             
                     </div>
                   </div>
@@ -305,27 +320,56 @@
         </div>
         <div  class="modal-body">
          <div class="panel-body">
-          <form class="form-horizontal"  action="javascript:sendEmailToBackers();" id="sendEmail" data-validate="parsley">  
+          <form class="form-horizontal" method="post" action="javascript:checkText();" id="sendEmail" data-validate="parsley">  
             
 
-             
+                            <label class="control-label">Choose the type of email you want to send to the backers</label>
                       <select id="select2-option" name="email_type" id="email_type" style="width:260px">
-                          <option  value="">Choose type</option>
                           <option value="welcome_email">Welcome email</option>
                           <option value="confirmation_email">Confirmation email</option>
                      
                       </select>
-
-
-           
-        
+                      <br/>
+                      <br/>
+          <div class="form-group">
+                  <label class="control-label">Please enter the text "Send email now" to send email to the backers:</label>
+                  <input type="text" class="bg-focus form-control" id="validateText">
+                   </div>
+                    <div class="form-group">
                   <input type="hidden" id="updateAddress_authentication_token" name="authentication_token" value="">
-
-
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-default">Send</button>
+                <button type="submit" id="btnPlaceOrder" class="btn btn-sm btn-default">Send</button>
+                <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Cancel</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div>
+        </form>
+      </div>
+</div>
+</div>
+      <div id="modalDelete"  class="modal fade">
+
+    <div   class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><i class="icon-remove"></i></button>
+          <h4 class="modal-title" id="myModalLabel">Delete backers</h4>
+        </div>
+        <div  class="modal-body">
+         <div class="panel-body">
+          <form class="form-horizontal" method="post" action="javascript:deleteBackerData();" id="sendEmail" data-validate="parsley">  
+          <div class="form-group">
+                  <label class="control-label">Please enter the text "Delete backer information" to delete all the information</label>
+                  <input type="text" class="bg-focus form-control" id="validateDeleteText">
+                   </div>
+                    <div class="form-group">
+                  <input type="hidden" id="updateAddress_authentication_token" name="authentication_token" value="">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" id="btnPlaceOrder" class="btn btn-sm btn-default">Delete</button>
                 <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Cancel</button>
               </div>
             </div><!-- /.modal-content -->
@@ -365,7 +409,7 @@
 <script type="text/javascript">
 //getCurrentUser();
 setCurrentUserName();
-role();
+loggedInrole();
 $("#order_source").val("igg");
 $("#api_key").val(getKey());
 getFileAction();
@@ -374,7 +418,8 @@ $(document).ready(function()
 {
 
             
-            $('#admin').addClass("active")
+            $('#admin').addClass("active");
+           
 });
 </script>
 <script>
@@ -385,6 +430,30 @@ function submit(){
  $("#fileButton").click();
  $("#backerCsv").append('<div id="loader"></div> ');
 }
+
+function checkText(){
+  var txt=$("#validateText").val();
+  console.log(txt);
+if(txt=="Send email now"){
+    sendEmailToBackers();
+}
+else{
+   bootbox.alert("Enter the proper text");
+}
+}
+
+  
+$( "#massNotification" ).click(function() {
+  $("#validateText").val("");
+
+});
+
+  
+$( "#deleteButton" ).click(function() {
+  $("#validateDeleteText").val("")
+
+});
+ 
 </script>
 </body>
 </html>

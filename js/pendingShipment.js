@@ -30,7 +30,7 @@ window.location="pendingShipment.html?page="+page;
    var page = urlParameterValue( 'page' );
  
 function  pendingShipment() {
-  callAPI("/v1/orders/order_status_details.json?order_status_type=Pending Shipment - All issues resolved&page="+page, "GET","", onSuccessPendingShipment, onApiError);
+  callAPI("/v1/orders/order_status_details.json?order_status_type=Pending Shipment - All issues resolved&page="+page, "GET",getApiKeyQueryFormat(), onSuccessPendingShipment, onApiError);
 }
 
 function onSuccessPendingShipment(response) {  

@@ -15,14 +15,14 @@ function forgotPassword(param){
 }
 
 function onSuccessforgotPassword(response){
-message="Forgot password link sent to your mail.";
+message="Forgot password link has been sent to your mail.";
   bootbox.alert(message) ;
 }
 
 
 
 function oncheckTokenExpiryApiError(response,exception){
-     bootbox.alert("link has expired", function(result) 
+     bootbox.alert("Link has expired", function(result) 
     {  
       if(result==undefined){
        window.location="signin.html";
@@ -43,17 +43,16 @@ function checkTokenExpiry(){
     var param = {
       "reset_password_token" : reset_password_token 
     };
- callAPI("/v1/backers/validate_password_token.json", "GET", param, onSuccessCheckTokenExpiry,oncheckTokenExpiryApiError);
-
+ callAPI("/v1/backers/{0}/backer_info.json".f(reset_password_token), "GET", param, onSuccessCheckTokenExpiry,oncheckTokenExpiryApiError);
 }
 
 function onSuccessResetPassword(response) {  
    clearKey();
-message="Password has been reset."
+message="Password has been reset successfully."
    bootbox.alert(message, function(result) 
     {  
       if(result==undefined){
-       window.location="login.html";
+       window.location="signin.html";
       }
     });
 }
@@ -61,7 +60,7 @@ message="Password has been reset."
 
 function resetPassword(param) {  
 
-  callAPI("/v1/users/reset_password.json", "POST", param, onSuccessResetPassword, onApiError);
+  callAPI("/v1/backers/reset_password.json", "POST", param, onSuccessResetPassword, onApiError);
 
 }
 
@@ -70,7 +69,7 @@ function resetPasswordForm(){
   var $form = $("#resetPassword");
   var $inputs = $form.find("input, select, button, textarea");
   var reset_password_token = urlParameterValue( 'rt' );
-  $("#reset_password").val("reset_password_token");
+  $("#reset_password").val(reset_password_token);
   var param =  $form.serializeObject();
   console.log(param);
   resetPassword( JSON.stringify(param));

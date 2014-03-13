@@ -1,5 +1,6 @@
 
-
+var perkArray=new Array(6);
+var perkValue=new Array(6);
 var page=1;
 var orderList=new Array();
 
@@ -25,10 +26,10 @@ function decrement(){
   $("#loading").show();
   page=parseInt(page)-1;
   if(page<1)
-  {
-   $("#decrement").removeAttr('href');
-   $("#loading").hide();
-   return;
+ {
+ $("#decrement").removeAttr('href');
+ $("#loading").hide();
+ return;
  }
  else
  {
@@ -46,7 +47,7 @@ var id= urlParameterValue( 'id' );
 
 
 function getBackerOrdersId(id){
-	console.log(id);
+
 	callAPI("/v1/orders/{0}/backer_information.json".f(id), "GET",getKeyQueryFormat(), onSuccessGetBackerOrders, onApiError);
 }
 
@@ -56,22 +57,25 @@ function getBackerOrders() {
 }
 
 function onSuccessGetBackerOrders(response) { 
-console.log(response.data[0].address_id); 
   $("#address_Orderid").val(response.data[0].address_id);
   $("#backer_id").val(response.data[0].backer_id);
-  console.log(response.data[0].backer.email);
   $("#email").html(response.data[0].backer.email);
-  console.log(response.data);
   setBackerOrdersAction(response.data);
-  j=0;
+   for(i=0;i<response.data.length;i++){
+orderList[i]=response.data[i].id;
+   }
+  
+  if(getRoles()!="admin"){
+    $("#warning").show();
   for(i=0;i<response.data.length;i++){
-    orderList[j]=response.data[j].id;
-    j++;
-     $("#warning").show();
+    
+     //$("#warning").show();
     if(response.data[i].notes!="Success"&&response.data[i].notes!=""){
         
       $("#alert1").append("<p>Pledge Id: "+response.data[i].reference_no+" >>> "+response.data[i].notes+"<p>");
   }
+}
+
 }
   $("#loading").hide();
 // $.getScript("js/app.data.js")
@@ -98,12 +102,17 @@ function  updateBackerAddresses(id,param){
 
 function onSuccessUpdateBackerAddresses(response){
 	console.log(response.data);
-  bootbox.alert("updated");
+     bootbox.alert("Address has been updated successfully", function(result) 
+    {  
+      if(result==undefined){
+         window.location=window.location.href;
+    }
+      });
 }
 
 function orderStatus(){
    id=getOrderStatusId();
-  if(order_status=="3"){
+  
      notes=$("#myNotes").val();
   if(filters.length==0){
     bootbox.alert("Please select the checkbox");
@@ -116,37 +125,31 @@ function orderStatus(){
                "notes":notes,
                "order_status_id" : id
                 };
-               
-  }
-}
-else{
- 
-  console.log(id);
-  notes=$("#myNotes").val();
-  orderIds=orderList.toString();
-  console.log(orderIds);
-  var param = {
-   "order_ids" :orderIds,
-   "notes":notes,
-   "order_status_id" : id
-
- };
-}
- param=JSON.stringify(param);
+     param=JSON.stringify(param);
  console.log(param);
  callAPI("/v1/orders/update_order_status.json", "PUT",param, onSuccessOrderStatus, onApiError);  
+          
+  }
 
+// else{
+ 
+//   console.log(id);
+
+//   notes=$("#myNotes").val();
+//   orderIds=orderList.toString();
+//   console.log(orderIds);
+//   var param = {
+//    "order_ids" :orderIds,
+//    "notes":notes,
+//    "order_status_id" : id
+
+//  };
+// }
+ 
 }
 function onSuccessOrderStatus(response){
 
-  var page = urlParameterValue( 'page' );
-  var id= urlParameterValue( 'id' );
-  if(order_status=="3"){
-  window.location="orders.html?page=1&orderStatus=3"
-  }else{
-  window.location="orders.html?id="+id+"&page="+page;
-}
-
+ window.location=window.location.href;
 }
 
 function order(i){
@@ -159,13 +162,17 @@ function order(i){
 
  // }
  function saveOrderChanges(){
-  var $form = $("#saveOrderChanges");
-  var $inputs = $form.find("input, select, button, textarea");
-  $("#saveOrder_authentication_token").val(getKey()); 
-  var param =  $form.serializeObject(); 
-  console.log(param);
-  console.log(JSON.stringify(param));
-  //updateBackerAddresses(param.address_id,JSON.stringify(param));
+
+ callAPI("/v1/orders/{0}/update_status_geckoteam.json".f(getKey()), "PUT","", onSuccessSaveOrderChanges, onApiError); 
+}
+
+function onSuccessSaveOrderChanges(response){
+  bootbox.alert("Changes have been saved successfully", function(result) 
+    {  
+      if(result==undefined){
+      window.location=window.location.href;
+    }
+      });
 }
 
 order_status= urlParameterValue('orderStatus');
@@ -174,13 +181,13 @@ switch(order_status)
 {
   case '1':
    $("#addOrder").hide();
-  $("#action").hide();
+  
   $("#emailBlock").hide();
   getPendingOrderAccepted();
   break;
   case '2':
    $("#addOrder").hide();
-  $("#action").hide();   
+   
   $("#emailBlock").hide();
   pendingActionCustomer();
   break;
@@ -191,15 +198,33 @@ switch(order_status)
   break;
   case '4':
    $("#addOrder").hide();
-  $("#action").hide(); 
+  
   $("#emailBlock").hide();
   pendingShipment();
   break;
   case '5':
    $("#addOrder").hide();
-  $("#action").hide(); 
+  
   $("#emailBlock").hide();
   shipmentDone();
+  break;
+  case '6':
+   $("#addOrder").hide();
+  
+  $("#emailBlock").hide();
+  inCompleteAddress();
+  break;
+   case '7':
+   $("#addOrder").hide();
+  
+  $("#emailBlock").hide();
+ perkNotMentioned();
+  break;
+   case '8':
+   $("#addOrder").hide();
+  
+  $("#emailBlock").hide();
+  shippingNotPaid();
   break;
   default:
   if(id==""){
@@ -211,3 +236,155 @@ else{
   $("#action").show(); 
 }
 
+
+function addNewPerk(){
+   var $form = $("#addPerk");
+  var $inputs = $form.find("input, select, button, textarea");
+  var param =  $form.serializeObject(); 
+  console.log(JSON.stringify(param));
+  addPerk(param.order_id,JSON.stringify(param));
+}
+
+function addPerk(id,param){
+  callAPI("/v1/orders/{0}/update_perk.json".f(id), "PUT",param, onSuccessAddPerk, onApiError);
+}
+
+function onSuccessAddPerk(response){
+    bootbox.alert("Perk has been added successfully", function(result) 
+    {  
+      if(result==undefined){
+         a=window.location.href;
+      console.log(a);
+       window.location=a;
+    }
+      });
+     }  
+
+
+  function inCompleteAddress() {
+  callAPI("/v1/orders/order_status_details2.json?status=Incomplete address&page="+page, "GET","", onSuccessInCompleteData, onApiError);
+}
+
+
+
+   function perkNotMentioned() {
+  callAPI("/v1/orders/order_status_details2.json?status=Perk not mentioned&page="+page, "GET","", onSuccessInCompleteData, onApiError);
+}
+
+
+   function shippingNotPaid() {
+  callAPI("/v1/orders/order_status_details2.json?status=Shipping not paid&page="+page, "GET","", onSuccessInCompleteData, onApiError);
+}
+
+function onSuccessInCompleteData(response) {  
+console.log(response.data);
+//setShipmentDone(response.data);
+$("#loading").hide();
+if(response.data.length<10){
+$("#increment").removeAttr('href');
+}
+drawDatatable(response.data);
+  }
+
+for (var i = perkArray.length - 1; i >= 0; i--) {
+  perkArray[i]=0;
+};
+function resetPerkValueArray(){
+for (var i =perkValue.length - 1; i >= 0; i--) {
+  perkValue[i]=0;
+};
+}
+  function selectedPerk1(i,val){
+   perkArray[0]=i;
+$("#perkValue1").html("$"+i);
+perkValue[0]=val;
+  }
+  function selectedPerk2(i,val){
+ perkArray[1]=i; 
+ perkValue[1]=val;
+$("#perkValue2").html("$"+i);
+  }
+  function selectedPerk3(i,val){
+   perkArray[2]=i;
+   perkValue[2]=val;
+$("#perkValue3").html("$"+i);
+  }
+  function selectedPerk4(i,val){
+    perkArray[3]=i;
+    perkValue[3]=val;
+$("#perkValue4").html("$"+i);
+  }
+  function selectedPerk5(i,val){
+    perkArray[4]=i;
+    perkValue[4]=val;
+$("#perkValue5").html("$"+i);
+  }
+  function selectedPerk6(i,val){
+    perkArray[5]=i;
+    perkValue[5]=val;
+$("#perkValue6").html("$"+i);
+  }
+
+  function addPerks(){
+    amount=0;
+  for (var i = perkArray.length - 1; i >= 0; i--) {
+    amount= parseInt(perkArray[i]) + amount;
+  };
+if(amount>addPerkTotalAmount){
+clearPerksModalDialog();
+ clearPerksAmount();
+  resetPerkValueArray();
+  for (var i = perkArray.length - 1; i >= 0; i--) {
+    perkArray[i]=0;
+  };
+  bootbox.alert("The total amount of the selected perks  exceeds the amount paid.Please reselect the perks")
+}
+else{
+  console.log(perkValue);
+  var perksIds=new Array();
+  j=0;
+  for (var i = 0; i < perkValue.length; i++) {
+       
+       if(perkValue[i]!=0){
+           perksIds[j]=perkValue[i];
+           j++;
+       }
+  };
+  console.log(perksIds);
+  var param={
+   order_id: addPerkOrderId,
+   perk_ids: perksIds.toString()
+  }
+  console.log(param);
+     callAPI("/v1/orders/split_the_order.json", "POST",JSON.stringify(param), onSuccessSplitPerk, onApiError);
+  
+}
+  }
+
+function onSuccessSplitPerk(response){
+    bootbox.alert("Perks have been successfully added", function(result) 
+    {  
+      if(result==undefined){
+       window.location=window.location.href;
+      }
+     });
+
+}
+  function clearPerksModalDialog()
+  {
+      document.getElementById('select3-option').selectedIndex = 0;
+  document.getElementById('select4-option').selectedIndex = 0;
+  document.getElementById('select5-option').selectedIndex = 0;
+  document.getElementById('select6-option').selectedIndex = 0;
+  document.getElementById('select7-option').selectedIndex = 0;
+  document.getElementById('select8-option').selectedIndex = 0;
+  }
+
+  function clearPerksAmount(){
+  $("#perkValue1").empty();
+  $("#perkValue2").empty();
+  $("#perkValue3").empty();
+  $("#perkValue4").empty();
+  $("#perkValue5").empty();
+  $("#perkValue6").empty();
+  }

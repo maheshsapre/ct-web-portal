@@ -30,7 +30,7 @@ window.location="shipmentDone.hml?page="+page;
   var page = urlParameterValue( 'page' );
 
 function shipmentDone() {
-  callAPI("/v1/orders/order_status_details.json?order_status_type=Shipped / Delivered&page="+page, "GET","", onSuccessShipmentDone, onApiError);
+  callAPI("/v1/orders/order_status_details.json?order_status_type=Shipped / Delivered&page="+page, "GET",getApiKeyQueryFormat(), onSuccessShipmentDone, onApiError);
 }
 
 function onSuccessShipmentDone(response) {  

@@ -33,7 +33,7 @@ window.location="orderAccepted.html?page="+page;
     var page = urlParameterValue( 'page' );
 
 function getPendingOrderAccepted() {
-  callAPI("/v1/orders/order_status_details.json?order_status_type=Order Accepted / Imported&page="+page, "GET","", onSuccessetPendingOrderAccepted, onApiError);
+  callAPI("/v1/orders/order_status_details.json?order_status_type=Order Accepted / Imported&page="+page, "GET",getApiKeyQueryFormat(), onSuccessetPendingOrderAccepted, onApiError);
 }
 
 function onSuccessetPendingOrderAccepted(response) {  

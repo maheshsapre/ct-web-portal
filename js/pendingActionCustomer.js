@@ -29,7 +29,7 @@ window.location="pendingActionCustomer.html?page="+page;
 }
   var page = urlParameterValue( 'page' );
 function pendingActionCustomer() {
-	callAPI("/v1/orders/order_status_details.json?order_status_type=Pending Action - Customer&page="+page, "GET","", onSuccessgetPendingActionGeckoTeam, onApiError);
+	callAPI("/v1/orders/order_status_details.json?order_status_type=Pending Action - Customer&page="+page, "GET",getApiKeyQueryFormat(), onSuccessgetPendingActionGeckoTeam, onApiError);
 }
 
 function onSuccessgetPendingActionGeckoTeam(response) {  
