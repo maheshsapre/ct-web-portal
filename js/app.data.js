@@ -401,6 +401,10 @@ $('[data-ride="datatables2"]').each(function() {
 		} );
 	 
 	});
+
+
+    // replace with the new table
+    
 	// select2 
 	$('[data-ride="datatables3"]').each(function() {
 		var oTable = $(this).dataTable( {
@@ -410,6 +414,7 @@ $('[data-ride="datatables2"]').each(function() {
 			"bRetrieve":true,
 			"sDom": "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'row'<'col-sm-6'i><'col col-sm-6'p>>",
 			"sPaginationType": "full_numbers",
+			"bFilter": false,
 				"bPaginate": false,
 			"bPaginate": false,
 			  "aoColumnDefs": [
@@ -440,7 +445,7 @@ $('[data-ride="datatables2"]').each(function() {
             nCells[1].innerHTML = iTotalMarket;
         },
        "fnDrawCallback": function () {
-            $("#example tbody tr td:nth-child(12)").click(function () {
+            $("#example tbody tr td:nth-child(8)").click(function () {
                 var position = oTable.fnGetPosition(this); // getting the clicked row position
                 console.log(position[0]);
                 RowID = oTable.fnGetData(position[0]); 
@@ -505,11 +510,15 @@ $('[data-ride="datatables2"]').each(function() {
                 { "mData": "perk.name" } ,
                 { "mData": "order_date" },
 				{ "mData": "amount" } ,
-				{ "mData": "amount_difference" },
-				{ "mData": "shipping_applicable" },
-				{ "mData": "shipping_paid" },
+				{ "mData": "amount_difference",
+				"bVisible":    false  },
+				{ "mData": "shipping_applicable",
+				"bVisible":    false },
+				{ "mData": "shipping_paid",
+				"bVisible":    false },
 				{ "mData": "order_status.name" },
-				{ "mData": "notes" } ,
+				{ "mData": "notes",
+				"bVisible":    false } ,
 				{ "mData": "backer_id",
 				"bVisible":    false  } ,
 				{ "mData": "created_at",
@@ -551,11 +560,11 @@ $('[data-ride="datatables2"]').each(function() {
 					if(full.perk.name =="Undefined"){
 						
 						
-					return   '<a style="font-size:10px;" class="btn btn-xs btn-info"  data-toggle="modal"  href="#modalAddPerk">Change perk</a>'+full.perk.name;
+					return   full.perk.name+'<br/><a style="font-size:10px;" class="btn btn-xs btn-info"  data-toggle="modal"  href="#modalAddPerk">Change perk</a>';
 				     }
                      else{
 				     
-				     	return '<a style="font-size:10px;" class="btn btn-xs btn-info"  data-toggle="modal"  href="#modalAddPerk">Change perk</a>'+full.perk.name ;
+				     	return full.perk.name +'<br/><a style="font-size:10px;" class="btn btn-xs btn-info"  data-toggle="modal"  href="#modalAddPerk">Change perk</a>';
 				    }
 				     // if(full.split==true){
 				     // 	return   '<a style="font-size:10px;" class="btn btn-xs btn-info"  data-toggle="modal"  href="#modalAddPerk">Add perk</a>'
@@ -568,7 +577,7 @@ $('[data-ride="datatables2"]').each(function() {
 				, "mRender": function ( url, type, full )  {
 					gfull=full;
 					 if(full.split==true){
-					return  '<a style="font-size:10px;" class="btn btn-xs btn-success"  data-toggle="modal"  href="#modalSelectPerks">Split perk</a>'+full.amount;
+					return  full.amount+'<br/><a style="font-size:10px;" class="btn btn-xs btn-success"  data-toggle="modal"  href="#modalSelectPerks">Split perk</a>';
                         }
                         else{
                         	return '<div>' + full.amount + '</div>';

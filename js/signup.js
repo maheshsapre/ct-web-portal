@@ -22,5 +22,5 @@ function onSuccessGetBackerInfo(response){
   $("#email").val(response.data.email);
   $("#first_name").val(response.data.first_name);
   $("#last_name").val(response.data.last_name);
-
+  $("#loading").hide();
 }

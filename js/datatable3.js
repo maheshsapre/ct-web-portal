@@ -50,6 +50,12 @@ function getPendingActionGeckoTeam(param) {
  callAPI("/v1/orders/order_status_details.json", "GET",param, onSuccessgetPendingActionGeckoTeam, onApiError);
 }
 
+function getPendingActionGeckoTeamSearch(param) {
+  console.log(param);
+
+ callAPI("/v1/orders/order_status_details.json?order_status_type=Pending Action - Gecko Team&page="+page+"&q[reference_no_cont]="+searchPledge_id, "GET",getApiKeyQueryFormat(), onSuccessgetPendingActionGeckoTeam, onApiError);
+}
+
 function onSuccessgetPendingActionGeckoTeam(response) {  
 console.log(response.data);
  $("#loading").hide();

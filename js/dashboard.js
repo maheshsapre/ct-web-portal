@@ -219,6 +219,7 @@ function  sendEmail(param){
 }
 
 function onSuccessSendEmail(response){
+  $("#loading").hide();
      bootbox.alert("Mails have been sent successfully", function(result) 
     {  
       if(result==undefined){
@@ -228,8 +229,10 @@ function onSuccessSendEmail(response){
 }
 
 function deleteBackerData(){
+
 var txt=$("#validateDeleteText").val();
 if(txt=="Delete backer information"){
+    $("#loading").show();
      callAPI("/v1/backers/delete_all.json", "DELETE", "", onSuccessDeleteBackerData, onApiError); 
 }
 else{

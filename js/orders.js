@@ -1,4 +1,6 @@
-
+var searchemail;
+ var searchPledge_id;
+ var searchPerk;
 var perkArray=new Array(6);
 var perkValue=new Array(6);
 var page=1;
@@ -66,14 +68,18 @@ orderList[i]=response.data[i].id;
    }
   
   if(getRoles()!="admin"){
-    $("#warning").show();
+  
   for(i=0;i<response.data.length;i++){
-    
+     
      //$("#warning").show();
     if(response.data[i].notes!="Success"&&response.data[i].notes!=""){
-        
-      $("#alert1").append("<p>Pledge Id: "+response.data[i].reference_no+" >>> "+response.data[i].notes+"<p>");
+          var str =   response.data[i].notes;
+          var res = str.replace("Shipping not paid.","");
+          if(res.trim().length!=0){
+              $("#warning").show();
+      $("#alert1").append("<p>Pledge Id: "+response.data[i].reference_no+" >>> "+ res +"<p>");
   }
+}
 }
 
 }
@@ -265,15 +271,26 @@ function onSuccessAddPerk(response){
   callAPI("/v1/orders/order_status_details2.json?status=Incomplete address&page="+page, "GET","", onSuccessInCompleteData, onApiError);
 }
 
+  function inCompleteAddressSearch() {
+  callAPI("/v1/orders/order_status_details2.json?status=Incomplete address&page="+page+"&q[reference_no_cont]="+searchPledge_id, "GET","", onSuccessInCompleteData, onApiError);
+}
 
 
    function perkNotMentioned() {
   callAPI("/v1/orders/order_status_details2.json?status=Perk not mentioned&page="+page, "GET","", onSuccessInCompleteData, onApiError);
 }
 
+   function perkNotMentionedSearch() {
+  callAPI("/v1/orders/order_status_details2.json?status=Perk not mentioned&page="+page+"&q[reference_no_cont]="+searchPledge_id, "GET","", onSuccessInCompleteData, onApiError);
+}
+
 
    function shippingNotPaid() {
   callAPI("/v1/orders/order_status_details2.json?status=Shipping not paid&page="+page, "GET","", onSuccessInCompleteData, onApiError);
+}
+   
+   function shippingNotPaidSearch() {
+  callAPI("/v1/orders/order_status_details2.json?status=Shipping not paid&page="+page+"&q[reference_no_cont]="+searchPledge_id, "GET","", onSuccessInCompleteData, onApiError);
 }
 
 function onSuccessInCompleteData(response) {  
@@ -388,3 +405,40 @@ function onSuccessSplitPerk(response){
   $("#perkValue5").empty();
   $("#perkValue6").empty();
   }
+
+  $( "#search" ).click(function() {
+  searchemail=$("#searchEmail").val();
+  searchPledge_id=$("#searchPledge").val();
+  searchPerk=$("#searchPerk").val();
+  order_status= urlParameterValue('orderStatus');
+console.log(order_status);
+switch(order_status)
+{
+  case '1':
+  getPendingOrderAcceptedSearch();
+  break;
+  case '2':
+  pendingActionCustomerSearch();
+  break;
+  case '3':
+  getPendingActionGeckoTeamSearch();
+  break;
+  case '4':
+  pendingShipmentSearch();
+  break;
+  case '5':
+  shipmentDoneSearch();
+  break;
+  case '6':
+  inCompleteAddressSearch();
+  break;
+   case '7':
+ perkNotMentionedSearch();
+  break;
+   case '8':
+  shippingNotPaidSearch();
+  break;
+  default:
+  
+}
+});

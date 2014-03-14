@@ -277,7 +277,7 @@ function onApiError(response, exception) {
             break;
     case 401:
           
-            message = SERVER_RESPONSE.Code[1].message_401+ result.message;
+            message = SERVER_RESPONSE.Code[1].message_401;
             break;
     case 404:
             message = SERVER_RESPONSE.Code[2].message_404+ result.message;
@@ -301,6 +301,7 @@ function onApiError(response, exception) {
             break;
   }
   bootbox.alert(message);
+  $("#loading").hide();
 }
 
 function checkCookie(){

@@ -32,6 +32,10 @@ function pendingActionCustomer() {
 	callAPI("/v1/orders/order_status_details.json?order_status_type=Pending Action - Customer&page="+page, "GET",getApiKeyQueryFormat(), onSuccessgetPendingActionGeckoTeam, onApiError);
 }
 
+function pendingActionCustomerSearch() {
+	callAPI("/v1/orders/order_status_details.json?order_status_type=Pending Action - Customer&page="+page+"&q[reference_no_cont]="+searchPledge_id, "GET",getApiKeyQueryFormat(), onSuccessgetPendingActionGeckoTeam, onApiError);
+}
+
 function onSuccessgetPendingActionGeckoTeam(response) {  
 	console.log(response.data);
 	 $("#loading").hide();

@@ -127,7 +127,39 @@
       </div>
 
 
-    </div>   
+    </div> 
+ <!--    <div class="row">
+           <div class="col-lg-2"> 
+            <div class="form-group">
+            <label class="control-label">Pledge Id</label>
+
+            <input type="text" name="name" id="searchPledge" placeholder="pledge id" class="bg-focus form-control">
+
+
+          </div>
+          </div> 
+          <div class="col-lg-2"> 
+            <div class="form-group">
+            <label class="control-label">Email</label>
+
+            <input type="text" name="name" id="searchEmail" placeholder="email" class="bg-focus form-control">
+
+
+          </div>
+          </div> 
+          <div class="col-lg-2"> 
+            <div class="form-group">
+            <label class="control-label">Perk</label>
+            <input type="text" name="name" id="searchPerk" placeholder="perk" class="bg-focus form-control">
+          </div>
+          </div> 
+           <div class="col-lg-2"> 
+           </br>
+           <div></div>
+             <button  id="search" class="btn btn-white btn-xs">Search </button>
+           
+          </div> 
+      </div>     -->
     <div class="row">
            <div class="col-lg-6">
               <button  id="addOrder" data-toggle="modal" href="#modalShipping" class="btn btn-primary">Add Order</button>
@@ -157,7 +189,7 @@
           <table  class="table table-striped m-b-none" id="example" data-ride="datatables3">
             <thead>
              <tr>
-              <th width="5%"></th>
+              <th width="1%"></th>
               <th width="10%">Pledge Id</th>
               <th width="10%">Backer Email</th>
               <th width="10%">Perk</th>
@@ -260,48 +292,43 @@
             <input type="text" name="address_line_2"  id="address_line_2" placeholder="Address Line 2" class="bg-focus form-control"   >
 
           </div>
-          <table>
-            <tr>
-              <td>
-                <div class="form-group">
+      <div class="row">
+           <div class="col-lg-6">
+                <div class="form-group col-lg-12 ">
                   <label class="control-label">City</label>
 
                   <input type="text" name="city" placeholder="City" id="city" class="bg-focus form-control">
 
 
                 </div>
-              </td>
-              <td>
-                <div class="form-group" style="padding-left:80px;">
+             </div>
+                <div class="col-lg-6">
+                <div class="form-group col-lg-12">
                   <label class="control-label">State/Province</label>
 
                   <input type="text" name="state" placeholder="State/Province" id="state" class="bg-focus form-control">
 
 
                 </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="form-group">
+          
+       </div>
+     </div>
+      <div class="row">
+           <div class="col-lg-6">
+                <div class="form-group col-lg-12">
                   <label class="control-label">Zip/Postal Code</label>
 
                   <input type="text" data-type="number" name="zip_code" id="zip_code" placeholder="Zip/Postal Code" class="bg-focus form-control">
 
                 </div>
-              </td>
-              <td >
-                <div style="padding-left:80px;padding-top:10px;" class="form-group">
+        </div>
+           <div class="col-lg-6">
+                <div  class="form-group col-lg-12">
                   <label  class="control-label">Country</label>
 
-                  <!--   <select name="gender" class="form-control">
-                      <option value="0">Select</option>
-                      <option value="1">India</option>
-                      <option value="2">Pakistan</option>
-                    </select> -->
 
                     <div class="m-b">
-                      <select id="select2-option" name="country" id="country" style="width:260px">
+                      <select id="select2-option" name="country" class="col-xs-12" id="country">
                        <option value="">Country...</option>
                        <option value="Afganistan">Afghanistan</option>
                        <option value="Albania">Albania</option>
@@ -554,8 +581,9 @@
                    </div>
 
                  </div>
-               </td>
-             </table>
+              </div>
+            </div>
+           
              <div class="form-group">
               <label class="control-label">Phone/Mobile Number</label>
               <input type="text" name="phone_no" data-type="phone" id="phone_no" placeholder="Phone/Mobile Number" class="bg-focus form-control"/>
@@ -702,7 +730,6 @@
                   <option  onClick="javascript:selectedPerk1('25','4');" value="4">Gecko </option>
                   <option onClick="javascript:selectedPerk1('40','5');" value="5">Gecko * 2</option>
                   <option onClick="javascript:selectedPerk1('75','6');" value="6">Gecko * 4</option>
-                 <option onClick="javascript:selectedPerk1('75','6');" value="6">Gecko * 4</option>
                   <option onClick="javascript:selectedPerk1('100','7');" value="7">Gecko * 6</option>
                   <option onClick="javascript:selectedPerk1('7','8');" value="8">Gecko Gateway Coupon</option>
                   <option onClick="javascript:selectedPerk1('995','9');" value="9">Gecko Geek</option>
@@ -711,6 +738,7 @@
                   <option onClick="javascript:selectedPerk1('5','12');" value="12">Luggage Tag</option>
                   <option onClick="javascript:selectedPerk1('25','13');" value="13">Pink Gecko * 1 </option>
                   <option onClick="javascript:selectedPerk1('200','14');" value="14">VB Geeks </option>
+                  <option onClick="javascript:selectedPerk1('8','16');" value="16">Shipping Charges </option>
                 </optgroup>
               </select>
             </div>
@@ -731,7 +759,6 @@
                   <option  onClick="javascript:selectedPerk2('25','4');" value="4">Gecko </option>
                   <option onClick="javascript:selectedPerk2('40','5');" value="5">Gecko * 2</option>
                   <option onClick="javascript:selectedPerk2('75','6');" value="6">Gecko * 4</option>
-                  <option onClick="javascript:selectedPerk2('75','6');" value="6">Gecko * 4</option>
                   <option onClick="javascript:selectedPerk2('100','7');" value="7">Gecko * 6</option>
                   <option onClick="javascript:selectedPerk2('7','8');" value="8">Gecko Gateway Coupon</option>
                   <option onClick="javascript:selectedPerk2('995','9');" value="9">Gecko Geek</option>
@@ -740,6 +767,7 @@
                   <option onClick="javascript:selectedPerk2('5','12');" value="12">Luggage Tag</option>
                   <option onClick="javascript:selectedPerk2('25','13');" value="13">Pink Gecko * 1 </option>
                   <option onClick="javascript:selectedPerk2('200','14');" value="14">VB Geeks </option>
+                   <option onClick="javascript:selectedPerk2('8','16');" value="16">Shipping Charges </option>
                 </optgroup>
               </select>
                        </div>
@@ -759,7 +787,6 @@
                   <option  onClick="javascript:selectedPerk3('25','4');" value="4">Gecko </option>
                   <option onClick="javascript:selectedPerk3('40','5');" value="5">Gecko * 2</option>
                   <option onClick="javascript:selectedPerk3('75','6');" value="6">Gecko * 4</option>
-                   <option onClick="javascript:selectedPerk3('75','6');" value="6">Gecko * 4</option>
                   <option onClick="javascript:selectedPerk3('100','7');" value="7">Gecko * 6</option>
                   <option onClick="javascript:selectedPerk3('7','8');" value="8">Gecko Gateway Coupon</option>
                   <option onClick="javascript:selectedPerk3('995','9');" value="9">Gecko Geek</option>
@@ -768,6 +795,7 @@
                   <option onClick="javascript:selectedPerk3('5','12');" value="12">Luggage Tag</option>
                   <option onClick="javascript:selectedPerk3('25','13');" value="13">Pink Gecko * 1 </option>
                   <option onClick="javascript:selectedPerk3('200','14');" value="14">VB Geeks </option>
+                   <option onClick="javascript:selectedPerk3('8','16');" value="16">Shipping Charges </option>
                 </optgroup>
               </select>
                        </div>
@@ -787,7 +815,6 @@
                   <option  onClick="javascript:selectedPerk4('25','4');" value="4">Gecko </option>
                   <option onClick="javascript:selectedPerk4('40','5');" value="5">Gecko * 2</option>
                   <option onClick="javascript:selectedPerk4('75','6');" value="6">Gecko * 4</option>
-                 <option onClick="javascript:selectedPerk4('75','6');" value="6">Gecko * 4</option>
                   <option onClick="javascript:selectedPerk4('100','7');" value="7">Gecko * 6</option>
                   <option onClick="javascript:selectedPerk4('7','8');" value="8">Gecko Gateway Coupon</option>
                   <option onClick="javascript:selectedPerk4('995','9');" value="9">Gecko Geek</option>
@@ -796,6 +823,7 @@
                   <option onClick="javascript:selectedPerk4('5','12');" value="12">Luggage Tag</option>
                   <option onClick="javascript:selectedPerk4('25','13');" value="13">Pink Gecko * 1 </option>
                   <option onClick="javascript:selectedPerk4('200','14');" value="14">VB Geeks </option>
+                   <option onClick="javascript:selectedPerk4('8','16');" value="16">Shipping Charges </option>
                 </optgroup>
               </select>
                        </div>
@@ -823,6 +851,7 @@
                   <option onClick="javascript:selectedPerk5('5','12');" value="12">Luggage Tag</option>
                   <option onClick="javascript:selectedPerk5('25','13');" value="13">Pink Gecko * 1 </option>
                   <option onClick="javascript:selectedPerk5('200','14');" value="14">VB Geeks </option>
+                   <option onClick="javascript:selectedPerk5('8','16');" value="16">Shipping Charges </option>
                 </optgroup>
               </select>
                        </div>
@@ -850,6 +879,7 @@
                   <option onClick="javascript:selectedPerk6('5','12');" value="12">Luggage Tag</option>
                   <option onClick="javascript:selectedPerk6('25','13');" value="13">Pink Gecko * 1 </option>
                   <option onClick="javascript:selectedPerk6('200','14');" value="14">VB Geeks </option>
+                   <option onClick="javascript:selectedPerk6('8','16');" value="16">Shipping Charges </option>
                 </optgroup>
               </select>
                         </div>
@@ -894,13 +924,14 @@
 <script src="js/jquery_cookie.js"></script>
 
 <script src="js/jquery.serialize-object.compiled.js"></script>
+
     <script src="js/shipmentDone.js"></script>
     <script src="js/pendingShipment.js"></script>
     <script src="js/pendingActionCustomer.js"></script>
     <script src="js/datatable3.js"></script>
     <script src="js/orderAccepted.js"></script>
-
-  <script src="js/orders.js"></script>
+<script src="js/orders.js"></script>
+  
 <script src="js/bootstrap.js"></script>
 <!-- fuelux -->
 <script src="js/fuelux/fuelux.js"></script>

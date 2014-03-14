@@ -32,6 +32,10 @@ window.location="pendingShipment.html?page="+page;
 function  pendingShipment() {
   callAPI("/v1/orders/order_status_details.json?order_status_type=Pending Shipment - All issues resolved&page="+page, "GET",getApiKeyQueryFormat(), onSuccessPendingShipment, onApiError);
 }
+function pendingShipmentSearch() {
+  callAPI("/v1/orders/order_status_details.json?order_status_type=Pending Shipment - All issues resolved&page="+page+"&q[reference_no_cont]="+searchPledge_id, "GET",getApiKeyQueryFormat(), onSuccessPendingShipment, onApiError);
+}
+
 
 function onSuccessPendingShipment(response) {  
 console.log(response.data);

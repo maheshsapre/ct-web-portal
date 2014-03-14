@@ -33,6 +33,10 @@ function shipmentDone() {
   callAPI("/v1/orders/order_status_details.json?order_status_type=Shipped / Delivered&page="+page, "GET",getApiKeyQueryFormat(), onSuccessShipmentDone, onApiError);
 }
 
+function  shipmentDoneSearch() {
+  callAPI("/v1/orders/order_status_details.json?order_status_type=Shipped / Delivered&page="+page+"&q[reference_no_cont]="+searchPledge_id, "GET",getApiKeyQueryFormat(), onSuccessShipmentDone, onApiError);
+}
+
 function onSuccessShipmentDone(response) {  
 console.log(response.data);
 //setShipmentDone(response.data);

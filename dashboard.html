@@ -435,6 +435,7 @@ function checkText(){
   var txt=$("#validateText").val();
   console.log(txt);
 if(txt=="Send email now"){
+  $("#loading").show();
     sendEmailToBackers();
 }
 else{
