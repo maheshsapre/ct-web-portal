@@ -3,15 +3,16 @@ var addPerkOrderId;
 var addPerkTotalAmount;
 var opendingActionCustomer;
  var filters=new Array();
+ var backerIds=new Array();
 var addressIdArray=new Array();
 var i=0;
 var gfull;
+ 
  function appendAddress(id){
  callAPI("/v1/addresses/{0}/address.json".f(id), "GET",getKeyQueryFormat(), onSuccessGetDetails, onApiError);
  }
 
  function onSuccessGetDetails(response){
-console.log(response.data);
 $("#name").val(response.data.name);
 $("#address_line_1").val(response.data.address_line_1);
 $("#address_line_2").val(response.data.address_line_2);
@@ -30,13 +31,25 @@ $("#select2-option > option").each(function() {
 
 
  }
+ function toggleCheckboxBacker(gfull){
+
+             console.log(gfull);
+             
+              var found = jQuery.inArray(gfull, backerIds);
+              if (found >= 0) {
+    // Element was found, remove it.
+				    backerIds.splice(found, 1);
+				} else {
+				    // Element was not found, add it.
+				    backerIds.push(gfull);
+				}
+}
 
  function toggleCheckbox(gfull){
 
-            
+             console.log(gfull);
              
               var found = jQuery.inArray(gfull, filters);
-              console.log(found);
               if (found >= 0) {
     // Element was found, remove it.
 				    filters.splice(found, 1);
@@ -366,22 +379,28 @@ $('[data-ride="datatables2"]').each(function() {
 		var oTable = $(this).dataTable( {
 			"bProcessing": true,
 			"aaData":tableData,
+			"bFilter": false,
+			 "bRetrieve":true,
 			"sDom": "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'row'<'col-sm-6'i><'col col-sm-6'p>>",
 			"sPaginationType": "full_numbers",
 				"bPaginate": false,
-
+                 
 			 "fnDrawCallback": function () {
             $("[data-ride='datatables2'] tbody tr td:nth-child(3)").click(function () {
                 var position = oTable.fnGetPosition(this); // getting the clicked row position
-                console.log(position[0]);
                 RowID = oTable.fnGetData(position); 
-                console.log(RowID);// getting the value of the first (invisible) column
                 sessionStorage.setItem("ModuleDetailID", RowID.ModuleDetailID); // HTML 5 Session Storage;
             });
            
           
         },
 			"aoColumns": [
+			 {
+	                "mData": null,
+	                "sClass": "center",
+	                "sDefaultContent": '<input id="checked" type="checkbox" </input>'
+	            },
+
 				{ "mData": "id",
 				"bVisible":    false  },
 				{ "mData": "first_name" },
@@ -390,13 +409,22 @@ $('[data-ride="datatables2"]').each(function() {
 				
 			],
 			"aoColumnDefs":[{
-				"aTargets": [ 3 ]
+				"aTargets": [ 4 ]
 				, "bSortable": false
 				, "mRender": function ( url, type, full )  {
 					
 					return  '<a style="color:blue" href="orders.html?id='+full.id+'&page=1">' + url + '</a>';
 				}
 			},
+			{
+				"aTargets": [ 0 ]
+				, "bSortable": false
+				, "mRender": function ( url, type, full )  {
+					gfull=full;
+					return  '<input id="checked" onchange="toggleCheckboxBacker('+gfull.id+')" type="checkbox" </input>';
+
+				}
+			}
 			]
 		} );
 	 
@@ -407,6 +435,7 @@ $('[data-ride="datatables2"]').each(function() {
     
 	// select2 
 	$('[data-ride="datatables3"]').each(function() {
+		
 		var oTable = $(this).dataTable( {
 			"bDestroy":true,
 			"bProcessing": true,
@@ -444,22 +473,20 @@ $('[data-ride="datatables2"]').each(function() {
             var nCells = nRow.getElementsByTagName('th');
             nCells[1].innerHTML = iTotalMarket;
         },
+       
+
        "fnDrawCallback": function () {
             $("#example tbody tr td:nth-child(8)").click(function () {
                 var position = oTable.fnGetPosition(this); // getting the clicked row position
-                console.log(position[0]);
                 RowID = oTable.fnGetData(position[0]); 
-                console.log(RowID.address_id);
                 $("#address_id").val(RowID.address_id);
-
                 $("#address_Orderid").val(RowID.address_id);
                 $("#backer_id").val(RowID.backer_id);
                 $("#order_source").val(RowID.order_source);
                 $("#refrence_number").val(RowID.reference_no);
-               // getting the value of the first (invisible) column
-                
                   appendAddress(RowID.address_id);
             });
+             
              $("#example tbody tr td:nth-child(4)").click(function () {
                 var position = oTable.fnGetPosition(this); // getting the clicked row position
                 console.log(position[0]);
@@ -472,7 +499,8 @@ $('[data-ride="datatables2"]').each(function() {
 					clearPerksAmount();
 					 resetPerkValueArray()
             });
-                  $("#example tbody tr td:nth-child(6)").click(function () {
+                  
+                $("#example tbody tr td:nth-child(6)").click(function () {
                 var position = oTable.fnGetPosition(this); // getting the clicked row position
                 console.log(position[0]);
                 RowID = oTable.fnGetData(position[0]); 
@@ -486,17 +514,6 @@ $('[data-ride="datatables2"]').each(function() {
             });
         },
 
-//  "fnRowCallback": function( nRow, aData, iDisplayIndex ) {
-//             /* Append the grade to the default row class name */
-//            if(getRoles()=="admin"){
-//             if ( aData.perk.name == "Undefined" )
-//             {   console.log(aData.perk.name);
-            	
-//                  console.log(aData.id);
-//                 $('td:eq(3)', nRow).append( '<a style="font-size:10px;" class="btn btn-xs btn-info"  data-toggle="modal"  href="#modalAddPerk">Change perk</a>' );
-//             }
-// }
-//         },
        
         "aaSorting": [[15, 'asc']],
 			"aoColumns": [

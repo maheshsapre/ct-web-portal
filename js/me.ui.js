@@ -1,5 +1,5 @@
 var userEmail;
-
+var shippingErrorMessage;
 function getKey() {
   $.cookie.json = false;
   return $.cookie("xsTk");
@@ -214,6 +214,62 @@ function clearErrorMessage()
   $.cookie("xsUsm", "", { expires: 1 });
 }
 
+function getSearchEmail() {
+  return $.cookie("xsEm");
+}
+
+function setSearchEmail(value) {
+   $.cookie.json = false;
+  $.cookie("xsEm", value, { expires: 5 }); // 5 days expiry
+}
+
+function clearSearchEmail()
+{  
+  $.cookie("xsEm", "", { expires: 5 });
+}
+function getSearchPledgeId() {
+  return $.cookie("xsPi");
+}
+
+function setSearchPledgeId(value) {
+   $.cookie.json = false;
+  $.cookie("xsPi", value, { expires: 5 }); // 5 days expiry
+}
+
+function clearSearchPledgeId()
+{  
+  $.cookie("xsPi", "", { expires: 5 });
+}
+
+function getBackerArray() {
+  return $.cookie("xsPa");
+}
+
+function setBackerArray(value) {
+   $.cookie.json = false;
+  $.cookie("xsPa", value, { expires: 5 }); // 5 days expiry
+}
+
+function clearBackerArray()
+{  
+  $.cookie("xsPa", "", { expires: 5 });
+}
+
+
+function  getFilterPerk() {
+  $.cookie.json = true;
+  return $.cookie("xsFp");
+}
+
+function setFilterPerk(value) {
+   $.cookie.json = true;
+  $.cookie("xsFp", value, { expires: 5 }); // 5 days expiry
+}
+
+function clearFilterPerk()
+{  
+  $.cookie("xsFp", "", { expires: 5 });
+}
 
 String.prototype.format = String.prototype.f = function() {
   var s = this,
@@ -288,6 +344,7 @@ function onApiError(response, exception) {
     case 500:
             message = SERVER_RESPONSE.Code[4].message_500 + result.message;
             break;
+
     default :
            if (exception === 'parsererror') {
               message =  SERVER_RESPONSE.Exception[0].message_parsererror+ result.message;
@@ -301,9 +358,20 @@ function onApiError(response, exception) {
             break;
   }
   bootbox.alert(message);
-  $("#loading").hide();
+ $("#loading").hide();
 }
 
+function onApiError1(response, exception){
+  if(response.status==400){
+    $("#warning").show();
+    var result = jQuery.parseJSON(response.responseText);
+   shippingErrorMessage=result.message;
+  $("#alert1").append("<p style='font-size:15px;'>"+shippingErrorMessage+"</p>")
+  }
+  else{
+    bootbox.alert(result.message);
+  }
+}
 function checkCookie(){
   key=getKey();
 console.log(key);
@@ -342,8 +410,9 @@ role=getRoles();
     $("#saveOrders").hide();   
 }
 else{
-   
-   $("#action").hide();
+   $("#actionButton").hide();
+   $("#emailSearch").hide();
+    $("#pledgeIdSearch").hide();
    $("#admin3").show();
       $("#admin2").show();
 }

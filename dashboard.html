@@ -1,118 +1,118 @@
 <html>
 <head>
-       <script src="js/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
-<script src="http://malsup.github.com/jquery.form.js"></script>
-  <meta charset="utf-8">
-  <title>Gecko - Make your smartphone smarter</title>
-  <meta name="description" content="mobile first, app, web app, responsive, admin dashboard, flat, flat ui">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> 
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/ajax.css">
-  <link rel="stylesheet" href="css/font.css" cache="false">
-  <link rel="stylesheet" href="css/style.css">
+ <script src="js/jquery.min.js"></script>
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+ <script src="http://malsup.github.com/jquery.form.js"></script>
+ <meta charset="utf-8">
+ <title>Gecko - Make your smartphone smarter</title>
+ <meta name="description" content="mobile first, app, web app, responsive, admin dashboard, flat, flat ui">
+ <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> 
+ <link rel="stylesheet" href="css/bootstrap.css">
+ <link rel="stylesheet" href="css/font-awesome.min.css">
+ <link rel="stylesheet" href="css/ajax.css">
+ <link rel="stylesheet" href="css/font.css" cache="false">
+ <link rel="stylesheet" href="css/style.css">
  <link rel="shortcut icon" href="images/favicon.ico" />
-   
+ 
  <script src="js/me.ui.js"></script>
-<script src="js/config.js"></script>
-<script src="js/dashboard.js"></script>
+ <script src="js/config.js"></script>
+ <script src="js/dashboard.js"></script>
 
-  <link rel="stylesheet" href="css/ajax.css">
+ <link rel="stylesheet" href="css/ajax.css">
   <!--[if lt IE 9]>
     <script src="js/ie/respond.min.js" cache="false"></script>
     <script src="js/ie/html5.js" cache="false"></script>
-  <![endif]-->
-  <style>
+    <![endif]-->
+    <style>
 
-#progress { position:relative; width:400px; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
-#bar { background-color: #B4F5B4; width:0%; height:20px; border-radius: 3px; }
-#percent { position:absolute; display:inline-block; top:3px; left:48%; }
-</style>
-</head>
-<body class="navbar-fixed" onload="myFunction()">
-  <!-- header -->
-   <div id="loading"></div> 
-	<header id="header" class="navbar">
-    <ul class="nav navbar-nav hidden-xs pull-right">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-          <span class="hidden-xs-only" id="me"></span>
-          <b class="caret hidden-xs-only"></b>
-        </a>
-        <ul class="dropdown-menu">
+    #progress { position:relative; width:400px; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
+    #bar { background-color: #B4F5B4; width:0%; height:20px; border-radius: 3px; }
+    #percent { position:absolute; display:inline-block; top:3px; left:48%; }
+    </style>
+  </head>
+  <body class="navbar-fixed" onload="myFunction()">
+    <!-- header -->
+    <div id="loading"></div> 
+    <header id="header" class="navbar">
+      <ul class="nav navbar-nav hidden-xs pull-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+            <span class="hidden-xs-only" id="me"></span>
+            <b class="caret hidden-xs-only"></b>
+          </a>
+          <ul class="dropdown-menu">
             <li><a href="https://geckotag.zendesk.com">Help</a></li>   
-          <li><a href="javascript:logout();">Logout</a></li>
-        </ul>
-      </li>
-    </ul>
-    <a class="navbar-brand" href="#"><img class="col-lg-6" src="images/gecko_logo.png"></img></a>
-    <button type="button" class="btn btn-link pull-left nav-toggle visible-xs" data-toggle="class:slide-nav slide-nav-left" data-target="body">
-      <i class="icon-reorder icon-xlarge text-default"></i>
-    </button>
-
-	</header>
-  <!-- / header -->
-  <!-- nav -->
-<nav id="nav" class="nav-primary hidden-xs nav-vertical">
-    <ul class="nav" data-spy="affix" data-offset-top="50">
-      <li  id="admin"  style="display: none;"><a onClick="javascript:activeDashboard();" href="dashboard.html"><i class="icon-dashboard icon-xlarge"></i><span>Dashboard</span></a></li>
-      
-      <li class="dropdown-submenu">
-        <a href="orders.html"  id="admin3" style="display: none;"><i class="icon-list icon-xlarge"></i><span>Orders</span></a>
-        
-      </li>
-      <li class="dropdown-submenu"><a  id="admin3" style="display: none;" href="#"><i class="icon-edit icon-xlarge"></i><span>Account</span></a>
-      <ul class="dropdown-menu">
-          <li><a href="personalinfo.html">Personal Information</a></li>
-          <li><a href="addresses.html">Addresses</a></li>
-           <li><a href="changePassword.html">Change Password</a></li>
-        </ul>
-      </li>
-    <li id="admin1" style="display: none;"><a href="backers.html?page=1"><i class="icon-list icon-xlarge"></i><span>Backers</span></a></li>
-   
-    </ul>
-  </nav>
-  <!-- / nav -->
-  <section id="content">
-    <section class="main padder">
-        <ul class="breadcrumb">
-            <li><a href="#"><i class="icon-home"></i>Home</a></li>
-           <!--  <li><a href="#"><i class="icon-list-ul"></i>Elements</a></li> -->
-            <li class="active">Dashboard</li>
+            <li><a href="javascript:logout();">Logout</a></li>
           </ul>
-      <div class="clearfix">
-        <h4><img  style="width:50px;height:50px;" src="images/indiegogo-logo.png"></img> Indiegogo Campaign Dashboard</h4>
-      </div>
-	   <div class="row">
+        </li>
+      </ul>
+      <a class="navbar-brand" href="#"><img class="col-lg-6" src="images/gecko_logo.png"></img></a>
+      <button type="button" class="btn btn-link pull-left nav-toggle visible-xs" data-toggle="class:slide-nav slide-nav-left" data-target="body">
+        <i class="icon-reorder icon-xlarge text-default"></i>
+      </button>
+
+    </header>
+    <!-- / header -->
+    <!-- nav -->
+    <nav id="nav" class="nav-primary hidden-xs nav-vertical">
+      <ul class="nav" data-spy="affix" data-offset-top="50">
+        <li  id="admin"  style="display: none;"><a onClick="javascript:activeDashboard();" href="dashboard.html"><i class="icon-dashboard icon-xlarge"></i><span>Dashboard</span></a></li>
+        
+        <li class="dropdown-submenu">
+          <a href="orders.html"  id="admin3" style="display: none;"><i class="icon-list icon-xlarge"></i><span>Orders</span></a>
+          
+        </li>
+        <li class="dropdown-submenu"><a  id="admin3" style="display: none;" href="#"><i class="icon-edit icon-xlarge"></i><span>Account</span></a>
+          <ul class="dropdown-menu">
+            <li><a href="personalinfo.html">Personal Information</a></li>
+            <li><a href="addresses.html">Addresses</a></li>
+            <li><a href="changePassword.html">Change Password</a></li>
+          </ul>
+        </li>
+        <li id="admin1" style="display: none;"><a href="backers.html?page=1"><i class="icon-list icon-xlarge"></i><span>Backers</span></a></li>
+        
+      </ul>
+    </nav>
+    <!-- / nav -->
+    <section id="content">
+      <section class="main padder">
+        <ul class="breadcrumb">
+          <li><a href="#"><i class="icon-home"></i>Home</a></li>
+          <!--  <li><a href="#"><i class="icon-list-ul"></i>Elements</a></li> -->
+          <li class="active">Dashboard</li>
+        </ul>
+        <div class="clearfix">
+          <h4><img  style="width:50px;height:50px;" src="images/indiegogo-logo.png"></img> Indiegogo Campaign Dashboard</h4>
+        </div>
+        <div class="row">
 
          <div class="col-lg-6">
-		 <section class="panel text-center">
+           <section class="panel text-center">
             <div class="panel-body text-muted l-h-2x">
               <span class="badge bg-success" id="orders"></span>
               <span class="m-r-small">Orders</span>
               <span class="badge bg-info" id="backers"></span> Backers
             </div>
           </section>
-           
-		  <section class="panel">
-          <section class="panel-body ">
-            <div class="col-lg-12">
-              <header class="panel-heading bg bg-inverse">
-                Summarized by Order Status<button data-toggle="modal" id="massNotification" href="#modal" class="btn btn-default btn-xs pull-right">Mass Notification</button>
-              </header>
-              <div class="list-group">
-                <a href="orders.html?page=1&orderStatus=1" class="list-group-item">
-                  <i class="icon-chevron-right"></i>
-                  <span class="badge" id="orderAccepted"></span>
-                  <i class="icon-info-sign grey"></i> Order Accepted / Imported
-                </a>
-                <a href="orders.html?page=1&orderStatus=2" class="list-group-item">
-                 <i class="icon-chevron-right"></i>
-                  <span class="badge" id="pendingActionCustomer"></span>
-                  <i class="icon-external-link orange"></i> Pending Action - Customer
-                </a>
-                <a href="orders.html?page=1&orderStatus=3" class="list-group-item">
+          
+          <section class="panel">
+            <section class="panel-body ">
+              <div class="col-lg-12">
+                <header class="panel-heading bg bg-inverse">
+                  Summarized by Order Status<button data-toggle="modal" id="massNotification" href="#modal" class="btn btn-default btn-xs pull-right">Mass Notification</button>
+                </header>
+                <div class="list-group">
+                  <a href="orders.html?page=1&orderStatus=1" class="list-group-item">
+                    <i class="icon-chevron-right"></i>
+                    <span class="badge" id="orderAccepted"></span>
+                    <i class="icon-info-sign grey"></i> Order Accepted / Imported
+                  </a>
+                  <a href="orders.html?page=1&orderStatus=2" class="list-group-item">
+                   <i class="icon-chevron-right"></i>
+                   <span class="badge" id="pendingActionCustomer"></span>
+                   <i class="icon-external-link orange"></i> Pending Action - Customer
+                 </a>
+                 <a href="orders.html?page=1&orderStatus=3" class="list-group-item">
                   <i class="icon-chevron-right"></i>
                   <span class="badge" id="pendingActionGeckoTeam"></span>
                   <i class="icon-bell red"></i> Pending Action - Gecko Team
@@ -127,12 +127,12 @@
                   <span class="badge" id="shipped"></span>
                   <i class="icon-smile yellow"></i> Shipped / Delivered
                 </a>
-                 <a href="orders.html?page=1&orderStatus=6" class="list-group-item">
+                <a href="orders.html?page=1&orderStatus=6" class="list-group-item">
                   <i class="icon-chevron-right"></i>
                   <span class="badge" id="inCompleteAddress"></span>
                   <i class="icon-smile yellow"></i> Incomplete Address
                 </a>
-                 <a href="orders.html?page=1&orderStatus=7" class="list-group-item">
+                <a href="orders.html?page=1&orderStatus=7" class="list-group-item">
                   <i class="icon-chevron-right"></i>
                   <span class="badge" id="PerkNotMentioned"></span>
                   <i class="icon-smile yellow"></i> Perk not mentioned
@@ -143,144 +143,144 @@
                   <i class="icon-smile yellow"></i> Shipping not paid
                 </a>
               </div>
-			</div>
+            </div>
           </section>
         </section>
-		<section class="panel">
+        <section class="panel">
           <section class="panel-body ">
             <div class="col-lg-12">
               <header class="panel-heading bg bg-inverse">
                 Summarized by Product/Perk
               </header>
               <div class="list-group">
-                <a href="#" class="list-group-item">
+                <a href="orders.html?page=1&orderStatus=9" class="list-group-item">
                   <span class="badge" id="gecko_2"></span>
                   <i class="icon-info-sign grey"></i>Gecko * 2
                 </a>
-                 <a href="#" class="list-group-item">
+                <a href="orders.html?page=1&orderStatus=10" class="list-group-item">
                   <span class="badge" id="gecko_6"></span>
                   <i class="icon-smile yellow"></i>Gecko * 6
                 </a>
-                  <a href="#" class="list-group-item">
+                <a href="orders.html?page=1&orderStatus=11" class="list-group-item">
                   <span class="badge" id="gecko_4"></span>
                   <i class="icon-smile yellow"></i>Gecko * 4
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="orders.html?page=1&orderStatus=12" class="list-group-item">
                   <span class="badge" id="gecko"></span>
                   <i class="icon-info-sign grey"></i>Gecko
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="orders.html?page=1&orderStatus=13" class="list-group-item">
                   <span class="badge" id="early_gecko"></span>
                   <i class="icon-info-sign grey"></i>Early Gecko 
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="orders.html?page=1&orderStatus=14" class="list-group-item">
                   <span class="badge" id="pink_gecko"></span>
                   <i class="icon-ok-sign green"></i>Pink Gecko
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="orders.html?page=1&orderStatus=15" class="list-group-item">
                   <span class="badge" id="gecko_gateway_coupon"></span>
                   <i class="icon-smile yellow"></i>Gecko Gateway Coupon
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="orders.html?page=1&orderStatus=16" class="list-group-item">
                   <span class="badge" id="vb_gecko"></span>
                   <i class="icon-smile yellow"></i>Vb Gecko
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="orders.html?page=1&orderStatus=17" class="list-group-item">
                   <span class="badge" id="luggage_tag"></span>
                   <i class="icon-smile yellow"></i>Luggage Tag
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="orders.html?page=1&orderStatus=18" class="list-group-item">
                   <span class="badge" id="key_chain"></span>
                   <i class="icon-smile yellow"></i>Key Chain
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="orders.html?page=1&orderStatus=19" class="list-group-item">
                   <span class="badge" id="gecko_trio"></span>
                   <i class="icon-smile yellow"></i>Gecko Trio
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="orders.html?page=1&orderStatus=20" class="list-group-item">
                   <span class="badge" id="gecko_reseller_pack"></span>
                   <i class="icon-smile yellow"></i>Gecko Reseller Pack
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="orders.html?page=1&orderStatus=21" class="list-group-item">
                   <span class="badge" id="gecko_geek"></span>
                   <i class="icon-smile yellow"></i>Gecko Geek
                 </a>
-                 
-                  <a href="#" class="list-group-item">
+                
+                <a href="orders.html?page=1&orderStatus=22" class="list-group-item">
                   <span class="badge" id="dslr_camera"></span>
                   <i class="icon-smile yellow"></i>Dslr camera
                 </a>
-                 <a href="#" class="list-group-item">
+                <a href="orders.html?page=1&orderStatus=23" class="list-group-item">
                   <span class="badge" id="undefined"></span>
                   <i class="icon-smile yellow"></i>undefined
                 </a>
-                  <a href="#" class="list-group-item">
+                <a href="orders.html?page=1&orderStatus=24" class="list-group-item">
                   <span class="badge" id="shipping_charges"></span>
                   <i class="icon-smile yellow"></i>Shipping charges
                 </a>
-                 
+                
               </div>
-			</div>
+            </div>
           </section>
         </section>
         
-        </div>
-          <div class="col-sm-6">
-           <section class="panel">
-          <section class="panel-body ">
-            <div class="col-lg-12">
-			<form class="form-horizontal"  method="post"  enctype="multipart/form-data" id="backerCsv" data-validate="parsley">      
-                <div class="form-group">
-				   <p><b>Upload Indiegogo Data</b></p>
-                  <div class="col-lg-9 media">
-                    <div class="media-body">
-                       <input type="hidden" id="order_source" name="order_source" value="">
-                        <input type="hidden" id="api_key" name="api_key" value="">
-                         <input type="file" onchange="javascript:submit();" title="Browse"  name="file" class="btn btn-sm btn-info">
-                            <input type="submit" style="opacity:0;" id="fileButton" value="Ajax File Upload">
-                    </div>
-                  </div>
-                </div>
-				</form>
+      </div>
+      <div class="col-sm-6">
+       <section class="panel">
+        <section class="panel-body ">
+          <div class="col-lg-12">
+           <form class="form-horizontal"  method="post"  enctype="multipart/form-data" id="backerCsv" data-validate="parsley">      
+            <div class="form-group">
+             <p><b>Upload Indiegogo Data</b></p>
+             <div class="col-lg-9 media">
+              <div class="media-body">
+               <input type="hidden" id="order_source" name="order_source" value="">
+               <input type="hidden" id="api_key" name="api_key" value="">
+               <input type="file" onchange="javascript:submit();" title="Browse"  name="file" class="btn btn-sm btn-info">
+               <input type="submit" style="opacity:0;" id="fileButton" value="Ajax File Upload">
+             </div>
+           </div>
+         </div>
+       </form>
 <!-- <div id="progress">
         <div id="bar"></div>
         <div id="percent">0%</div >
-</div> -->
-<br/>
-    
- <div class="alert alert-danger" id="uploadError" style="display:none;">
-        <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
-        <i class="icon-ban-circle icon-large"></i><strong>Upload failed!</strong> Please Upload a CSV file.
-       </div>
-       <div class="alert alert-success" id="uploadSuccess" style="display:none;">
-      <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
-      <i class="icon-ok-sign icon-large"></i><strong>Success!</strong> CSV file successfully uploaded.
-      </div>
+        </div> -->
+        <br/>
+        
+        <div class="alert alert-danger" id="uploadError" style="display:none;">
+          <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+          <i class="icon-ban-circle icon-large"></i><strong>Upload failed!</strong> Please Upload a CSV file.
+        </div>
+        <div class="alert alert-success" id="uploadSuccess" style="display:none;">
+          <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+          <i class="icon-ok-sign icon-large"></i><strong>Success!</strong> CSV file successfully uploaded.
+        </div>
 
-      <table border="2" cellpadding="11" id="basicInfo"><caption><u><b><h2></h2></b></u></caption></table> 
-          </section>
-        </section>
-		  </div>
-               <div class="col-sm-6">
-           <section class="panel">
-          <section class="panel-body ">
-            <div class="col-lg-12">
-                <div class="form-group">
-           <p><b>Delete Backer Data</b></p>
-                  <div class="col-lg-9 media">
-                    <div class="media-body">
-                     
-                         <a class="btn btn-danger" id="deleteButton" data-toggle="modal" href="#modalDelete">Delete</a>
-                            
-                    </div>
-                  </div>
-<br/>
-          </section>
-        </section>
-      </div>
-	  </div>  
+        <table border="2" cellpadding="11" id="basicInfo"><caption><u><b><h2></h2></b></u></caption></table> 
+      </section>
+    </section>
+  </div>
+  <div class="col-sm-6">
+   <section class="panel">
+    <section class="panel-body ">
+      <div class="col-lg-12">
+        <div class="form-group">
+         <p><b>Delete Backer Data</b></p>
+         <div class="col-lg-9 media">
+          <div class="media-body">
+           
+           <a class="btn btn-danger" id="deleteButton" data-toggle="modal" href="#modalDelete">Delete</a>
+           
+         </div>
+       </div>
+       <br/>
+     </section>
    </section>
-  </section>
+ </div>
+</div>  
+</section>
+</section>
 <!--   <div id="modalnumber"  class="modal fade">
 
     <div   class="modal-dialog">
@@ -310,32 +310,32 @@
         </form>
       </div>  -->
 
-  <div id="modal"  class="modal fade">
+      <div id="modal"  class="modal fade">
 
-    <div   class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><i class="icon-remove"></i></button>
-          <h4 class="modal-title" id="myModalLabel">Send Email to backers</h4>
-        </div>
-        <div  class="modal-body">
-         <div class="panel-body">
-          <form class="form-horizontal" method="post" action="javascript:checkText();" id="sendEmail" data-validate="parsley">  
-            
+        <div   class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><i class="icon-remove"></i></button>
+              <h4 class="modal-title" id="myModalLabel">Send Email to backers</h4>
+            </div>
+            <div  class="modal-body">
+             <div class="panel-body">
+              <form class="form-horizontal" method="post" action="javascript:checkText();" id="sendEmail" data-validate="parsley">  
+                
 
-                            <label class="control-label">Choose the type of email you want to send to the backers</label>
-                      <select id="select2-option" name="email_type" id="email_type" style="width:260px">
-                          <option value="welcome_email">Welcome email</option>
-                          <option value="confirmation_email">Confirmation email</option>
-                     
-                      </select>
-                      <br/>
-                      <br/>
-          <div class="form-group">
+                <label class="control-label">Choose the type of email you want to send to the backers</label>
+                <select id="select2-option" name="email_type" id="email_type" style="width:260px">
+                  <option value="welcome_email">Welcome email</option>
+                  <option value="confirmation_email">Confirmation email</option>
+                  
+                </select>
+                <br/>
+                <br/>
+                <div class="form-group">
                   <label class="control-label">Please enter the text "Send email now" to send email to the backers:</label>
                   <input type="text" class="bg-focus form-control" id="validateText">
-                   </div>
-                    <div class="form-group">
+                </div>
+                <div class="form-group">
                   <input type="hidden" id="updateAddress_authentication_token" name="authentication_token" value="">
                 </div>
               </div>
@@ -347,9 +347,9 @@
           </div>
         </form>
       </div>
-</div>
-</div>
-      <div id="modalDelete"  class="modal fade">
+    </div>
+  </div>
+  <div id="modalDelete"  class="modal fade">
 
     <div   class="modal-dialog">
       <div class="modal-content">
@@ -360,22 +360,22 @@
         <div  class="modal-body">
          <div class="panel-body">
           <form class="form-horizontal" method="post" action="javascript:deleteBackerData();" id="sendEmail" data-validate="parsley">  
-          <div class="form-group">
-                  <label class="control-label">Please enter the text "Delete backer information" to delete all the information</label>
-                  <input type="text" class="bg-focus form-control" id="validateDeleteText">
-                   </div>
-                    <div class="form-group">
-                  <input type="hidden" id="updateAddress_authentication_token" name="authentication_token" value="">
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="submit" id="btnPlaceOrder" class="btn btn-sm btn-default">Delete</button>
-                <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Cancel</button>
-              </div>
-            </div><!-- /.modal-content -->
+            <div class="form-group">
+              <label class="control-label">Please enter the text "Delete backer information" to delete all the information</label>
+              <input type="text" class="bg-focus form-control" id="validateDeleteText">
+            </div>
+            <div class="form-group">
+              <input type="hidden" id="updateAddress_authentication_token" name="authentication_token" value="">
+            </div>
           </div>
-        </form>
+          <div class="modal-footer">
+            <button type="submit" id="btnPlaceOrder" class="btn btn-sm btn-default">Delete</button>
+            <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Cancel</button>
+          </div>
+        </div><!-- /.modal-content -->
       </div>
+    </form>
+  </div>
   <!-- footer -->
   <footer id="footer">
     <div class="text-center padder clearfix">
@@ -387,7 +387,7 @@
     </div>
   </footer>
   <!-- / footer -->
-<!-- 	// <script src="js/jquery.min.js"></script> -->
+  <!-- 	// <script src="js/jquery.min.js"></script> -->
   <!-- Bootstrap -->
   <script src="js/bootstrap.js"></script>
   <!-- app -->
@@ -400,13 +400,13 @@
   <script src="js/fuelux/fuelux.js"></script>
   <script src="js/underscore-min.js"></script>
   <script src="js/charts/easypiechart/jquery.easy-pie-chart.js"></script>
-    <script src="js/file-input/bootstrap.file-input.js"></script>
-      <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
-    <script src="js/jquery_cookie.js"></script>
-    <script src="js/jquery.serialize-object.compiled.js"></script>
-     <script src="js/bootbox.min.js"></script>
-      <script src="js/app.data.js"></script> 
-<script type="text/javascript">
+  <script src="js/file-input/bootstrap.file-input.js"></script>
+  <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+  <script src="js/jquery_cookie.js"></script>
+  <script src="js/jquery.serialize-object.compiled.js"></script>
+  <script src="js/bootbox.min.js"></script>
+  <script src="js/app.data.js"></script> 
+  <script type="text/javascript">
 //getCurrentUser();
 setCurrentUserName();
 loggedInrole();
@@ -417,9 +417,9 @@ getFileAction();
 $(document).ready(function()
 {
 
-            
-            $('#admin').addClass("active");
-           
+  
+  $('#admin').addClass("active");
+  
 });
 </script>
 <script>
@@ -433,28 +433,27 @@ function submit(){
 
 function checkText(){
   var txt=$("#validateText").val();
-  console.log(txt);
-if(txt=="Send email now"){
-  $("#loading").show();
+  if(txt=="Send email now"){
+    $("#loading").show();
     sendEmailToBackers();
-}
-else{
+  }
+  else{
    bootbox.alert("Enter the proper text");
-}
+ }
 }
 
-  
+
 $( "#massNotification" ).click(function() {
   $("#validateText").val("");
 
 });
 
-  
+
 $( "#deleteButton" ).click(function() {
   $("#validateDeleteText").val("")
 
 });
- 
+
 </script>
 </body>
 </html>

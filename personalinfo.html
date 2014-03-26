@@ -11,81 +11,81 @@
   <link rel="stylesheet" href="css/plugin.css">
   <link rel="stylesheet" href="css/font.css" cache="false">
   <link rel="stylesheet" href="css/style.css">  
-    <link rel="stylesheet" href="css/ajax.css">
- <link rel="shortcut icon" href="images/favicon.ico" />
+  <link rel="stylesheet" href="css/ajax.css">
+  <link rel="shortcut icon" href="images/favicon.ico" />
   <script src="js/me.ui.js"></script>
-<script src="js/config.js"></script>
- <script src="js/personalinfo.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/personalinfo.js"></script>
   <!--[if lt IE 9]>
     <script src="js/ie/respond.min.js" cache="false"></script>
     <script src="js/ie/html5.js" cache="false"></script>
-  <![endif]-->
-</head>
-<body class="navbar-fixed" onload="myFunction()">
-  <!-- header -->
-  <header id="header" class="navbar">
-    <ul class="nav navbar-nav hidden-xs pull-right">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">            
-          <span class="hidden-xs-only" id="me"></span>
-          <b class="caret hidden-xs-only"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="https://geckotag.zendesk.com">Help</a></li>
-          <li><a href="javascript:logout();">Logout</a></li>
-        </ul>
-      </li>
-    </ul>
-    <a class="navbar-brand" href="#"><img class="col-lg-6" src="images/gecko_logo.png"></img></a>
-    <button type="button" class="btn btn-link pull-left nav-toggle visible-xs" data-toggle="class:slide-nav slide-nav-left" data-target="body">
-      <i class="icon-reorder icon-xlarge text-default"></i>
-    </button>
- 
-  </header>
-  <!-- / header -->
-  <!-- nav -->
-  <nav id="nav" class="nav-primary hidden-xs nav-vertical">
-    <ul class="nav" data-spy="affix" data-offset-top="50">
-      <li class="active" id="admin" style="display: none;"><a href="dashboard.html"><i class="icon-dashboard icon-xlarge"></i><span>Dashboard</span></a></li>
-      
-      <li class="dropdown-submenu">
-        <a href="orders.html" id="admin2" style="display: none;"><i class="icon-list icon-xlarge"></i><span>Orders</span></a>
-        
-      </li>
-      <li id="highlightAccount" class="dropdown-submenu"><a id="admin3" style="display: none;" href="#"><i class="icon-edit icon-xlarge"></i><span>Account</span></a>
-      <ul class="dropdown-menu">
-          <li><a href="personalinfo.html">Personal Information</a></li>
-          <li style="display:none;"><a href="addresses.html">Addresses</a></li>
-           <li><a href="changePassword.html">Change Password</a></li>
-        </ul>
-      </li>
-     <li><a href="backers.html?page=1" id="admin1" style="display: none;"><i class="icon-list icon-xlarge"></i><span>Backers</span></a></li>
-    </ul>
-  </nav>
-  <!-- / nav -->
-  <section id="content">
-    <section class="main padder">
-        <ul class="breadcrumb">
-            <li><a href="#"><i class="icon-home"></i>Home</a></li>
-           <!--  <li><a href="#"><i class="icon-list-ul"></i>Elements</a></li> -->
-            <li class="active">Orders</li>
+    <![endif]-->
+  </head>
+  <body class="navbar-fixed" onload="myFunction()">
+    <!-- header -->
+    <header id="header" class="navbar">
+      <ul class="nav navbar-nav hidden-xs pull-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">            
+            <span class="hidden-xs-only" id="me"></span>
+            <b class="caret hidden-xs-only"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="https://geckotag.zendesk.com">Help</a></li>
+            <li><a href="javascript:logout();">Logout</a></li>
           </ul>
-      <div class="clearfix">
-        <h4><i class="icon-edit"></i>Personal Information</h4>
-      </div>
-      <div class="row">
-        <div class="col-sm-6">
-          <section class="panel">
-            <div class="panel-body">
-              <form class="form-horizontal" action="javascript:personalInfo();" id="personalInfo"  data-validate="parsley">      
-               <div class="form-group">
+        </li>
+      </ul>
+      <a class="navbar-brand" href="#"><img class="col-lg-6" src="images/gecko_logo.png"></img></a>
+      <button type="button" class="btn btn-link pull-left nav-toggle visible-xs" data-toggle="class:slide-nav slide-nav-left" data-target="body">
+        <i class="icon-reorder icon-xlarge text-default"></i>
+      </button>
+      
+    </header>
+    <!-- / header -->
+    <!-- nav -->
+    <nav id="nav" class="nav-primary hidden-xs nav-vertical">
+      <ul class="nav" data-spy="affix" data-offset-top="50">
+        <li class="active" id="admin" style="display: none;"><a href="dashboard.html"><i class="icon-dashboard icon-xlarge"></i><span>Dashboard</span></a></li>
+        
+        <li class="dropdown-submenu">
+          <a href="orders.html" id="admin2" style="display: none;"><i class="icon-list icon-xlarge"></i><span>Orders</span></a>
+          
+        </li>
+        <li id="highlightAccount" class="dropdown-submenu"><a id="admin3" style="display: none;" href="#"><i class="icon-edit icon-xlarge"></i><span>Account</span></a>
+          <ul class="dropdown-menu">
+            <li><a href="personalinfo.html">Personal Information</a></li>
+            <li style="display:none;"><a href="addresses.html">Addresses</a></li>
+            <li><a href="changePassword.html">Change Password</a></li>
+          </ul>
+        </li>
+        <li><a href="backers.html?page=1" id="admin1" style="display: none;"><i class="icon-list icon-xlarge"></i><span>Backers</span></a></li>
+      </ul>
+    </nav>
+    <!-- / nav -->
+    <section id="content">
+      <section class="main padder">
+        <ul class="breadcrumb">
+          <li><a href="#"><i class="icon-home"></i>Home</a></li>
+          <!--  <li><a href="#"><i class="icon-list-ul"></i>Elements</a></li> -->
+          <li class="active">Orders</li>
+        </ul>
+        <div class="clearfix">
+          <h4><i class="icon-edit"></i>Personal Information</h4>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <section class="panel">
+              <div class="panel-body">
+                <form class="form-horizontal" action="javascript:personalInfo();" id="personalInfo"  data-validate="parsley">      
+                 <div class="form-group">
                   <label class="col-lg-3 control-label">First Name</label>
                   <div class="col-lg-8">
                     <input type="text" name="first_name" id="first_name" placeholder="First Name" class="bg-focus form-control">
-                  
+                    
                   </div>
                 </div>
-                  <div class="form-group">
+                <div class="form-group">
                   <label class="col-lg-3 control-label">Last Name</label>
                   <div class="col-lg-8">
                     <input type="text" name="last_name" id="last_name" placeholder="Last Name" class="bg-focus form-control">
@@ -98,7 +98,7 @@
                     <input type="text" name="email" placeholder="test@example.com" id="personalInfoEmail" class="bg-focus form-control"  data-type="email" readonly>
                   </div>
                 </div>
-                 <div class="form-group">
+                <div class="form-group">
                   <label class="col-lg-3 control-label">Gender</label>
                   <div class="col-lg-4">
                     <select name="gender" class="form-control">
@@ -108,7 +108,7 @@
                     </select>
                   </div>
                 </div>
-            <input type="hidden" id="personalInfo_authentication_token" name="authentication_token" value="">
+                <input type="hidden" id="personalInfo_authentication_token" name="authentication_token" value="">
                 <div class="form-group">
                   <div class="col-lg-9 col-lg-offset-3">                      
                     <button onClick="javascript:cancel()" class="btn btn-white">Cancel</button>
@@ -118,9 +118,9 @@
               </form>
             </div>
           </section>
-        
+          
         </div>
-       
+        
       </div>
     </section>
   </section>
@@ -128,14 +128,14 @@
   <footer id="footer">
     <div class="text-center padder clearfix">
       <p>
-      <small>&copy; Connovate Technology Pvt. Ltd. 2014</small><br><br>
+        <small>&copy; Connovate Technology Pvt. Ltd. 2014</small><br><br>
         <a href="https://www.twitter.com/mygeckotag" class="btn btn-xs btn-circle btn-twitter"><i class="icon-twitter"></i></a>
         <a href="https://www.facebook.com/mygeckotag" class="btn btn-xs btn-circle btn-facebook"><i class="icon-facebook"></i></a>
       </p>
     </div>
   </footer>
   <!-- / footer -->
-	<script src="js/jquery.min.js"></script>
+  <script src="js/jquery.min.js"></script>
   <!-- Bootstrap -->
   <script src="js/bootstrap.js"></script>
   <!-- app -->
@@ -157,19 +157,19 @@
   <script src="js/parsley/parsley.min.js"></script>
   <!-- select2 -->
   <script src="js/select2/select2.min.js"></script>
-   <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
-    <script src="js/jquery_cookie.js"></script>
-    <script src="js/jquery.serialize-object.compiled.js"></script>
+  <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+  <script src="js/jquery_cookie.js"></script>
+  <script src="js/jquery.serialize-object.compiled.js"></script>
   <script type="text/javascript">
-   $(document).ready(function()
-{
-             $("#admin3").show();
-            $("#admin2").show();
-            $('#highlightAccount').addClass("active")
-});
-getCurrentUser();
+  $(document).ready(function()
+  {
+   $("#admin3").show();
+   $("#admin2").show();
+   $('#highlightAccount').addClass("active")
+ });
+  getCurrentUser();
 
-</script>
-<script src="js/bootbox.min.js"></script>
+  </script>
+  <script src="js/bootbox.min.js"></script>
 </body>
 </html>

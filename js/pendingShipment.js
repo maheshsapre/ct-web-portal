@@ -33,9 +33,15 @@ function  pendingShipment() {
   callAPI("/v1/orders/order_status_details.json?order_status_type=Pending Shipment - All issues resolved&page="+page, "GET",getApiKeyQueryFormat(), onSuccessPendingShipment, onApiError);
 }
 function pendingShipmentSearch() {
-  callAPI("/v1/orders/order_status_details.json?order_status_type=Pending Shipment - All issues resolved&page="+page+"&q[reference_no_cont]="+searchPledge_id, "GET",getApiKeyQueryFormat(), onSuccessPendingShipment, onApiError);
+	searchPledge_id=getSearchPledgeId();
+	console.log(searchPledge_id);
+  callAPI("/v1/orders/order_status_details.json?order_status_type=Pending Shipment - All issues resolved&page="+page+"&q[reference_no_cont]="+searchPledge_id, "GET",getApiKeyQueryFormat(), onSuccessSearchPendingShipment, onApiError);
 }
 
+function onSuccessSearchPendingShipment(response) {  
+$("#loading").hide();
+drawDatatable(response.data)
+  } 
 
 function onSuccessPendingShipment(response) {  
 console.log(response.data);

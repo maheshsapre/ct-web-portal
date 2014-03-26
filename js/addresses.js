@@ -4,7 +4,6 @@ function addresses()
   var $inputs = $form.find("input, select, button, textarea");
    $("#address_authentication_token").val(getKey()); 
      var param =  $form.serializeObject(); 
-  console.log(param);
   updateAddresses(JSON.stringify(param));
 }
 
@@ -22,7 +21,6 @@ function onSuccessupdateUpdateAddresses(response) {
   }
 
   function onSuccessGetExsistingAddresses(response){
-  	console.log(response.data);
   	address=response.data;
   	 $("#exsistingAddress").empty();
     for (var i=0;i<response.data.length;i++){
@@ -48,7 +46,6 @@ if(result==true){
 }
 
 function onSuccessDeleteAddrress(response){
-	console.log(response.data);
 	 getExsisitingAddresses();
 }
 

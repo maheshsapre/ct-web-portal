@@ -37,9 +37,15 @@ function getPendingOrderAccepted() {
 }
 
 function getPendingOrderAcceptedSearch() {
-  callAPI("/v1/orders/order_status_details.json?order_status_type=Order Accepted / Imported&page="+page+"&q[reference_no_cont]="+searchPledge_id, "GET",getApiKeyQueryFormat(), onSuccessetPendingOrderAccepted, onApiError);
+	searchPledge_id=getSearchPledgeId();
+	console.log(searchPledge_id);
+  callAPI("/v1/orders/order_status_details.json?order_status_type=Order Accepted / Imported&page="+page+"&q[reference_no_cont]="+searchPledge_id, "GET",getApiKeyQueryFormat(), onSuccessearchPendingOrderAccepted, onApiError);
 }
 
+function onSuccessearchPendingOrderAccepted(response) {  
+ $("#loading").hide();
+drawDatatable(response.data);
+  }
 
 function onSuccessetPendingOrderAccepted(response) {  
  $("#loading").hide();
