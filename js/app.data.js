@@ -577,11 +577,11 @@ $('[data-ride="datatables2"]').each(function() {
 					if(full.perk.name =="Undefined"){
 						
 						
-					return   full.perk.name+'<br/><a style="font-size:10px;" class="btn btn-xs btn-info"  data-toggle="modal"  href="#modalAddPerk">Change perk</a>';
+					return   full.perk.name;//+'<br/><a style="font-size:10px;" class="btn btn-xs btn-info"  data-toggle="modal"  href="#modalAddPerk">Change perk</a>';
 				     }
                      else{
 				     
-				     	return full.perk.name +'<br/><a style="font-size:10px;" class="btn btn-xs btn-info"  data-toggle="modal"  href="#modalAddPerk">Change perk</a>';
+				     	return full.perk.name;// +'<br/><a style="font-size:10px;" class="btn btn-xs btn-info"  data-toggle="modal"  href="#modalAddPerk">Change perk</a>';
 				    }
 				     // if(full.split==true){
 				     // 	return   '<a style="font-size:10px;" class="btn btn-xs btn-info"  data-toggle="modal"  href="#modalAddPerk">Add perk</a>'
@@ -594,7 +594,7 @@ $('[data-ride="datatables2"]').each(function() {
 				, "mRender": function ( url, type, full )  {
 					gfull=full;
 					 if(full.split==true){
-					return  full.amount+'<br/><a style="font-size:10px;" class="btn btn-xs btn-success"  data-toggle="modal"  href="#modalSelectPerks">Split perk</a>';
+					return  full.amount;//+'<br/><a style="font-size:10px;" class="btn btn-xs btn-success"  data-toggle="modal"  href="#modalSelectPerks">Split perk</a>';
                         }
                         else{
                         	return '<div>' + full.amount + '</div>';
