@@ -57,12 +57,13 @@
         <li class="dropdown-submenu"><a id="admin2" style="display: none;" href="#"><i class="icon-edit icon-xlarge"></i><span>Account</span></a>
           <ul class="dropdown-menu">
             <li><a href="personalinfo.html">Personal Information</a></li>
+            <li><a href="updateAddress.html">Update Address</a></li>
+            <li><a style="display:none;" href="addresses.html">Addresses</a></li>
             <li><a style="display:none;" href="addresses.html">Addresses</a></li>
             <li><a href="changePassword.html">Change Password</a></li>
           </ul>
         </li>
         <li><a href="backers.html?page=1" id="admin1" style="display:none;"><i class="icon-list icon-xlarge"></i><span>Backers</span></a></li>
-
       </ul>
     </nav>
     <!-- / nav -->
@@ -169,6 +170,19 @@
             <p id="alert1"></p>
           </div>
       </div>
+      
+      <div id="saveOrders" class="col-lg-12">
+        <section class="panel padder">
+          <div class="clearfix">
+            <p>Please note that changing address will affect all your ordered perks.</p>
+          </div>
+          <a style="width:200px;"  class="btn btn-success" href="updateAddress.html">Change Address</a>
+          <div class="clearfix">
+            <p></p>
+          </div>
+        </section>
+      </div>
+
        <div id="saveOrders" class="col-lg-12">
         <section class="panel padder">
           <div class="clearfix">
@@ -229,8 +243,8 @@
           <div class="form-group">
             <label class="control-label">Address</label>
             <input type="text" name="address_line_1" id="address_line_1" placeholder="Address Line 1" class="bg-focus form-control">
-			<label class="control-label"></label>
-			<input type="text" name="address_line_2"  id="address_line_2" placeholder="Address Line 2" class="bg-focus form-control"   >
+			       <label class="control-label"></label>
+			       <input type="text" name="address_line_2"  id="address_line_2" placeholder="Address Line 2" class="bg-focus form-control"   >
           </div>
           <div class="row">
            <div class="col-lg-6">
@@ -248,7 +262,7 @@
             </div>
 
           </div>
-        </div>
+        
         <div class="row">
          <div class="col-lg-6">
           <div class="form-group col-lg-12">
