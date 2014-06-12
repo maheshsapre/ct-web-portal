@@ -172,7 +172,7 @@
           </div>
       </div>
       
-      <div id="saveOrders" class="col-lg-12">
+      <div id="changeAddress" class="col-lg-12">
         <section class="panel padder">
           <div class="clearfix">
             <p>Please note that changing address will affect all your ordered perks.</p>
@@ -987,13 +987,11 @@
 setCurrentUserName();
 loggedInrole();
 var id = urlParameterValue( 'id' );
-if(id!=""){
-  $("#orderPopup").hide();
-
-  getBackerOrdersId(id);
-
-    //getBackerInformation(id);
+	if(id!=""){
+		$("#orderPopup").hide();
+		getBackerOrdersId(id);
   }
+ 
   if(getRoles()!="admin"){
     $("#addOrder").hide();
     getBackerOrders();

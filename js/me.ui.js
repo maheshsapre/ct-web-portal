@@ -433,7 +433,13 @@ function myFunction()
   }
 
 function cancel(){
-  window.location="orders.html";
+	if(getRoles()!="admin"){
+		window.location="orders.html";
+	}
+	else
+	{
+		window.location="backers.html?page=1";
+	}
 }
 
 
