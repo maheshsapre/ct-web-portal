@@ -102,10 +102,11 @@
       </div> 
     </div>    
     <div class="row">
-     <div class="col-lg-2">
+     <div class="col-lg-3">
       <button  id="addOrder" data-toggle="modal" href="#modalShipping" class="btn btn-primary">Add Order</button>
     </div>
-    <div class="col-lg-2">
+	
+    <div class="col-lg-3">
       <div class="btn-group" >
         <button  id="actionButton" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Action<span class="caret"></span></button>
         <ul class="dropdown-menu">
@@ -1002,7 +1003,9 @@ if(id!=""){
   {
 	
     $('#admin3').addClass("active")
-	getCurrentUser();
+	if(getRoles()!="admin"){
+		getCurrentUser();
+		}
   });
   clearPerksModalDialog();
   resetPerkValueArray();

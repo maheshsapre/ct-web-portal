@@ -168,7 +168,9 @@
    $("#admin2").show();
    $('#highlightAccount').addClass("active")
  });
-  getCurrentUser();
+	if(getRoles()!="admin"){
+		getCurrentUser();
+	}
 
   </script>
   <script src="js/bootbox.min.js"></script>
