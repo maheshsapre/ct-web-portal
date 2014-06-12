@@ -255,22 +255,6 @@ function clearBackerArray()
   $.cookie("xsPa", "", { expires: 5 });
 }
 
-
-function  getFilterPerk() {
-  $.cookie.json = true;
-  return $.cookie("xsFp");
-}
-
-function setFilterPerk(value) {
-   $.cookie.json = true;
-  $.cookie("xsFp", value, { expires: 5 }); // 5 days expiry
-}
-
-function clearFilterPerk()
-{  
-  $.cookie("xsFp", "", { expires: 5 });
-}
-
 String.prototype.format = String.prototype.f = function() {
   var s = this,
   i = arguments.length;
@@ -288,7 +272,7 @@ function getCurrentUser(){
 
 
 function onSuccessGetCurrentUser(response) {
-  currentUser = response.data.first_name;
+  currentUser = response.data.email;
   setCurrentUser(currentUser);
   userEmail=response.data.email;
  
@@ -296,6 +280,7 @@ function onSuccessGetCurrentUser(response) {
    $("#personalInfoEmail").val(userEmail); 
       $("#first_name").val(response.data.first_name); 
          $("#last_name").val(response.data.last_name); 
+		    $("#me").empty();
   $("<label />", { text: currentUser }).appendTo("#me");
 }
 

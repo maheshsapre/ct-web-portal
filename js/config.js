@@ -5,7 +5,7 @@ var MESSAGE =
 
 var CONFIG = 
 {
-	url: "http://107.20.189.200:3001",
+	url: "http://api.connovatech.com",
 	contentType: "application/json",	/* Consider as default parameter for web-portal */
 	dataType: "json",					/* Consider as default parameter for web-portal */
 	isDebugging : true,

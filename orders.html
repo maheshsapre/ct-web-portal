@@ -53,7 +53,6 @@
 
         <li id="admin3" style="display: none;" class="dropdown-submenu">
           <a href="orders.html "><i class="icon-list icon-xlarge"></i><span>Orders</span></a>
-
         </li>
         <li class="dropdown-submenu"><a id="admin2" style="display: none;" href="#"><i class="icon-edit icon-xlarge"></i><span>Account</span></a>
           <ul class="dropdown-menu">
@@ -77,77 +76,34 @@
           <li class="active">Orders</li>
         </ul>
         <!-- / .breadcrumb -->
-        
-        <div class="clearfix">
-          <h4>Orders</h4>
-        </div>
-        <div class="row">
-         <div id="emailBlock" class="col-lg-12">
+        <!-- <div id="emailBlock" class="col-lg-12">
           <section class="panel padder">
             <div class="clearfix">
               <p></p>
             </div>
-            <div class="block">
-             <label class="control-label">Email: </label> <label class="control-label" style="display:inline;" id="email"></label>
+            <div class="block">	
+             <label class="control-label">email: </label> <label class="control-label" style="display:inline;" id="email"></label>
            </div>
          </section>
-       </div>
-       <div id="warning" class="col-lg-12">
-        <section class="panel padder">
-          <div class="clearfix">
-            <p></p>
-          </div>
-          <div id="alert">
-          </div>
-          <div class="alert alert-warning alert-block">
-            <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
-            <h4><i class="icon-bell-alt"></i>Notes!</h4>
-            <p id="alert1"></p>
-          </div>
-        </section>
-
-      </div>
-      <div id="saveOrders" class="col-lg-12">
-
-        <section class="panel padder">
-          <div class="clearfix">
-            <p>Please click on <b>submit</b> button after making the necessary changes.</p>
-          </div>
-
-          <a style="width:200px;"  class="btn btn-success" href="javascript:saveOrderChanges();">Submit Changes</a>
-          <div class="clearfix">
-            <p></p>
-          </div>
-        </section>
-
-      </div>
-
-
-    </div> 
+       </div> -->
+        <div class="clearfix">
+          <h4>Orders</h4>
+        </div>
     <div id="pledgeIdSearch" class="row">
      <div class="col-lg-2"> 
       <div class="form-group">
         <label class="control-label">Pledge Id</label>
-
         <input type="text" name="name" id="searchPledge" placeholder="pledge id" class="bg-focus form-control">
-
-
       </div>
     </div> 
         <div class="col-lg-2"> 
-        </br>
-        <div></div>
-        <button  id="search" class="btn btn-white btn-xs">Search </button>
-
+        <button  id="search" class="btn btn-white btn-xs">Search</button>
       </div> 
     </div>    
     <div class="row">
      <div class="col-lg-2">
       <button  id="addOrder" data-toggle="modal" href="#modalShipping" class="btn btn-primary">Add Order</button>
     </div>
-  <!--    <div class="col-lg-2">
-      <button  id="addOrder" data-toggle="modal" href="#modalFilterOrder" class="btn btn-primary">Filter Orders</button>
-    </div> -->
     <div class="col-lg-2">
       <div class="btn-group" >
         <button  id="actionButton" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Action<span class="caret"></span></button>
@@ -157,19 +113,17 @@
           <li><a data-toggle="modal"href="#modalnumber" onclick="javascript:order('3');">Pending Action - Gecko Team </a></li>
           <li><a data-toggle="modal" href="#modalnumber" onclick="javascript:order('4');">Pending Shipment - All issues resolved </a></li>
           <li><a data-toggle="modal" href="#modalnumber" onclick="javascript:order('5');">Shipped / Delivered </a></li>
-
         </ul>
+		<br/>
       </div>
     </div>
   </div>
-    <br/>
-    <div class="col-lg-12">
+
+   <!--  <div class="col-lg-12">
      <div><a id="decrement" class="btn btn-white btn-xs" href="javascript:decrement();">Previous<a><a id="increment"class="btn btn-white btn-xs"  href="javascript:increment();">Next</a></div>
-   </div>
-   <div class="col-lg-12">
-
+   </div> -->
+   <div class="col-lg-12" id="orderstable">
     <section class="panel">
-
       <div style="overflow-x:auto;" class="table-responsive">
         <table  class="table table-striped m-b-none" id="example" data-ride="datatables3">
           <thead>
@@ -195,8 +149,6 @@
             <th width="0%">Updated At</th>
             <th  width="10%">Update</th>
             <!--<th width="10%">update Adddress</th>-->
-
-
           </tr>
         </thead>
         <tbody>
@@ -211,6 +163,23 @@
     </div>
   </section>
 </div>
+       <div id="warning" class="col-lg-12">
+          <div class="alert alert-warning alert-block">
+            <h4><i class="icon-bell-alt"></i>Notes!</h4>
+            <p id="alert1"></p>
+          </div>
+      </div>
+       <div id="saveOrders" class="col-lg-12">
+        <section class="panel padder">
+          <div class="clearfix">
+            <p>Please click on <b>submit</b> button after making the necessary changes.</p>
+          </div>
+          <a style="width:200px;"  class="btn btn-success" href="javascript:saveOrderChanges();">Submit Changes</a>
+          <div class="clearfix">
+            <p></p>
+          </div>
+        </section>
+      </div>
 </div>
 </section>
 </section>
@@ -252,45 +221,27 @@
       <div  class="modal-body">
        <div class="panel-body">
         <form class="form-horizontal"  action="javascript: updateAddresses();" id="updateAddresses" data-validate="parsley">  
-
-
-          <input type="hidden"  name="address_id" id="address_id" placeholder="" class="bg-focus form-control">
-
-
+          
           <div class="form-group">
-            <label class="control-label">Name</label>
-
+            <label class="control-label">Shipping Name</label>
             <input type="text" name="name" id="name" placeholder="Full Name" class="bg-focus form-control">
-
-
           </div>
           <div class="form-group">
             <label class="control-label">Address</label>
-
             <input type="text" name="address_line_1" id="address_line_1" placeholder="Address Line 1" class="bg-focus form-control">
-
-
-          </div>
-          <div class="form-group">
-            <label class="control-label"></label>
-
-            <input type="text" name="address_line_2"  id="address_line_2" placeholder="Address Line 2" class="bg-focus form-control"   >
-
+			<label class="control-label"></label>
+			<input type="text" name="address_line_2"  id="address_line_2" placeholder="Address Line 2" class="bg-focus form-control"   >
           </div>
           <div class="row">
            <div class="col-lg-6">
             <div class="form-group col-lg-12 ">
               <label class="control-label">City</label>
-
               <input type="text" name="city" placeholder="City" id="city" class="bg-focus form-control">
-
-
             </div>
           </div>
           <div class="col-lg-6">
             <div class="form-group col-lg-12">
               <label class="control-label">State/Province</label>
-
               <input type="text" name="state" placeholder="State/Province" id="state" class="bg-focus form-control">
 
 
@@ -571,7 +522,7 @@
 
      <div class="form-group">
       <label class="control-label">Phone/Mobile Number</label>
-      <input type="text" name="phone_no" data-type="phone" id="phone_no" placeholder="Phone/Mobile Number" class="bg-focus form-control"/>
+      <input type="text" name="phone_no"  id="phone_no" placeholder="Phone/Mobile Number" class="bg-focus form-control"/>
     </div>
     <input type="hidden" id="updateAddress_authentication_token" name="authentication_token" value="">
 
@@ -584,6 +535,7 @@
 </div>
 </div><!-- /.modal-content -->
 </div>
+<input type="hidden"  name="address_id" id="address_id" placeholder="" class="bg-focus form-control"/>
 </form>
 </div>
 
@@ -1034,8 +986,9 @@ if(id!=""){
   }
   $(document).ready(function()
   {
-
+	
     $('#admin3').addClass("active")
+	getCurrentUser();
   });
   clearPerksModalDialog();
   resetPerkValueArray();

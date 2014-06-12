@@ -30,19 +30,8 @@ window.location="shipmentDone.hml?page="+page;
   var page = urlParameterValue( 'page' );
 
 function shipmentDone() {
-  callAPI("/v1/orders/order_status_details.json?order_status_type=Shipped / Delivered&page="+page, "GET",getApiKeyQueryFormat(), onSuccessShipmentDone, onApiError);
+  callAPI("/v1/orders/order_status_details.json?order_status_type=Shipped / Delivered&page="+page, "GET","", onSuccessShipmentDone, onApiError);
 }
-
-function  shipmentDoneSearch() {
-	searchPledge_id=getSearchPledgeId();
-	console.log(searchPledge_id);
-  callAPI("/v1/orders/order_status_details.json?order_status_type=Shipped / Delivered&page="+page+"&q[reference_no_cont]="+searchPledge_id, "GET",getApiKeyQueryFormat(), onSuccessSerachShipmentDone, onApiError);
-}
-
-function onSuccessSerachShipmentDone(response) {  
-$("#loading").hide();
-drawDatatable(response.data);
-  }
 
 function onSuccessShipmentDone(response) {  
 console.log(response.data);

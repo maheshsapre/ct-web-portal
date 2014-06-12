@@ -74,58 +74,58 @@
           <div class="col-lg-6">
            <div class="col-lg-offset-4 m-t-large">
             <!-- .crousel slide -->
-            <section class="panel">
-              <div class="carousel slide auto panel-body" id="c-slide">
+             <section class="panel">
+            <div class="carousel slide auto panel-body" id="c-slide">
                 <ol class="carousel-indicators out">
                   <li data-target="#c-slide" data-slide-to="0" class="active"></li>
                   <li data-target="#c-slide" data-slide-to="1" class=""></li>
                   <li data-target="#c-slide" data-slide-to="2" class=""></li>
-                  <li data-target="#c-slide" data-slide-to="3" class=""></li>
-                  <li data-target="#c-slide" data-slide-to="4" class=""></li>
-                  <li data-target="#c-slide" data-slide-to="5" class=""></li>
-                  <li data-target="#c-slide" data-slide-to="6" class=""></li>
+          <li data-target="#c-slide" data-slide-to="3" class=""></li>
+          <li data-target="#c-slide" data-slide-to="4" class=""></li>
+          <li data-target="#c-slide" data-slide-to="5" class=""></li>
+         
                 </ol>
                 <div class="carousel-inner">
                   <div class="item active">
                     <p class="text-center">
-                      <img src="images/banner1.jpg"/>
-                      <em class="h4 text-mute">Save your time</em><br>
-                      <small class="text-muted">Many components</small>
+            <img src="images/banner1.jpg"/>
+                      <em class="h4 text-mute">Camera Trigger</em><br>
+                      <small class="text-muted">Say cheese! Get in the frame, wave your arm and let Gecko trigger the camera.</small>
                     </p>
                   </div>
                   <div class="item">
                     <p class="text-center">
-                      <img src="images/banner2.jpg"/>
-                      <em class="h4 text-mute">Nice and easy to use</em><br>
-                      <small class="text-muted">Full documents</small>
+            <img src="images/banner2.jpg"/>
+                      <em class="h4 text-mute">Motion Detection</em><br>
+                      <small class="text-muted">Stick or Tag Gecko on your door or luggage. If anyone opens the door or moves your luggage, Gecko sends an Alert to your smart phone. Gecko brings peace of mind. </small>
                     </p>
                   </div>
                   <div class="item">
                     <p class="text-center">
-                      <img src="images/banner3.jpg"/>
-                      <em class="h4 text-mute">Mobile header first</em><br>
-                      <small class="text-muted">Mobile/Tablet/Desktop</small>
+            <img src="images/banner3.jpg"/>
+                      <em class="h4 text-mute">Motion Detection</em><br>
+                      <small class="text-muted">Don't touch my stuff. Gecko will sound an alert and buzz you if motion is detected.</small>
                     </p>
                   </div>
-                  <div class="item">
+          <div class="item">
                     <p class="text-center">
-                      <img src="images/banner4.jpg"/>
-                      <em class="h4 text-mute">Mobile header first</em><br>
-                      <small class="text-muted">Mobile/Tablet/Desktop</small>
+            <img src="images/banner4.jpg"/>
+                      <em class="h4 text-mute">Music Control</em><br>
+                      <small class="text-muted">Turn up the groove. Gecko turns on music on your phone, switch tracks and controls volume with just a flick of your hand.</small>
                     </p>
                   </div>
-                  <div class="item">
+          <div class="item">
                     <p class="text-center">
-                      <img src="images/banner5.jpg"/>
-                      <em class="h4 text-mute">Mobile header first</em><br>
-                      <small class="text-muted">Mobile/Tablet/Desktop</small>
+            <img src="images/banner5.jpg"/>
+                      <em class="h4 text-mute"></em>Smart Leash<br>
+                      <small class="text-muted">Break the leash. The Gecko smart leash sets off an alarm if your pet/kid moves away. So you can head Fido off the next time he’s on his way out of the door.</small>
                     </p>
                   </div>
-                  <div class="item">
+          <div class="item">
                     <p class="text-center">
-                      <img src="images/banner6.jpg"/>
-                      <em class="h4 text-mute">Mobile header first</em><br>
-                      <small class="text-muted">Mobile/Tablet/Desktop</small>
+            <img src="images/banner6.jpg"/>
+                      <em class="h4 text-mute">Track & Find</em><br>
+                      <small class="text-muted">Never lose again. Tag Gecko to your precious. Let Gecko track and Find. If you lose, Gecko cloud community will find it for you.</small>
                     </p>
                   </div>
                 </div>
@@ -135,8 +135,8 @@
                 <a class="right carousel-control" href="#c-slide" data-slide="next">
                   <i class="icon-chevron-right"></i>
                 </a>
-              </div>
-            </section>
+            </div>
+          </section>
           </div>
         </div>
       </div>
@@ -175,6 +175,7 @@
     };
     if(nb==""){
       bootbox.alert("Looks like the link you have used is not proper. If you are a Gecko backer and trying to register for the first time please contact support@geckotag.me");
+      $("#loading").hide();
     }
     else{
       $("#registration_token").val(nb);

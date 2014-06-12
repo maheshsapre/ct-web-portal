@@ -87,7 +87,9 @@ function  updateBackerAddresses(id,param){
 
 function onSuccessUpdateBackerAddresses(response){
 	console.log(response.data);
+   
    bootbox.alert("updated");
+
 }
 
 function addOrder(){

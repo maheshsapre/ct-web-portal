@@ -48,5 +48,5 @@ div#loading {
     background: url('../images/ajax-loader.gif') no-repeat;
     cursor: wait;
     top: 30%;
-    left: 30%;
+    left: 80%;
   }

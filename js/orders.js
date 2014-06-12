@@ -48,7 +48,11 @@ function getBackerOrdersId(id){
 }
 
 function getBackerOrders() {
-  $("#warning").hide();
+   $("#warning").hide();
+   $("#saveOrders").hide();
+   $("#orderstable").hide();
+  
+  
   callAPI("/v1/orders/current_backer_orders.json", "GET",getKeyQueryFormat(), onSuccessGetBackerOrders, onApiError);
 }
 
@@ -62,12 +66,15 @@ function onSuccessGetBackerOrders(response) {
   }
   if(getRoles()!="admin"){
     for(i=0;i<response.data.length;i++){
-     if(response.data[i].notes!="Success"&&response.data[i].notes!=""){
+     if(response.data[i].notes && response.data[i].notes!="Success" && response.data[i].notes!="" ){
       var str =   response.data[i].notes;
+	  
       var res = str.replace("Shipping not paid.","");
-      if(res.trim().length!=0){
-        $("#warning").show();
-        $("#alert1").append("<p style='font-size:15px;'>Pledge Id: "+response.data[i].reference_no+" >>> "+ res +"<p>");
+	  $("#orderstable").show();
+		$("#saveOrders").show();
+	  if(res.trim().length!=0){
+        $("#alert1").append("<p style='font-size:15px;'>Pledge Id: "+response.data[i].reference_no+" - "+ res +"<p>");
+		$("#warning").show();
       }
     }
   }
