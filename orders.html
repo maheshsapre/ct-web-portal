@@ -102,11 +102,11 @@
       </div> 
     </div>    
     <div class="row">
-     <div class="col-lg-3">
+     <div class="col-lg-1">
       <button  id="addOrder" data-toggle="modal" href="#modalShipping" class="btn btn-primary">Add Order</button>
     </div>
 	
-    <div class="col-lg-3">
+    <div class="col-lg-1">
       <div class="btn-group" >
         <button  id="actionButton" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Action<span class="caret"></span></button>
         <ul class="dropdown-menu">
@@ -171,20 +171,41 @@
             <p id="alert1"></p>
           </div>
       </div>
-      
-      <div id="changeAddress" class="col-lg-12">
-        <section class="panel padder">
-          <div class="clearfix">
-            <p>Please note that changing address will affect all your ordered perks.</p>
-          </div>
-          <a style="width:200px;"  class="btn btn-success" href="updateAddress.html">Change Address</a>
-          <div class="clearfix">
-            <p></p>
-          </div>
-        </section>
-      </div>
-
-       <div id="saveOrders" class="col-lg-12">
+	  
+	  <div id="otherDetails" class="row">
+		  <div id="shippingAddress" class="col-lg-6">
+			<section class="panel padder">
+			<h3 class="m-t-none">Shipping Address <a  class="btn btn-white btn-xs" href="updateAddress.html">Change</a></h3>			
+			<p class="m-t m-b">
+						<strong>R Kumar</strong><br>
+						<strong>Address 1</strong><br>
+						<strong>Address 2</strong><br>
+						<strong>City</strong><br>
+						<strong>State</strong><br>
+						<strong>Country</strong><br>
+						<strong>Postal Code</strong>
+				</p>
+			<div class="clearfix">
+				<p>Please note that changing address will affect all your ordered perks.</p>
+			  </div>
+			  
+			  <div class="clearfix">
+				<p></p>
+			  </div>
+			</section>
+		  </div>
+		<div id="shippingDetails" class="col-lg-6">
+			<section class="panel padder">
+				<h3 class="m-t-none">Shipping Details</h3>			
+				<p class="m-t m-b">
+						Shipmnet status: <span class="label bg-success">Shipped</span><br>
+						Shipped On: <strong>26th Mar 2013</strong><br>
+						Tracking No.: <strong>PSU #9399034</strong>
+				</p>
+			</section>
+		</div>
+	  </div>
+       <!-- <div id="saveOrders" class="col-lg-12">
         <section class="panel padder">
           <div class="clearfix">
             <p>Please click on <b>submit</b> button after making the necessary changes.</p>
@@ -194,7 +215,7 @@
             <p></p>
           </div>
         </section>
-      </div>
+      </div> -->
 </div>
 </section>
 </section>

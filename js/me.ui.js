@@ -170,7 +170,7 @@ function clearBackerOrdersAction()
 
 function getKeyQueryFormat() {
  $.cookie.json = false;
- return 'authentication_token={0}'.f($.cookie("xsTk"));
+ return 'authentication_token={0}&api_key={0}'.f($.cookie("xsTk"));
  //return 'api_key=owQPBHkrMwKW9SY7DtpP';
  }
 
@@ -289,6 +289,37 @@ function setCurrentUserName(){
     $("<label />", { text: getCurrentUserName() }).appendTo("#me");
 }
 
+function process(option) {
+	var resource = "";
+	switch(option)
+	{
+		case "INDIA_SHIPPING_PAID":
+			resource = "/v1/backers/backer_details?q%5Bshipping_paid_true%5D=1&q%5Baddresses_country_cont%5D=India&size=10000";
+			break;
+		case "INDIA_SHIPPING_NOT_PAID":
+			resource = "/v1/backers/backer_details?q%5Bshipping_paid_false%5D=1&q%5Baddresses_country_cont%5D=India&size=10000";
+			break;
+		case "USA_ALL":
+			resource = "/v1/backers/backer_details?q%5Baddresses_country_cont%5D=United%20States&size=100000";
+			break;
+		case "NON_USA_ALL":
+			resource = "/v1/backers/backer_details?q%5Baddresses_country_not_cont%5D=United%20States&size=100000";
+			break;
+		case "NON_USA_SHIPPING_PAID":
+			resource =  "/v1/backers/backer_details?q%5Bshipping_paid_true%5D=1&q%5Baddresses_country_not_in%5D=United%20States%2CIndia&size =10000";
+			break;
+		case "NON_USA_SHIPPING_NOT_PAID":
+			resource = "/v1/backers/backer_details?q%5Bshipping_paid_false%5D=1&q%5Baddresses_country_not_in%5D=United%20States%2CIndia&size=10000";
+			break;
+		default: 
+			resource = "undefined";
+	}
+ 
+  var serverUrl= CONFIG.url + resource + "&" + getKeyQueryFormat(); 
+//$.get(serverUrl);
+window.open(serverUrl, "_blank");
+} 
+
 function callAPI(resource, httpMethod, param, successHandler, errorHandler) {
 
   
@@ -392,6 +423,7 @@ role=getRoles();
     $("#admin1").show();
   
     $("#warning").hide();
+	$("#otherDetails").hide();
     $("#saveOrders").hide();   
 }
 else{

@@ -51,7 +51,7 @@ function getBackerOrders() {
    $("#warning").hide();
    $("#saveOrders").hide();
    $("#orderstable").hide();
-  
+  $("#otherDetails").hide();
   
   callAPI("/v1/orders/current_backer_orders.json", "GET",getKeyQueryFormat(), onSuccessGetBackerOrders, onApiError);
 }
@@ -72,6 +72,7 @@ function onSuccessGetBackerOrders(response) {
       var res = str.replace("Shipping not paid.","");
 	  $("#orderstable").show();
 		$("#saveOrders").show();
+		$("#otherDetails").show();
 	  if(res.trim().length!=0){
         $("#alert1").append("<p style='font-size:15px;'>Pledge Id: "+response.data[i].reference_no+" - "+ res +"<p>");
 		$("#warning").show();
