@@ -439,6 +439,7 @@ $('[data-ride="datatables2"]').each(function() {
 		var oTable = $(this).dataTable( {
 			"bDestroy":true,
 			"bProcessing": true,
+			"info": false,
 			"aaData":tableData,
 			"bRetrieve":true,
 			"sDom": "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'row'<'col-sm-6'i><'col col-sm-6'p>>",

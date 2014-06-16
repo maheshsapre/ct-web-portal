@@ -503,10 +503,9 @@ function onSuccessGetBackerAddress(response) {
       var res = str.replace("Shipping not paid.","");
 	  $("#orderstable").show();
 		$("#saveOrders").show();
-		$("#otherDetails").show();
+		$("#tracking-wizard").show();
 	  if(res.trim().length!=0){
-        $("#alert1").append("<p style='font-size:15px;'>Pledge Id: "+response.data[i].reference_no+" - "+ res +"<p>");
-		$("#warning").show();
+        $("#verificationDetails").append("<p >Pledge Id: "+response.data[i].reference_no+" - "+ res +"<p>");
       }
     }
   }

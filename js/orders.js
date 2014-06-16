@@ -48,44 +48,89 @@ function getBackerOrdersId(id){
 }
 
 function getBackerOrders() {
-   $("#warning").hide();
    $("#saveOrders").hide();
    $("#orderstable").hide();
-  $("#otherDetails").hide();
+  $("#tracking-wizard").hide();
   
   callAPI("/v1/orders/current_backer_orders.json", "GET",getKeyQueryFormat(), onSuccessGetBackerOrders, onApiError);
 }
 
+function getBackerAddress()
+{
+	callAPI("/v1/addresses/address_details.json", "GET", getKeyQueryFormat(), onSuccessGetBackerAddress, onSuccessGetBackerAddress);	
+}
+
+function getTrackingInfo()
+{
+	callAPI("/v1/backers/backer_information.json", "GET", getKeyQueryFormat(), onSuccessGetTrackerInfo, onApiError);
+	
+}
+function onSuccessGetTrackerInfo(response){
+	var trackingDetails = 
+	 //'Shipmnet status: <span class="label bg-success">' +  response.data.shipment_status +'</span><br>' +
+	 //'Shipped On: <strong>' + response.data.shipped_on +'</strong><br>' + 
+	 'Shipping Service: <strong>' + response.data.shipping_service +'</strong><br>' + 
+	 'Tracking Number: <strong>' + response.data.tracking_number +'</strong><br>'
+	
+	$("#trackingDetails").empty();
+	$("#trackingDetails").append(trackingDetails);
+}
+function onSuccessGetBackerAddress(response){
+console.log(response);
+	var addressDetails = 
+	 'Name: <strong>' + response.data.name +'</strong><br>' + 
+	 'Address:<br><strong>' + response.data.address_line_1 +'</strong><br>' + 
+	 '<strong>' + response.data.address_line_2 +'</strong><br>' + 
+	 '<strong>' + response.data.city +'</strong><br>' + 
+	 '<strong>' + response.data.state +'</strong><br>' + 
+	 '<strong>' + response.data.country +'</strong><br>' + 
+	 'Postal Code: <strong>' + response.data.zip_code +'</strong><br>' + 
+	 'Phone/Mobile: <strong>' + response.data.phone +'</strong><br>' 
+	 
+	
+	$("#addressDetails").empty();
+	if (response.data.name) $("#addressDetails").append('Name: <strong>{0}</strong><br>'.f(response.data.name));
+	if (response.data.address_line_1) $("#addressDetails").append('Address: <br><strong>{0}</strong><br>'.f(response.data.address_line_1));
+	if (response.data.address_line_2) $("#addressDetails").append('<strong>{0}</strong><br>'.f(response.data.address_line_2));
+	if (response.data.city) $("#addressDetails").append('<strong>{0}</strong><br>'.f(response.data.city));
+	if (response.data.state) $("#addressDetails").append('<strong>{0}</strong><br>'.f(response.data.state));
+	if (response.data.country) $("#addressDetails").append('<strong>{0}</strong><br>'.f(response.data.country));
+	if (response.data.zip_code) $("#addressDetails").append('<strong>{0}</strong><br>'.f(response.data.zip_code));
+	if (response.data.phone) $("#addressDetails").append('<strong>{0}</strong><br>'.f(response.data.phone));
+	
+	
+	
+}
+
 function onSuccessGetBackerOrders(response) { 
-  $("#address_Orderid").val(response.data[0].address_id);
-  $("#backer_id").val(response.data[0].backer_id);
-  $("#email").html(response.data[0].backer.email);
-  setBackerOrdersAction(response.data);
-  for(i=0;i<response.data.length;i++){
-    orderList[i]=response.data[i].id;
-  }
-  if(getRoles()!="admin"){
-    for(i=0;i<response.data.length;i++){
-     if(response.data[i].notes && response.data[i].notes!="Success" && response.data[i].notes!="" ){
-      var str =   response.data[i].notes;
+	  $("#address_Orderid").val(response.data[0].address_id);
+	  $("#backer_id").val(response.data[0].backer_id);
+	  $("#email").html(response.data[0].backer.email);
+	  setBackerOrdersAction(response.data);
+	  for(i=0;i<response.data.length;i++){
+		orderList[i]=response.data[i].id;
+	  }
+	  if(getRoles()!="admin"){
+		for(i=0;i<response.data.length;i++){
+		 if(response.data[i].notes && response.data[i].notes!="Success" && response.data[i].notes!="" ){
+		  var str =   response.data[i].notes;
+		  
+		  var res = str.replace("Shipping not paid.","");
+		  $("#orderstable").show();
+			$("#saveOrders").show();
+			$("#tracking-wizard").show();
+		  if(res.trim().length!=0){
+			$("#verificationDetails").append("<p >Pledge Id: "+response.data[i].reference_no+" - "+ res +"<p>");
+		  }
+		}
+	  }
 	  
-      var res = str.replace("Shipping not paid.","");
-	  $("#orderstable").show();
-		$("#saveOrders").show();
-		$("#otherDetails").show();
-	  if(res.trim().length!=0){
-        $("#alert1").append("<p style='font-size:15px;'>Pledge Id: "+response.data[i].reference_no+" - "+ res +"<p>");
-		$("#warning").show();
-      }
-    }
-  }
-  
-}
-$("#loading").hide();
-if(response.data.length<10){
-  $("#increment").removeAttr('href');
-}
-drawDatatable(response.data);
+	}
+	$("#loading").hide();
+	if(response.data.length<10){
+	  $("#increment").removeAttr('href');
+	}
+	drawDatatable(response.data);
 }
 
 function updateAddresses()
@@ -149,9 +194,6 @@ function displaySaveOrderChangesForBackers(){
 }
 
 function onSuccessDisplaySaveOrderChanges(response){
- // $("#warning").show();
- //  $("#alert1").append("<p style='font-size:15px;'>Success</p>")
- //  console.log(response.data.message);
 }
 
 function onSuccessSaveOrderChanges(response){

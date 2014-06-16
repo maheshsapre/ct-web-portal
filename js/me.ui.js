@@ -394,10 +394,9 @@ function onApiError(response, exception) {
 
 function onApiError1(response, exception){
   if(response.status==400){
-    $("#warning").show();
     var result = jQuery.parseJSON(response.responseText);
-   shippingErrorMessage=result.message;
-  $("#alert1").append("<p style='font-size:15px;'>"+shippingErrorMessage+"</p>")
+	shippingErrorMessage=result.message;
+	$("#verificationDetails").append("<p class=' list-group-item icon-warning-sign '>"+shippingErrorMessage+"</p>");
   }
   else{
     bootbox.alert(result.message);
@@ -437,8 +436,7 @@ role=getRoles();
   $("#admin").show();
     $("#admin1").show();
   
-    $("#warning").hide();
-	$("#otherDetails").hide();
+	$("#tracking-wizard").hide();
     $("#saveOrders").hide();   
 }
 else{
