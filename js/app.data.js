@@ -530,7 +530,7 @@ $('[data-ride="datatables2"]').each(function() {
 				{ "mData": "amount_difference",				"bVisible":    false  },
 				{ "mData": "shipping_applicable",				"bVisible":    false },
 				{ "mData": "shipping_paid",				"bVisible":    false },
-				{ "mData": "order_status.name" },
+				{ "mData": "order_status.name", "bVisible":    false },
 				{ "mData": "notes",				"bVisible":    false } ,				
 				{ "mData": "backer_id",				"bVisible":    false  } ,
 				{ "mData": "created_at",				"bVisible":    false  } ,

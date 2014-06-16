@@ -306,10 +306,25 @@ function process(option) {
 			resource = "/v1/backers/backer_details?q%5Baddresses_country_not_cont%5D=United%20States&size=100000";
 			break;
 		case "NON_USA_SHIPPING_PAID":
-			resource =  "/v1/backers/backer_details?q%5Bshipping_paid_true%5D=1&q%5Baddresses_country_not_in%5D=United%20States%2CIndia&size =10000";
+			resource =  "/v1/backers/backer_details?q%5Bshipping_paid_true%5D=1&q%5Baddresses_country_not_in%5D=United%20States%2CIndia&size=10000";
 			break;
 		case "NON_USA_SHIPPING_NOT_PAID":
 			resource = "/v1/backers/backer_details?q%5Bshipping_paid_false%5D=1&q%5Baddresses_country_not_in%5D=United%20States%2CIndia&size=10000";
+			break;
+		case "UNDEFINED_PERK":
+			resource = "/v1/orders/order_details.json?q%5Bperk_id_eq%5D=15&size=10000";
+			break;
+		case "ORDER_REQUIRES_SPLIT":
+			resource = "/v1/orders/order_details.json?q%5Bsplit_true%5D=1&size=10000";
+			break;
+		case "SHIPPED_ORDERS":
+			resource = "/v1/orders/order_details.json?q%5Border_status_id_eq%5D=5&size=10000";
+			break;
+		case "UNSHIPPED_ORDERS":
+			resource = "/v1/orders/order_details.json?q%5Border_status_id_not_eq%5D=5&size=10000";
+			break;
+		case "MULTIPLE_ADDRESSES":
+			resource = "/v1/backers/multiple_address_backers.json?&size=10000";
 			break;
 		default: 
 			resource = "undefined";
