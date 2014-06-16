@@ -523,7 +523,7 @@ $('[data-ride="datatables2"]').each(function() {
 	                "sDefaultContent": '<input id="checked" type="checkbox" </input>'
 	            },
                 { "mData": "reference_no" } ,
-                { "mData": "backer.email" } ,
+                { "mData": "backer.email",		"bVisible":    false } ,
                 { "mData": "perk.name" } ,
                 { "mData": "order_date" },
 				{ "mData": "amount" } ,

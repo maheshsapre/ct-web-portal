@@ -132,7 +132,7 @@
            <tr>
             <th width="1%"></th>
             <th width="10%">Pledge Id</th>
-            <th width="15%">Backer Email</th>
+            <th width="0%">Backer Email</th>
             <th width="15%">Perk</th>
             <th width="15%">Order Date</th>
             <th width="5%">Amount</th>
@@ -175,8 +175,8 @@
 	  <div id="otherDetails" class="row">
 		  <div id="shippingAddress" class="col-lg-6">
 			<section class="panel padder">
-			<h3 class="m-t-none">Shipping Address <a  class="btn btn-white btn-xs" href="updateAddress.html">Change</a></h3>			
-			<p class="m-t m-b">
+			<h3 class="m-t-none">Shipping Address <a id="confirmAddress" class="btn btn-white btn-xs" href="updateAddress.html">Confirm Address</a></h3>
+			<p id="addressDetails" class="m-t m-b">
 						<strong>R Kumar</strong><br>
 						<strong>Address 1</strong><br>
 						<strong>Address 2</strong><br>
@@ -185,19 +185,12 @@
 						<strong>Country</strong><br>
 						<strong>Postal Code</strong>
 				</p>
-			<div class="clearfix">
-				<p>Please note that changing address will affect all your ordered perks.</p>
-			  </div>
-			  
-			  <div class="clearfix">
-				<p></p>
-			  </div>
 			</section>
 		  </div>
 		<div id="shippingDetails" class="col-lg-6">
 			<section class="panel padder">
 				<h3 class="m-t-none">Shipping Details</h3>			
-				<p class="m-t m-b">
+				<p id="trackingDetails" class="m-t m-b">
 						Shipmnet status: <span class="label bg-success">Shipped</span><br>
 						Shipped On: <strong>26th Mar 2013</strong><br>
 						Tracking No.: <strong>PSU #9399034</strong>
