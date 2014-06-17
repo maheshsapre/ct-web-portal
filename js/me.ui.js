@@ -276,7 +276,6 @@ function onSuccessGetCurrentUser(response) {
   setCurrentUser(currentUser);
   userEmail=response.data.email;
  
-  console.log(response.data.first_name);
    $("#personalInfoEmail").val(userEmail); 
       $("#first_name").val(response.data.first_name); 
          $("#last_name").val(response.data.last_name); 
@@ -336,11 +335,11 @@ window.open(serverUrl, "_blank");
 } 
 
 function callAPI(resource, httpMethod, param, successHandler, errorHandler) {
-
-  
-
   var serverUrl= CONFIG.url + resource; 
 
+  // console.log( httpMethod + " " + serverUrl);
+  // console.log( " --> " + param);
+  
   $.ajax({
     type: httpMethod,
     url: serverUrl ,
@@ -350,8 +349,6 @@ function callAPI(resource, httpMethod, param, successHandler, errorHandler) {
     success: successHandler,
     error: errorHandler
   });
-   //alert("api call");
-
 } 
 function onApiError(response, exception) {  
 

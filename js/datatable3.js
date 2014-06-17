@@ -73,20 +73,29 @@ drawDatatable(response.data);
 
  function updateAddresses()
  {
+	alert('sdfsdfsdfdsfsdf');
  	var $form = $("#updateAddresses");
   var $inputs = $form.find("input, select, button, textarea");
   var param =  $form.serializeObject(); 
    $("#updateAddress_authentication_token").val(getKey()); 
-    console.log(param.address_id,param);
   updateBackerAddresses(param.address_id,JSON.stringify(param));
+  
+  
  }
 
 function  updateBackerAddresses(id,param){
-	  callAPI("/v1/addresses/{0}/update_address.json".f(id), "PUT",param, onSuccessUpdateBackerAddresses, onApiError);
+	
+	alert(id);
+	console.log(param);
+	
+	  callAPI("/v1/addresses/address_details.json", "PUT", param, onSuccessUpdateBackerAddresses, onApiError);
+	  
+	  
 }
 
 function onSuccessUpdateBackerAddresses(response){
 	console.log(response.data);
+	alert("Hi");
    
    bootbox.alert("updated");
 
