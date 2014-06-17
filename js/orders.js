@@ -48,10 +48,6 @@ function getBackerOrdersId(id){
 }
 
 function getBackerOrders() {
-   $("#saveOrders").hide();
-   $("#orderstable").hide();
-  $("#tracking-wizard").hide();
-  
   callAPI("/v1/orders/current_backer_orders.json", "GET",getKeyQueryFormat(), onSuccessGetBackerOrders, onApiError);
 }
 
@@ -63,20 +59,61 @@ function getBackerAddress()
 function getTrackingInfo()
 {
 	callAPI("/v1/backers/backer_information.json", "GET", getKeyQueryFormat(), onSuccessGetTrackerInfo, onApiError);
+}
+function confirmBackerAddress()
+{
+	var param= {};
+	param['api_key'] = getKey();
+	param['address_confirmed'] = true;
+	callAPI("/v1/backers/update_backer.json", "PUT", param, onSuccessConfirmBackerAddress, onApiError);	
+}
+
+function onSuccessConfirmBackerAddress(response){
+
+	$("#changeAddress").hide();
+	$("#confirmAddress").hide();
+	$("#addressConfirmed").show();
+	$("#addressConfirmedText").val("confirmed");
 	
+	console.log("confirm success - done");
 }
 function onSuccessGetTrackerInfo(response){
-	var trackingDetails = 
-	 //'Shipmnet status: <span class="label bg-success">' +  response.data.shipment_status +'</span><br>' +
-	 //'Shipped On: <strong>' + response.data.shipped_on +'</strong><br>' + 
-	 'Shipping Service: <strong>' + response.data.shipping_service +'</strong><br>' + 
-	 'Tracking Number: <strong>' + response.data.tracking_number +'</strong><br>'
-	
+	var status = "";
+	switch(response.data.shipment_status)
+	{
+		case 1: status = 'Shipmnet status: <span class="label bg-info">Shipment Scheduled</span><br>'; 	break;
+		case 2: status = 'Shipmnet status: <span class="label bg-success">Shipped</span><br>'; 	break;
+		default: status = 'Shipmnet status: <span class="label bg-warning">No information available</span><br>'; break;
+	}
+	 
 	$("#trackingDetails").empty();
-	$("#trackingDetails").append(trackingDetails);
+	$("#trackingDetails").append(status);
+	if (response.data.shipping_service) $("#trackingDetails").append('Shipping Service: <strong>{0}</strong><br>'.f(response.data.shipping_service));
+	if (response.data.tracking_number) $("#trackingDetails").append('Tracking Number: <strong>{0}</strong><br>'.f(response.data.tracking_number));
+	
+	if (response.data.address_confirmed)
+	{
+		$("#changeAddress").hide();
+		$("#confirmAddress").hide();
+		$("#addressConfirmed").show();
+	}
+	else
+	{
+		$("#changeAddress").show();
+		$("#confirmAddress").show();
+		$("#addressConfirmed").hide();
+	}
+	
+	$("#orderstable").show();
+	$("#saveOrders").show();
+	$("#tracking-wizard").show();
+	
+	
+	if (response.data.address_confirmed) $("#tracking-wizard").next();
+	
+	$("#loading").hide();
 }
 function onSuccessGetBackerAddress(response){
-console.log(response);
 	var addressDetails = 
 	 'Name: <strong>' + response.data.name +'</strong><br>' + 
 	 'Address:<br><strong>' + response.data.address_line_1 +'</strong><br>' + 
@@ -87,7 +124,7 @@ console.log(response);
 	 'Postal Code: <strong>' + response.data.zip_code +'</strong><br>' + 
 	 'Phone/Mobile: <strong>' + response.data.phone +'</strong><br>' 
 	 
-	
+	// populate the display address
 	$("#addressDetails").empty();
 	if (response.data.name) $("#addressDetails").append('Name: <strong>{0}</strong><br>'.f(response.data.name));
 	if (response.data.address_line_1) $("#addressDetails").append('Address: <br><strong>{0}</strong><br>'.f(response.data.address_line_1));
@@ -98,8 +135,28 @@ console.log(response);
 	if (response.data.zip_code) $("#addressDetails").append('<strong>{0}</strong><br>'.f(response.data.zip_code));
 	if (response.data.phone) $("#addressDetails").append('<strong>{0}</strong><br>'.f(response.data.phone));
 	
+	// populate the editor form
+	$("#name").val(response.data.name);
+	$("#address_id").val(response.data.id);
+	$("#address_line_1").val(response.data.address_line_1);
+	$("#address_line_2").val(response.data.address_line_2);
+	$("#city").val(response.data.city);
+	$("#state").val(response.data.state);
+	$("#zip_code").val(response.data.zip_code);
+	$("#phone_no").val(response.data.phone);
+	$("#updateAddress_authentication_token").val(getKey()); 
+
 	
+	var str=response.data.country;
+	str = str.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+		return letter.toUpperCase();
+	});
+	$("#select2-option > option").each(function() {
+		if(str==this.value)
+			document.getElementById('select2-option').selectedIndex = this.index;
+	});
 	
+	getTrackingInfo();
 }
 
 function onSuccessGetBackerOrders(response) { 
@@ -116,21 +173,24 @@ function onSuccessGetBackerOrders(response) {
 		  var str =   response.data[i].notes;
 		  
 		  var res = str.replace("Shipping not paid.","");
-		  $("#orderstable").show();
-			$("#saveOrders").show();
-			$("#tracking-wizard").show();
+
+		 $("#verificationDetails").empty();
 		  if(res.trim().length!=0){
 			$("#verificationDetails").append("<p >Pledge Id: "+response.data[i].reference_no+" - "+ res +"<p>");
+		  } else {
+			$("#verificationDetails").append('<span class="label bg-success">Done!</span> No problems found with your order.<br>');
 		  }
 		}
 	  }
 	  
 	}
-	$("#loading").hide();
+	
 	if(response.data.length<10){
 	  $("#increment").removeAttr('href');
 	}
 	drawDatatable(response.data);
+	
+	getBackerAddress();
 }
 
 function updateAddresses()
@@ -138,23 +198,23 @@ function updateAddresses()
   var $form = $("#updateAddresses");
   var $inputs = $form.find("input, select, button, textarea");
   var param =  $form.serializeObject(); 
-  $("#updateAddress_authentication_token").val(getKey()); 
-  console.log(param.address_id,param);
-  console.log(JSON.stringify(param));
+  param["authentication_token"] = getKey();
   updateBackerAddresses(param.address_id,JSON.stringify(param));
 }
 
 function  updateBackerAddresses(id,param){
- callAPI("/v1/addresses/{0}/update_address.json".f(id), "PUT",param, onSuccessUpdateBackerAddresses, onApiError);
+	  callAPI("/v1/addresses/{0}.json".f(id), "PUT", param, onSuccessUpdateBackerAddresses, onApiError);
 }
 
 function onSuccessUpdateBackerAddresses(response){
- bootbox.alert("Address has been updated successfully", function(result) 
- {  
-  if(result==undefined){
-   window.location=window.location.href;
- }
-});
+ // bootbox.alert("Address has been updated successfully", function(result) 
+ // {  
+  // if(result==undefined){
+   // window.location=window.location.href;
+ // }
+// });
+
+window.location=window.location.href;
 }
 
 function orderStatus(){
@@ -207,7 +267,6 @@ function onSuccessSaveOrderChanges(response){
 
 function getInformation(){
   order_status= urlParameterValue('orderStatus');
-  console.log(order_status);
   switch(order_status)
   {
     case '1':
