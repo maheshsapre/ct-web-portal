@@ -52,7 +52,7 @@ function getPendingActionGeckoTeam(param) {
 
 function getPendingActionGeckoTeamSearch(param) {
 searchPledge_id=getSearchPledgeId();
-console.log(searchPledge_id);
+
  callAPI("/v1/orders/order_status_details.json?order_status_type=Pending Action - Gecko Team&page="+page+"&q[reference_no_cont]="+searchPledge_id, "GET",getApiKeyQueryFormat(), onSuccessSearchPendingActionGeckoTeam, onApiError);
 }
 

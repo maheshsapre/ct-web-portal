@@ -477,7 +477,7 @@ $('[data-ride="datatables3"]').each(function() {
 		},
 
 
-		"aaSorting": [[15, 'asc']],
+		"aaSorting": [],
 		"aoColumns": [
 		{
 			"mData": null,

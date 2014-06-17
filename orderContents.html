@@ -1,0 +1,94 @@
+ <div class="row">
+   
+		<div class="col-sm-6" id="orderstable">
+   
+      <div  class="table-responsive panel">
+        <table  class="table table-striped m-b-none" id="example" data-ride="datatables3">
+          <thead>
+           <tr>
+            <th width="1%"></th>
+            <th width="10%">Pledge Id</th>
+            <th width="0%">Backer Email</th>
+            <th width="15%">Perk</th>
+            <th width="15%">Order Date</th>
+            <th width="5%">Amount (USD)</th>
+            <th width="10%">Amount Difference</th>
+            <th width="10%">Shipping Applicable</th>
+            <th width="10%">Shipping Paid</th>
+            <th width="0%">Order Status</th>
+            <th width="0%">Notes</th>
+            <th width="0%">Backer Id</th>
+            <th width="0%">Created At</th> 
+            <th width="0%">Order ID</th>
+            <th width="0%">Order Source</th>
+            <th width="0%">Address Id</th>
+            <th width="0%">Perk Id</th>
+            <th width="0%">quantity</th>
+            <th width="0%">Updated At</th>
+            <th  width="0%">Update</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th style="text-align:right" colspan="5">Total Amount:</th>
+            <th></th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  
+</div>
+    
+	  <div class="col-sm-6">
+	  <section id="tracking-wizard" class="panel"> 
+	  
+            <div class="wizard wizard-vertical clearfix" id="form-wizard">
+              <ul class="steps">
+                <li data-target="#step1" class="active"><span  class="badge badge-info">1</span>Confirm Address</li>
+                <li data-target="#step2"><span class="badge" >2</span>Verification</li>
+                <li data-target="#step3"><span class="badge" >3</span>Tracking Details</li>
+              </ul>
+            </div>
+            <div class="step-content">
+              <form>
+                <div class="step-pane active" id="step1">
+                  <h3 class="m-t-none">
+					<a id="changeAddress" class="btn btn-white btn-xs" data-toggle="modal"  href="#modal">Change</a> 
+					<a id="confirmAddress" class="btn btn-xs btn-info" href="javascript:confirmBackerAddress(); ">Confirm</a>
+					<a id="addressConfirmed" class="btn btn-white btn-xs icon-thumbs-up disabled" href="javascript:onConfirmClick(); ">Confirmed!</a></h3>          
+                  <p id="addressDetails" class="m-t m-b">
+						<strong>R Kumar</strong><br>
+						<strong>Address 1</strong><br>
+						<strong>Address 2</strong><br>
+						<strong>City</strong><br>
+						<strong>State</strong><br>
+						<strong>Country</strong><br>
+						<strong>Postal Code</strong>
+				</p>
+				<input type="text" id="addressConfirmedText"  class="input-sm form-control" data-trigger="change">
+				<p>
+				</p>
+                </div>
+                <div class="step-pane" id="step2">
+					<h3 class="m-t-none"></h3>    
+					<div class="list-group">					
+						<div id="verificationDetails"></div>             
+					</div>
+                </div>
+                <div class="step-pane" id="step3">
+					<h3 class="m-t-none"></h3>          
+					<p id="trackingDetails" class="m-t m-b"></p>
+				</div>                
+              </form>
+			  <div class="line line-dashed m-t-large"></div>
+              <div class="actions m-t">
+                <button type="button" class="btn btn-white btn-sm btn-prev" data-target="#form-wizard" data-wizard="previous" disabled="disabled">Prev</button>
+                <button type="button" class="btn btn-white btn-sm btn-next" data-target="#form-wizard" data-wizard="next" data-last="Finish">Next</button>
+              </div>
+            </div>
+          </section>
+		</div>
+	</div>
+		 

@@ -69,13 +69,10 @@ function confirmBackerAddress()
 }
 
 function onSuccessConfirmBackerAddress(response){
-
 	$("#changeAddress").hide();
 	$("#confirmAddress").hide();
 	$("#addressConfirmed").show();
 	$("#addressConfirmedText").val("confirmed");
-	
-	console.log("confirm success - done");
 }
 function onSuccessGetTrackerInfo(response){
 	var status = "";
@@ -114,47 +111,52 @@ function onSuccessGetTrackerInfo(response){
 	$("#loading").hide();
 }
 function onSuccessGetBackerAddress(response){
-	var addressDetails = 
-	 'Name: <strong>' + response.data.name +'</strong><br>' + 
-	 'Address:<br><strong>' + response.data.address_line_1 +'</strong><br>' + 
-	 '<strong>' + response.data.address_line_2 +'</strong><br>' + 
-	 '<strong>' + response.data.city +'</strong><br>' + 
-	 '<strong>' + response.data.state +'</strong><br>' + 
-	 '<strong>' + response.data.country +'</strong><br>' + 
-	 'Postal Code: <strong>' + response.data.zip_code +'</strong><br>' + 
-	 'Phone/Mobile: <strong>' + response.data.phone +'</strong><br>' 
-	 
-	// populate the display address
-	$("#addressDetails").empty();
-	if (response.data.name) $("#addressDetails").append('Name: <strong>{0}</strong><br>'.f(response.data.name));
-	if (response.data.address_line_1) $("#addressDetails").append('Address: <br><strong>{0}</strong><br>'.f(response.data.address_line_1));
-	if (response.data.address_line_2) $("#addressDetails").append('<strong>{0}</strong><br>'.f(response.data.address_line_2));
-	if (response.data.city) $("#addressDetails").append('<strong>{0}</strong><br>'.f(response.data.city));
-	if (response.data.state) $("#addressDetails").append('<strong>{0}</strong><br>'.f(response.data.state));
-	if (response.data.country) $("#addressDetails").append('<strong>{0}</strong><br>'.f(response.data.country));
-	if (response.data.zip_code) $("#addressDetails").append('<strong>{0}</strong><br>'.f(response.data.zip_code));
-	if (response.data.phone) $("#addressDetails").append('<strong>{0}</strong><br>'.f(response.data.phone));
-	
-	// populate the editor form
-	$("#name").val(response.data.name);
-	$("#address_id").val(response.data.id);
-	$("#address_line_1").val(response.data.address_line_1);
-	$("#address_line_2").val(response.data.address_line_2);
-	$("#city").val(response.data.city);
-	$("#state").val(response.data.state);
-	$("#zip_code").val(response.data.zip_code);
-	$("#phone_no").val(response.data.phone);
-	$("#updateAddress_authentication_token").val(getKey()); 
+ if (response.data)
+ {
+		var addressDetails = 
+		 'Name: <strong>' + response.data.name +'</strong><br>' + 
+		 'Address:<br><strong>' + response.data.address_line_1 +'</strong><br>' + 
+		 '<strong>' + response.data.address_line_2 +'</strong><br>' + 
+		 '<strong>' + response.data.city +'</strong><br>' + 
+		 '<strong>' + response.data.state +'</strong><br>' + 
+		 '<strong>' + response.data.country +'</strong><br>' + 
+		 'Postal Code: <strong>' + response.data.zip_code +'</strong><br>' + 
+		 'Phone/Mobile: <strong>' + response.data.phone +'</strong><br>' 
+		 
+		// populate the display address
+		$("#addressDetails").empty();
+		if (response.data.name) $("#addressDetails").append('Name: <strong>{0}</strong><br>'.f(response.data.name));
+		if (response.data.address_line_1) $("#addressDetails").append('Address: <br>     <strong>{0}</strong><br>'.f(response.data.address_line_1));
+		if (response.data.address_line_2) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(response.data.address_line_2));
+		if (response.data.city) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(response.data.city));
+		if (response.data.state) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(response.data.state));
+		if (response.data.country) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(response.data.country));
+		if (response.data.zip_code) $("#addressDetails").append('Postal Code: <strong>{0}</strong><br>'.f(response.data.zip_code));
+		if (response.data.phone) $("#addressDetails").append('Phone/Mobile: <strong>{0}</strong><br>'.f(response.data.phone));
+		
+		// populate the editor form
+		$("#name").val(response.data.name);
+		$("#address_id").val(response.data.id);
+		$("#address_line_1").val(response.data.address_line_1);
+		$("#address_line_2").val(response.data.address_line_2);
+		$("#city").val(response.data.city);
+		$("#state").val(response.data.state);
+		$("#zip_code").val(response.data.zip_code);
+		$("#phone_no").val(response.data.phone);
+		$("#updateAddress_authentication_token").val(getKey()); 
 
+		
+		var str=response.data.country;
+		str = str.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+			return letter.toUpperCase();
+		});
+		$("#select2-option > option").each(function() {
+			if(str==this.value)
+				document.getElementById('select2-option').selectedIndex = this.index;
+		});
+		
 	
-	var str=response.data.country;
-	str = str.toLowerCase().replace(/\b[a-z]/g, function(letter) {
-		return letter.toUpperCase();
-	});
-	$("#select2-option > option").each(function() {
-		if(str==this.value)
-			document.getElementById('select2-option').selectedIndex = this.index;
-	});
+	}
 	
 	getTrackingInfo();
 }
@@ -437,7 +439,7 @@ function inCompleteAddress() {
 
 function inCompleteAddressSearch() {
   searchPledge_id=getSearchPledgeId();
-  console.log(searchPledge_id);
+  
   callAPI("/v1/orders/order_status_details2.json?status=Incomplete address&page="+page+"&q[reference_no_cont]="+searchPledge_id, "GET","", onSuccessSearchData, onApiError);
 }
 
