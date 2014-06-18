@@ -2,7 +2,6 @@ function signup(){
   var $form = $("#signUpForm");
   var $inputs = $form.find("input, select, button, textarea");  
   var param =  $form.serializeObject();
-  console.log(param);
   registerUser(JSON.stringify(param));
    }
 

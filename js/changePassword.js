@@ -5,7 +5,6 @@ function changePassword()
      $("#changePassword_authentication_token").val(getKey()); 
   var param =  $form.serializeObject(); 
 
-  console.log(param);
   changePasswordInfo(JSON.stringify(param));
 }
 

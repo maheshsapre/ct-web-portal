@@ -8,7 +8,6 @@ function personalInfo()
    $("#personalInfo_authentication_token").val(getKey()); 
    $("#personalInfoEmail").val(userEmail); 
    var param =  $form.serializeObject(); 
-   console.log(param);
   updatePersonalInfo(JSON.stringify(param));
 }
 

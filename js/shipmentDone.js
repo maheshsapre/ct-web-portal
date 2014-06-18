@@ -34,7 +34,6 @@ function shipmentDone() {
 }
 
 function onSuccessShipmentDone(response) {  
-console.log(response.data);
 //setShipmentDone(response.data);
 $("#loading").hide();
 if(response.data.length<10){

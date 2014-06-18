@@ -401,7 +401,6 @@ function onApiError1(response, exception){
 }
 function checkCookie(){
   key=getKey();
-console.log(key);
 if(key==""||key==undefined){
   window.location="signin.html";
 }
@@ -411,12 +410,10 @@ function getRole(){
   var param = {
     token:getKey()
   }
-  console.log(param);
   callAPI("/v1/backers/role.json", "GET", param, onSuccessGetRole, onApiError); 
 }
 
 function onSuccessGetRole(response){
-  console.log(response.data);
   setRole(response.data.role);
   if(response.data.role=="admin"){
  window.location="dashboard.html";

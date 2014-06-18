@@ -8,7 +8,6 @@ function signin()
 }
 
 function createToken(param) {
-	  console.log(param);
   callAPI("/v1/backers/authentication_token.json", "GET", param, onSuccessCreateToken, onApiError);
 }
 

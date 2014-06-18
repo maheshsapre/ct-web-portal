@@ -13,7 +13,6 @@ function increment(){
    $("#decrement").attr('href','increment()');
  }
  id = urlParameterValue('id');
- console.log(id);
  if(id==""){
    order_status= urlParameterValue('orderStatus');
    window.location="orders.html?orderStatus="+order_status+"&page="+page;
@@ -75,11 +74,7 @@ function onSuccessConfirmBackerAddress(response){
 	$("#addressConfirmedText").val("confirmed");
 }
 function onSuccessGetTrackerInfo(response){
-
-console.log(response);
-
 	var status = "";
-	console.log(response.data.shipping_status);
 	switch(response.data.shipping_status)
 	{
 		case "shipment_scheduled" : status = 'Shipmnet status: <span class="label bg-info">Shipment Scheduled</span><br>'; 	break;
@@ -414,7 +409,6 @@ function onSuccessAddPerk(response){
   {  
     if(result==undefined){
      a=window.location.href;
-     console.log(a);
      window.location=a;
    }
  });
@@ -438,7 +432,6 @@ function perkNotMentioned() {
 
 function perkNotMentionedSearch() {
   searchPledge_id=getSearchPledgeId();
-  console.log(searchPledge_id);
   callAPI("/v1/orders/order_status_details2.json?status=Perk not mentioned&page="+page+"&q[reference_no_cont]="+searchPledge_id, "GET","", onSuccessSearchData, onApiError);
 }
 
@@ -449,7 +442,6 @@ function shippingNotPaid() {
 
 function shippingNotPaidSearch() {
   searchPledge_id=getSearchPledgeId();
-  console.log(searchPledge_id);
   callAPI("/v1/orders/order_status_details2.json?status=Shipping not paid&page="+page+"&q[reference_no_cont]="+searchPledge_id, "GET","", onSuccessSearchData, onApiError);
 }
 
@@ -525,7 +517,6 @@ function addPerks(){
     bootbox.alert("The total amount of the selected perks  exceeds the amount paid.Please reselect the perks")
   }
   else{
-    console.log(perkValue);
     var perksIds=new Array();
     j=0;
     for (var i = 0; i < perkValue.length; i++) {
@@ -535,12 +526,10 @@ function addPerks(){
        j++;
      }
    };
-   console.log(perksIds);
    var param={
      order_id: addPerkOrderId,
      perk_ids: perksIds.toString()
    }
-   console.log(param);
    callAPI("/v1/orders/split_the_order.json", "POST",JSON.stringify(param), onSuccessSplitPerk, onApiError);
 
  }
@@ -578,7 +567,6 @@ $( "#search" ).click(function() {
   //searchemail=$("#searchEmail").val();
   searchPledge_id=$("#searchPledge").val();
  //searchPerk=$("#searchPerk").val();
- console.log(searchPledge_id);
  setSearchPledgeId(searchPledge_id);
  order_status= urlParameterValue('orderStatus');
  window.location="orders.html?orderStatus="+order_status+"&page="+page+"&search=1";
@@ -709,9 +697,7 @@ function filterOrder(){
   var $form = $("#filterOrder");
   var $inputs = $form.find("input, select, button, textarea");
   var param =  $form.serializeObject(); 
-  console.log(param);
 
-  console.log(filterPerk);
   a=filterPerk.toString();
   var param={
     "order_types" : a,
@@ -723,7 +709,6 @@ function filterOrder(){
   setFilterPerk(param);
   order_status= urlParameterValue('orderStatus');
   window.location="orders.html?orderStatus="+order_status+"&page="+page+"&filter=1";
-  console.log(JSON.stringify(param));
   
 }
 
@@ -767,7 +752,6 @@ function selectedPerk(i,val){
       function  onSuccessGetFilterData(response){
         $("#addOrder").hide();
         $("#emailBlock").hide();
-        console.log(response.data);
         $("#loading").hide();
       //setPendingShipment(response.data);
       if(response.data.length<10){

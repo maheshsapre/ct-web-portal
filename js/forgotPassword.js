@@ -71,7 +71,6 @@ function resetPasswordForm(){
   var reset_password_token = urlParameterValue( 'rt' );
   $("#reset_password").val(reset_password_token);
   var param =  $form.serializeObject();
-  console.log(param);
   resetPassword( JSON.stringify(param));
 
 }

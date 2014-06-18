@@ -28,8 +28,6 @@ $(document).ready(function()
     complete: function(response) 
     {   $("#loader").remove();
       var obj = JSON.parse(response.responseText);
-      console.log(obj.data);
-      console.log(obj.message);
       if(obj.status==200){  
         $("#uploadError").css('display','none');
         $("#uploadSuccess").css('display','block');
@@ -210,7 +208,6 @@ function sendEmailToBackers(){
  var $form = $("#sendEmail");
   var $inputs = $form.find("input, select, button, textarea");
   var param =  $form.serializeObject(); 
-  console.log(param);
   sendEmail(JSON.stringify(param));
 }
 

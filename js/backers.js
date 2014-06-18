@@ -113,7 +113,6 @@ else{
     "email_type" : param1.email_type
  };
 }
- console.log(param);
   sendEmail(JSON.stringify(param));
   }
   else{

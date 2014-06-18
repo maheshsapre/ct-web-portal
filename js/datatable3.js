@@ -46,7 +46,6 @@ function pendingActionGeckoTeam()
 }
 
 function getPendingActionGeckoTeam(param) {
-  console.log(param);
  callAPI("/v1/orders/order_status_details.json", "GET",param, onSuccessgetPendingActionGeckoTeam, onApiError);
 }
 
@@ -62,7 +61,6 @@ drawDatatable(response.data);
 }
 
 function onSuccessgetPendingActionGeckoTeam(response) {  
-console.log(response.data);
  $("#loading").hide();
 //setPendingActionGeckoTeam(response.data);
 if(response.data.length<10){
@@ -86,7 +84,6 @@ drawDatatable(response.data);
 function  updateBackerAddresses(id,param){
 	
 	alert(id);
-	console.log(param);
 	
 	  callAPI("/v1/addresses/address_details.json", "PUT", param, onSuccessUpdateBackerAddresses, onApiError);
 	  
@@ -94,7 +91,6 @@ function  updateBackerAddresses(id,param){
 }
 
 function onSuccessUpdateBackerAddresses(response){
-	console.log(response.data);
 	
    
 
@@ -104,7 +100,6 @@ function addOrder(){
 	var $form = $("#addOrderForm");
   var $inputs = $form.find("input, select, button, textarea");
   var param =  $form.serializeObject(); 
-  console.log(param);
   addNewOrder(param.backer_id,JSON.stringify(param));
 }
 
@@ -113,7 +108,6 @@ function  addNewOrder(id,param){
 }
 
 function onSuccessAddNewOrder(response){
-	console.log(response.data);
        bootbox.alert("Order has been added successfully", function(result) 
     {  
       if(result==undefined){
@@ -143,7 +137,6 @@ function onSuccessAddNewOrder(response){
 //                 };
                
 //                 param=JSON.stringify(param);
-//                 console.log(param);
 //     callAPI("/v1/orders/update_order_status.json", "PUT",param, onSuccessOrderStatus, onApiError);  
 //   }        
 // }
@@ -157,6 +150,5 @@ function onSuccessAddNewOrder(response){
  
 
 function sendNotifiction(i){
-  console.log(i);
 }
 

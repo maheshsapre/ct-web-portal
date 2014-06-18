@@ -14,9 +14,6 @@ function showHelp()
 }
 
 function toggleCheckboxBacker(gfull){
-
-	console.log(gfull);
-
 	var found = jQuery.inArray(gfull, backerIds);
 	if (found >= 0) {
 // Element was found, remove it.
@@ -28,9 +25,6 @@ backerIds.push(gfull);
 }
 
 function toggleCheckbox(gfull){
-
-	console.log(gfull);
-
 	var found = jQuery.inArray(gfull, filters);
 	if (found >= 0) {
 // Element was found, remove it.
@@ -452,9 +446,7 @@ $('[data-ride="datatables3"]').each(function() {
 
 			$("#example tbody tr td:nth-child(4)").click(function () {
 		var position = oTable.fnGetPosition(this); // getting the clicked row position
-		console.log(position[0]);
 		RowID = oTable.fnGetData(position[0]); 
-		console.log(RowID.id);
 		$("#order_idPerk").val(RowID.id);
 		addPerkOrderId=RowID.id;
 		addPerkTotalAmount=RowID.amount;
@@ -465,9 +457,7 @@ $('[data-ride="datatables3"]').each(function() {
 
 			$("#example tbody tr td:nth-child(6)").click(function () {
 			var position = oTable.fnGetPosition(this); // getting the clicked row position
-			console.log(position[0]);
 			RowID = oTable.fnGetData(position[0]); 
-			console.log(RowID.id);
 			$("#order_idPerk").val(RowID.id);
 			addPerkOrderId=RowID.id;
 			addPerkTotalAmount=RowID.amount;

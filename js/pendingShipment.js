@@ -34,7 +34,6 @@ function  pendingShipment() {
 }
 
 function onSuccessPendingShipment(response) {  
-console.log(response.data);
 $("#loading").hide();
 //setPendingShipment(response.data);
 if(response.data.length<10){
