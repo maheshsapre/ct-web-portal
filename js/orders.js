@@ -74,6 +74,8 @@ function onSuccessConfirmBackerAddress(response){
 	$("#addressConfirmedText").val("confirmed");
 }
 function onSuccessGetTrackerInfo(response){
+	
+	// display the tracking information
 	var status = "";
 	switch(response.data.shipping_status)
 	{
@@ -81,7 +83,7 @@ function onSuccessGetTrackerInfo(response){
 		case "shipped": status = 'Shipmnet status: <span class="label bg-success">Shipped</span><br>'; 	break;
 		default: status = 'Shipmnet status: <span class="label bg-warning">No information available</span><br>'; break;
 	}
-  
+	
 	$("#trackingDetails").empty();
 	$("#trackingDetails").append(status);
 	if (response.data.shipping_service) $("#trackingDetails").append('Shipping Service: <strong>{0}</strong><br>'.f(response.data.shipping_service));
@@ -101,7 +103,7 @@ function onSuccessGetTrackerInfo(response){
 		$("#addressConfirmed").hide();
 	}
 	
-	
+	// display the address information
 	var addressDetails = 
 		 'Name: <strong>' + response.data.address.name +'</strong><br>' + 
 		 'Address:<br><strong>' + response.data.address.address_line_1 +'</strong><br>' + 
@@ -133,7 +135,6 @@ function onSuccessGetTrackerInfo(response){
 		$("#zip_code").val(response.data.address.zip_code);
 		$("#phone_no").val(response.data.address.phone);
 		$("#updateAddress_authentication_token").val(getKey()); 
-
 		
 		var str=response.data.address.country;
 		str = str.toLowerCase().replace(/\b[a-z]/g, function(letter) {
@@ -144,12 +145,44 @@ function onSuccessGetTrackerInfo(response){
 				document.getElementById('select2-option').selectedIndex = this.index;
 		});
    
+   // show the verification messages
+	$("#shipping_not_paid").hide();
+	$("#split_required").hide();
+	$("#address_not_confirmed").hide()
+	$("#perk_is_undefined").hide();
+	$("#no_problems").hide();
+	
+   var errorList =response.data.verification_details;
+   if (errorList)
+   {
+		if (errorList.length == 0) 
+		{
+			$("#no_problems").show();
+		}
+		else
+		{
+			for(var i=0; i < errorList.length; i++)
+			{
+				$("#" + errorList[i]).show();
+			}
+		}
+	}
+	else
+	{
+		$("#no_problems").show();
+	}
+	
+	$("#shipping_not_paid").show();
+	$("#split_required").show();
+	$("#address_not_confirmed").show()
+	$("#perk_is_undefined").show();
+	$("#no_problems").hide();
+	
+	
+   // show the hidden sections as appropriate
    $("#orderstable").show();
    $("#saveOrders").show();
    $("#tracking-wizard").show();
-   
-   if (response.data.address_confirmed) $("#tracking-wizard").next();
-   if (response.data.shipment_status != 0) $("#tracking-wizard").next();
    
    $("#loading").hide();
  }
