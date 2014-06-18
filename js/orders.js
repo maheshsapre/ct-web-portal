@@ -172,13 +172,6 @@ function onSuccessGetTrackerInfo(response){
 		$("#no_problems").show();
 	}
 	
-	$("#shipping_not_paid").show();
-	$("#split_required").show();
-	$("#address_not_confirmed").show()
-	$("#perk_is_undefined").show();
-	$("#no_problems").hide();
-	
-	
    // show the hidden sections as appropriate
    $("#orderstable").show();
    $("#saveOrders").show();
