@@ -63,9 +63,9 @@ function getTrackingInfo()
 function confirmBackerAddress()
 {
 	var param= {};
-	param['api_key'] = getKey();
+	param['authentication_token'] = getKey();
 	param['address_confirmed'] = true;
-	callAPI("/v1/backers/update_backer.json", "PUT", param, onSuccessConfirmBackerAddress, onApiError);	
+	callAPI("/v1/backers/update_backer.json", "PUT", JSON.stringify(param), onSuccessConfirmBackerAddress, onApiError);	
 }
 
 function onSuccessConfirmBackerAddress(response){
@@ -75,18 +75,23 @@ function onSuccessConfirmBackerAddress(response){
 	$("#addressConfirmedText").val("confirmed");
 }
 function onSuccessGetTrackerInfo(response){
+
+console.log(response);
+
 	var status = "";
-	switch(response.data.shipment_status)
+	console.log(response.data.shipping_status);
+	switch(response.data.shipping_status)
 	{
-		case 1: status = 'Shipmnet status: <span class="label bg-info">Shipment Scheduled</span><br>'; 	break;
-		case 2: status = 'Shipmnet status: <span class="label bg-success">Shipped</span><br>'; 	break;
+		case "shipment_scheduled" : status = 'Shipmnet status: <span class="label bg-info">Shipment Scheduled</span><br>'; 	break;
+		case "shipped": status = 'Shipmnet status: <span class="label bg-success">Shipped</span><br>'; 	break;
 		default: status = 'Shipmnet status: <span class="label bg-warning">No information available</span><br>'; break;
 	}
-	 
+  
 	$("#trackingDetails").empty();
 	$("#trackingDetails").append(status);
 	if (response.data.shipping_service) $("#trackingDetails").append('Shipping Service: <strong>{0}</strong><br>'.f(response.data.shipping_service));
 	if (response.data.tracking_number) $("#trackingDetails").append('Tracking Number: <strong>{0}</strong><br>'.f(response.data.tracking_number));
+	if (response.data.shipping_date) $("#trackingDetails").append('Shipping Date: <strong>{0}</strong><br>'.f(response.data.shipping_date));
 	
 	if (response.data.address_confirmed)
 	{
@@ -101,52 +106,41 @@ function onSuccessGetTrackerInfo(response){
 		$("#addressConfirmed").hide();
 	}
 	
-	$("#orderstable").show();
-	$("#saveOrders").show();
-	$("#tracking-wizard").show();
 	
-	
-	if (response.data.address_confirmed) $("#tracking-wizard").next();
-	
-	$("#loading").hide();
-}
-function onSuccessGetBackerAddress(response){
- if (response.data)
- {
-		var addressDetails = 
-		 'Name: <strong>' + response.data.name +'</strong><br>' + 
-		 'Address:<br><strong>' + response.data.address_line_1 +'</strong><br>' + 
-		 '<strong>' + response.data.address_line_2 +'</strong><br>' + 
-		 '<strong>' + response.data.city +'</strong><br>' + 
-		 '<strong>' + response.data.state +'</strong><br>' + 
-		 '<strong>' + response.data.country +'</strong><br>' + 
-		 'Postal Code: <strong>' + response.data.zip_code +'</strong><br>' + 
-		 'Phone/Mobile: <strong>' + response.data.phone +'</strong><br>' 
-		 
+	var addressDetails = 
+		 'Name: <strong>' + response.data.address.name +'</strong><br>' + 
+		 'Address:<br><strong>' + response.data.address.address_line_1 +'</strong><br>' + 
+		 '<strong>' + response.data.address.address_line_2 +'</strong><br>' + 
+		 '<strong>' + response.data.address.city +'</strong><br>' + 
+		 '<strong>' + response.data.address.state +'</strong><br>' + 
+		 '<strong>' + response.data.address.country +'</strong><br>' + 
+		 'Postal Code: <strong>' + response.data.address.zip_code +'</strong><br>' + 
+		 'Phone/Mobile: <strong>' + response.data.address.phone +'</strong><br>' 
+ 
 		// populate the display address
 		$("#addressDetails").empty();
-		if (response.data.name) $("#addressDetails").append('Name: <strong>{0}</strong><br>'.f(response.data.name));
-		if (response.data.address_line_1) $("#addressDetails").append('Address: <br>     <strong>{0}</strong><br>'.f(response.data.address_line_1));
-		if (response.data.address_line_2) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(response.data.address_line_2));
-		if (response.data.city) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(response.data.city));
-		if (response.data.state) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(response.data.state));
-		if (response.data.country) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(response.data.country));
-		if (response.data.zip_code) $("#addressDetails").append('Postal Code: <strong>{0}</strong><br>'.f(response.data.zip_code));
-		if (response.data.phone) $("#addressDetails").append('Phone/Mobile: <strong>{0}</strong><br>'.f(response.data.phone));
+		if (response.data.address.name) $("#addressDetails").append('Name: <strong>{0}</strong><br>'.f(response.data.address.name));
+		if (response.data.address.address_line_1) $("#addressDetails").append('Address: <br>     <strong>{0}</strong><br>'.f(response.data.address.address_line_1));
+		if (response.data.address.address_line_2) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(response.data.address.address_line_2));
+		if (response.data.address.city) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(response.data.address.city));
+		if (response.data.address.state) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(response.data.address.state));
+		if (response.data.address.country) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(response.data.address.country));
+		if (response.data.address.zip_code) $("#addressDetails").append('Postal Code: <strong>{0}</strong><br>'.f(response.data.address.zip_code));
+		if (response.data.address.phone) $("#addressDetails").append('Phone/Mobile: <strong>{0}</strong><br>'.f(response.data.address.phone));
 		
 		// populate the editor form
-		$("#name").val(response.data.name);
-		$("#address_id").val(response.data.id);
-		$("#address_line_1").val(response.data.address_line_1);
-		$("#address_line_2").val(response.data.address_line_2);
-		$("#city").val(response.data.city);
-		$("#state").val(response.data.state);
-		$("#zip_code").val(response.data.zip_code);
-		$("#phone_no").val(response.data.phone);
+		$("#name").val(response.data.address.name);
+		$("#address_id").val(response.data.address.id);
+		$("#address_line_1").val(response.data.address.address_line_1);
+		$("#address_line_2").val(response.data.address.address_line_2);
+		$("#city").val(response.data.address.city);
+		$("#state").val(response.data.address.state);
+		$("#zip_code").val(response.data.address.zip_code);
+		$("#phone_no").val(response.data.address.phone);
 		$("#updateAddress_authentication_token").val(getKey()); 
 
 		
-		var str=response.data.country;
+		var str=response.data.address.country;
 		str = str.toLowerCase().replace(/\b[a-z]/g, function(letter) {
 			return letter.toUpperCase();
 		});
@@ -154,45 +148,48 @@ function onSuccessGetBackerAddress(response){
 			if(str==this.value)
 				document.getElementById('select2-option').selectedIndex = this.index;
 		});
-		
-	
-	}
-	
-	getTrackingInfo();
+   
+   $("#orderstable").show();
+   $("#saveOrders").show();
+   $("#tracking-wizard").show();
+   
+   if (response.data.address_confirmed) $("#tracking-wizard").next();
+   if (response.data.shipment_status != 0) $("#tracking-wizard").next();
+   
+   $("#loading").hide();
+ }
+
+ function onSuccessGetBackerOrders(response) { 
+   $("#address_Orderid").val(response.data[0].address_id);
+   $("#backer_id").val(response.data[0].backer_id);
+   $("#email").html(response.data[0].backer.email);
+   setBackerOrdersAction(response.data);
+   for(i=0;i<response.data.length;i++){
+    orderList[i]=response.data[i].id;
+  }
+  if(getRoles()!="admin"){
+    for(i=0;i<response.data.length;i++){
+     if(response.data[i].notes && response.data[i].notes!="Success" && response.data[i].notes!="" ){
+      var str =   response.data[i].notes;
+      
+      var res = str.replace("Shipping not paid.","");
+
+      $("#verificationDetails").empty();
+      if(res.trim().length!=0){
+       $("#verificationDetails").append("<p >Pledge Id: "+response.data[i].reference_no+" - "+ res +"<p>");
+     } else {
+       $("#verificationDetails").append('<span class="label bg-success">Done!</span> No problems found with your order.<br>');
+     }
+   }
+ }
 }
 
-function onSuccessGetBackerOrders(response) { 
-	  $("#address_Orderid").val(response.data[0].address_id);
-	  $("#backer_id").val(response.data[0].backer_id);
-	  $("#email").html(response.data[0].backer.email);
-	  setBackerOrdersAction(response.data);
-	  for(i=0;i<response.data.length;i++){
-		orderList[i]=response.data[i].id;
-	  }
-	  if(getRoles()!="admin"){
-		for(i=0;i<response.data.length;i++){
-		 if(response.data[i].notes && response.data[i].notes!="Success" && response.data[i].notes!="" ){
-		  var str =   response.data[i].notes;
-		  
-		  var res = str.replace("Shipping not paid.","");
+if(response.data.length<10){
+ $("#increment").removeAttr('href');
+}
+drawDatatable(response.data);
 
-		 $("#verificationDetails").empty();
-		  if(res.trim().length!=0){
-			$("#verificationDetails").append("<p >Pledge Id: "+response.data[i].reference_no+" - "+ res +"<p>");
-		  } else {
-			$("#verificationDetails").append('<span class="label bg-success">Done!</span> No problems found with your order.<br>');
-		  }
-		}
-	  }
-	  
-	}
-	
-	if(response.data.length<10){
-	  $("#increment").removeAttr('href');
-	}
-	drawDatatable(response.data);
-	
-	getBackerAddress();
+getTrackingInfo();
 }
 
 function updateAddresses()
@@ -205,18 +202,11 @@ function updateAddresses()
 }
 
 function  updateBackerAddresses(id,param){
-	  callAPI("/v1/addresses/{0}.json".f(id), "PUT", param, onSuccessUpdateBackerAddresses, onApiError);
+ callAPI("/v1/addresses/{0}.json".f(id), "PUT", param, onSuccessUpdateBackerAddresses, onApiError);
 }
 
 function onSuccessUpdateBackerAddresses(response){
- // bootbox.alert("Address has been updated successfully", function(result) 
- // {  
-  // if(result==undefined){
-   // window.location=window.location.href;
- // }
-// });
-
-window.location=window.location.href;
+	window.location=window.location.href;
 }
 
 function orderStatus(){
@@ -242,7 +232,6 @@ function onSuccessOrderStatus(response){
 }
 
 function order(i){
-  console.log(i);
   setOrderStatusId(i);
 }
 
@@ -413,7 +402,6 @@ function addNewPerk(){
  var $form = $("#addPerk");
  var $inputs = $form.find("input, select, button, textarea");
  var param =  $form.serializeObject(); 
- console.log(JSON.stringify(param));
  addPerk(param.order_id,JSON.stringify(param));
 }
 
@@ -778,9 +766,9 @@ function selectedPerk(i,val){
 
       function  onSuccessGetFilterData(response){
         $("#addOrder").hide();
-    $("#emailBlock").hide();
-              console.log(response.data);
-              $("#loading").hide();
+        $("#emailBlock").hide();
+        console.log(response.data);
+        $("#loading").hide();
       //setPendingShipment(response.data);
       if(response.data.length<10){
         $("#increment").removeAttr('href');

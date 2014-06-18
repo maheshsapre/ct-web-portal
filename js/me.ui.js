@@ -338,7 +338,7 @@ function callAPI(resource, httpMethod, param, successHandler, errorHandler) {
   var serverUrl= CONFIG.url + resource; 
 
   // console.log( httpMethod + " " + serverUrl);
-  // console.log( " --> " + param);
+  // console.log(  param);
   
   $.ajax({
     type: httpMethod,

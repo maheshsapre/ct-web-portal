@@ -55,7 +55,7 @@ $("#loading").hide();
 if(response.data.length<10){
 	$("#increment").removeAttr('href');
 }
-drawDatatable(response.data);
+// mahesh - uncomment	drawDatatable(response.data);
 }
 
 function onSuccessSearchGetBackerInfo(response) {  
@@ -70,8 +70,6 @@ $( "#search" ).click(function() {
 	window.location="backers.html?page="+page+"&search=1";
 
 });
-
-
 
 function checkText(){
   var txt=$("#validateText").val();

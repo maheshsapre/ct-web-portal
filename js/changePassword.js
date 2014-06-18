@@ -14,5 +14,5 @@ function changePasswordInfo(param) {
 }
 
 function  onSuccessChangePasswordInfo(response) {  
-   bootbox.alert("updated");
+   
   }

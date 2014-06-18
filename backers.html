@@ -30,7 +30,7 @@
             <b class="caret hidden-xs-only"></b>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="https://geckotag.zendesk.com">Help</a></li>
+            <li><a href=" javascript:showHelp(); ">Help</a></li>
             <li><a href="javascript:logout();">Logout</a></li>
           </ul>
         </li>
@@ -112,6 +112,18 @@
         </table>
       </div>
     </section>
+	<table id="example2" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+    </table>
+	<script>
+	</script>
   </div>
 </div>
 </section>
@@ -194,8 +206,7 @@
 <script type="text/javascript">
   $(document).ready(function()
   {
-
-    $('#adminBackers').addClass("active")
+    $('#adminBackers').addClass("active");
   });
   setCurrentUserName();
   var search = urlParameterValue( 'search' );

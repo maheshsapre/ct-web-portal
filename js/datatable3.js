@@ -95,9 +95,8 @@ function  updateBackerAddresses(id,param){
 
 function onSuccessUpdateBackerAddresses(response){
 	console.log(response.data);
-	alert("Hi");
+	
    
-   bootbox.alert("updated");
 
 }
 

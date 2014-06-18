@@ -3,15 +3,12 @@ function personalInfo()
   var $form = $("#personalInfo");
   var $inputs = $form.find("input, select, button, textarea");
  
-  console.log(getKey());
+
   a=getKey();
    $("#personalInfo_authentication_token").val(getKey()); 
-   console.log(userEmail);
    $("#personalInfoEmail").val(userEmail); 
-
-
-  console.log(param);
    var param =  $form.serializeObject(); 
+   console.log(param);
   updatePersonalInfo(JSON.stringify(param));
 }
 
@@ -20,8 +17,7 @@ function updatePersonalInfo(param) {
 }
 
 function onSuccessupdatePersonalInfo(response) {  
-  console.log(response.data.first_name); 
-  setCurrentUser(response.data.first_name);
+  setCurrentUser(response.data.email);
   setCurrentUserName();
-   bootbox.alert("updated");
+   
   }

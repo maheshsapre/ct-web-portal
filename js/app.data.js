@@ -8,6 +8,10 @@ var addressIdArray=new Array();
 var i=0;
 var gfull;
 
+function showHelp()
+{
+	window.open("https://geckotag.zendesk.com", "_blank");
+}
 
 function toggleCheckboxBacker(gfull){
 
@@ -338,12 +342,12 @@ columns: [
 }
 ],
 
-// Create IMG tag for each returned image
-formatter: function (items) {
-	$.each(items, function (index, item) {
-		item.geonameId = '<a href="#edit?geonameid='+item.geonameId+'"><i class="icon-pencil"></i></a>';
-	});
-}
+	// Create IMG tag for each returned image
+	formatter: function (items) {
+			$.each(items, function (index, item) {
+				item.geonameId = '<a href="#edit?geonameid='+item.geonameId+'"><i class="icon-pencil"></i></a>';
+			});
+		}
 })
 	});
 });
@@ -352,21 +356,23 @@ formatter: function (items) {
 $('[data-ride="datatables2"]').each(function() {
 	var oTable = $(this).dataTable( {
 		"bProcessing": true,
-		"aaData":tableData,
+		//"aaData":tableData,
 		"info": false,
 		"paging": false,
 		"bFilter": false,
 		"ordering": false,
 		"bRetrieve":true,
+		"serverSide": true,
+		"ajax": "/v1/backers.json?api_key=Z7sEvzS2nPTAeiy_UcxS&size=100",
 		"sDom": "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'row'<'col-sm-6'i><'col col-sm-6'p>>",
 		"sPaginationType": "full_numbers",
 		"bPaginate": false,
 		"fnDrawCallback": function () {
 			$("[data-ride='datatables2'] tbody tr td:nth-child(3)").click(function () {
-		var position = oTable.fnGetPosition(this); // getting the clicked row position
-		RowID = oTable.fnGetData(position); 
-		sessionStorage.setItem("ModuleDetailID", RowID.ModuleDetailID); // HTML 5 Session Storage;
-		});
+			var position = oTable.fnGetPosition(this); // getting the clicked row position
+			RowID = oTable.fnGetData(position); 
+			sessionStorage.setItem("ModuleDetailID", RowID.ModuleDetailID); // HTML 5 Session Storage;
+			});
 		},
 		"aoColumns": [
 		{
@@ -374,19 +380,16 @@ $('[data-ride="datatables2"]').each(function() {
 			"sClass": "center",
 			"sDefaultContent": '<input id="checked" type="checkbox" </input>'
 		},
-
 		{ "mData": "id", "bVisible":    false  },
 		{ "mData": "first_name" },
 		{ "mData": "last_name" },
 		{ "mData": "email" }
-
 		],
 		"aoColumnDefs":[{
 			"aTargets": [ 4 ]
 			, "bSortable": false
 			, "mRender": function ( url, type, full )  {
-
-				return  '<a style="color:blue" href="orders.html?id='+full.id+'&page=1">' + url + '</a>';
+				return  '<a style="color:blue" href="orderList.html?id='+full.id+'&page=1">' + url + '</a>';
 			}
 		},
 		{
@@ -395,12 +398,10 @@ $('[data-ride="datatables2"]').each(function() {
 			, "mRender": function ( url, type, full )  {
 				gfull=full;
 				return  '<input id="checked" onchange="toggleCheckboxBacker('+gfull.id+')" type="checkbox" </input>';
-
 			}
 		}
 		]
 	} );
-
 });
 
 // Render the Orders table

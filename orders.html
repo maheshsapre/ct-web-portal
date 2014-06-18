@@ -17,7 +17,6 @@
   <script src="js/app.data.js"></script>
   <script type="text/javascript">
   </script>
-
   <!--[if lt IE 9]>
     <script src="js/ie/respond.min.js" cache="false"></script>
     <script src="js/ie/html5.js" cache="false"></script>
@@ -34,7 +33,7 @@
             <b class="caret hidden-xs-only"></b>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="https://geckotag.zendesk.com">Help</a></li>
+            <li><a href=" javascript:showHelp(); ">Help</a></li>
             <li><a href="javascript:logout();">Logout</a></li>
           </ul>
         </li>
@@ -904,17 +903,12 @@
 <script src="js/jquery_cookie.js"></script>
 <script src="js/jquery.serialize-object.compiled.js"></script>
 <script type="text/javascript">
-
-
   $(document).ready(function()
   {
-  
-  
 	$("#orderContents").load("orderContents.html", onSuccessContentsLoad);
 	});
 	
 function onSuccessContentsLoad(){
-	
 	setCurrentUserName();
 	loggedInrole();
 	var id = urlParameterValue( 'id' );
@@ -928,7 +922,6 @@ function onSuccessContentsLoad(){
 	$("#saveOrders").hide();
 	$("#orderstable").hide();
 	$("#tracking-wizard").hide();
-  
     getBackerOrders();
   }
   
