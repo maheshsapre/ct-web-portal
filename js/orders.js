@@ -72,6 +72,7 @@ function onSuccessConfirmBackerAddress(response){
 	$("#confirmAddress").hide();
 	$("#addressConfirmed").show();
 	$("#addressConfirmedText").val("confirmed");
+	$("#address_not_confirmed").hide();
 }
 function onSuccessGetTrackerInfo(response){
 	
