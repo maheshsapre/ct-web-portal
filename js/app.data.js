@@ -350,14 +350,12 @@ columns: [
 $('[data-ride="datatables2"]').each(function() {
 	var oTable = $(this).dataTable( {
 		"bProcessing": true,
-		//"aaData":tableData,
+		"aaData":tableData,
 		"info": false,
 		"paging": false,
 		"bFilter": false,
 		"ordering": false,
 		"bRetrieve":true,
-		"serverSide": true,
-		"ajax": "/v1/backers.json?api_key=Z7sEvzS2nPTAeiy_UcxS&size=100",
 		"sDom": "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'row'<'col-sm-6'i><'col col-sm-6'p>>",
 		"sPaginationType": "full_numbers",
 		"bPaginate": false,

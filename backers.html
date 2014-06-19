@@ -30,7 +30,7 @@
             <b class="caret hidden-xs-only"></b>
           </a>
           <ul class="dropdown-menu">
-            <li><a href=" javascript:showHelp(); ">Help</a></li>
+			 <li><a href=" javascript:showHelp(); ">Help</a></li>
             <li><a href="javascript:logout();">Logout</a></li>
           </ul>
         </li>
@@ -46,8 +46,10 @@
     <nav id="nav" class="nav-primary hidden-xs nav-vertical">
       <ul class="nav" data-spy="affix" data-offset-top="50">
         <li><a href="dashboard.html"><i class="icon-dashboard icon-xlarge"></i><span>Dashboard</span></a></li>
+        
         <li class="dropdown-submenu">
           <a href="orders.html" id="admin3" style="display: none;"><i class="icon-list icon-xlarge"></i><span>Orders</span></a>
+          
         </li>
         <li class="dropdown-submenu"><a id="admin3" style="display: none;" href="#"><i class="icon-edit icon-xlarge"></i><span>Account</span></a>
           <ul class="dropdown-menu">
@@ -66,6 +68,7 @@
         <!-- .breadcrumb -->
         <ul class="breadcrumb">
           <li><a href="#"><i class="icon-home"></i>Home</a></li>
+          <!--  <li><a href="#"><i class="icon-list-ul"></i>Elements</a></li> -->
           <li class="active">Backers</li>
         </ul>
         <!-- / .breadcrumb -->
@@ -83,92 +86,114 @@
           </div>
           <div class="col-lg-2"> 
           </br>
+          <div></div>
           <button  id="search" class="btn btn-white btn-xs">Search </button>
         </div>
-        <div class="col-lg-2"> 
-        </br>
-        <button href="#modal" data-toggle="modal" onClick="checkBackerLength();" class="btn btn-white btn-success">Send Email</button>
-      </div>  
+         <div class="col-lg-2"> 
+          </br>
+          <div></div>
+          <button href="#modal" data-toggle="modal" onClick="checkBackerLength();" class="btn btn-white btn-success">Send Email</button>
+        </div>  
+      </div>
     </div>
     <div class="row">
-     <div class="col-lg-12">
-       <div><a id="decrement" class="btn btn-white btn-xs" href="javascript:decrement();">Previous<a><a id="increment"class="btn btn-white btn-xs"  href="javascript:increment();">Next</a></div>
-     </div>
-     <div class="col-lg-6">
-      <section class="panel">
-        <div class="table-responsive">
-          <table class="table table-striped m-b-none" data-ride="datatables2">
-            <thead>
-             <tr>
-              <th width="1%"></th>
-              <th width="10%" style="display: none;">Id</th>
-              <th width="10%">First name</th>
-              <th width="10%">Last name</th>
-              <th width="10%">Email</th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
-      </div>
-    </section>
-	<table id="example2" class="display" cellspacing="0" width="100%">
+     
+      
+         <!--  <section class="panel padder">
+		  <div class="clearfix">
+				<p></p>
+			</div>
+			<div class="alert alert-warning alert-block">
+				<h4><i class="icon-bell-alt"></i>Warning!</h4>
+				<p>Your action is required. You need to pay shipping charges. <a href="#" class="alert-link"><b>Fix it now!</b></a></p>
+			</div>
+			<div class="alert alert-danger">
+				<button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+				<i class="icon-ban-circle icon-large"></i><strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
+			</div>
+			<div class="alert alert-success">
+			<button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+			<i class="icon-ok-sign icon-large"></i><strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important alert message</a>.
+			</div>
+			<div class="alert alert-info">
+			<button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+			<i class="icon-info-sign icon-large"></i><strong>Heads up!</strong> This <a href="#" class="alert-link">alert needs your attention</a>, but it's not super important.
+			</div>
+		  
+    </section> -->
+  </div>
+</div>   
+<div class="row">
+ <div class="col-lg-12">
+   <div><a id="decrement" class="btn btn-white btn-xs" href="javascript:decrement();">Previous<a><a id="increment"class="btn btn-white btn-xs"  href="javascript:increment();">Next</a></div>
+ </div>
+ <div class="col-lg-12">
+  
+  <section class="panel">
+   
+    <div class="table-responsive">
+      <table class="table table-striped m-b-none" data-ride="datatables2">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-            </tr>
-        </thead>
+         <tr>
+          <th width="1%"></th>
+          <th width="10%" style="display: none;">Id</th>
+          <th width="10%">First name</th>
+          <th width="10%">Last name</th>
+          <th width="10%">Email</th>
+          
+          
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
     </table>
-	<script>
-	</script>
   </div>
+</section>
+</div>
 </div>
 </section>
 </section>
-<div id="modal"  class="modal fade">
+   <div id="modal"  class="modal fade">
 
-  <div   class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><i class="icon-remove"></i></button>
-        <h4 class="modal-title" id="myModalLabel">Send Email to backers</h4>
-      </div>
-      <div  class="modal-body">
-       <div class="panel-body">
-        <form class="form-horizontal" method="post" action="javascript:sendEmailToBackers();" id="sendEmail" data-validate="parsley">  
-          
+        <div   class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><i class="icon-remove"></i></button>
+              <h4 class="modal-title" id="myModalLabel">Send Email to backers</h4>
+            </div>
+            <div  class="modal-body">
+             <div class="panel-body">
+              <form class="form-horizontal" method="post" action="javascript:sendEmailToBackers();" id="sendEmail" data-validate="parsley">  
+                
 
-          <label class="control-label">Choose the type of email you want to send to the backers</label>
-          <select id="select2-option" name="email_type" id="email_type" style="width:260px">
-            <option value="welcome_email">Welcome email</option>
-            <option value="confirmation_email">Confirmation email</option>
-            
-          </select>
-          <br/>
-          <br/>
-          <div class="form-group">
-            <label class="control-label">Please enter the text "Send email now" to send email to the backers:</label>
-            <input type="text" class="bg-focus form-control" id="validateText">
+                <label class="control-label">Choose the type of email you want to send to the backers</label>
+                <select id="select2-option" name="email_type" id="email_type" style="width:260px">
+                  <option value="welcome_email">Welcome email</option>
+                  <option value="confirmation_email">Confirmation email</option>
+                  
+                </select>
+                <br/>
+                <br/>
+                <div class="form-group">
+                  <label class="control-label">Please enter the text "Send email now" to send email to the backers:</label>
+                  <input type="text" class="bg-focus form-control" id="validateText">
+                </div>
+                <div class="form-group">
+                  <input type="hidden" id="updateAddress_authentication_token" name="authentication_token" value="">
+                </div>
+             
+                  <label id="alertMessage" class="control-label"></label>
+                
+              <div class="modal-footer">
+                <button type="submit" id="btnPlaceOrder" class="btn btn-sm btn-default">Send</button>
+                <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Cancel</button>
+              </div>
+            </div><!-- /.modal-content -->
           </div>
-          <div class="form-group">
-            <input type="hidden" id="updateAddress_authentication_token" name="authentication_token" value="">
-          </div>
-          
-          <label id="alertMessage" class="control-label"></label>
-          
-          <div class="modal-footer">
-            <button type="submit" id="btnPlaceOrder" class="btn btn-sm btn-default">Send</button>
-            <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Cancel</button>
-          </div>
-        </div><!-- /.modal-content -->
+        </form>
       </div>
-    </form>
+    </div>
   </div>
-</div>
-</div>
 <!-- footer -->
 <footer id="footer">
   <div class="text-center padder clearfix">
@@ -204,18 +229,19 @@
 <script src="js/jquery_cookie.js"></script>
 <script src="js/jquery.serialize-object.compiled.js"></script>
 <script type="text/javascript">
-  $(document).ready(function()
-  {
-    $('#adminBackers').addClass("active");
-  });
-  setCurrentUserName();
-  var search = urlParameterValue( 'search' );
-  if(search==""){
-    getBackerInfo();
-  }
-  else{
-    searchBackerInfo();
-  }
+$(document).ready(function()
+{
+
+  $('#adminBackers').addClass("active")
+});
+setCurrentUserName();
+var search = urlParameterValue( 'search' );
+if(search==""){
+  getBackerInfo();
+}
+else{
+  searchBackerInfo();
+}
 </script>
 
 <script src="js/app.data.js"></script>

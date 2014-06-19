@@ -55,13 +55,20 @@ $("#loading").hide();
 if(response.data.length<10){
 	$("#increment").removeAttr('href');
 }
-// mahesh - uncomment	drawDatatable(response.data);
+
+console.log(response);
+
+drawDatatable(response.data);
 }
 
 function onSuccessSearchGetBackerInfo(response) {  
 //setBackerInfo(response.data);
 $("#loading").hide();
+console.log(response);
+
 drawDatatable(response.data);
+
+
 }
 
 $( "#search" ).click(function() {
@@ -70,6 +77,8 @@ $( "#search" ).click(function() {
 	window.location="backers.html?page="+page+"&search=1";
 
 });
+
+
 
 function checkText(){
   var txt=$("#validateText").val();
@@ -113,6 +122,7 @@ else{
     "email_type" : param1.email_type
  };
 }
+ console.log(param);
   sendEmail(JSON.stringify(param));
   }
   else{
