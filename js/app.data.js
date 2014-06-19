@@ -352,6 +352,7 @@ $('[data-ride="datatables2"]').each(function() {
 		"bProcessing": true,
 		"aaData":tableData,
 		"info": false,
+		"bInfo": false, // hides "Showing 1 of N entries"
 		"paging": false,
 		"bFilter": false,
 		"ordering": false,
@@ -402,6 +403,7 @@ $('[data-ride="datatables3"]').each(function() {
 		"bDestroy":true,
 		"bProcessing": true,
 		"info": false,
+		"bInfo": false, // hides "Showing 1 of N entries"
 		"paging": false,
 		"aaData":tableData,
 		"ordering": false,
