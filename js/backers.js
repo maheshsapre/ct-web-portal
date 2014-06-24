@@ -47,8 +47,16 @@ function getBackerInfo() {
 }
 
 function searchBackerInfo() {
+	$("#searchEmail").val(urlParameterValue('q[email_cont]'));
+	$("#searchCountry").val(urlParameterValue('q[addresses_country_cont]'));
+	$("#searchNotCountry").val(urlParameterValue('q[addresses_country_not_cont]'));
+	$("#searchOrderReference").val(urlParameterValue('q[orders_reference_no_cont]'));
+	$("#searchAddressConfirmed").attr('checked', ( urlParameterValue('q[address_confirmed_eq]') == "1" ? true : false));
+	$("#searchPerkName").val(urlParameterValue('q[orders_perks_name_cont]'));
+	
+
 	var url = "/v1/backers.json" + window.location.search;
-	console.log(url);
+	console.log(url);	
 	callAPI(url, "GET", getApiKeyQueryFormat(), onSuccessSearchGetBackerInfo, onApiError);
 }
 
@@ -66,8 +74,15 @@ function onSuccessSearchGetBackerInfo(response) {
 }
 
 function onSearchBacker() {
-	window.location="backers.html?page="+page+"&search=1" + "&q[email_cont]="+ encodeURIComponent($("#searchEmail").val())
-	+ "&q[orders_reference_no_cont]="+ encodeURIComponent($("#searchOrderReference").val());    	
+	
+	var url = "&q[address_confirmed_eq]=" + ($("#searchAddressConfirmed").is(':checked') ? 1 : 0);
+	if ($.trim($("#searchEmail").val()).length > 0) url = url + "&q[email_cont]="+ encodeURIComponent($("#searchEmail").val());
+	if ($.trim($("#searchCountry").val()).length > 0) url = url + "&q[addresses_country_cont]="+ encodeURIComponent($("#searchCountry").val());
+	if ($.trim($("#searchNotCountry").val()).length > 0) url = url + "&q[addresses_country_not_cont]="+ encodeURIComponent($("#searchNotCountry").val());
+	if ($.trim($("#searchPerkName").val()).length > 0) url = url + "&q[orders_perks_name_cont]="+ encodeURIComponent($("#searchPerkName").val());
+	if ($.trim($("#searchOrderReference").val()).length > 0) url = url + "&q[orders_reference_no_cont]="+ encodeURIComponent($("#searchOrderReference").val());    	
+	
+	window.location="backers.html?" + url + "&page=1&search=1&size=10"  ;
 }
 
 

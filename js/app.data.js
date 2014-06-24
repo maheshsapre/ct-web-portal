@@ -358,15 +358,15 @@ console.log(tableData);
 	var oTable = $(this).dataTable( {
 		"bProcessing": true,
 		"aaData":tableData,
-		"info": false,
-		"bInfo": false, // hides "Showing 1 of N entries"
-		"paging": false,
-		"bFilter": false,
-		"ordering": false,
+		"info": true,
+		"bInfo": true, // hides "Showing 1 of N entries"
+		"paging": true,
+		"bFilter": true,
+		"ordering": true,
 		"bRetrieve":true,
 		"sDom": "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'row'<'col-sm-6'i><'col col-sm-6'p>>",
 		"sPaginationType": "full_numbers",
-		"bPaginate": false,
+		"bPaginate": true,
 		"fnDrawCallback": function () {
 			$("[data-ride='datatables2'] tbody tr td:nth-child(3)").click(function () {
 			var position = oTable.fnGetPosition(this); // getting the clicked row position
@@ -375,21 +375,22 @@ console.log(tableData);
 			});
 		},
 		"aoColumns": [
-		{
-			"mData": null,
-			"sClass": "center",
-			"sDefaultContent": '<input id="checked" type="checkbox" </input>'
-		},
+		// {
+			// "mData": null,
+			// "sClass": "center",
+			// "sDefaultContent": '<input id="checked" type="checkbox" </input>'
+		// },
 		{ "mData": "id", "bVisible":    false  },
 		{ "mData": "first_name" },
 		{ "mData": "last_name" },
-		{ "mData": "email" }
+		{ "mData": "email" },
+		{ "mData": "address_confirmed" }
 		],
 		"aoColumnDefs":[{
-			"aTargets": [ 4 ]
+			"aTargets": [ 3 ]
 			, "bSortable": false
 			, "mRender": function ( url, type, full )  {
-				return  '<a style="color:blue" href="orders.html?id='+full.id+'&page=1">' + url + '</a>';
+				return  '<a style="color:blue" target="_blank" href="orders.html?id='+full.id+'&page=1">' + url + '</a>';
 			}
 		},
 		{

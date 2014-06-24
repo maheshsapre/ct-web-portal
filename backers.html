@@ -76,8 +76,38 @@
           <h4>Backers</h4>
         </div>
 	 <div class="row">
+	 <div class="col-sm-6">
+  <section class="panel">
+    <div class="table-responsive">
+      <table  class="table table-striped m-b-none" data-ride="datatables2">
+        <thead>
+         <tr>
+          <th width="10%" style="display: none;">Id</th>
+          <th width="10%">First name</th>
+          <th width="10%">Last name</th>
+          <th width="10%">Email</th>
+		  <th width="10%">Address Confirmed</th>
+        </tr>
+      </thead>
+	  <tfoot>
+         <tr>
+          <th width="10%" style="display: none;">Id</th>
+          <th width="10%">First name</th>
+          <th width="10%">Last name</th>
+          <th width="10%">Email</th>
+		  <th width="10%">Address Confirmed</th>
+        </tr>
+      </tfoot>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</section>
+</div>
+
         <div class="col-sm-6">
           <section class="panel">
+		  <header class="panel-heading bg-white"><div class="text-center h5">Search</div></header>
             <div class="panel-body">
               <form class="form-horizontal"  action="javascript:onSearchBacker();" method="GET"  >      
                <div class="form-group">
@@ -92,46 +122,56 @@
 				  <input type="text" name="searchOrderReference" id="searchOrderReference" placeholder="pledge id / order reference no" class="bg-focus form-control">
                 </div>
               </div>
+			  <div class="form-group">
+                <label class="col-lg-3 control-label">Belongs to Country</label>
+                <div class="col-lg-8">
+				  <input type="text" name="searchCountry" id="searchCountry" placeholder="Backers from this country" class="bg-focus form-control">
+                </div>
+              </div>
+			  <div class="form-group">
+                <label class="col-lg-3 control-label">Does not belong to Country</label>
+                <div class="col-lg-8">
+				  <input type="text" name="searchNotCountry" id="searchNotCountry" placeholder="Backers not from this country" class="bg-focus form-control">
+                </div>
+              </div>
+			  <div class="form-group">
+                <label class="col-lg-3 control-label"></label>
+                <div class="col-lg-8">
+				  <input type="checkbox" name="searchAddressConfirmed" id="searchAddressConfirmed"><label>&nbsp;Is Address Confirmed?</label>
+                </div>
+              </div>
+			  <!-- <div class="form-group">
+                <label class="col-lg-3 control-label">Perk</label>
+                <div class="col-lg-8">
+				  <input type="text" name="searchPerkName" id="searchPerkName" placeholder="Name of the perk" class="bg-focus form-control">
+                </div>
+              </div> -->
               <input type="hidden" id="changePassword_authentication_token" name="authentication_token" value="">
               
               <div class="form-group">
                 <div class="col-lg-9 col-lg-offset-3">                      
 				  <button type="submit" value="Submit"  class="btn btn-primary btn-xs" >Search</button>
+				  <small class="text-muted" >Press ENTER to search</small>
                 </div>
               </div>
+			  <div>
+				<div class="line line-dashed m-t-large"></div>
+				<div class="text-muted text-center"><small>Note: Depending on the search results it may take longer to load. Please be patient.</small></div>
+			  </div>
             </form>
           </div>
         </section>
       </div>
     </div>
-    </div>
+    </section>
+	</section>
 </div>   
 <div class="row">
  <div class="col-lg-12">
    <div><a id="decrement" class="btn btn-white btn-xs" href="javascript:decrement();">Previous<a><a id="increment"class="btn btn-white btn-xs"  href="javascript:increment();">Next</a></div>
  </div>
- <div class="col-lg-12">
-  <section class="panel">
-    <div class="table-responsive">
-      <table  class="table table-striped m-b-none" data-ride="datatables2">
-        <thead>
-         <tr>
-          <th width="1%"></th>
-          <th width="10%" style="display: none;">Id</th>
-          <th width="10%">First name</th>
-          <th width="10%">Last name</th>
-          <th width="10%">Email</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
-</section>
-</div>
-</div>
-</section>
-</section>
+ 
+
    <div id="modal"  class="modal fade">
         <div   class="modal-dialog">
           <div class="modal-content">
