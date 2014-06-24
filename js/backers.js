@@ -41,44 +41,34 @@ function decrement(){
 var page = urlParameterValue( 'page' );
 
 function getBackerInfo() {
+	
+
 	callAPI("/v1/backers.json?page="+page, "GET", getApiKeyQueryFormat(), onSuccessGetBackerInfo, onApiError);
 }
 
 function searchBackerInfo() {
-	searchemail=getSearchEmail();
-	var url = "/v1/backers.json?page="+page+"&q[email_cont]="+ encodeURIComponent(searchemail);
+	var url = "/v1/backers.json" + window.location.search;
+	console.log(url);
 	callAPI(url, "GET", getApiKeyQueryFormat(), onSuccessSearchGetBackerInfo, onApiError);
 }
 
 function onSuccessGetBackerInfo(response) {  
-//setBackerInfo(response.data);
 $("#loading").hide();
-if(response.data.length<10){
-	$("#increment").removeAttr('href');
-}
-
-console.log(response);
-
-drawDatatable(response.data);
+	if(response.data.length<10){
+		$("#increment").removeAttr('href');
+	}
+	drawDatatable(response.data);
 }
 
 function onSuccessSearchGetBackerInfo(response) {  
-//setBackerInfo(response.data);
-$("#loading").hide();
-console.log(response);
-
-drawDatatable(response.data);
-
-
+	$("#loading").hide();
+	drawDatatable(response.data);
 }
 
-$( "#search" ).click(function() {
-	searchemail=$("#searchEmail").val();
-	setSearchEmail(searchemail);
-	window.location="backers.html?page="+page+"&search=1";
-
-});
-
+function onSearchBacker() {
+	window.location="backers.html?page="+page+"&search=1" + "&q[email_cont]="+ encodeURIComponent($("#searchEmail").val())
+	+ "&q[orders_reference_no_cont]="+ encodeURIComponent($("#searchOrderReference").val());    	
+}
 
 
 function checkText(){

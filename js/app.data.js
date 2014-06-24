@@ -37,8 +37,10 @@ filters.push(gfull);
 function drawDatatable(tableData){
 
 
+
 //backerInfo=getBackerInformation();
 backerOrder=getBackerOrdersAction();
+
 
 
 $('#docs pre code').each(function(){
@@ -348,6 +350,11 @@ columns: [
 
 // Render the Backers table
 $('[data-ride="datatables2"]').each(function() {
+
+
+console.log(tableData);
+
+
 	var oTable = $(this).dataTable( {
 		"bProcessing": true,
 		"aaData":tableData,
