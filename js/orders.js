@@ -59,11 +59,19 @@ function getTrackingInfo()
 {
 	callAPI("/v1/backers/backer_information.json", "GET", getKeyQueryFormat(), onSuccessGetTrackerInfo, onApiError);
 }
+
+function getTrackingInfo2(id)
+{
+	callAPI("/v1/backers/backer_information.json?backer_id={0}".f(id), "GET", getKeyQueryFormat(), onSuccessGetTrackerInfo, onApiError);
+}
+
+
 function confirmBackerAddress()
 {
 	var param= {};
 	param['authentication_token'] = getKey();
 	param['address_confirmed'] = true;
+	console.log(param);
 	callAPI("/v1/backers/update_backer.json", "PUT", JSON.stringify(param), onSuccessConfirmBackerAddress, onApiError);	
 }
 
@@ -189,7 +197,7 @@ function onSuccessGetTrackerInfo(response){
    for(i=0;i<response.data.length;i++){
     orderList[i]=response.data[i].id;
   }
-  if(getRoles()!="admin"){
+  // if(getRoles()!="admin"){
     for(i=0;i<response.data.length;i++){
      if(response.data[i].notes && response.data[i].notes!="Success" && response.data[i].notes!="" ){
       var str =   response.data[i].notes;
@@ -204,14 +212,20 @@ function onSuccessGetTrackerInfo(response){
      }
    }
  }
-}
+// }
 
-if(response.data.length<10){
- $("#increment").removeAttr('href');
-}
-drawDatatable(response.data);
+	if(response.data.length<10){
+	 $("#increment").removeAttr('href');
+	}
+	drawDatatable(response.data);
 
-getTrackingInfo();
+	if(getRoles()!="admin"){
+		getTrackingInfo();
+	}
+	else
+	{
+		getTrackingInfo2(response.data[0].backer_id);
+	}
 }
 
 function updateAddresses()

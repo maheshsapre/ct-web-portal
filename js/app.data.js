@@ -382,7 +382,7 @@ $('[data-ride="datatables2"]').each(function() {
 			"aTargets": [ 4 ]
 			, "bSortable": false
 			, "mRender": function ( url, type, full )  {
-				return  '<a style="color:blue" href="orderList.html?id='+full.id+'&page=1">' + url + '</a>';
+				return  '<a style="color:blue" href="orders.html?id='+full.id+'&page=1">' + url + '</a>';
 			}
 		},
 		{

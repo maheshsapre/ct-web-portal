@@ -1010,11 +1010,7 @@
 setCurrentUserName();
 loggedInrole();
 var id = urlParameterValue( 'id' );
-	if(id!=""){
-		$("#orderPopup").hide();
-		getBackerOrdersId(id);
-  }
- 
+	
   if(getRoles()!="admin"){
     $("#addOrder").hide();
     getBackerOrders();
@@ -1025,6 +1021,16 @@ var id = urlParameterValue( 'id' );
   }
   $(document).ready(function()
   {
+	$("#orderContents").load("orderContents.html", onSuccessContentsLoad);
+	});
+	
+function onSuccessContentsLoad()
+  {
+  if(id!=""){
+		$("#orderPopup").hide();
+		getBackerOrdersId(id);
+	}
+  
 	$("#addressConfirmedText").hide();
 	$("#changeAddress").show();
 	$("#confirmAddress").show();
@@ -1034,12 +1040,12 @@ var id = urlParameterValue( 'id' );
 	$("#addressDetails").empty();
 	$("#trackingDetails").empty();
 	
-	
+		
     $('#admin3').addClass("active")
 	if(getRoles()!="admin"){
 		getCurrentUser();
 		}
-  });
+  }
   clearPerksModalDialog();
   resetPerkValueArray();
   var search = urlParameterValue( 'search' );
