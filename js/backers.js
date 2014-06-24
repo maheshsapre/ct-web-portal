@@ -46,7 +46,8 @@ function getBackerInfo() {
 
 function searchBackerInfo() {
 	searchemail=getSearchEmail();
-	callAPI("/v1/backers.json?page="+page+"&q[email_cont]="+searchemail, "GET", getApiKeyQueryFormat(), onSuccessSearchGetBackerInfo, onApiError);
+	var url = "/v1/backers.json?page="+page+"&q[email_cont]="+ encodeURIComponent(searchemail);
+	callAPI(url, "GET", getApiKeyQueryFormat(), onSuccessSearchGetBackerInfo, onApiError);
 }
 
 function onSuccessGetBackerInfo(response) {  
