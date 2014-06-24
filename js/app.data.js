@@ -385,7 +385,8 @@ console.log(tableData);
 		{ "mData": "last_name" },
 		{ "mData": "email" },
 		{ "mData": "address_confirmed" },
-		{ "mData": "shipping_status" }
+		{ "mData": "shipping_status" },
+		{ "mData": "address.country" }
 		],
 		"aoColumnDefs":[{
 			"aTargets": [ 3 ]
