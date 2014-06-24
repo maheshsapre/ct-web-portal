@@ -46,15 +46,55 @@ function getBackerInfo() {
 	callAPI("/v1/backers.json?page="+page, "GET", getApiKeyQueryFormat(), onSuccessGetBackerInfo, onApiError);
 }
 
+function onSearchBacker() {
+	
+	//var url = "&q[address_confirmed_eq]=" + ($("#searchAddressConfirmed").is(':checked') ? 1 : 0);
+	var url = "";
+	switch ($("#searchAddressConfirmed").text())
+	{
+		case "Confirmed": url = url + "&q[address_confirmed_eq]=1"; break;
+		case "Not Confirmed": url = url + "&q[address_confirmed_eq]=0"; break;
+	}
+	
+	switch ($("#searchShippingStatus").text())
+	{
+		case "No Information": url = url + "&q[shipping_status_eq]=0"; break;
+		case "Scheduled": url = url + "&q[shipping_status_eq]=1"; break;
+		case "Shipped": url = url + "&q[shipping_status_eq]=2"; break;
+	}
+	
+	if ($.trim($("#searchEmail").val()).length > 0) url = url + "&q[email_cont]="+ encodeURIComponent($("#searchEmail").val());
+	if ($.trim($("#searchCountry").val()).length > 0) url = url + "&q[addresses_country_cont]="+ encodeURIComponent($("#searchCountry").val());
+	if ($.trim($("#searchNotCountry").val()).length > 0) url = url + "&q[addresses_country_not_cont]="+ encodeURIComponent($("#searchNotCountry").val());
+	if ($.trim($("#searchPerkName").val()).length > 0) url = url + "&q[orders_perks_name_cont]="+ encodeURIComponent($("#searchPerkName").val());
+	if ($.trim($("#searchOrderReference").val()).length > 0) url = url + "&q[orders_reference_no_cont]="+ encodeURIComponent($("#searchOrderReference").val());    	
+	
+	window.location="backers.html?" + url + "&page=1&search=1&size=100000"  ;
+}
+
 function searchBackerInfo() {
 	$("#searchEmail").val(urlParameterValue('q[email_cont]'));
 	$("#searchCountry").val(urlParameterValue('q[addresses_country_cont]'));
 	$("#searchNotCountry").val(urlParameterValue('q[addresses_country_not_cont]'));
 	$("#searchOrderReference").val(urlParameterValue('q[orders_reference_no_cont]'));
-	$("#searchAddressConfirmed").attr('checked', ( urlParameterValue('q[address_confirmed_eq]') == "1" ? true : false));
 	$("#searchPerkName").val(urlParameterValue('q[orders_perks_name_cont]'));
-	
 
+	switch (urlParameterValue('q[address_confirmed_eq]'))
+	{
+		case "1": $("#searchAddressConfirmed").text("Confirmed"); break;
+		case "0": $("#searchAddressConfirmed").text("Not Confirmed"); break;
+		default: $("#searchAddressConfirmed").text("All"); break;
+	}
+
+	switch (urlParameterValue('q[shipping_status_eq]'))
+	{
+		case "0": $("#searchShippingStatus").text("No Information"); break;
+		case "1": $("#searchShippingStatus").text("Scheduled"); break;
+		case "2": $("#searchShippingStatus").text("Shipped"); break;
+		default: $("#searchShippingStatus").text("All"); break;
+	}
+	
+	
 	var url = "/v1/backers.json" + window.location.search;
 	console.log(url);	
 	callAPI(url, "GET", getApiKeyQueryFormat(), onSuccessSearchGetBackerInfo, onApiError);
@@ -73,17 +113,6 @@ function onSuccessSearchGetBackerInfo(response) {
 	drawDatatable(response.data);
 }
 
-function onSearchBacker() {
-	
-	var url = "&q[address_confirmed_eq]=" + ($("#searchAddressConfirmed").is(':checked') ? 1 : 0);
-	if ($.trim($("#searchEmail").val()).length > 0) url = url + "&q[email_cont]="+ encodeURIComponent($("#searchEmail").val());
-	if ($.trim($("#searchCountry").val()).length > 0) url = url + "&q[addresses_country_cont]="+ encodeURIComponent($("#searchCountry").val());
-	if ($.trim($("#searchNotCountry").val()).length > 0) url = url + "&q[addresses_country_not_cont]="+ encodeURIComponent($("#searchNotCountry").val());
-	if ($.trim($("#searchPerkName").val()).length > 0) url = url + "&q[orders_perks_name_cont]="+ encodeURIComponent($("#searchPerkName").val());
-	if ($.trim($("#searchOrderReference").val()).length > 0) url = url + "&q[orders_reference_no_cont]="+ encodeURIComponent($("#searchOrderReference").val());    	
-	
-	window.location="backers.html?" + url + "&page=1&search=1&size=10"  ;
-}
 
 
 function checkText(){

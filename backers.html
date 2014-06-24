@@ -76,7 +76,7 @@
           <h4>Backers</h4>
         </div>
 	 <div class="row">
-	 <div class="col-sm-6">
+	 <div class="col-sm-8">
   <section class="panel">
     <div class="table-responsive">
       <table  class="table table-striped m-b-none" data-ride="datatables2">
@@ -87,6 +87,7 @@
           <th width="10%">Last name</th>
           <th width="10%">Email</th>
 		  <th width="10%">Address Confirmed</th>
+		  <th width="10%">Shiment Status</th>
         </tr>
       </thead>
 	  <tfoot>
@@ -96,6 +97,7 @@
           <th width="10%">Last name</th>
           <th width="10%">Email</th>
 		  <th width="10%">Address Confirmed</th>
+		  <th width="10%">Shiment Status</th>
         </tr>
       </tfoot>
       <tbody>
@@ -104,8 +106,8 @@
   </div>
 </section>
 </div>
-
-        <div class="col-sm-6">
+<small>
+        <div class="col-sm-4">
           <section class="panel">
 		  <header class="panel-heading bg-white"><div class="text-center h5">Search</div></header>
             <div class="panel-body">
@@ -134,12 +136,42 @@
 				  <input type="text" name="searchNotCountry" id="searchNotCountry" placeholder="Backers not from this country" class="bg-focus form-control">
                 </div>
               </div>
-			  <div class="form-group">
-                <label class="col-lg-3 control-label"></label>
+
+			<div class="form-group">
+                <label class="col-lg-3 control-label">Address confirmed?</label>
                 <div class="col-lg-8">
-				  <input type="checkbox" name="searchAddressConfirmed" id="searchAddressConfirmed"><label>&nbsp;Is Address Confirmed?</label>
+				   <div class="btn-group">
+						  <button data-toggle="dropdown" class="btn btn-sm btn-white dropdown-toggle">
+							<span class="dropdown-label"  data-placeholder="Please select" id="searchAddressConfirmed">Please select</span> 
+							<span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu dropdown-select">
+							  <li><a href="#"><input type="radio" name="d-s-r">Confirmed</a></li>
+							  <li><a href="#"><input type="radio" name="d-s-r">Not Confirmed</a></li>
+							  <li><a href="#"><input type="radio" name="d-s-r">All</a></li>
+						  </ul>
+						</div>
                 </div>
-              </div>
+				     
+            </div>			  
+			<div class="form-group">
+                <label class="col-lg-3 control-label">Shipment Status?</label>
+                <div class="col-lg-8">
+				   <div class="btn-group">
+						  <button data-toggle="dropdown" class="btn btn-sm btn-white dropdown-toggle">
+							<span class="dropdown-label"  data-placeholder="Please select" id="searchShippingStatus">Please select</span> 
+							<span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu dropdown-select">
+							  <li><a href="#"><input type="radio" name="d-s-r">No Information</a></li>
+							  <li><a href="#"><input type="radio" name="d-s-r">Scheduled</a></li>
+							  <li><a href="#"><input type="radio" name="d-s-r">Shipped</a></li>
+							  <li><a href="#"><input type="radio" name="d-s-r">All</a></li>
+						  </ul>
+						</div>
+                </div>
+              </div>  
+                
 			  <!-- <div class="form-group">
                 <label class="col-lg-3 control-label">Perk</label>
                 <div class="col-lg-8">
@@ -162,54 +194,13 @@
           </div>
         </section>
       </div>
-    </div>
+   
+</small>
+   </div>
     </section>
 	</section>
 </div>   
-<div class="row">
- <div class="col-lg-12">
-   <div><a id="decrement" class="btn btn-white btn-xs" href="javascript:decrement();">Previous<a><a id="increment"class="btn btn-white btn-xs"  href="javascript:increment();">Next</a></div>
- </div>
- 
 
-   <div id="modal"  class="modal fade">
-        <div   class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal"><i class="icon-remove"></i></button>
-              <h4 class="modal-title" id="myModalLabel">Send Email to backers</h4>
-            </div>
-            <div  class="modal-body">
-             <div class="panel-body">
-              <form class="form-horizontal" method="post" action="javascript:sendEmailToBackers();" id="sendEmail" data-validate="parsley">  
-                <label class="control-label">Choose the type of email you want to send to the backers</label>
-                <select id="select2-option" name="email_type" id="email_type" style="width:260px">
-                  <option value="welcome_email">Welcome email</option>
-                  <option value="confirmation_email">Confirmation email</option>
-                  
-                </select>
-                <br/>
-                <br/>
-                <div class="form-group">
-                  <label class="control-label">Please enter the text "Send email now" to send email to the backers:</label>
-                  <input type="text" class="bg-focus form-control" id="validateText">
-                </div>
-                <div class="form-group">
-                  <input type="hidden" id="updateAddress_authentication_token" name="authentication_token" value="">
-                </div>
-             
-                  <label id="alertMessage" class="control-label"></label>
-                
-              <div class="modal-footer">
-                <button type="submit" id="btnPlaceOrder" class="btn btn-sm btn-default">Send</button>
-                <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Cancel</button>
-              </div>
-            </div><!-- /.modal-content -->
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
 <!-- footer -->
 <footer id="footer">
   <div class="text-center padder clearfix">
