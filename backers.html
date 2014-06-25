@@ -114,47 +114,21 @@
 		  <header class="panel-heading bg-white"><div class="text-center h5">Search</div></header>
             <div class="panel-body">
               <form class="form-horizontal"  action="javascript:onSearchBacker();" method="GET"  >      
-               <div class="form-group">
-                <label class="col-lg-3 control-label">Email</label>
-                <div class="col-lg-8">
-				  <input type="text" name="searchEmail" id="searchEmail" placeholder="email" class="bg-focus form-control">
-                </div>
-              </div>
-			  <div class="form-group">
-                <label class="col-lg-3 control-label">Order Reference# / Pledge Id</label>
-                <div class="col-lg-8">
-				  <input type="text" name="searchOrderReference" id="searchOrderReference" placeholder="pledge id / order reference no" class="bg-focus form-control">
-                </div>
-              </div>
-			  <div class="form-group">
-                <label class="col-lg-3 control-label">Belongs to Country</label>
-                <div class="col-lg-8">
-				  <input type="text" name="searchCountry" id="searchCountry" placeholder="Backers from this country" class="bg-focus form-control">
-                </div>
-              </div>
-			  <div class="form-group">
-                <label class="col-lg-3 control-label">Does not belong to Country</label>
-                <div class="col-lg-8">
-				  <input type="text" name="searchNotCountry" id="searchNotCountry" placeholder="Backers not from this country" class="bg-focus form-control">
-                </div>
-              </div>
-
-			<div class="form-group">
-                <label class="col-lg-3 control-label">Address confirmed?</label>
-                <div class="col-lg-8">
-				   <div class="btn-group">
-						  <button data-toggle="dropdown" class="btn btn-sm btn-white dropdown-toggle">
-							<span class="dropdown-label"  data-placeholder="Please select" id="searchAddressConfirmed">Please select</span> 
-							<span class="caret"></span>
-						  </button>
-						  <ul class="dropdown-menu dropdown-select">
-							  <li><a href="#"><input type="radio" name="d-s-r">Confirmed</a></li>
-							  <li><a href="#"><input type="radio" name="d-s-r">Not Confirmed</a></li>
-							  <li><a href="#"><input type="radio" name="d-s-r">All</a></li>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Address confirmed?</label>
+					<div class="col-lg-8">
+					   <div class="btn-group">
+							  <button data-toggle="dropdown" class="btn btn-sm btn-white dropdown-toggle">
+								<span class="dropdown-label"  data-placeholder="Please select" id="searchAddressConfirmed">Please select</span> 
+								<span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu dropdown-select">
+								  <li><a href="#"><input type="radio" name="d-s-r">Confirmed</a></li>
+								  <li><a href="#"><input type="radio" name="d-s-r">Not Confirmed</a></li>
+								  <li><a href="#"><input type="radio" name="d-s-r">All</a></li>
 						  </ul>
 						</div>
                 </div>
-				     
             </div>			  
 			<div class="form-group">
                 <label class="col-lg-3 control-label">Shipment Status?</label>
@@ -172,20 +146,38 @@
 						  </ul>
 						</div>
                 </div>
-              </div>  
-                
-			  <!-- <div class="form-group">
-                <label class="col-lg-3 control-label">Perk</label>
+              </div>
+			  </form>
+			  <form class="form-horizontal"  action="javascript:onSearchBacker();" method="GET"  >      
+			<div class="form-group">
+                <label class="col-lg-3 control-label">Email</label>
                 <div class="col-lg-8">
-				  <input type="text" name="searchPerkName" id="searchPerkName" placeholder="Name of the perk" class="bg-focus form-control">
+				  <input type="text" name="searchEmail" id="searchEmail" placeholder="email" class="bg-focus form-control">
                 </div>
-              </div> -->
+              </div>
+			  <div class="form-group">
+                <label class="col-lg-3 control-label">Pledge Id</label>
+                <div class="col-lg-8">
+				  <input type="text" name="searchOrderReference" id="searchOrderReference" placeholder="pledge id / order reference no" class="bg-focus form-control">
+                </div>
+              </div>
+			  <div class="form-group">
+                <label class="col-lg-3 control-label">From Country</label>
+                <div class="col-lg-8">
+				  <input type="text" name="searchCountry" id="searchCountry" placeholder="Backers from this country" class="bg-focus form-control">
+                </div>
+              </div>
+			  <div class="form-group">
+                <label class="col-lg-3 control-label">Not From Country</label>
+                <div class="col-lg-8">
+				  <input type="text" name="searchNotCountry" id="searchNotCountry" placeholder="Backers not from this country" class="bg-focus form-control">
+                </div>
+              </div>
+			  
               <input type="hidden" id="changePassword_authentication_token" name="authentication_token" value="">
-              
               <div class="form-group">
                 <div class="col-lg-9 col-lg-offset-3">                      
 				  <button type="submit" value="Submit"  class="btn btn-primary btn-xs" >Search</button>
-				  <small class="text-muted" >Press ENTER to search</small>
                 </div>
               </div>
 			  <div>

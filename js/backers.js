@@ -2,15 +2,6 @@ var backerInfo;
 var page=1;
 
 function increment(){
-	
-	/*if(page>1){
-	 a=getBackerArray();
-	 alert(a);
-	backerIds= a.concat(backerIds);
-	setBackerArray(backerIds);
-	alert(backerIds);
-	
-}*/
 	$("#loading").show();
 	page=parseInt(page)+1;
 	if(page>0){
@@ -41,14 +32,10 @@ function decrement(){
 var page = urlParameterValue( 'page' );
 
 function getBackerInfo() {
-	
-
 	callAPI("/v1/backers.json?page="+page, "GET", getApiKeyQueryFormat(), onSuccessGetBackerInfo, onApiError);
 }
 
 function onSearchBacker() {
-	
-	//var url = "&q[address_confirmed_eq]=" + ($("#searchAddressConfirmed").is(':checked') ? 1 : 0);
 	var url = "";
 	switch ($("#searchAddressConfirmed").text())
 	{
@@ -73,6 +60,8 @@ function onSearchBacker() {
 }
 
 function searchBackerInfo() {
+//	console.log(window.location.search);
+	
 	$("#searchEmail").val(urlParameterValue('q[email_cont]'));
 	$("#searchCountry").val(urlParameterValue('q[addresses_country_cont]'));
 	$("#searchNotCountry").val(urlParameterValue('q[addresses_country_not_cont]'));
@@ -93,10 +82,7 @@ function searchBackerInfo() {
 		case "2": $("#searchShippingStatus").text("Shipped"); break;
 		default: $("#searchShippingStatus").text("All"); break;
 	}
-	
-	
 	var url = "/v1/backers.json" + window.location.search;
-	console.log(url);	
 	callAPI(url, "GET", getApiKeyQueryFormat(), onSuccessSearchGetBackerInfo, onApiError);
 }
 
