@@ -97,7 +97,7 @@ function onSuccessGetTrackerInfo(response){
 	$("#trackingDetails").append(status);
 	if (response.data.shipping_service) $("#trackingDetails").append('Shipping Service: <strong>{0}</strong><br>'.f(response.data.shipping_service));
 	if (response.data.tracking_number) $("#trackingDetails").append('Tracking Number: <strong>{0}</strong><br>'.f(response.data.tracking_number));
-	if (response.data.shipping_date) $("#trackingDetails").append('Shipping Date: <strong>{0}</strong><br>'.f(response.data.shipping_date));
+	if (response.data.shipping_date) $("#trackingDetails").append('Shipping Date: <strong>{0}</strong><br>'.f( $.formatDateTime("MM dd, yy", new Date(response.data.shipping_date)))); //$.format.date(response.data.shipping_date, "MMM dd, yyyy")
 	
 	if (response.data.address_confirmed)
 	{

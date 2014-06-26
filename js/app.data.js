@@ -489,7 +489,7 @@ $('[data-ride="datatables3"]').each(function() {
 		{ "mData": "reference_no" } ,
 		{ "mData": "backer.email",		"bVisible":    false } ,
 		{ "mData": "perk.name" } ,
-		{ "mData": "order_date" },
+		{ "mData": "order_date",  "bVisible":    false},
 		{ "mData": "amount" } ,
 		{ "mData": "amount_difference",				"bVisible":    false  },
 		{ "mData": "shipping_applicable",				"bVisible":    false },
@@ -507,10 +507,6 @@ $('[data-ride="datatables3"]').each(function() {
 		{ "mData": null,            "bVisible":    isAdmin ,     "sClass": "center",
 		"sDefaultContent": '<a  class="icon-edit" data-toggle="modal"  href="#modalAddPerk"></a><a id="splitPerkButton"  class="icon-strikethrough" data-toggle="modal"  href="#modalSelectPerks"></a><a  class="icon-remove" data-toggle="modal"  href="javascript:onDeleteOrder();"></a>'
 		}
-
-
-
-
 	],
 	"aoColumnDefs":[{
 		"aTargets": [ 2 ]
@@ -536,7 +532,6 @@ $('[data-ride="datatables3"]').each(function() {
 	, "mRender": function ( url, type, full )  {
 		gfull=full;
 		if(full.split==true){
-
 			return  full.amount;
 		}
 		else{
