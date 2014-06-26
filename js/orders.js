@@ -443,7 +443,11 @@ function addNewPerk(){
  var $form = $("#addPerk");
  var $inputs = $form.find("input, select, button, textarea");
  var param =  $form.serializeObject(); 
+ param["api_key"] = getKey();
  addPerk(param.order_id,JSON.stringify(param));
+
+
+
 }
 
 function addPerk(id,param){
@@ -453,10 +457,7 @@ function addPerk(id,param){
 function onSuccessAddPerk(response){
   bootbox.alert("Perk has been added successfully", function(result) 
   {  
-    if(result==undefined){
-     a=window.location.href;
-     window.location=a;
-   }
+ 		location.reload();
  });
 }  
 
@@ -551,7 +552,7 @@ function selectedPerk6(i,val){
 function onDeleteOrder()
 {
 
-   callAPI("/v1/orders/{0}/delete.json&api_key={1}".f(addPerkOrderId, getKey()), "DELETE",  "" , onSuccessDeleteOrder, onApiError);
+   callAPI("/v1/orders/{0}/delete.json?api_key={1}".f(addPerkOrderId, getKey()), "DELETE",  "" , onSuccessDeleteOrder, onApiError);
 
 
 }
@@ -582,7 +583,8 @@ function addPerks(){
    };
    var param={
      order_id: addPerkOrderId,
-     perk_ids: perksIds.toString()
+     perk_ids: perksIds.toString(),
+     api_key: getKey()
    }
 
    callAPI("/v1/orders/split_the_order.json", "POST",JSON.stringify(param), onSuccessSplitPerk, onApiError);
@@ -592,19 +594,16 @@ function addPerks(){
 
 function onSuccessSplitPerk(response){
   bootbox.alert("Perks have been successfully added", function(result) 
-  {  
-    if(result==undefined){
-     window.location=window.location.href;
-   }
- });
+  { 
+  	location.reload(); 
+    
+     });
 }
 
 function onSuccessDeleteOrder(response){
   bootbox.alert("Order is deleted successfully.", function(result) 
   {  
-    if(result==undefined){
-     window.location=window.location.href;
-   }
+  	location.reload();
  });
 }
 

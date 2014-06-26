@@ -100,6 +100,7 @@ function addOrder(){
 	var $form = $("#addOrderForm");
   var $inputs = $form.find("input, select, button, textarea");
   var param =  $form.serializeObject(); 
+  param["api_key"] = getKey();
   addNewOrder(param.backer_id,JSON.stringify(param));
 }
 
@@ -108,11 +109,10 @@ function  addNewOrder(id,param){
 }
 
 function onSuccessAddNewOrder(response){
-       bootbox.alert("Order has been added successfully", function(result) 
+    bootbox.alert("Order has been added successfully", function(result) 
     {  
-      if(result==undefined){
-       window.location=window.location.href;
-      }
+    location.reload();
+       //window.location=window.location.href;      
      });
 
 
