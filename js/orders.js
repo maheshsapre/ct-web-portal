@@ -194,6 +194,7 @@ function onSuccessGetTrackerInfo(response){
  }
 
  function onSuccessGetBackerOrders(response) { 
+ 	console.log(response);
    $("#address_Orderid").val(response.data[0].address_id);
    $("#backer_id").val(response.data[0].backer_id);
    $("#email").html(response.data[0].backer.email);
@@ -567,7 +568,7 @@ function addPerks(){
     for (var i = perkArray.length - 1; i >= 0; i--) {
       perkArray[i]=0;
     };
-    bootbox.alert("The total amount of the selected perks  exceeds the amount paid.Please reselect the perks")
+    bootbox.alert("The total amount of the selected perks exceeds the actual amount paid. Please reselect the perks.")
   }
   else{
     var perksIds=new Array();
