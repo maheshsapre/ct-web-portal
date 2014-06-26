@@ -62,11 +62,11 @@ function onSearchBacker() {
 function searchBackerInfo() {
 //	console.log(window.location.search);
 	
-	$("#searchEmail").val(urlParameterValue('q[email_cont]'));
-	$("#searchCountry").val(urlParameterValue('q[addresses_country_cont]'));
-	$("#searchNotCountry").val(urlParameterValue('q[addresses_country_not_cont]'));
-	$("#searchOrderReference").val(urlParameterValue('q[orders_reference_no_cont]'));
-	$("#searchPerkName").val(urlParameterValue('q[orders_perks_name_cont]'));
+	$("#searchEmail").val(decodeURIComponent(urlParameterValue('q[email_cont]')));
+	$("#searchCountry").val(decodeURIComponent(urlParameterValue('q[addresses_country_cont]')));
+	$("#searchNotCountry").val(decodeURIComponent(urlParameterValue('q[addresses_country_not_cont]')));
+	$("#searchOrderReference").val(decodeURIComponent(urlParameterValue('q[orders_reference_no_cont]')));
+	$("#searchPerkName").val(decodeURIComponent(urlParameterValue('q[orders_perks_name_cont]')))
 
 	switch (urlParameterValue('q[address_confirmed_eq]'))
 	{
