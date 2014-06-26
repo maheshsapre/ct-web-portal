@@ -41,14 +41,14 @@
 		  <section id="tracking-wizard" class="panel"> 
 				<div class="wizard wizard-vertical clearfix" id="form-wizard">
 				  <ul class="steps">
-					<li data-target="#step1" class="active"><span  class="badge badge-info">1</span>Address</li>
-					<li data-target="#step2"><span class="badge" >2</span>Verification</li>
+					<li data-target="#step1"  class="active"><span class="badge badge-info" >1</span>Verification</li>
+					<li data-target="#step2"><span  class="badge">2</span>Address</li>
 					<li data-target="#step3"><span class="badge" >3</span>Shipping</li>
 				  </ul>
 				</div>
 				<div class="step-content">
 				  <form>
-					<div class="step-pane active" id="step1">
+					<div class="step-pane " id="step2">
 					  <h3 class="m-t-none">
 						<a id="changeAddress" class="btn btn-white btn-xs" data-toggle="modal"  href="#modal">Change</a> 
 						<a id="confirmAddress" class="btn btn-xs btn-info" href="javascript:confirmBackerAddress(); ">Confirm</a>
@@ -57,7 +57,7 @@
 					  <p id="addressDetails" class="m-t m-b"></p>
 					<input type="text" id="addressConfirmedText"  class="input-sm form-control" data-trigger="change"/>
 					</div>
-					<div class="step-pane" id="step2">
+					<div class="step-pane active"  id="step1">
 						<h3 class="m-t-none"></h3>    
 							<div class="list-group">
 							  <a id="no_problems" href="#" class="list-group-item">
