@@ -76,9 +76,13 @@
         
         <div class="clearfix">
           <h4>Orders</h4>
+               <div class="col-lg-2">
+      				<button  id="addOrder" data-toggle="modal" href="#modalShipping" class="btn btn-primary">Add Order</button>
+    			</div>
         </div>
     
   <div id="orderContents">
+
   </div>
    </div>
 </section>
@@ -895,6 +899,10 @@ function onSuccessContentsLoad(){
 	$("#orderstable").hide();
 	$("#tracking-wizard").hide();
     getBackerOrders();
+  }
+  else
+  {
+  	$("#addOrder").show();
   }
   
 	$("#addressConfirmedText").hide();

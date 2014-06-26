@@ -409,6 +409,7 @@ console.log(tableData);
 
 // Render the Orders table
 $('[data-ride="datatables3"]').each(function() {
+	var isAdmin = getRoles()=="admin"? true : false;
 	var oTable = $(this).dataTable( {
 		"bDestroy":true,
 		"bProcessing": true,
@@ -465,7 +466,7 @@ $('[data-ride="datatables3"]').each(function() {
 		resetPerkValueArray()
 });
 
-			$("#example tbody tr td:nth-child(6)").click(function () {
+			$("#example tbody tr td:nth-child(5)").click(function () {
 			var position = oTable.fnGetPosition(this); // getting the clicked row position
 			RowID = oTable.fnGetData(position[0]); 
 			$("#order_idPerk").val(RowID.id);
@@ -482,7 +483,7 @@ $('[data-ride="datatables3"]').each(function() {
 		"aoColumns": [
 		{
 			"mData": null,
-			"sClass": "center",
+			"sClass": "center", "bVisible":    false,
 			"sDefaultContent": '<input id="checked" type="checkbox" </input>'
 		},
 		{ "mData": "reference_no" } ,
@@ -503,9 +504,9 @@ $('[data-ride="datatables3"]').each(function() {
 		{ "mData": "perk_id",				"bVisible":    false  } ,
 		{ "mData": "quantity",				"bVisible":    false  },
 		{ "mData": "updated_at" ,				"bVisible":    false },
-		{ "mData": null,            "bVisible":    false,    "sClass": "center",
-		"sDefaultContent": '<a style="font-size:10px;" class="btn btn-xs btn-info" data-toggle="modal"  href="#modal">Update address</a>'
-	}
+		{ "mData": null,            "bVisible":    isAdmin ,     "sClass": "center",
+		"sDefaultContent": '<a  class="btn btn-xs icon-edit btn-default" data-toggle="modal"  href="#modalAddPerk"></a><a id="splitPerkButton"  class="btn btn-xs  icon-strikethrough btn-info" data-toggle="modal"  href="#modalSelectPerks"></a><a  class="btn btn-xs icon-remove btn-danger" data-toggle="modal"  href="javascript:onDeleteOrder();"></a>'
+		}
 	],
 	"aoColumnDefs":[{
 		"aTargets": [ 2 ]
@@ -531,6 +532,7 @@ $('[data-ride="datatables3"]').each(function() {
 	, "mRender": function ( url, type, full )  {
 		gfull=full;
 		if(full.split==true){
+
 			return  full.amount;
 		}
 		else{

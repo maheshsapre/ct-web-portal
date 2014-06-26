@@ -146,9 +146,13 @@ function onSuccessGetTrackerInfo(response){
 		$("#updateAddress_authentication_token").val(getKey()); 
 		
 		var str=response.data.address.country;
-		str = str.toLowerCase().replace(/\b[a-z]/g, function(letter) {
-			return letter.toUpperCase();
-		});
+
+    if (str){
+  		str = str.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+  			return letter.toUpperCase();
+  		});
+    }
+
 		$("#select2-option > option").each(function() {
 			if(str==this.value)
 				document.getElementById('select2-option').selectedIndex = this.index;
@@ -543,6 +547,14 @@ function selectedPerk6(i,val){
   $("#perkValue6").html("$"+i);
 }
 
+function onDeleteOrder()
+{
+
+   callAPI("/v1/orders/{0}/delete.json&api_key={1}".f(addPerkOrderId, getKey()), "DELETE",  "" , onSuccessDeleteOrder, onApiError);
+
+
+}
+
 function addPerks(){
   amount=0;
   for (var i = perkArray.length - 1; i >= 0; i--) {
@@ -571,6 +583,7 @@ function addPerks(){
      order_id: addPerkOrderId,
      perk_ids: perksIds.toString()
    }
+
    callAPI("/v1/orders/split_the_order.json", "POST",JSON.stringify(param), onSuccessSplitPerk, onApiError);
 
  }
@@ -578,6 +591,15 @@ function addPerks(){
 
 function onSuccessSplitPerk(response){
   bootbox.alert("Perks have been successfully added", function(result) 
+  {  
+    if(result==undefined){
+     window.location=window.location.href;
+   }
+ });
+}
+
+function onSuccessDeleteOrder(response){
+  bootbox.alert("Order is deleted successfully.", function(result) 
   {  
     if(result==undefined){
      window.location=window.location.href;
