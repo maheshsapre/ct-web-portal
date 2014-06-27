@@ -16,8 +16,6 @@ $(document).ready(function()
   {
   	$("#bar").width(percentComplete+'%');
   	$("#percent").html(percentComplete+'%');
-
-
   },
   success: function() 
   {
@@ -36,13 +34,11 @@ complete: function(response)
 if(response.status==200){  
 	$("#uploadError").css('display','none');
 	$("#uploadSuccess").css('display','block');
-	callAPI("/v1/orders/order_status_summary.json", "GET", getKeyQueryFormat(), onSuccessStatusSummary, onApiError);
 	callAPI("/v1/orders/perk_summary.json", "GET", getKeyQueryFormat(), onSuccessPerksummary, onApiError);
 	callAPI("/v1/orders/total_backers_and_orders.json", "GET", getKeyQueryFormat(), onSuccessTotalBackers, onApiError);
 
 }
 else {
-	console.log(response);
 	$("#uploadResult").append(response.status + ": " + response.statusText + "<br/>");
 	$("#uploadSuccess").css('display','none');
 	$("#uploadError").css('display','block');
@@ -50,16 +46,18 @@ else {
 	if (response.responseText != "")
 	{
 		var obj = JSON.parse(response.responseText);
-		setErrorMessage(obj.message);
-		if(obj.code==3003){
-			$("#basicInfo").empty().append("<tr><th>Line</th><th>Pledge Id</th><th>error</th></tr>");
+		if(obj.code==9107){
+			$("#basicInfo").empty().append("<tr><th>Line</th><th>Error</th></tr>");
 			for(i=0;i<obj.message.length;i++){
 				basic=obj.message[i];
-				$("#basicInfo").append("<tr><td>"+basic.line+"</td><td>"+basic.pledge_id+"</td><td>"+ basic.error+"</td></tr>");
+				$("#basicInfo").append("<tr><td>"+basic.line+"</td><td>"+ basic.error+"</td></tr>");
 			}
-			callAPI("/v1/orders/order_status_summary.json", "GET", getKeyQueryFormat(), onSuccessStatusSummary, onApiError);
 			callAPI("/v1/orders/perk_summary.json", "GET", getKeyQueryFormat(), onSuccessPerksummary, onApiError);
 			callAPI("/v1/orders/total_backers_and_orders.json", "GET", getKeyQueryFormat(), onSuccessTotalBackers, onApiError);
+		}
+		else
+		{
+			$("#uploadResult").append(obj.message + "<br/>");
 		}
 	}
 	return;
