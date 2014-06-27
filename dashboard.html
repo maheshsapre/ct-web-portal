@@ -96,66 +96,14 @@
 					<section class="panel">
 						<header class="panel-heading">
 							<ul class="nav nav-tabs nav-justified">
-								<li class="active"><a href="#orderStatus" data-toggle="tab">Order Status</a></li>
-								<li><a href="#perks" data-toggle="tab">Perks</a></li>
+								<li class="active"><a href="#perks" data-toggle="tab">Perks</a></li>
 								<li><a href="#customQueries" data-toggle="tab">Custom Queries</a></li>
 							</ul>
 						</header>
 						<div class="panel-body">
 							<div class="tab-content">
-								<div class="tab-pane active" id="orderStatus">
-									<section class="panel-body ">
-										<div class="col-lg-12">
-											<header class="panel-heading bg bg-inverse">
-												Summarized by Order Status<button data-toggle="modal" id="massNotification" href="#modal" class="btn btn-default btn-xs pull-right">Mass Notification</button>
-											</header>
-											<div class="list-group">
-												<a href="orders.html?page=1&orderStatus=1" class="list-group-item">
-													<i class="icon-chevron-right"></i>
-													<span class="badge" id="orderAccepted"></span>
-													<i class="icon-info-sign grey"></i> Order Accepted / Imported
-												</a>
-												<a href="orders.html?page=1&orderStatus=2" class="list-group-item">
-													<i class="icon-chevron-right"></i>
-													<span class="badge" id="pendingActionCustomer"></span>
-													<i class="icon-info-sign grey"></i> Pending Action - Customer
-												</a>
-												<a href="orders.html?page=1&orderStatus=3" class="list-group-item">
-													<i class="icon-chevron-right"></i>
-													<span class="badge" id="pendingActionGeckoTeam"></span>
-													<i class="icon-info-sign grey"></i> Pending Action - Gecko Team
-												</a>
-												<a href="orders.html?page=1&orderStatus=4" class="list-group-item">
-													<i class="icon-chevron-right"></i>
-													<span class="badge" id="pendingShipment"></span>
-													<i class="icon-info-sign grey"></i> Pending Shipment - All issues resolved
-												</a>
-												<a href="orders.html?page=1&orderStatus=5" class="list-group-item">
-													<i class="icon-chevron-right"></i>
-													<span class="badge" id="shipped"></span>
-													<i class="icon-info-sign grey"></i> Shipped / Delivered
-												</a>
-												<a href="orders.html?page=1&orderStatus=6" class="list-group-item">
-													<i class="icon-chevron-right"></i>
-													<span class="badge" id="inCompleteAddress"></span>
-													<i class="icon-info-sign grey"></i> Incomplete Address
-												</a>
-												<a href="orders.html?page=1&orderStatus=7" class="list-group-item">
-													<i class="icon-chevron-right"></i>
-													<span class="badge" id="PerkNotMentioned"></span>
-													<i class="icon-info-sign grey"></i> Perk not mentioned
-												</a>
-												<a href="orders.html?page=1&orderStatus=8" class="list-group-item">
-													<i class="icon-chevron-right"></i>
-													<span class="badge" id="ShippingNotPaid"></span>
-													<i class="icon-info-sign grey"></i> Shipping not paid
-												</a>
-											</div>
-										</div>
 
-									</section>
-								</div>
-								<div class="tab-pane" id="perks">
+								<div class="tab-pane active" id="perks">
 
 									<section class="panel-body ">
 										<div class="col-lg-12">
@@ -284,6 +232,37 @@
 
 							</div>
 						</div>
+					</section>
+				</div>
+
+				<div class="col-sm-6">
+					<section class="panel">
+							<header class="panel-heading bg bg-default">
+								<a class="btn btn-link pull-right nav"><i class="icon-upload icon-light icon-xlarge"></i></a>
+								Upload
+							</header>
+					
+					<form class="form-horizontal"  method="post"  enctype="multipart/form-data" id="backerCsv" data-validate="parsley">      
+						<input type="hidden" id="data_type" name="data_type" value="">
+						<input type="hidden" id="api_key" name="api_key" value="">
+
+						<div class="form-group ">
+							<label  class="col-sm-3 control-label">Country</label>
+							<div class="col-sm-6">
+								<div class="m-b">
+									<select id="select-upload-type" name="select-upload-type" class="col-xs-12 form-control">
+										<option value="">Please select...</option>
+										<option value="indiegogo">Indiegogo Contribtinos</option>
+										<option value="shopify">Shopify Orders</option>
+										<option value="payumoney">PayUMoney Orders</option>
+										<option value="scheduled">Scheduled Shipment Orders</option>
+										<option value="shipped">Shipped Orders</option>
+										<option value="merge_emails">Merge Accounts</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</form>
 					</section>
 				</div>
 				<div class="col-sm-6">
