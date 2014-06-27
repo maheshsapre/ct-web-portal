@@ -238,7 +238,8 @@ function updateAddresses()
   var $form = $("#updateAddresses");
   var $inputs = $form.find("input, select, button, textarea");
   var param =  $form.serializeObject(); 
-  param["authentication_token"] = getKey();
+  param["api_key"] = getKey();
+
   updateBackerAddresses(param.address_id,JSON.stringify(param));
 }
 
