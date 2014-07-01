@@ -50,11 +50,11 @@ function onSearchBacker() {
 		case "Shipped": url = url + "&q[shipping_status_eq]=2"; break;
 	}
 	
-	if ($.trim($("#searchEmail").val()).length > 0) url = url + "&q[email_cont]="+ encodeURIComponent($.trim($("#searchEmail").val()));
-	if ($.trim($("#searchCountry").val()).length > 0) url = url + "&q[addresses_country_cont]="+ encodeURIComponent($.trim($("#searchCountry").val()));
-	if ($.trim($("#searchNotCountry").val()).length > 0) url = url + "&q[addresses_country_not_cont]="+ encodeURIComponent($.trim($("#searchNotCountry").val()));
-	if ($.trim($("#searchPerkName").val()).length > 0) url = url + "&q[orders_perks_name_cont]="+ encodeURIComponent($.trim($("#searchPerkName").val()));
-	if ($.trim($("#searchOrderReference").val()).length > 0) url = url + "&q[orders_reference_no_cont]="+ encodeURIComponent($.trim($("#searchOrderReference").val()));    	
+	if ($.trim($("#searchEmail").val()).length > 0) url = url + "&q[email_cont]="+ encodeURIComponent($("#searchEmail").val());
+	if ($.trim($("#searchCountry").val()).length > 0) url = url + "&q[addresses_country_cont]="+ encodeURIComponent($("#searchCountry").val());
+	if ($.trim($("#searchNotCountry").val()).length > 0) url = url + "&q[addresses_country_not_cont]="+ encodeURIComponent($("#searchNotCountry").val());
+	if ($.trim($("#searchPerkName").val()).length > 0) url = url + "&q[orders_perks_name_cont]="+ encodeURIComponent($("#searchPerkName").val());
+	if ($.trim($("#searchOrderReference").val()).length > 0) url = url + "&q[orders_reference_no_cont]="+ encodeURIComponent($("#searchOrderReference").val());    	
 	
 	window.location="backers.html?" + url + "&page=1&search=1&size=100000"  ;
 }
