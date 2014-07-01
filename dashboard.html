@@ -3,7 +3,8 @@
 	<script src="js/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
 	<script src="http://malsup.github.com/jquery.form.js"></script>
-	<meta charset="utf-8">
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
 	<title>Gecko - Make your smartphone smarter</title>
 	<meta name="description" content="mobile first, app, web app, responsive, admin dashboard, flat, flat ui">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> 
@@ -237,184 +238,70 @@
 
 				<div class="col-sm-6">
 					<section class="panel">
-							<header class="panel-heading bg bg-default">
-								<a class="btn btn-link pull-right nav"><i class="icon-upload icon-light icon-xlarge"></i></a>
-								Upload
-							</header>
-					
-					<form class="form-horizontal"  method="post"  enctype="multipart/form-data" id="backerCsv" data-validate="parsley">      
-						<input type="hidden" id="data_type" name="data_type" value="">
-						<input type="hidden" id="api_key" name="api_key" value="">
+						<header class="panel-heading bg-white">
+							<a class="btn btn-link pull-right nav"><i class="icon-upload icon-light icon-xlarge"></i></a>
+							Upload
+						</header>
+						<div class="panel-body">
 
-						<div class="form-group ">
-							<label  class="col-sm-3 control-label">Country</label>
-							<div class="col-sm-6">
-								<div class="m-b">
-									<select id="select-upload-type" name="select-upload-type" class="col-xs-12 form-control">
+							<form class="form-horizontal"  method="post"  enctype="multipart/form-data" id="backerCsv" data-validate="parsley">      
+								<input type="hidden" id="data_type" name="data_type" value="">
+								<input type="hidden" id="api_key" name="api_key" value="">
+								<div class="block">
+					                <label class="control-label">Type of upload</label>
+					                <select id="select-upload-type" name="select-upload-type" class="col-xs-12 form-control">
 										<option value="">Please select...</option>
 										<option value="indiegogo">Indiegogo Contribtinos</option>
 										<option value="shopify">Shopify Orders</option>
-										<option value="payumoney">PayUMoney Orders</option>
+										<option value="payu_money">PayUMoney Orders</option>
 										<option value="scheduled">Scheduled Shipment Orders</option>
 										<option value="shipped">Shipped Orders</option>
 										<option value="merge_emails">Merge Accounts</option>
 									</select>
-								</div>
-							</div>
+					            </div>
+
+								<div class="block">
+					                <a href="" id="download_sample"><small class="text-muted pull-right">Download Sample</small></a>
+									<input type="submit" style="opacity:0;" id="fileButton">
+					            </div>
+
+								<div class="block">
+					               	<label class="control-label">Send report to (comma separated email ids)</label>
+									 <textarea placeholder="Comma separated email ids.." name="report_to" rows="5" class="form-control" data-trigger="keyup" data-rangelength="[10,400]"></textarea>
+					            </div>
+								<div class="block">
+					                <input type="file" id="uploadButton" onchange="javascript:submitUploadForm();" title="Upload"  name="file" class="btn btn-sm btn-info">
+					            </div>
+							</form>
 						</div>
-					</form>
 					</section>
-				</div>
-				<div class="col-sm-6">
 
-					<form class="form-horizontal"  method="post"  enctype="multipart/form-data" id="backerCsv" data-validate="parsley">      
-						<input type="hidden" id="data_type" name="data_type" value="">
-						<input type="hidden" id="api_key" name="api_key" value="">
-
-						<section class="panel">
-							<header class="panel-heading bg bg-default">
-								<a class="btn btn-link pull-right nav"><i class="icon-upload icon-light icon-xlarge"></i></a>
-								Upload
-							</header>
-							<ul class="list-group">
-								<li class="list-group-item"  >
-									<div class="media">
-										<span class="pull-left">
-											<img  style="width:35px;height:35px;" src="images/indiegogo-logo.png"></img>
-										</span>
-										<div id="todo-1" class="pull-right text-primary m-t-small">
-											<input type="submit" style="opacity:0;" id="fileButton-indiegogo">
-											<a href="https://s3.amazonaws.com/gecko-api-server-resources/backers/sample_files/indegiego_csv.csv"><small class="text-muted">Download Sample</small></a>
-										</div>
-										<div class="media-body">
-											<div class="h5"><p>Indiegogo Contributions</p></div>
-											<small class="text-muted"><input type="file"  onchange="javascript:submit('indiegogo');" title="Upload"  name="file" class="btn btn-sm btn-info"></small>
-										</div>
-									</div>
-								</li>
-							</ul>
-							<ul class="list-group">
-								<li class="list-group-item"  >
-									<div class="media">
-										<span class="pull-left">
-											<img  style="width:35px;height:35px;" src="images/shopify-logo.jpg"></img>
-										</span>
-										<div id="todo-1" class="pull-right text-primary m-t-small">
-											<input type="submit" style="opacity:0;" id="fileButton-shopify">
-											<a href="https://s3.amazonaws.com/gecko-api-server-resources/backers/sample_files/1.shopify_list.csv"><small class="text-muted">Download Sample</small></a>
-										</div>
-										<div class="media-body">
-											<div class="h5"><p>Shopify Orders</p></div>
-											<small class="text-muted"><input type="file"  onchange="javascript:submit('shopify');" title="Upload"  name="file" class="btn btn-sm btn-info"></small>
-										</div>
-									</div>
-								</li>
-							</ul>
-							<ul class="list-group">
-								<li class="list-group-item"  >
-									<div class="media">
-										<span class="pull-left thumb-small m-t-mini">
-											<i class="icon-plane icon-xlarge text-info"></i>
-										</span>
-										<div id="todo-1" class="pull-right text-primary m-t-small">
-											<input type="submit" style="opacity:0;" id="fileButton-scheduled">
-											<a href="https://s3.amazonaws.com/gecko-api-server-resources/backers/sample_files/scheduled_shippment_date.csv"><small class="text-muted">Download Sample</small></a>
-										</div>
-										<div class="media-body">
-											<div class="h5"><p>List of emails scheduled for shipping</p></div>
-											<small class="text-muted"><input type="file"  onchange="javascript:submit('scheduled');" title="Upload"  name="file" class="btn btn-sm btn-info"></small>
-										</div>
-									</div>
-								</li>
-							</ul>
-							<ul class="list-group">
-								<li class="list-group-item"  >
-									<div class="media">
-										<span class="pull-left thumb-small m-t-mini">
-											<i class="icon-thumbs-up icon-xlarge  text-success"></i>
-										</span>
-										<div id="todo-1" class="pull-right text-primary m-t-small">
-											<input type="submit" style="opacity:0;" id="fileButton-shipped">
-											<a href="https://s3.amazonaws.com/gecko-api-server-resources/backers/sample_files/2.Tracking+Nos.csv"><small class="text-muted">Download Sample</small></a>
-										</div>
-										<div class="media-body">
-											<div class="h5"><p>List of orders already shipped</p></div>
-											<small class="text-muted"><input type="file"  onchange="javascript:submit('shipped');" title="Upload"  name="file" class="btn btn-sm btn-info"></small>
-										</div>
-									</div>
-								</li>
-							</ul>
-							<ul class="list-group">
-								<li class="list-group-item"  >
-									<div class="media">
-										<span class="pull-left thumb-small m-t-mini">
-											<i class="icon-thumbs-up icon-xlarge  text-success"></i>
-										</span>
-										<div id="todo-1" class="pull-right text-primary m-t-small">
-											<input type="submit" style="opacity:0;" id="fileButton-merge_emails">
-											<a href="https://s3.amazonaws.com/gecko-api-server-resources/backers/sample_files/Two_email_ids_need_to_be_merged_23.06.14.csv"><small class="text-muted">Download Sample</small></a>
-										</div>
-										<div class="media-body">
-											<div class="h5"><p>Merge emails</p></div>
-											<small class="text-muted"><input type="file"  onchange="javascript:submit('merge_emails');" title="Upload"  name="file" class="btn btn-sm btn-info"></small>
-										</div>
-									</div>
-								</li>
-							</ul>							
-						</section>
-
-					</form>
 					<section class="panel">
-						<section class="panel-body ">
-							<div class="col-lg-12">
-								<div class="alert alert-danger" id="uploadError" style="display:none;">
-									<button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
-									<i class="icon-ban-circle icon-large"></i><strong>Upload failed! </strong><div id="uploadResult"></div>
-								</div>
-								<div class="alert alert-success" id="uploadSuccess" style="display:none;">
-									<button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
-									<i class="icon-ok-sign icon-large"></i><strong>Success!</strong> CSV file successfully uploaded.
-								</div>
-
-								<table border="2" cellpadding="11" id="basicInfo"><caption><u><b><h2></h2></b></u></caption></table> 
-							</div>
-						</section>
+						<header class="panel-heading bg-white">
+							<a class="btn btn-link pull-right nav"><i class="icon-upload icon-light icon-xlarge"></i></a>
+							Merge Emails
+						</header>
+						<div class="panel-body">
+							<form action="javascript:mergeEmails();" class="panel-body" id="merge-form" data-validate="parsley">
+								<input type="hidden" id="data_type" name="data_type" value="">
+								<input type="hidden" id="api_key" name="api_key" value="">
+								<div class="block">
+					                <label class="control-label">From</label>
+					                <input data-type="email" id="merge-from" placeholder="test@example.com" name="from"  class="form-control" data-required="true">
+					              </div>
+								<div class="block">
+					                <label class="control-label">To</label>
+					                <input data-type="email" id="merge-to" placeholder="test@example.com" name="to"  class="form-control" data-required="true">
+					              </div>
+					              <button type="submit" class="btn btn-info">Merge Now</button>
+							</form>
+						</div>
 					</section>
 				</div>
 			</div>  
 		</section>
 	</section>
-<!--   <div id="modalnumber"  class="modal fade">
-
-    <div   class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><i class="icon-remove"></i></button>
-          <h4 class="modal-title" id="myModalLabel">Notes</h4>
-        </div>
-        <div  class="modal-body">
-         <div class="panel-body">
-          <form class="form-horizontal"  action="javascript:orderStatus();" data-validate="parsley">  
-              <div class="form-group">
-                  <label class="control-label">Notes:</label>
-                  <textarea class="form-control" name="notes" placeholder="Content" id="myNotes" rows="5"></textarea>
-                </div>
-                  <input type="hidden" id="updateAddress_authentication_token" name="authentication_token" value="">
-
-
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-default">Save</button>
-                <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Close</button>
-              </div>
-          </div><!-- /.modal-content -->
-     <!--      </div>
-        </form>
-    </div>  -->
-
     <div id="modal"  class="modal fade">
-
     	<div   class="modal-dialog">
     		<div class="modal-content">
     			<div class="modal-header">
@@ -424,13 +311,10 @@
     			<div  class="modal-body">
     				<div class="panel-body">
     					<form class="form-horizontal" method="post" action="javascript:checkText();" id="sendEmail" data-validate="parsley">  
-
-
     						<label class="control-label">Choose the type of email you want to send to the backers</label>
     						<select id="select2-option" name="email_type" id="email_type" style="width:260px">
     							<option value="welcome_email">Welcome email</option>
     							<option value="confirmation_email">Confirmation email</option>
-
     						</select>
     						<br/>
     						<br/>
@@ -453,7 +337,6 @@
     </div>
 </div>
 <div id="modalDelete"  class="modal fade">
-
 	<div   class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -513,22 +396,23 @@
 //getCurrentUser();
 setCurrentUserName();
 loggedInrole();
-$("#order_source").val("igg");
-$("#api_key").val(getKey());
-getFileAction();
-
-$(document).ready(function()
-{
-
-
-	$('#admin').addClass("active");
-
-});
+	$("#order_source").val("igg");
+	$("#api_key").val(getKey());
+	getFileAction();
+	$(document).ready(function()
+	{
+		$('#admin').addClass("active");
+	});
 </script>
 <script>
 
 </script>
 <script type="text/javascript">
+	function submitUploadForm(){
+		$("#api_key").val(getKey());
+		$("#backerCsv").append('<div id="loader"></div> ');
+		$("#fileButton").click();
+	}
 	function submit(option){
 		$("#data_type").val(option);
 		$("#api_key").val(getKey());

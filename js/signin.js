@@ -4,7 +4,6 @@ function signin()
 	var $inputs = $form.find("input, select, button, textarea");
 	var param =  $form.serializeObject();  
 	createToken(param);
-
 }
 
 function createToken(param) {

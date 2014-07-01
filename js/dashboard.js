@@ -19,6 +19,8 @@ $(document).ready(function()
   },
   success: function() 
   {
+
+  	alert("hi");
   	$("#bar").width('100%');
   	$("#percent").html('100%');
 
@@ -31,11 +33,14 @@ $(document).ready(function()
 complete: function(response) 
 {   $("#loader").remove();
 
+
+alert(response);
 if(response.status==200){  
 	$("#uploadError").css('display','none');
 	$("#uploadSuccess").css('display','block');
-	callAPI("/v1/orders/perk_summary.json", "GET", getKeyQueryFormat(), onSuccessPerksummary, onApiError);
-	callAPI("/v1/orders/total_backers_and_orders.json", "GET", getKeyQueryFormat(), onSuccessTotalBackers, onApiError);
+
+//	callAPI("/v1/orders/perk_summary.json", "GET", getKeyQueryFormat(), onSuccessPerksummary, onApiError);
+//	callAPI("/v1/orders/total_backers_and_orders.json", "GET", getKeyQueryFormat(), onSuccessTotalBackers, onApiError);
 
 }
 else {
@@ -52,26 +57,63 @@ else {
 				basic=obj.message[i];
 				$("#basicInfo").append("<tr><td>"+basic.line+"</td><td>"+ basic.error+"</td></tr>");
 			}
-			callAPI("/v1/orders/perk_summary.json", "GET", getKeyQueryFormat(), onSuccessPerksummary, onApiError);
-			callAPI("/v1/orders/total_backers_and_orders.json", "GET", getKeyQueryFormat(), onSuccessTotalBackers, onApiError);
-		}
-		else
-		{
-			$("#uploadResult").append(obj.message + "<br/>");
-		}
-	}
-	return;
+//			callAPI("/v1/orders/perk_summary.json", "GET", getKeyQueryFormat(), onSuccessPerksummary, onApiError);
+//			callAPI("/v1/orders/total_backers_and_orders.json", "GET", getKeyQueryFormat(), onSuccessTotalBackers, onApiError);
+}
+else
+{
+	$("#uploadResult").append(obj.message + "<br/>");
+}
+}
+return;
 }
 }
 
 }; 
 
-$("#backerCsv").ajaxForm(options);
 
+
+$( "#select-upload-type" ).change(function() {
+
+	var datatype = $("#select-upload-type").val();
+	$("#data_type").val(datatype);
+	$("#api_key").val(getKey());
+
+
+	$("#uploadButton").show();
+	var csv = "#";
+	switch(datatype)
+	{
+		case "indiegogo": 
+		csv = "https://s3.amazonaws.com/gecko-api-server-resources/backers/sample_files/indegiego_csv.csv";
+		break;
+		case "shopify": 
+		csv = "https://s3.amazonaws.com/gecko-api-server-resources/backers/sample_files/1.shopify_list.csv";
+		break;
+		case "shipped": 
+		csv = "https://s3.amazonaws.com/gecko-api-server-resources/backers/sample_files/2.Tracking+Nos.csv";
+		break;
+		case "scheduled": 
+		csv = "https://s3.amazonaws.com/gecko-api-server-resources/backers/sample_files/scheduled_shippment_date.csv";
+		break;
+		case "merge_emails": 
+		csv = "https://s3.amazonaws.com/gecko-api-server-resources/backers/sample_files/Two_email_ids_need_to_be_merged_23.06.14.csv";
+		break;
+		case "payu_money": 
+		csv = "#";
+		break;
+		default:
+		csv = "#";
+		
+		$("#uploadButton").hide();
+		break;
+	}
+	$("#download_sample").attr("href", csv);
+});
 });
 
 function getFileAction(){
-	$("#backerCsv").attr("action",CONFIG.url+"/v1/backers/upload_data.json");
+	$("#backerCsv").attr("action",CONFIG.url+"/v1/backers/upload_data");
 }
 
 
@@ -193,9 +235,9 @@ function onSuccessTotalBackers(response){
 }
 
 $(document).ready(function() {
-	callAPI("/v1/orders/order_status_summary.json", "GET", getKeyQueryFormat(), onSuccessStatusSummary, onApiError);
-	callAPI("/v1/orders/perk_summary.json", "GET", getKeyQueryFormat(), onSuccessPerksummary, onApiError);
-	callAPI("/v1/orders/total_backers_and_orders.json", "GET", getKeyQueryFormat(), onSuccessTotalBackers, onApiError);
+//	callAPI("/v1/orders/order_status_summary.json", "GET", getKeyQueryFormat(), onSuccessStatusSummary, onApiError);
+//	callAPI("/v1/orders/perk_summary.json", "GET", getKeyQueryFormat(), onSuccessPerksummary, onApiError);
+callAPI("/v1/orders/total_backers_and_orders.json", "GET", getKeyQueryFormat(), onSuccessTotalBackers, onApiError);
 
 
 });
@@ -221,8 +263,26 @@ function onSuccessSendEmail(response){
 	});
 }
 
-function deleteBackerData(){
+function mergeEmails()
+{
+	var $form = $("#merge-form");
+	var $inputs = $form.find("input, select, button, textarea");
+	var param =  $form.serializeObject(); 
+	param["api_key"] = getKey();
 
+	mergeEmailAccounts(JSON.stringify(param));
+}
+
+function mergeEmailAccounts(param)
+{
+	callAPI("/v1/backers/merge_backers.json", "POST", param, onSuccessEmailAccounts, onApiError);	
+}
+
+function onSuccessEmailAccounts(response){
+	  bootbox.alert("Done! Accounts merged.");
+}
+
+function deleteBackerData(){
 	var txt=$("#validateDeleteText").val();
 	if(txt=="Delete backer information"){
 		$("#loading").show();
@@ -232,7 +292,6 @@ function deleteBackerData(){
 		bootbox.alert("Enter the proper text");
 	}
 }
-
 
 function onSuccessDeleteBackerData(response){
 	window.location="dashboard.html";
