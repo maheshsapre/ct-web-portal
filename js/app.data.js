@@ -532,10 +532,10 @@ $('[data-ride="datatables3"]').each(function() {
 	, "mRender": function ( url, type, full )  {
 		gfull=full;
 		if(full.split==true){
-			return  full.amount;
+			return  full.currency + " " +  full.amount;
 		}
 		else{
-			return '<div>' + full.amount + '</div>';
+			return '<div>' + full.currency + " " +  full.amount + '</div>';
 		}
 	}
 },
