@@ -43,6 +43,7 @@ var page = urlParameterValue( 'page' );
 var id= urlParameterValue( 'id' );
 
 function getBackerOrdersId(id){
+  $("#backer_id").val(id);
 	callAPI("/v1/orders/{0}/backer_information.json".f(id), "GET",getKeyQueryFormat(), onSuccessGetBackerOrders, onApiError);
 }
 
@@ -69,9 +70,10 @@ function getTrackingInfo2(id)
 function confirmBackerAddress()
 {
 	var param= {};
-	param['authentication_token'] = getKey();
+	param['api_key'] = getKey();
 	param['address_confirmed'] = true;
-	console.log(param);
+  param['backer_id'] = $("#backer_id").val();
+  console.log(param);
 	callAPI("/v1/backers/update_backer.json", "PUT", JSON.stringify(param), onSuccessConfirmBackerAddress, onApiError);	
 }
 
