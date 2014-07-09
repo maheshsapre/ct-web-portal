@@ -52,8 +52,10 @@
 					<div class="step-pane " id="step2">
 					  <h3 class="m-t-none">
 						<a id="changeAddress" class="btn btn-white btn-xs" data-toggle="modal"  href="#modal">Change</a> 
-						<a id="confirmAddress" class="btn btn-xs btn-info" href="javascript:confirmBackerAddress(); ">Confirm</a>
-						<a id="addressConfirmed" class="btn btn-white btn-xs icon-thumbs-up disabled" href="javascript:onConfirmClick(); ">Confirmed!</a></h3>
+						<a id="confirmAddress" class="btn btn-xs btn-info" href="javascript:confirmBackerAddress(true); ">Confirm</a>
+						<a id="addressConfirmed" class="btn btn-white btn-xs icon-thumbs-up disabled" href="javascript:onConfirmClick(); ">Confirmed!</a>
+						<a id="unConfirmAddress" class="btn btn-xs btn-info" href="javascript:confirmBackerAddress(false); ">Unlock Now!</a>
+						</h3>
 						<div class="line line-dashed m-t-large"></div>
 					  <p id="addressDetails" class="m-t m-b"></p>
 					<input type="text" id="addressConfirmedText"  class="input-sm form-control" data-trigger="change"/>

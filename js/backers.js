@@ -60,8 +60,6 @@ function onSearchBacker() {
 }
 
 function searchBackerInfo() {
-//	console.log(window.location.search);
-	
 	$("#searchEmail").val(decodeURIComponent(urlParameterValue('q[email_cont]')));
 	$("#searchCountry").val(decodeURIComponent(urlParameterValue('q[addresses_country_cont]')));
 	$("#searchNotCountry").val(decodeURIComponent(urlParameterValue('q[addresses_country_not_cont]')));
@@ -143,7 +141,6 @@ else{
     "email_type" : param1.email_type
  };
 }
- console.log(param);
   sendEmail(JSON.stringify(param));
   }
   else{

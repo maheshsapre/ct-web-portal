@@ -516,7 +516,7 @@
       <div  class="modal-body">
        <div class="panel-body">
         <form class="form-horizontal"  action="javascript:addOrder();" id="addOrderForm" data-validate="parsley">  
-          <input type="hidden" name="backer_id" id="backer_id" placeholder="" class="bg-focus form-control">
+          <input type="hidden" name="backer_id" id="backer_id2" placeholder="" class="bg-focus form-control">
           <input type="hidden" name="address_id" id="address_Orderid" placeholder="" class="bg-focus form-control">
           <div class="form-group">
             <label class="control-label">Amount</label>
@@ -959,6 +959,7 @@ function onSuccessContentsLoad(){
 	$("#addressConfirmedText").hide();
 	$("#changeAddress").show();
 	$("#confirmAddress").show();
+	$("#unConfirmAddress").hide();
 	$("#addressConfirmed").hide();
 	$("#addressDetails").empty();
 	$("#trackingDetails").empty();

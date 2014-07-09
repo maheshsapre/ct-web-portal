@@ -101,6 +101,7 @@ function addOrder(){
   var $inputs = $form.find("input, select, button, textarea");
   var param =  $form.serializeObject(); 
   param["api_key"] = getKey();
+  param['backer_id'] = $("#backer_id").val();
   addNewOrder(param.backer_id,JSON.stringify(param));
 }
 

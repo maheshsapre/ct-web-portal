@@ -67,19 +67,33 @@ function getTrackingInfo2(id)
 }
 
 
-function confirmBackerAddress()
+function confirmBackerAddress(status)
 {
 	var param= {};
 	param['api_key'] = getKey();
-	param['address_confirmed'] = true;
-  param['backer_id'] = $("#backer_id").val();
-  console.log(param);
+	param['address_confirmed'] = status;
+  if(getRoles()=="admin"){
+    param['backer_id'] = $("#backer_id").val();
+  }
 	callAPI("/v1/backers/update_backer.json", "PUT", JSON.stringify(param), onSuccessConfirmBackerAddress, onApiError);	
 }
 
 function onSuccessConfirmBackerAddress(response){
-	$("#changeAddress").hide();
-	$("#confirmAddress").hide();
+
+  if (response.data.address_confirmed == true)
+  {
+    $("#changeAddress").hide();
+    $("#confirmAddress").hide();
+  if(getRoles()=="admin"){
+    $("#unConfirmAddress").show();
+  }
+  }
+  else
+  {
+    $("#changeAddress").show();
+    $("#confirmAddress").show();
+    $("#unConfirmAddress").hide(); 
+  }
 	$("#addressConfirmed").show();
 	$("#addressConfirmedText").val("confirmed");
 	$("#address_not_confirmed").hide();
@@ -105,12 +119,16 @@ function onSuccessGetTrackerInfo(response){
 	{
 		$("#changeAddress").hide();
 		$("#confirmAddress").hide();
+      if(getRoles()=="admin"){
+    $("#unConfirmAddress").show();
+  }
 		$("#addressConfirmed").show();
 	}
 	else
 	{
 		$("#changeAddress").show();
 		$("#confirmAddress").show();
+    $("#unConfirmAddress").hide();
 		$("#addressConfirmed").hide();
 	}
 	
@@ -196,10 +214,12 @@ function onSuccessGetTrackerInfo(response){
  }
 
  function onSuccessGetBackerOrders(response) { 
- 	console.log(response);
+  if (response.data.length > 0)
+  {
    $("#address_Orderid").val(response.data[0].address_id);
    $("#backer_id").val(response.data[0].backer_id);
    $("#email").html(response.data[0].backer.email);
+ }
    setBackerOrdersAction(response.data);
    for(i=0;i<response.data.length;i++){
     orderList[i]=response.data[i].id;

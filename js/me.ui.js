@@ -29,84 +29,6 @@ function clearRole()
   $.cookie("xsTr", "", { expires: 5 });
 }
 
-// function getPendingActionsGeckoTeam() {
-//   $.cookie.json = true;
-//   return $.cookie("xsTA");
-// }
-
-// function setPendingActionGeckoTeam(value) {
-//   console.log(value);
-//    $.cookie.json = true;
-//   $.cookie("xsTA", value, { expires: 5 }); // 5 days expiry
-// }
-
-// function clearPendingActionsGeckoTeam()
-// {  
-//   $.cookie("xsTA", "", { expires: 5 });
-// }
-
-// function getPendingOrdersAccepted() {
-//   $.cookie.json = true;
-//   return $.cookie("xsTL");
-// }
-
-// function setPendingOrderAccepted(value) {
-//   console.log(value);
-//    $.cookie.json = true;
-//   $.cookie("xsTL", value, { expires: 5 }); // 5 days expiry
-// }
-
-// function clearPendingOrderAccepted()
-// {  
-//   $.cookie("xsTL", "", { expires: 5 });
-// }
-
-// function getPendingShipment() {
-//   $.cookie.json = true;
-//   return $.cookie("xsTH");
-// }
-
-// function setPendingShipment(value) {
-//   console.log(value);
-//    $.cookie.json = true;
-//   $.cookie("xsTH", value, { expires: 5 }); // 5 days expiry
-// }
-
-// function clearPendingShipment()
-// {  
-//   $.cookie("xsTH", "", { expires: 5 });
-// }
-// function getShipmentDone() {
-//   $.cookie.json = true;
-//   return $.cookie("xsTD");
-// }
-
-// function setShipmentDone(value) {
-//   console.log(value);
-//    $.cookie.json = true;
-//   $.cookie("xsTD", value, { expires: 5 }); // 5 days expiry
-// }
-
-// function clearShipmentDone()
-// {  
-//   $.cookie("xsTD", "", { expires: 5 });
-// }
-
-// function getPendingActionCustomer() {
-//   $.cookie.json = true;
-//   return $.cookie("xsTP");
-// }
-
-// function setPendingActionCustomer(value) {
-//    $.cookie.json = true;
-//   $.cookie("xsTP", value, { expires: 5 }); // 5 days expiry
-// }
-
-// function clearPendingActionCustomer()
-// {  
-//   $.cookie("xsTP", "", { expires: 5 });
-// }
-
 
 function getOrderStatus() {
   $.cookie.json = true;
@@ -137,21 +59,6 @@ function clearOrderStatusId()
   $.cookie("xsTI", "", { expires: 5 });
 }
 
-// function getBackerInformation() {
-//   $.cookie.json = true;
-//   return $.cookie("xsTB");
-// }
-
-// function setBackerInfo(value) {
-//   console.log(value);
-//    $.cookie.json = true;
-//   $.cookie("xsTB", value, { expires: 5 }); // 5 days expiry
-// }
-
-// function clearBackerInfo()
-// {  
-//   $.cookie("xsTB", "", { expires: 5 });
-// }
 
 function getBackerOrdersAction() {
   $.cookie.json = true;
