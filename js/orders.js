@@ -22,6 +22,8 @@ function increment(){
  }
 }
 
+
+
 function decrement(){
   $("#loading").show();
   page=parseInt(page)-1;
@@ -118,12 +120,29 @@ function onSuccessGetTrackerInfo(response){
 		default: status = 'Shipmnet status: <span class="label bg-warning">No information available</span><br>'; break;
 	}
 	
+var tracking_url = null;
+switch((response.data.shipping_service + "").toLowerCase())
+        {
+          case "cnrpost": 
+            tracking_url = '<a style="color:blue" target="_blank" href="http://www.17track.net/en/result/post.shtml?nums={0}">{0} (Click here)</a>'.f(response.data.tracking_number);
+            break;
+          case "pfc post":
+            tracking_url = '<a style="color:blue" target="_blank" href="http://www.17track.net/en/result/post.shtml?nums={0}">{0} (Click here)</a>'.f(response.data.tracking_number);
+            break;
+          default: 
+            tracking_url = response.data.tracking_number;
+            break;
+      }
+
 	$("#trackingDetails").empty();
 	$("#trackingDetails").append(status);
 	if (response.data.shipping_service) $("#trackingDetails").append('Shipping Service: <strong>{0}</strong><br>'.f(response.data.shipping_service));
-	if (response.data.tracking_number) $("#trackingDetails").append('Tracking Number: <strong>{0}</strong><br>'.f(response.data.tracking_number));
+	if (response.data.tracking_number) $("#trackingDetails").append('Tracking Number: <strong>{0}</strong><br>'.f(tracking_url));
 	if (response.data.shipping_date) $("#trackingDetails").append('Shipping Date: <strong>{0}</strong><br>'.f( $.formatDateTime("MM dd, yy", new Date(response.data.shipping_date)))); //$.format.date(response.data.shipping_date, "MMM dd, yyyy")
 	
+
+  
+
 	if (response.data.address_confirmed)
 	{
 		$("#changeAddress").hide();

@@ -397,10 +397,41 @@ $('[data-ride="datatables2"]').each(function() {
 				gfull=full;
 				return  '<input id="checked" onchange="toggleCheckboxBacker('+gfull.id+')" type="checkbox" </input>';
 			}
+		},
+		{
+			"aTargets": [ 5 ]
+			, "bSortable": false
+			, "mRender": function ( url, type, full )  {
+				var tracking_url = null;
+				switch(full.shipping_service)
+				{
+					case "CNRPOST": 
+						tracking_url = '<a style="color:blue" target="_blank" href="http://www.17track.net/en/result/post.shtml?nums={0}">{1}</a>'.f(full.tracking_number, full.tracking_number);
+						break;
+					case "PFC Post":
+						tracking_url = '<a style="color:blue" target="_blank" href="http://www.17track.net/en/result/post.shtml?nums={0}">{1}</a>'.f(full.tracking_number, full.tracking_number);
+						break;
+					default: 
+						if (full.shipping_service != null){
+						 tracking_url = "{0}:{1}<br>{2}".f(full.shipping_status, full.shipping_service, full.tracking_number);
+						}
+						else
+						{
+							tracking_url = full.shipping_status;
+						}
+						break;
+				}
+
+				return  tracking_url;
+			}
 		}
 		]
 	} );
 });
+
+
+//
+//
 
 // Render the Orders table
 $('[data-ride="datatables3"]').each(function() {
