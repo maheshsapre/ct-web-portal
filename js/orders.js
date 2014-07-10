@@ -66,6 +66,11 @@ function getTrackingInfo2(id)
 	callAPI("/v1/backers/backer_information.json?backer_id={0}".f(id), "GET", getKeyQueryFormat(), onSuccessGetTrackerInfo, onApiError);
 }
 
+function deleteBackerAccount()
+{
+  var id = $("#backer_id").val();
+  callAPI("/v1/backers/{0}/delete_backer.json?api_key={1}".f(id, getKey()), "DELETE", "", onDeleteBackerAccount, onApiError);
+}
 
 function confirmBackerAddress(status)
 {
@@ -76,6 +81,10 @@ function confirmBackerAddress(status)
     param['backer_id'] = $("#backer_id").val();
   }
 	callAPI("/v1/backers/update_backer.json", "PUT", JSON.stringify(param), onSuccessConfirmBackerAddress, onApiError);	
+}
+
+function onDeleteBackerAccount(response){
+window.location="backers.html?page=1";
 }
 
 function onSuccessConfirmBackerAddress(response){

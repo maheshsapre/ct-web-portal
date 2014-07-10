@@ -77,8 +77,9 @@
         
         <div class="clearfix">
           <h4>Orders</h4>
-               <div class="col-lg-2">
+               <div class="col-lg-12">
       				<button  id="addOrder" data-toggle="modal" href="#modalShipping" class="btn btn-primary">Add Order</button>
+      				<button  id="deleteBackerAccount" data-toggle="modal" href="#modalDeleteBackerAccount" class="btn btn-danger pull-right">Delete Backer Account</button>
     			</div>
         </div>
     
@@ -566,6 +567,30 @@
 </div>
 </div>
 
+<div id="modalDeleteBackerAccount"  class="modal fade">
+	<div   class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><i class="icon-remove"></i></button>
+				<h4 class="modal-title" id="myModalLabel">Delete Backer Account</h4>
+			</div>
+			<div  class="modal-body">
+				<div class="panel-body">
+					<form class="form-horizontal" method="post" action="javascript:deleteBackerAccount();"  data-validate="parsley">  
+						<div class="form-group">
+							<label class="">Please enter the text "Delete Backer Account" to delete all the orders, addresses and any other details related to this backer.</label>
+							<input type="text" class="bg-focus form-control" id="validateDeleteText" placeholder="Do you really want to delete backer account?" data-parsley-equalto="Delete Backer Account" required>
+						</div>
+					<div class="modal-footer">
+						<button type="submit" id="btnPlaceOrder" class="btn btn-sm btn-default">Delete</button>
+						<button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Cancel</button>
+					</div>
+					</form>
+				</div>
+				</div>
+			</div>
+	</div>
+</div>
 
 <div id="modalFilterOrder"  class="modal fade">
 
@@ -946,6 +971,7 @@ function onSuccessContentsLoad(){
  
   if(getRoles()!="admin"){
     $("#addOrder").hide();
+    $("#deleteBackerAccount").hide();
 	$("#saveOrders").hide();
 	$("#orderstable").hide();
 	$("#tracking-wizard").hide();
@@ -954,6 +980,7 @@ function onSuccessContentsLoad(){
   else
   {
   	$("#addOrder").show();
+  	$("#deleteBackerAccount").show();
   }
   
 	$("#addressConfirmedText").hide();
