@@ -78,7 +78,6 @@
         <div class="clearfix">
           <h4>Orders</h4>
                <div class="col-lg-12">
-      				<button  id="addOrder" data-toggle="modal" href="#modalShipping" class="btn btn-primary">Add Order</button>
       				
     			</div>
         </div>
@@ -87,47 +86,12 @@
 
 		  </div>
 
-			<div class="row" id="adminPanel">
-				<div class="col-lg-6">
-					<section class="panel">
-						<header class="panel-heading">
-							<ul class="nav nav-tabs nav-justified">
-								<li class="active"><a href="#changeEmail" data-toggle="tab">Change Email</a></li>
-								<li ><a href="#deleteBackerAccount" data-toggle="tab">Delete Account</a></li>
-							</ul>
-						</header>
-						<div class="panel-body">
-							<div class="tab-content">
-								<div class="tab-pane active" id="changeEmail">
-									<section class="panel-body ">
-										<div class="col-lg-12">
-									<form action="javascript:changeEmail();" class="panel-body" id="change-email-form" data-validate="parsley">
-								<div class="block">
-					                <label class="control-label">Current Email Id</label>
-					                <input data-type="email" id="current-email" placeholder="old.email@example.com"  class="form-control" readonly>
-					              </div>
-								<div class="block">
-					                <label class="control-label">New Email Id</label>
-					                <input data-type="email" id="merge-to" placeholder="new.email@example.com" name="email"  class="form-control" data-required="true">
-					              </div>
-					              
-					              <button type="submit" class="btn btn-info">Update</button>
-							</form>
-										</div>
-									</section>
-								</div>
+			
+   	
+</section>
 
-								<div class="tab-pane" id="deleteBackerAccount">
-								<button   data-toggle="modal" href="#modalDeleteBackerAccount" class="btn btn-danger">Delete Backer Account</button>
-								</div>
-							</div>
-						</div>
-					</section>
-				</div>
-			</div>
-   	</div>
 </section>
-</section>
+
 <div id="modalnumber"  class="modal fade">
   <div   class="modal-dialog">
     <div class="modal-content">
@@ -143,17 +107,17 @@
             <textarea class="form-control" name="notes" placeholder="Content" id="myNotes" rows="5"></textarea>
           </div>
           <input type="hidden" id="updateAddress_authentication_token" name="authentication_token" value="">
-
-
-        </div>
-      </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-sm btn-default">Save</button>
         <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Close</button>
       </div>
+	  </form>
     </div><!-- /.modal-content -->
-  </div>
-</form>
+  
+
+</div>
+</div>
+</div>
 </div>
 <div id="modal"  class="modal fade">
 
@@ -166,7 +130,6 @@
       <div  class="modal-body">
        <div class="panel-body">
         <form class="form-horizontal"  action="javascript: updateAddresses();" id="updateAddresses" data-validate="parsley">  
-          
           <div class="form-group">
             <label class="col-lg-3 control-label">Shipping Name</label>
 			<div class="col-lg-8">
@@ -478,16 +441,17 @@
 	  </div>
     </div>
 
-  </div>
-</div>
+
 <div class="modal-footer">
   <button type="submit" class="btn btn-sm btn-default">Save</button>
   <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Close</button>
 </div>
+</form>
 </div><!-- /.modal-content -->
 </div>
 <input type="hidden"  name="address_id" id="address_id" placeholder="" class="bg-focus form-control"/>
-</form>
+
+</div>
 </div>
 
 
@@ -534,14 +498,15 @@
             </div>
           </div>
 
-        </div>
+        
         <div class="modal-footer">
           <button type="submit" class="btn btn-sm btn-default">Save</button>
           <button type="button" class="btn btn-sm btn-primary" id="closeButton" data-dismiss="modal">Close</button>
         </div>
+		</form>
       </div><!-- /.modal-content -->
     </div>
-  </form>
+  
 </div>
 </div>
 
@@ -594,15 +559,15 @@
             <label class="control-label">Notes</label>
             <textarea class="form-control" name="notes" placeholder="Content" rows="3"></textarea>
           </div>
-        </div>
+       
         <div class="modal-footer">
           <button type="submit" class="btn btn-sm btn-default">Save</button>
           <button type="button" class="btn btn-sm btn-primary" id="closeButton" data-dismiss="modal">Close</button>
         </div>
-
+</form>
       </div><!-- /.modal-content -->
     </div>
-  </form>
+  
 </div>
 </div>
 
@@ -703,15 +668,15 @@
               </select>
             </div>
           </div>
-        </div>
+        
         <div class="modal-footer">
           <button type="submit" class="btn btn-sm btn-default">Filter</button>
           <button type="button" class="btn btn-sm btn-primary" id="closeButton" data-dismiss="modal">Close</button>
         </div>
-
+</form>
       </div><!-- /.modal-content -->
     </div>
-  </form>
+  
 </div>
 </div>
 
@@ -945,7 +910,12 @@
    <input type="hidden" id="pageId" name="page" value="">
    <input type="hidden" id="api_key" name="api_key" value="">
  </form>
+ </div>
+ </div>
+ </div>
+ </div>
  <!-- footer -->
+ </div>
  <footer id="footer">
   <div class="text-center padder clearfix">
     <p>
@@ -994,12 +964,16 @@
 <script src="js/jquery.formatDateTime.min.js"></script>
 
 <script type="text/javascript">
+
   $(document).ready(function()
   {
+	
 	$("#orderContents").load("orderContents.html", onSuccessContentsLoad);
 	});
 	
 function onSuccessContentsLoad(){
+	$("#adminPanel").hide();
+	$("#addOrder").hide();
 	setCurrentUserName();
 	loggedInrole();
 	var id = urlParameterValue( 'id' );
@@ -1050,7 +1024,8 @@ function onSuccessContentsLoad(){
 	}
 	uncheckTheCheckbox();
 	}
-  </script>
+   </script>
   <script src="js/bootbox.min.js"></script>
-</body>
+
+  </body>
 </html>
