@@ -85,110 +85,21 @@
 				<h1>Gecko Dashboard</h1>
 			</div>
 			<div class="row">
-
 				<div class="col-lg-6">
-					<section class="panel text-center">
-						<div class="panel-body text-muted l-h-2x">
-							<span class="badge bg-success" id="orders"></span>
-							<span class="m-r-small">Orders</span>
-							<span class="badge bg-info" id="backers"></span> Backers
-						</div>
-					</section>
 					<section class="panel">
 						<header class="panel-heading">
 							<ul class="nav nav-tabs nav-justified">
-								<li class="active"><a href="#perks" data-toggle="tab">Perks</a></li>
-								<li><a href="#customQueries" data-toggle="tab">Custom Queries</a></li>
+								<li class="active"><a href="#customQueries" data-toggle="tab">Custom Queries</a></li>
 							</ul>
 						</header>
 						<div class="panel-body">
 							<div class="tab-content">
-
-								<div class="tab-pane active" id="perks">
-
-									<section class="panel-body ">
-										<div class="col-lg-12">
-											<header class="panel-heading bg bg-inverse">
-												Summarized by Product/Perk
-											</header>
-											<div class="list-group">
-												<a href="orders.html?page=1&orderStatus=9" class="list-group-item">
-													<span class="badge" id="gecko_2"></span>
-													<i class="icon-info-sign grey"></i> Gecko * 2
-												</a>
-												<a href="orders.html?page=1&orderStatus=10" class="list-group-item">
-													<span class="badge" id="gecko_6"></span>
-													<i class="icon-info-sign grey"></i> Gecko * 6
-												</a>
-												<a href="orders.html?page=1&orderStatus=11" class="list-group-item">
-													<span class="badge" id="gecko_4"></span>
-													<i class="icon-info-sign grey"></i> Gecko * 4
-												</a>
-												<a href="orders.html?page=1&orderStatus=12" class="list-group-item">
-													<span class="badge" id="gecko"></span>
-													<i class="icon-info-sign grey"></i> Gecko
-												</a>
-												<a href="orders.html?page=1&orderStatus=13" class="list-group-item">
-													<span class="badge" id="early_gecko"></span>
-													<i class="icon-info-sign grey"></i> Early Gecko 
-												</a>
-												<a href="orders.html?page=1&orderStatus=14" class="list-group-item">
-													<span class="badge" id="pink_gecko"></span>
-													<i class="icon-info-sign grey"></i> Pink Gecko
-												</a>
-												<a href="orders.html?page=1&orderStatus=15" class="list-group-item">
-													<span class="badge" id="gecko_gateway_coupon"></span>
-													<i class="icon-info-sign grey"></i> Gecko Gateway Coupon
-												</a>
-												<a href="orders.html?page=1&orderStatus=16" class="list-group-item">
-													<span class="badge" id="vb_gecko"></span>
-													<i class="icon-info-sign grey"></i> Vb Gecko
-												</a>
-												<a href="orders.html?page=1&orderStatus=17" class="list-group-item">
-													<span class="badge" id="luggage_tag"></span>
-													<i class="icon-info-sign grey"></i> Luggage Tag
-												</a>
-												<a href="orders.html?page=1&orderStatus=18" class="list-group-item">
-													<span class="badge" id="key_chain"></span>
-													<i class="icon-info-sign grey"></i> Key Chain
-												</a>
-												<a href="orders.html?page=1&orderStatus=19" class="list-group-item">
-													<span class="badge" id="gecko_trio"></span>
-													<i class="icon-info-sign grey"></i> Gecko Trio
-												</a>
-												<a href="orders.html?page=1&orderStatus=20" class="list-group-item">
-													<span class="badge" id="gecko_reseller_pack"></span>
-													<i class="icon-info-sign grey"></i> Gecko Reseller Pack
-												</a>
-												<a href="orders.html?page=1&orderStatus=21" class="list-group-item">
-													<span class="badge" id="gecko_geek"></span>
-													<i class="icon-info-sign grey"></i> Gecko Geek
-												</a>
-
-												<a href="orders.html?page=1&orderStatus=22" class="list-group-item">
-													<span class="badge" id="dslr_camera"></span>
-													<i class="icon-info-sign grey"></i> Dslr camera
-												</a>
-												<a href="orders.html?page=1&orderStatus=23" class="list-group-item">
-													<span class="badge" id="undefined"></span>
-													<i class="icon-info-sign grey"></i> undefined
-												</a>
-												<a href="orders.html?page=1&orderStatus=24" class="list-group-item">
-													<span class="badge" id="shipping_charges"></span>
-													<i class="icon-info-sign grey"></i> Shipping charges
-												</a>
-
-											</div>
-										</div>
-
-									</section>
-								</div>
-								<div class="tab-pane" id="customQueries">
+								<div class="tab-pane active" id="customQueries">
 
 									<section class="panel-body ">
 										<div class="col-lg-12">
 											<header class="panel-heading bg bg-inverse">
-												Custom Queries
+												Custom Queries (Download CSV Reports)
 											</header>
 											<div class="list-group">
 												<a href="javascript:process('INDIA_SHIPPING_PAID'); " class="list-group-item">
@@ -235,14 +146,21 @@
 						</div>
 					</section>
 				</div>
-
-				<div class="col-sm-6">
+					<div class="col-lg-6">
 					<section class="panel">
-						<header class="panel-heading bg-white">
-							<a class="btn btn-link pull-right nav"><i class="icon-upload icon-light icon-xlarge"></i></a>
-							Upload
+						<header class="panel-heading">
+							<ul class="nav nav-tabs nav-justified">
+								<li ><a href="#uploads" data-toggle="tab">Uploads</a></li>
+								<li class="active"><a href="#mergeEmails" data-toggle="tab">Merge Emails</a></li>
+							</ul>
 						</header>
 						<div class="panel-body">
+							<div class="tab-content">
+								<div class="tab-pane" id="uploads">
+
+									<section class="panel-body ">
+										<div class="col-lg-12">
+											<div class="panel-body">
 
 							<form class="form-horizontal"  method="post"  enctype="multipart/form-data" id="backerCsv" data-validate="parsley">      
 								<input type="hidden" id="data_type" name="data_type" value="">
@@ -274,14 +192,14 @@
 					            </div>
 							</form>
 						</div>
-					</section>
+										</div>
 
-					<section class="panel">
-						<header class="panel-heading bg-white">
-							<a class="btn btn-link pull-right nav"><i class="icon-upload icon-light icon-xlarge"></i></a>
-							Merge Emails
-						</header>
-						<div class="panel-body">
+									</section>
+								</div>
+								<div class="tab-pane  active" id="mergeEmails">
+
+									<section class="panel-body ">
+										<div class="col-lg-12">
 							<form action="javascript:mergeEmails();" class="panel-body" id="merge-form" data-validate="parsley">
 								<input type="hidden" id="data_type" name="data_type" value="">
 								<input type="hidden" id="api_key" name="api_key" value="">
@@ -295,6 +213,12 @@
 					              </div>
 					              <button type="submit" class="btn btn-info">Merge Now</button>
 							</form>
+										</div>
+
+									</section>
+								</div>
+								
+							</div>
 						</div>
 					</section>
 				</div>
@@ -372,17 +296,11 @@
 			</p>
 		</div>
 	</footer>
-	<!-- / footer -->
-	<!-- 	// <script src="js/jquery.min.js"></script> -->
-	<!-- Bootstrap -->
 	<script src="js/bootstrap.js"></script>
-	<!-- app -->
 	<script src="js/app.js"></script>
 	<script src="js/app.plugin.js"></script>
 
-	<!-- Sparkline Chart -->
 	<script src="js/charts/sparkline/jquery.sparkline.min.js"></script>
-	<!-- Easy Pie Chart -->
 	<script src="js/fuelux/fuelux.js"></script>
 	<script src="js/underscore-min.js"></script>
 	<script src="js/charts/easypiechart/jquery.easy-pie-chart.js"></script>
@@ -393,56 +311,6 @@
 	<script src="js/bootbox.min.js"></script>
 	<script src="js/app.data.js"></script> 
 	<script type="text/javascript">
-//getCurrentUser();
-setCurrentUserName();
-loggedInrole();
-	$("#order_source").val("igg");
-	$("#api_key").val(getKey());
-	getFileAction();
-	$(document).ready(function()
-	{
-		$('#admin').addClass("active");
-	});
-</script>
-<script>
-
-</script>
-<script type="text/javascript">
-	function submitUploadForm(){
-		$("#api_key").val(getKey());
-		$("#backerCsv").append('<div id="loader"></div> ');
-		$("#fileButton").click();
-	}
-	function submit(option){
-		$("#data_type").val(option);
-		$("#api_key").val(getKey());
-		$("#backerCsv").append('<div id="loader"></div> ');
-		$("#fileButton-" + option).click();
-	}
-
-	function checkText(){
-		var txt=$("#validateText").val();
-		if(txt=="Send email now"){
-			$("#loading").show();
-			sendEmailToBackers();
-		}
-		else{
-			bootbox.alert("Enter the proper text");
-		}
-	}
-
-
-	$( "#massNotification" ).click(function() {
-		$("#validateText").val("");
-
-	});
-
-
-	$( "#deleteButton" ).click(function() {
-		$("#validateDeleteText").val("")
-
-	});
-
 </script>
 </body>
 </html>

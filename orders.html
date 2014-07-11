@@ -79,14 +79,53 @@
           <h4>Orders</h4>
                <div class="col-lg-12">
       				<button  id="addOrder" data-toggle="modal" href="#modalShipping" class="btn btn-primary">Add Order</button>
-      				<button  id="deleteBackerAccount" data-toggle="modal" href="#modalDeleteBackerAccount" class="btn btn-danger pull-right">Delete Backer Account</button>
+      				
     			</div>
         </div>
     
-  <div id="orderContents">
+  			<div id="orderContents">
 
-  </div>
-   </div>
+		  </div>
+
+			<div class="row" id="adminPanel">
+				<div class="col-lg-6">
+					<section class="panel">
+						<header class="panel-heading">
+							<ul class="nav nav-tabs nav-justified">
+								<li class="active"><a href="#changeEmail" data-toggle="tab">Change Email</a></li>
+								<li ><a href="#deleteBackerAccount" data-toggle="tab">Delete Account</a></li>
+							</ul>
+						</header>
+						<div class="panel-body">
+							<div class="tab-content">
+								<div class="tab-pane active" id="changeEmail">
+									<section class="panel-body ">
+										<div class="col-lg-12">
+									<form action="javascript:changeEmail();" class="panel-body" id="change-email-form" data-validate="parsley">
+								<div class="block">
+					                <label class="control-label">Current Email Id</label>
+					                <input data-type="email" id="current-email" placeholder="old.email@example.com"  class="form-control" readonly>
+					              </div>
+								<div class="block">
+					                <label class="control-label">New Email Id</label>
+					                <input data-type="email" id="merge-to" placeholder="new.email@example.com" name="email"  class="form-control" data-required="true">
+					              </div>
+					              
+					              <button type="submit" class="btn btn-info">Update</button>
+							</form>
+										</div>
+									</section>
+								</div>
+
+								<div class="tab-pane" id="deleteBackerAccount">
+								<button   data-toggle="modal" href="#modalDeleteBackerAccount" class="btn btn-danger">Delete Backer Account</button>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+   	</div>
 </section>
 </section>
 <div id="modalnumber"  class="modal fade">
@@ -971,7 +1010,7 @@ function onSuccessContentsLoad(){
  
   if(getRoles()!="admin"){
     $("#addOrder").hide();
-    $("#deleteBackerAccount").hide();
+    $("#adminPanel").hide();
 	$("#saveOrders").hide();
 	$("#orderstable").hide();
 	$("#tracking-wizard").hide();
@@ -980,7 +1019,7 @@ function onSuccessContentsLoad(){
   else
   {
   	$("#addOrder").show();
-  	$("#deleteBackerAccount").show();
+  	$("#adminPanel").show();
   }
   
 	$("#addressConfirmedText").hide();

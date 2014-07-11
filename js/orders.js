@@ -22,7 +22,21 @@ function increment(){
  }
 }
 
+function changeEmail()
+{
+  var $form = $("#change-email-form");
+  var $inputs = $form.find("input, select, button, textarea");
+  var param =  $form.serializeObject(); 
+  param["api_key"] = getKey();
+  if(getRoles()=="admin"){
+    param['backer_id'] = $("#backer_id").val();
+  }
+  callAPI("/v1/backers/update_backer.json", "PUT", JSON.stringify(param), onSuccessBckerEmailChange, onApiError); 
+}
 
+function onSuccessBckerEmailChange(response){
+    location.reload();
+}
 
 function decrement(){
   $("#loading").show();
@@ -46,6 +60,8 @@ var id= urlParameterValue( 'id' );
 
 function getBackerOrdersId(id){
   $("#backer_id").val(id);
+
+
 	callAPI("/v1/orders/{0}/backer_information.json".f(id), "GET",getKeyQueryFormat(), onSuccessGetBackerOrders, onApiError);
 }
 
@@ -247,6 +263,7 @@ switch((response.data.shipping_service + "").toLowerCase())
    $("#address_Orderid").val(response.data[0].address_id);
    $("#backer_id").val(response.data[0].backer_id);
    $("#email").html(response.data[0].backer.email);
+   $("#current-email").val(response.data[0].backer.email);
  }
    setBackerOrdersAction(response.data);
    for(i=0;i<response.data.length;i++){

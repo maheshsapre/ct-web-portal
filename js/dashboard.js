@@ -38,10 +38,6 @@ alert(response);
 if(response.status==200){  
 	$("#uploadError").css('display','none');
 	$("#uploadSuccess").css('display','block');
-
-//	callAPI("/v1/orders/perk_summary.json", "GET", getKeyQueryFormat(), onSuccessPerksummary, onApiError);
-//	callAPI("/v1/orders/total_backers_and_orders.json", "GET", getKeyQueryFormat(), onSuccessTotalBackers, onApiError);
-
 }
 else {
 	$("#uploadResult").append(response.status + ": " + response.statusText + "<br/>");
@@ -57,8 +53,6 @@ else {
 				basic=obj.message[i];
 				$("#basicInfo").append("<tr><td>"+basic.line+"</td><td>"+ basic.error+"</td></tr>");
 			}
-//			callAPI("/v1/orders/perk_summary.json", "GET", getKeyQueryFormat(), onSuccessPerksummary, onApiError);
-//			callAPI("/v1/orders/total_backers_and_orders.json", "GET", getKeyQueryFormat(), onSuccessTotalBackers, onApiError);
 }
 else
 {
@@ -226,21 +220,51 @@ function onSuccessPerksummary(response){
 
 
 }
+$( "#massNotification" ).click(function() {
+		$("#validateText").val("");
 
-function onSuccessTotalBackers(response){
+	});
 
-	$("#orders").html(response.data.orders);
-	$("#backers").html(response.data.backers);
-	$("#loading").hide();
-}
+
+	$( "#deleteButton" ).click(function() {
+		$("#validateDeleteText").val("")
+
+	});
 
 $(document).ready(function() {
-//	callAPI("/v1/orders/order_status_summary.json", "GET", getKeyQueryFormat(), onSuccessStatusSummary, onApiError);
-//	callAPI("/v1/orders/perk_summary.json", "GET", getKeyQueryFormat(), onSuccessPerksummary, onApiError);
-callAPI("/v1/orders/total_backers_and_orders.json", "GET", getKeyQueryFormat(), onSuccessTotalBackers, onApiError);
-
-
+	$("#loading").hide();
+	setCurrentUserName();
+	loggedInrole();
+	$("#order_source").val("igg");
+	$("#api_key").val(getKey());
+	getFileAction();
+	$('#admin').addClass("active");
 });
+
+	function submitUploadForm(){
+		$("#api_key").val(getKey());
+		$("#backerCsv").append('<div id="loader"></div> ');
+		$("#fileButton").click();
+	}
+	function submit(option){
+		$("#data_type").val(option);
+		$("#api_key").val(getKey());
+		$("#backerCsv").append('<div id="loader"></div> ');
+		$("#fileButton-" + option).click();
+	}
+
+	function checkText(){
+		var txt=$("#validateText").val();
+		if(txt=="Send email now"){
+			$("#loading").show();
+			sendEmailToBackers();
+		}
+		else{
+			bootbox.alert("Enter the proper text");
+		}
+	}
+
+
 
 function sendEmailToBackers(){
 	var $form = $("#sendEmail");
@@ -272,6 +296,8 @@ function mergeEmails()
 
 	mergeEmailAccounts(JSON.stringify(param));
 }
+
+
 
 function mergeEmailAccounts(param)
 {
