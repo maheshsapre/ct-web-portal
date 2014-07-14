@@ -16,7 +16,7 @@ function onSuccessCreateToken(response) {
 	setRole(response.data.role);
 	setCurrentUser(response.data.name);
 	if(response.data.role=="admin")
-		window.location="dashboard.html";
+		window.location="backers.html?q[email_cont]=   &page=1&search=1&size=1";
 	else
 		window.location="orders.html?page=1";
 }
