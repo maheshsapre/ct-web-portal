@@ -307,6 +307,8 @@ function updateAddresses()
   var param =  $form.serializeObject(); 
   param["api_key"] = getKey();
 
+  console.log(param);
+
   updateBackerAddresses(param.address_id,JSON.stringify(param));
 }
 
