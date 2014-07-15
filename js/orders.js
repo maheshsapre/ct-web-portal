@@ -6,6 +6,62 @@ var page=1;
 var orderList=new Array();
 var filterPerk=new Array();
 var iPerk=-1;
+
+$(document).ready(function()
+    {
+      $("#adminPanel").hide();
+      $("#addOrder").hide();
+      setCurrentUserName();
+      loggedInrole();
+      var id = urlParameterValue( 'id' );
+      if(id!=""){
+        $("#orderPopup").hide();
+        getBackerOrdersId(id);
+      }
+      
+      if(getRoles()!="admin"){
+        $("#addOrder").hide();
+        $("#adminPanel").hide();
+        $("#saveOrders").hide();
+        $("#orderstable").hide();
+        $("#tracking-wizard").hide();
+        getBackerOrders();
+      }
+      else
+      {
+        $("#addOrder").show();
+        $("#adminPanel").show();
+      }
+      
+      $("#addressConfirmedText").hide();
+      $("#changeAddress").show();
+      $("#confirmAddress").show();
+      $("#unConfirmAddress").hide();
+      $("#addressConfirmed").hide();
+      $("#addressDetails").empty();
+      $("#trackingDetails").empty();
+      $('#admin3').addClass("active")
+      if(getRoles()!="admin"){
+        getCurrentUser();
+      }
+      
+      clearPerksModalDialog();
+      resetPerkValueArray();
+      var search = urlParameterValue( 'search' );
+      var filter = urlParameterValue( 'filter' );
+
+      if(search!=""){
+        getSearchInformation();
+      }
+      else if(filter!=""){
+        getFilteredData();
+      }
+      else{
+        getInformation();
+      }
+      uncheckTheCheckbox();
+    });
+
 function increment(){
   $("#loading").show();
   page=parseInt(page)+1;

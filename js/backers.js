@@ -1,38 +1,42 @@
 var backerInfo;
 var page=1;
 
-function increment(){
-	$("#loading").show();
-	page=parseInt(page)+1;
-	if(page>0){
-		$("#decrement").attr('href','increment()');
+$(document).ready(function()
+{
+	$('#adminBackers').addClass("active");
+	setCurrentUserName();
+	var search = urlParameterValue( 'search' );
+	if(search==""){
+		getBackerInfo();
 	}
+	else{
+		searchBackerInfo();
+	}
+});
 
-window.location="backers.html?page="+page;
-
+var page = urlParameterValue( 'page' );
+function getBackerInfo() {
+	callAPI("/v1/backers.json?page="+page, "GET", getApiKeyQueryFormat(), onSuccessGetBackerInfo, onApiError);
 }
 
-function decrement(){
-	$("#loading").show();
-	page=parseInt(page)-1;
-	if(page<1)
+function onSuccessGetBackerInfo(response) {  
+	$("#loading").hide();
+	if(response.data.length<10){
+		$("#increment").removeAttr('href');
+	}
+	drawDatatable(response.data);
+}
+
+function onSuccessSearchGetBackerInfo(response) {  
+	$("#loading").hide();
+	if (response.data == "Email sent")
 	{
-		$("#decrement").removeAttr('href');
-		$("#loading").hide();
-		return;
+		alert("Search result is sent to the specified email.");
 	}
 	else
 	{
-		$("#decrement").attr('href','decrement()');
+		drawDatatable(response.data);
 	}
-	window.location="backers.html?page="+page;
-	pendingActionGeckoTeam();
-}
-
-var page = urlParameterValue( 'page' );
-
-function getBackerInfo() {
-	callAPI("/v1/backers.json?page="+page, "GET", getApiKeyQueryFormat(), onSuccessGetBackerInfo, onApiError);
 }
 
 function onSearchBacker() {
@@ -97,88 +101,3 @@ function searchBackerInfo() {
 	callAPI(url, "GET", getApiKeyQueryFormat(), onSuccessSearchGetBackerInfo, onApiError);
 }
 
-function onSuccessGetBackerInfo(response) {  
-$("#loading").hide();
-	if(response.data.length<10){
-		$("#increment").removeAttr('href');
-	}
-	drawDatatable(response.data);
-}
-
-function onSuccessSearchGetBackerInfo(response) {  
-	$("#loading").hide();
-	if (response.data == "Email sent")
-	{
-			alert("Search result is sent to the specified email.");
-	}
-	else
-	{
-		drawDatatable(response.data);
-	}
-
-}
-
-
-
-function checkText(){
-  var txt=$("#validateText").val();
-  if(txt=="Send email now"){
-    $("#loading").show();
-    sendEmailToBackers();
-  }
-  else{
-   bootbox.alert("Enter the proper text");
- }
-}
-
-function checkBackerLength(){
-$("#validateText").val("");
-if(backerIds.length==0){
-		$("#alertMessage").html("<p style='color:red;'>Emails will be sent to all the backers.");
-	}
-	else{
-		$("#alertMessage").html("<p style='color:red;'>Emails will be sent to  "+backerIds.length+" backers.");
-
-}
-}
-
-function sendEmailToBackers(){
-	var txt=$("#validateText").val();
-	
-
-  if(txt=="Send email now"){
- var $form = $("#sendEmail");
-  var $inputs = $form.find("input, select, button, textarea");
-  var param1 =  $form.serializeObject(); 
-  a=backerIds.toString();
-  if(backerIds.length!=0){
-  var param = {
-   "user_ids" : a,
-    "email_type" : param1.email_type
- };
-}
-else{
-	 var param = {
-    "email_type" : param1.email_type
- };
-}
-  sendEmail(JSON.stringify(param));
-  }
-  else{
-  	bootbox.alert("please enter the proper text");
-  }
-}
-
-function  sendEmail(param){
-	$("#loading").show();
-    callAPI("/v1/backers/send_email.json", "POST",param, onSuccessSendEmail, onApiError);
-}
-function onSuccessSendEmail(response){
-  $("#loading").hide();
-     bootbox.alert(response.data, function(result) 
-    {  
-      if(result==undefined){
-     window.location=window.location.href;
-    }
-      });
-}
