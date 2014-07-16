@@ -35,13 +35,8 @@ filters.push(gfull);
 }
 }
 function drawDatatable(tableData){
-
-
-
 //backerInfo=getBackerInformation();
 backerOrder=getBackerOrdersAction();
-
-
 
 $('#docs pre code').each(function(){
 	var $this = $(this);

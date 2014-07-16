@@ -15,10 +15,10 @@
 	<script src="js/me.ui.js"></script>
 	<script src="js/config.js"></script>
 	<script src="js/app.data.js"></script>
-  <!--[if lt IE 9]>
-    <script src="js/ie/respond.min.js" cache="false"></script>
-    <script src="js/ie/html5.js" cache="false"></script>
-    <![endif]-->
+<!--[if lt IE 9]>
+<script src="js/ie/respond.min.js" cache="false"></script>
+<script src="js/ie/html5.js" cache="false"></script>
+<![endif]-->
 </head>
 <body class="navbar-fixed" onload="myFunction()">
 	<!-- header -->
@@ -149,7 +149,7 @@
 												<span class="badge bg-info">Fix</span>
 												<i class="icon-warning-sign"></i>Shipping is not paid. Please click here to pay shipping. Then send the order details to support@geckotag.me. It will take 48 hours to reflect the changes in the backer portal.
 											</a>
-											
+
 											<a id="split_required" href="mailto:support@geckotag.me" class="list-group-item">
 												<i class="icon-chevron-right"></i>
 												<span class="badge bg-info"></span>
@@ -204,7 +204,7 @@
 														<label class="control-label">New Email Id</label>
 														<input data-type="email" id="merge-to" placeholder="new.email@example.com" name="email"  class="form-control" data-required="true">
 													</div>
-													
+
 													<button type="submit" class="btn btn-info">Update</button>
 												</form>
 											</div>
@@ -672,87 +672,6 @@
 			</div>
 		</div>
 	</div>
-	<div id="modalFilterOrder"  class="modal fade">
-		<div   class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"><i class="icon-remove"></i></button>
-					<h4 class="modal-title" id="myModalLabel">Filter the Orders</h4>
-				</div>
-				<div  class="modal-body">
-					<div class="panel-body">
-						<form class="form-horizontal"  action="javascript:filterOrder();" id="filterOrder">  
-							<div class="form-group">
-								<label class="control-label">Select Perk</label>
-								<div class="m-b">
-									<input type="checkbox" id="check1" onClick="javascript:selectedPerk('5',1);" value="1">Detachable Key Chain
-									<input type="checkbox"  id="check2" onClick="javascript:selectedPerk('8','2');" value="DSLR Camera Trigger Cable">DSLR Camera Trigger Cable
-									<input type="checkbox"  id="check18" onClick="javascript:selectedPerk('8','18');" value="DSLR Canon Camera">DSLR Canon Camera
-									<input type="checkbox"  id="check19" onClick="javascript:selectedPerk('8','19');" value="DSLR Nikon 1 Camera">DSLR Nikon 1 Camera
-									<input type="checkbox"  id="check20" onClick="javascript:selectedPerk('8','20');" value="DSLR Nikon 2 Camera">DSLR Nikon 2 Camera
-									<input type="checkbox"  id="check21" onClick="javascript:selectedPerk('8','21');" value="DSLR Nikon 3 Camera">DSLR Nikon 3 Camera
-									<input type="checkbox"   id="check3" onClick="javascript:selectedPerk('20','3');" value="Early Gecko">Early Gecko<br>
-									<input type="checkbox"  id="check4" onClick="javascript:selectedPerk('25','4');" value="Gecko">Gecko
-									<input type="checkbox"  id="check5" onClick="javascript:selectedPerk('40','5');" value="Gecko * 2">Gecko * 2
-									<input type="checkbox"  id="check6"  onClick="javascript:selectedPerk('75','6');" value="Gecko * 4">Gecko * 4<br>
-									<input type="checkbox"  id="check7" onClick="javascript:selectedPerk('100','7');" value="7">Gecko * 6
-									<input type="checkbox"  id="check8" onClick="javascript:selectedPerk('7','8');" value="Gecko Gateway Coupon">Gecko Gateway Coupon
-									<input type="checkbox"  id="check9" onClick="javascript:selectedPerk('995','9');" value="9">Gecko Geek<br>
-									<input type="checkbox"  id="check10" onClick="javascript:selectedPerk('995','10');" value="Gecko Re-Seller Pack<">Gecko Re-Seller Pack
-									<input type="checkbox"  id="check11" onClick="javascript:selectedPerk('60','11');" value="Gecko Trio">Gecko Trio
-									<input type="checkbox"  id="check12" onClick="javascript:selectedPerk('5','12');"   value="Luggage Tag">Luggage Tag<br>
-									<input type="checkbox"  id="check13"  onClick="javascript:selectedPerk('25','13');" value="Pink Gecko * 1">Pink Gecko * 1
-									<input type="checkbox"  id="check14" onClick="javascript:selectedPerk('200','14');" value="VB Geeks">VB Geeks
-									<input type="checkbox"  id="check15" onClick="javascript:selectedPerk('8','16');" value="Shipping Charges">Shipping Charges<br>
-									<input type="checkbox"  id="check17" onClick="javascript:selectedPerk('','17');" value="Donation">Donation<br>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="m-b">
-									<select id="select2-option" name="address_completion" style="width:260px">
-										<option value="">Select</option>
-										<option value="2">Address Complete</option>
-										<option value="1">Address incomplete</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="m-b">
-									<select id="select2-option" name="perk_completion" style="width:260px">
-										<option value="">Select</option>
-										<option value="1">Perk undefined</option>
-										<option value="2">Perk defined</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="m-b">
-									<select id="select2-option" name="shipping_completion" style="width:260px">
-										<option value="">Select</option>
-										<option value="2">Shipping paid</option>
-										<option value="1">Shipping not paid</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="m-b">
-									<select id="select2-option" name="shipping_status" style="width:260px">
-										<option value="">Select</option>
-										<option value="2">Shipped</option>
-										<option value="1">Not shipped</option>
-									</select>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="submit" class="btn btn-sm btn-default">Filter</button>
-								<button type="button" class="btn btn-sm btn-primary" id="closeButton" data-dismiss="modal">Close</button>
-							</div>
-						</form>
-					</div><!-- /.modal-content -->
-				</div>
-			</div>
-		</div>
-	</div>
 	<div id="modalSelectPerks"  class="modal fade">
 		<div   class="modal-dialog">
 			<div class="modal-content">
@@ -763,7 +682,7 @@
 				<div  class="modal-body">
 					<div class="panel-body">
 						<form class="form-horizontal"  action="javascript:addPerks();" id="addOrderForm" data-validate="parsley">  
-							<div class="form-group">
+							<div class="form-group" id="orderSelection">
 								<label class="control-label"></label>
 								<div class="m-b">
 									<div class="row">
@@ -778,7 +697,7 @@
 													<option onClick="javascript:selectedPerk1('8','27');" value="27">DSLR Nikon 2 Camera</option>	
 													<option onClick="javascript:selectedPerk1('8','28');" value="28">DSLR Nikon 3 Camera</option>
 													<option onClick="javascript:selectedPerk1('20','3');" value="3">Early Gecko</option>
-													<option  onClick="javascript:selectedPerk1('25','4');" value="4">Gecko </option>
+													<option onClick="javascript:selectedPerk1('25','4');" value="4">Gecko </option>
 													<option onClick="javascript:selectedPerk1('40','5');" value="5">Gecko * 2</option>
 													<option onClick="javascript:selectedPerk1('75','6');" value="6">Gecko * 4</option>
 													<option onClick="javascript:selectedPerk1('100','7');" value="7">Gecko * 6</option>
@@ -790,7 +709,7 @@
 													<option onClick="javascript:selectedPerk1('25','13');" value="13">Pink Gecko * 1 </option>
 													<option onClick="javascript:selectedPerk1('200','14');" value="14">VB Geeks </option>
 													<option onClick="javascript:selectedPerk1('8','16');" value="16">Shipping Charges </option>
-													<option onClick="javascript:selectedPerk6('','17');" value="17">Donation </option>
+													<option onClick="javascript:selectedPerk1('','17');" value="17">Donation </option>
 												</optgroup>
 											</select>
 										</div>
@@ -807,12 +726,12 @@
 													<option  value="">Select</option>
 													<option onClick="javascript:selectedPerk2('5','1');" value="1">Detachable Key Chain</option>
 													<option onClick="javascript:selectedPerk2('8','2');" value="2">DSLR Camera Trigger Cable</option>
-													<option onClick="javascript:selectedPerk1('8','25');" value="25">DSLR Canon Camera</option>
-													<option onClick="javascript:selectedPerk1('8','26');" value="26">DSLR Nikon 1 Camera</option>
-													<option onClick="javascript:selectedPerk1('8','27');" value="27">DSLR Nikon 2 Camera</option>	
-													<option onClick="javascript:selectedPerk1('8','28');" value="28">DSLR Nikon 3 Camera</option>
+													<option onClick="javascript:selectedPerk2('8','25');" value="25">DSLR Canon Camera</option>
+													<option onClick="javascript:selectedPerk2('8','26');" value="26">DSLR Nikon 1 Camera</option>
+													<option onClick="javascript:selectedPerk2('8','27');" value="27">DSLR Nikon 2 Camera</option>	
+													<option onClick="javascript:selectedPerk2('8','28');" value="28">DSLR Nikon 3 Camera</option>
 													<option onClick="javascript:selectedPerk2('20','3');" value="3">Early Gecko</option>
-													<option  onClick="javascript:selectedPerk2('25','4');" value="4">Gecko </option>
+													<option onClick="javascript:selectedPerk2('25','4');" value="4">Gecko </option>
 													<option onClick="javascript:selectedPerk2('40','5');" value="5">Gecko * 2</option>
 													<option onClick="javascript:selectedPerk2('75','6');" value="6">Gecko * 4</option>
 													<option onClick="javascript:selectedPerk2('100','7');" value="7">Gecko * 6</option>
@@ -824,13 +743,12 @@
 													<option onClick="javascript:selectedPerk2('25','13');" value="13">Pink Gecko * 1 </option>
 													<option onClick="javascript:selectedPerk2('200','14');" value="14">VB Geeks </option>
 													<option onClick="javascript:selectedPerk2('8','16');" value="16">Shipping Charges </option>
-													<option onClick="javascript:selectedPerk6('','17');" value="17">Donation </option>
+													<option onClick="javascript:selectedPerk2('','17');" value="17">Donation </option>
 												</optgroup>
 											</select>
 										</div>
 										<div class="col-lg-2">
 											<div id="perkValue2">
-												
 											</div>
 										</div>
 									</div>
@@ -843,12 +761,12 @@
 													<option  value="">Select</option>
 													<option onClick="javascript:selectedPerk3('5','1');" value="1">Detachable Key Chain</option>
 													<option onClick="javascript:selectedPerk3('8','2');" value="2">DSLR Camera Trigger Cable</option>
-													<option onClick="javascript:selectedPerk1('8','25');" value="25">DSLR Canon Camera</option>
-													<option onClick="javascript:selectedPerk1('8','26');" value="26">DSLR Nikon 1 Camera</option>
-													<option onClick="javascript:selectedPerk1('8','27');" value="27">DSLR Nikon 2 Camera</option>	
-													<option onClick="javascript:selectedPerk1('8','28');" value="28">DSLR Nikon 3 Camera</option>
+													<option onClick="javascript:selectedPerk3('8','25');" value="25">DSLR Canon Camera</option>
+													<option onClick="javascript:selectedPerk3('8','26');" value="26">DSLR Nikon 1 Camera</option>
+													<option onClick="javascript:selectedPerk3('8','27');" value="27">DSLR Nikon 2 Camera</option>	
+													<option onClick="javascript:selectedPerk3('8','28');" value="28">DSLR Nikon 3 Camera</option>
 													<option onClick="javascript:selectedPerk3('20','3');" value="3">Early Gecko</option>
-													<option  onClick="javascript:selectedPerk3('25','4');" value="4">Gecko </option>
+													<option onClick="javascript:selectedPerk3('25','4');" value="4">Gecko </option>
 													<option onClick="javascript:selectedPerk3('40','5');" value="5">Gecko * 2</option>
 													<option onClick="javascript:selectedPerk3('75','6');" value="6">Gecko * 4</option>
 													<option onClick="javascript:selectedPerk3('100','7');" value="7">Gecko * 6</option>
@@ -860,13 +778,13 @@
 													<option onClick="javascript:selectedPerk3('25','13');" value="13">Pink Gecko * 1 </option>
 													<option onClick="javascript:selectedPerk3('200','14');" value="14">VB Geeks </option>
 													<option onClick="javascript:selectedPerk3('8','16');" value="16">Shipping Charges </option>
-													<option onClick="javascript:selectedPerk6('','17');" value="17">Donation </option>
+													<option onClick="javascript:selectedPerk3('','17');" value="17">Donation </option>
 												</optgroup>
 											</select>
 										</div>
 										<div class="col-lg-2">
 											<div id="perkValue3">
-												
+
 											</div>
 										</div>
 									</div>
@@ -879,12 +797,12 @@
 													<option  value="">Select</option>
 													<option onClick="javascript:selectedPerk4('5','1');" value="1">Detachable Key Chain</option>
 													<option onClick="javascript:selectedPerk4('8','2');" value="2">DSLR Camera Trigger Cable</option>
-													<option onClick="javascript:selectedPerk1('8','25');" value="25">DSLR Canon Camera</option>
-													<option onClick="javascript:selectedPerk1('8','26');" value="26">DSLR Nikon 1 Camera</option>
-													<option onClick="javascript:selectedPerk1('8','27');" value="27">DSLR Nikon 2 Camera</option>	
-													<option onClick="javascript:selectedPerk1('8','28');" value="28">DSLR Nikon 3 Camera</option>
+													<option onClick="javascript:selectedPerk4('8','25');" value="25">DSLR Canon Camera</option>
+													<option onClick="javascript:selectedPerk4('8','26');" value="26">DSLR Nikon 1 Camera</option>
+													<option onClick="javascript:selectedPerk4('8','27');" value="27">DSLR Nikon 2 Camera</option>	
+													<option onClick="javascript:selectedPerk4('8','28');" value="28">DSLR Nikon 3 Camera</option>
 													<option onClick="javascript:selectedPerk4('20','3');" value="3">Early Gecko</option>
-													<option  onClick="javascript:selectedPerk4('25','4');" value="4">Gecko </option>
+													<option onClick="javascript:selectedPerk4('25','4');" value="4">Gecko </option>
 													<option onClick="javascript:selectedPerk4('40','5');" value="5">Gecko * 2</option>
 													<option onClick="javascript:selectedPerk4('75','6');" value="6">Gecko * 4</option>
 													<option onClick="javascript:selectedPerk4('100','7');" value="7">Gecko * 6</option>
@@ -896,7 +814,7 @@
 													<option onClick="javascript:selectedPerk4('25','13');" value="13">Pink Gecko * 1 </option>
 													<option onClick="javascript:selectedPerk4('200','14');" value="14">VB Geeks </option>
 													<option onClick="javascript:selectedPerk4('8','16');" value="16">Shipping Charges </option>
-													<option onClick="javascript:selectedPerk6('','17');" value="17">Donation </option>
+													<option onClick="javascript:selectedPerk4('','17');" value="17">Donation </option>
 												</optgroup>
 											</select>
 										</div>
@@ -913,12 +831,12 @@
 													<option  value="">Select</option>
 													<option onClick="javascript:selectedPerk5('5','1');" value="1">Detachable Key Chain</option>
 													<option onClick="javascript:selectedPerk5('8','2');" value="2">DSLR Camera Trigger Cable</option>
-													<option onClick="javascript:selectedPerk1('8','25');" value="25">DSLR Canon Camera</option>
-													<option onClick="javascript:selectedPerk1('8','26');" value="26">DSLR Nikon 1 Camera</option>
-													<option onClick="javascript:selectedPerk1('8','27');" value="27">DSLR Nikon 2 Camera</option>	
-													<option onClick="javascript:selectedPerk1('8','28');" value="28">DSLR Nikon 3 Camera</option>
+													<option onClick="javascript:selectedPerk5('8','25');" value="25">DSLR Canon Camera</option>
+													<option onClick="javascript:selectedPerk5('8','26');" value="26">DSLR Nikon 1 Camera</option>
+													<option onClick="javascript:selectedPerk5('8','27');" value="27">DSLR Nikon 2 Camera</option>	
+													<option onClick="javascript:selectedPerk5('8','28');" value="28">DSLR Nikon 3 Camera</option>
 													<option onClick="javascript:selectedPerk5('20','3');" value="3">Early Gecko</option>
-													<option  onClick="javascript:selectedPerk5('25','4');" value="4">Gecko </option>
+													<option onClick="javascript:selectedPerk5('25','4');" value="4">Gecko </option>
 													<option onClick="javascript:selectedPerk5('40','5');" value="5">Gecko * 2</option>
 													<option onClick="javascript:selectedPerk5('75','6');" value="6">Gecko * 4</option>
 													<option onClick="javascript:selectedPerk5('100','7');" value="7">Gecko * 6</option>
@@ -930,13 +848,13 @@
 													<option onClick="javascript:selectedPerk5('25','13');" value="13">Pink Gecko * 1 </option>
 													<option onClick="javascript:selectedPerk5('200','14');" value="14">VB Geeks </option>
 													<option onClick="javascript:selectedPerk5('8','16');" value="16">Shipping Charges </option>
-													<option onClick="javascript:selectedPerk6('','17');" value="17">Donation </option>
+													<option onClick="javascript:selectedPerk5('','17');" value="17">Donation </option>
 												</optgroup>
 											</select>
 										</div>
 										<div class="col-lg-2">
 											<div id="perkValue5">
-												
+
 											</div>
 										</div>
 									</div>
@@ -949,12 +867,12 @@
 													<option  value="">Select</option>
 													<option onClick="javascript:selectedPerk6('5','1');" value="1">Detachable Key Chain</option>
 													<option onClick="javascript:selectedPerk6('8','2');" value="2">DSLR Camera Trigger Cable</option>
-													<option onClick="javascript:selectedPerk1('8','25');" value="25">DSLR Canon Camera</option>
-													<option onClick="javascript:selectedPerk1('8','26');" value="26">DSLR Nikon 1 Camera</option>
-													<option onClick="javascript:selectedPerk1('8','27');" value="27">DSLR Nikon 2 Camera</option>	
-													<option onClick="javascript:selectedPerk1('8','28');" value="28">DSLR Nikon 3 Camera</option>
+													<option onClick="javascript:selectedPerk6('8','25');" value="25">DSLR Canon Camera</option>
+													<option onClick="javascript:selectedPerk6('8','26');" value="26">DSLR Nikon 1 Camera</option>
+													<option onClick="javascript:selectedPerk6('8','27');" value="27">DSLR Nikon 2 Camera</option>	
+													<option onClick="javascript:selectedPerk6('8','28');" value="28">DSLR Nikon 3 Camera</option>
 													<option onClick="javascript:selectedPerk6('20','3');" value="3">Early Gecko</option>
-													<option  onClick="javascript:selectedPerk6('25','4');" value="4">Gecko </option>
+													<option onClick="javascript:selectedPerk6('25','4');" value="4">Gecko </option>
 													<option onClick="javascript:selectedPerk6('40''5');" value="5">Gecko * 2</option>
 													<option onClick="javascript:selectedPerk6('75','6');" value="6">Gecko * 4</option>
 													<option onClick="javascript:selectedPerk6('100','7');" value="7">Gecko * 6</option>

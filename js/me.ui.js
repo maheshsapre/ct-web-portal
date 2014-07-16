@@ -244,8 +244,8 @@ window.open(serverUrl, "_blank");
 function callAPI(resource, httpMethod, param, successHandler, errorHandler) {
   var serverUrl= CONFIG.url + resource; 
 
-  // console.log( httpMethod + " " + serverUrl);
-//   console.log(  param);
+   // console.log( httpMethod + " " + serverUrl);
+   // console.log(  param);
   
   $.ajax({
     type: httpMethod,
@@ -336,9 +336,7 @@ role=getRoles();
  if(role=="admin"){
   $("#admin").show();
     $("#admin1").show();
-  
 	$("#tracking-wizard").hide();
-    $("#saveOrders").hide();   
 }
 else{
    $("#actionButton").hide();

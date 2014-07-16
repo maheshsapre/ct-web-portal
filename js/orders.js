@@ -3,80 +3,42 @@ var searchPerk;
 var perkArray=new Array(6);
 var perkValue=new Array(6);
 var page=1;
-var orderList=new Array();
 var filterPerk=new Array();
 var iPerk=-1;
+var id= urlParameterValue( 'id' );
 
-$(document).ready(function()
-    {
-      $("#adminPanel").hide();
-      $("#addOrder").hide();
-      setCurrentUserName();
-      loggedInrole();
-      var id = urlParameterValue( 'id' );
-      if(id!=""){
-        $("#orderPopup").hide();
-        getBackerOrdersId(id);
-      }
-      
-      if(getRoles()!="admin"){
-        $("#addOrder").hide();
-        $("#adminPanel").hide();
-        $("#saveOrders").hide();
-        $("#orderstable").hide();
-        $("#tracking-wizard").hide();
-        getBackerOrders();
-      }
-      else
-      {
-        $("#addOrder").show();
-        $("#adminPanel").show();
-      }
-      
-      $("#addressConfirmedText").hide();
-      $("#changeAddress").show();
-      $("#confirmAddress").show();
-      $("#unConfirmAddress").hide();
-      $("#addressConfirmed").hide();
-      $("#addressDetails").empty();
-      $("#trackingDetails").empty();
-      $('#admin3').addClass("active")
-      if(getRoles()!="admin"){
-        getCurrentUser();
-      }
-      
-      clearPerksModalDialog();
-      resetPerkValueArray();
-      var search = urlParameterValue( 'search' );
-      var filter = urlParameterValue( 'filter' );
+$(document).ready(function(){
+  $("#adminPanel").hide();
+  $("#tracking-wizard").hide();
+  $("#orderstable").hide();
+  $("#addressConfirmedText").hide();
+  $("#unConfirmAddress").hide();
+  $("#addressConfirmed").hide();
+  $("#addressDetails").empty();
+  $("#trackingDetails").empty();
+  $("#changeAddress").show();
+  $("#confirmAddress").show();
+  $('#admin3').addClass("active");
 
-      if(search!=""){
-        getSearchInformation();
-      }
-      else if(filter!=""){
-        getFilteredData();
-      }
-      else{
-        getInformation();
-      }
-      uncheckTheCheckbox();
-    });
+  //$("#orderSelection").append('<div class="m-b"><div class="row"><div class="col-lg-6"><select id="select{0}-option" class="col-xs-12 form-control" name="perk"><optgroup label="Select a perk"><option value="">Select aaaa</option><option onClick="javascript:selectedPerk({0}, 5,1);" value="1">Detachable Key Chain</option><option onClick="javascript:selectedPerk({0}, 8,2);" value="2">DSLR Camera Trigger Cable</option><option onClick="javascript:selectedPerk({0}, 8,25);" value="25">DSLR Canon Camera</option><option onClick="javascript:selectedPerk({0}, 8,26);" value="26">DSLR Nikon 1 Camera</option><option onClick="javascript:selectedPerk({0}, 8,27);" value="27">DSLR Nikon 2 Camera</option> <option onClick="javascript:selectedPerk({0}, 8,28);" value="28">DSLR Nikon 3 Camera</option><option onClick="javascript:selectedPerk({0}, 20,3);" value="3">Early Gecko</option><option onClick="javascript:selectedPerk({0}, 25,4);" value="4">Gecko </option><option onClick="javascript:selectedPerk({0}, 40,5);" value="5">Gecko * 2</option><option onClick="javascript:selectedPerk({0}, 75,6);" value="6">Gecko * 4</option><option onClick="javascript:selectedPerk({0}, 100,7);" value="7">Gecko * 6</option><option onClick="javascript:selectedPerk({0}, 7,8);" value="8">Gecko Gateway Coupon</option><option onClick="javascript:selectedPerk({0}, 995,9);" value="9">Gecko Geek</option><option onClick="javascript:selectedPerk({0}, 995,10);" value="10">Gecko Re-Seller Pack</option><option onClick="javascript:selectedPerk({0}, 60,11);" value="11">Gecko Trio </option><option onClick="javascript:selectedPerk({0}, 5,12);" value="12">Luggage Tag</option><option onClick="javascript:selectedPerk({0}, 25,13);" value="13">Pink Gecko * 1 </option><option onClick="javascript:selectedPerk({0}, 200,14);" value="14">VB Geeks </option><option onClick="javascript:selectedPerk({0}, 8,16);" value="16">Shipping Charges </option><option onClick="javascript:selectedPerk({0}, 0,17);" value="17">Donation </option></optgroup></select></div><div class="col-lg-2"><div id="perkValue{0}"></div></div></div></div>'.f(0));
+  // $("#orderSelection").append('<div class="m-b"><div class="row"><div class="col-lg-6"><select id="select{0}-option" class="col-xs-12 form-control" name="perk"><optgroup label="Select a perk"><option value="1">Detachable Key Chain</option><option value="2">DSLR Camera Trigger Cable</option></optgroup></select></div><div class="col-lg-2"><div id="perkValue{0}"></div></div></div></div>'.f(0));
 
-function increment(){
-  $("#loading").show();
-  page=parseInt(page)+1;
-  if(page>0){
-   $("#decrement").attr('href','increment()');
- }
- id = urlParameterValue('id');
- if(id==""){
-   order_status= urlParameterValue('orderStatus');
-   window.location="orders.html?orderStatus="+order_status+"&page="+page;
- }
- else{
-   window.location="orders.html?id="+id+"&page="+page;
- }
-}
+  setCurrentUserName();
+  loggedInrole();
+
+  var id = urlParameterValue( 'id' );
+  if(id!=""){
+    getBackerOrdersId(id);
+  }
+
+  if(getRoles()!="admin"){
+    getBackerOrders();
+    getCurrentUser();
+  }
+  
+  clearPerksModalDialog();
+  resetPerkValueArray();
+});
 
 function changeEmail()
 {
@@ -91,269 +53,215 @@ function changeEmail()
 }
 
 function onSuccessBckerEmailChange(response){
-    location.reload();
+  location.reload();
 }
-
-function decrement(){
-  $("#loading").show();
-  page=parseInt(page)-1;
-  if(page<1)
-  {
-   $("#decrement").removeAttr('href');
-   $("#loading").hide();
-   return;
- }
- else
- {
-   $("#decrement").attr('href','decrement()');
-
- }
- window.location="orders.html?orderStatus="+order_status+"&page="+page;
-}
-
-var page = urlParameterValue( 'page' );
-var id= urlParameterValue( 'id' );
 
 function getBackerOrdersId(id){
   $("#backer_id").val(id);
-
-
-	callAPI("/v1/orders/{0}/backer_information.json".f(id), "GET",getKeyQueryFormat(), onSuccessGetBackerOrders, onApiError);
+  callAPI("/v1/orders/{0}/backer_information.json".f(id), "GET",getKeyQueryFormat(), onSuccessGetBackerOrders, onApiError);
 }
 
 function getBackerOrders() {
   callAPI("/v1/orders/current_backer_orders.json", "GET",getKeyQueryFormat(), onSuccessGetBackerOrders, onApiError);
 }
+function onSuccessGetBackerOrders(response) { 
+  setBackerOrdersAction(response.data);
+  drawDatatable(response.data);
 
-function getBackerAddress()
-{
-	callAPI("/v1/addresses/address_details.json", "GET", getKeyQueryFormat(), onSuccessGetBackerAddress, onSuccessGetBackerAddress);	
+  if (response.data.length > 0) {
+    $("#address_Orderid").val(response.data[0].address_id);
+    $("#backer_id").val(response.data[0].backer_id);
+    $("#email").html(response.data[0].backer.email);
+    $("#current-email").val(response.data[0].backer.email);
+    if(getRoles()!="admin"){
+      callAPI("/v1/backers/backer_information.json", "GET", getKeyQueryFormat(), onSuccessGetTrackerInfo, onApiError);
+    }
+    else{
+      callAPI("/v1/backers/backer_information.json?backer_id={0}".f(response.data[0].backer_id), "GET", getKeyQueryFormat(), onSuccessGetTrackerInfo, onApiError);
+    }
+  }
+  else  {
+    $("#loading").hide();
+  }
+}
+function onSuccessGetTrackerInfo(response){
+  populateTrackingDetails(response.data);
+  populateAddressDetails(response.data);
+  populateEditorForm(response.data);
+  populateVerificationDetails(response.data);
+
+  if(getRoles() =="admin"){
+    $("#adminPanel").show();
+  }
+
+// show the hidden sections as appropriate
+$("#orderstable").show();
+$("#tracking-wizard").show();
+$("#loading").hide();
 }
 
-function getTrackingInfo()
-{
-	callAPI("/v1/backers/backer_information.json", "GET", getKeyQueryFormat(), onSuccessGetTrackerInfo, onApiError);
-}
-
-function getTrackingInfo2(id)
-{
-	callAPI("/v1/backers/backer_information.json?backer_id={0}".f(id), "GET", getKeyQueryFormat(), onSuccessGetTrackerInfo, onApiError);
-}
-
-function deleteBackerAccount()
-{
+function deleteBackerAccount(){
   var id = $("#backer_id").val();
   callAPI("/v1/backers/{0}/delete_backer.json?api_key={1}".f(id, getKey()), "DELETE", "", onDeleteBackerAccount, onApiError);
 }
 
-function confirmBackerAddress(status)
-{
-	var param= {};
-	param['api_key'] = getKey();
-	param['address_confirmed'] = status;
+function confirmBackerAddress(status){
+  var param= {};
+  param['api_key'] = getKey();
+  param['address_confirmed'] = status;
   if(getRoles()=="admin"){
     param['backer_id'] = $("#backer_id").val();
   }
-	callAPI("/v1/backers/update_backer.json", "PUT", JSON.stringify(param), onSuccessConfirmBackerAddress, onApiError);	
+  callAPI("/v1/backers/update_backer.json", "PUT", JSON.stringify(param), onSuccessConfirmBackerAddress, onApiError);	
 }
 
 function onDeleteBackerAccount(response){
-window.location="backers.html?page=1";
+  window.location="backers.html?page=1";
 }
 
 function onSuccessConfirmBackerAddress(response){
-
   if (response.data.address_confirmed == true)
   {
     $("#changeAddress").hide();
     $("#confirmAddress").hide();
-  if(getRoles()=="admin"){
-    $("#unConfirmAddress").show();
-  }
+    if(getRoles()=="admin"){
+      $("#unConfirmAddress").show();
+    }
+    $("#addressConfirmed").show();
+    $("#addressConfirmedText").val("confirmed");
+    $("#address_not_confirmed").hide();
   }
   else
   {
     $("#changeAddress").show();
     $("#confirmAddress").show();
     $("#unConfirmAddress").hide(); 
+    $("#addressConfirmed").hide();
+    $("#address_not_confirmed").show();
   }
-	$("#addressConfirmed").show();
-	$("#addressConfirmedText").val("confirmed");
-	$("#address_not_confirmed").hide();
 }
-function onSuccessGetTrackerInfo(response){
-	
-	// display the tracking information
-	var status = "";
-	switch(response.data.shipping_status)
-	{
-		case "shipment_scheduled" : status = 'Shipmnet status: <span class="label bg-info">Shipment Scheduled</span><br>'; 	break;
-		case "shipped": status = 'Shipmnet status: <span class="label bg-success">Shipped</span><br>'; 	break;
-		default: status = 'Shipmnet status: <span class="label bg-warning">No information available</span><br>'; break;
-	}
-	
-var tracking_url = null;
-switch((response.data.shipping_service + "").toLowerCase())
-        {
-          case "cnrpost": 
-            tracking_url = '<a style="color:blue" target="_blank" href="http://www.17track.net/en/result/post.shtml?nums={0}">{0} (Click here)</a>'.f(response.data.tracking_number);
-            break;
-          case "pfc post":
-            tracking_url = '<a style="color:blue" target="_blank" href="http://www.17track.net/en/result/post.shtml?nums={0}">{0} (Click here)</a>'.f(response.data.tracking_number);
-            break;
-          default: 
-            tracking_url = response.data.tracking_number;
-            break;
-      }
 
-	$("#trackingDetails").empty();
-	$("#trackingDetails").append(status);
-	if (response.data.shipping_service) $("#trackingDetails").append('Shipping Service: <strong>{0}</strong><br>'.f(response.data.shipping_service));
-	if (response.data.tracking_number) $("#trackingDetails").append('Tracking Number: <strong>{0}</strong><br>'.f(tracking_url));
-	if (response.data.shipping_date) $("#trackingDetails").append('Shipping Date: <strong>{0}</strong><br>'.f( $.formatDateTime("MM dd, yy", new Date(response.data.shipping_date)))); //$.format.date(response.data.shipping_date, "MMM dd, yyyy")
-	
-
-  
-
-	if (response.data.address_confirmed)
-	{
-		$("#changeAddress").hide();
-		$("#confirmAddress").hide();
-      if(getRoles()=="admin"){
-    $("#unConfirmAddress").show();
-  }
-		$("#addressConfirmed").show();
-	}
-	else
-	{
-		$("#changeAddress").show();
-		$("#confirmAddress").show();
-    $("#unConfirmAddress").hide();
-		$("#addressConfirmed").hide();
-	}
-	
-	// display the address information
-	var addressDetails = 
-		 'Name: <strong>' + response.data.address.name +'</strong><br>' + 
-		 'Address:<br><strong>' + response.data.address.address_line_1 +'</strong><br>' + 
-		 '<strong>' + response.data.address.address_line_2 +'</strong><br>' + 
-		 '<strong>' + response.data.address.city +'</strong><br>' + 
-		 '<strong>' + response.data.address.state +'</strong><br>' + 
-		 '<strong>' + response.data.address.country +'</strong><br>' + 
-		 'Postal Code: <strong>' + response.data.address.zip_code +'</strong><br>' + 
-		 'Phone/Mobile: <strong>' + response.data.address.phone +'</strong><br>' 
- 
-		// populate the display address
-		$("#addressDetails").empty();
-		if (response.data.address.name) $("#addressDetails").append('Name: <strong>{0}</strong><br>'.f(response.data.address.name));
-		if (response.data.address.address_line_1) $("#addressDetails").append('Address: <br>     <strong>{0}</strong><br>'.f(response.data.address.address_line_1));
-		if (response.data.address.address_line_2) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(response.data.address.address_line_2));
-		if (response.data.address.city) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(response.data.address.city));
-		if (response.data.address.state) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(response.data.address.state));
-		if (response.data.address.country) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(response.data.address.country));
-		if (response.data.address.zip_code) $("#addressDetails").append('Postal Code: <strong>{0}</strong><br>'.f(response.data.address.zip_code));
-		if (response.data.address.phone) $("#addressDetails").append('Phone/Mobile: <strong>{0}</strong><br>'.f(response.data.address.phone));
-		
-		// populate the editor form
-		$("#name").val(response.data.address.name);
-		$("#address_id").val(response.data.address.id);
-		$("#address_line_1").val(response.data.address.address_line_1);
-		$("#address_line_2").val(response.data.address.address_line_2);
-		$("#city").val(response.data.address.city);
-		$("#state").val(response.data.address.state);
-		$("#zip_code").val(response.data.address.zip_code);
-		$("#phone_no").val(response.data.address.phone);
-		$("#updateAddress_authentication_token").val(getKey()); 
-		
-		var str=response.data.address.country;
-
-    if (str){
-  		str = str.toLowerCase().replace(/\b[a-z]/g, function(letter) {
-  			return letter.toUpperCase();
-  		});
-    }
-
-		$("#select2-option > option").each(function() {
-			if(str==this.value)
-				document.getElementById('select2-option').selectedIndex = this.index;
-		});
-   
-   // show the verification messages
-	$("#shipping_not_paid").hide();
-	$("#split_required").hide();
-	$("#address_not_confirmed").hide()
-	$("#perk_is_undefined").hide();
-	$("#no_problems").hide();
-	
-   var errorList =response.data.verification_details;
-   if (errorList)
-   {
-		if (errorList.length == 0) 
-		{
-			$("#no_problems").show();
-		}
-		else
-		{
-			for(var i=0; i < errorList.length; i++)
-			{
-				$("#" + errorList[i]).show();
-			}
-		}
-	}
-	else
-	{
-		$("#no_problems").show();
-	}
-	
-   // show the hidden sections as appropriate
-   $("#orderstable").show();
-   $("#saveOrders").show();
-   $("#tracking-wizard").show();
-   
-   $("#loading").hide();
- }
-
- function onSuccessGetBackerOrders(response) { 
-  if (response.data.length > 0)
+function getShipmentStatusLine(data){
+  switch(data)
   {
-   $("#address_Orderid").val(response.data[0].address_id);
-   $("#backer_id").val(response.data[0].backer_id);
-   $("#email").html(response.data[0].backer.email);
-   $("#current-email").val(response.data[0].backer.email);
- }
-   setBackerOrdersAction(response.data);
-   for(i=0;i<response.data.length;i++){
-    orderList[i]=response.data[i].id;
+    case "shipment_scheduled" : status = 'Shipmnet status: <span class="label bg-info">Shipment Scheduled</span><br>';  break;
+    case "shipped": status = 'Shipmnet status: <span class="label bg-success">Shipped</span><br>';  break;
+    default: status = 'Shipmnet status: <span class="label bg-warning">No information available</span><br>'; break;
   }
-  // if(getRoles()!="admin"){
-    for(i=0;i<response.data.length;i++){
-     if(response.data[i].notes && response.data[i].notes!="Success" && response.data[i].notes!="" ){
-      var str =   response.data[i].notes;
-      
-      var res = str.replace("Shipping not paid.","");
+  return status;
+}
 
-      $("#verificationDetails").empty();
-      if(res.trim().length!=0){
-       $("#verificationDetails").append("<p >Pledge Id: "+response.data[i].reference_no+" - "+ res +"<p>");
-     } else {
-       $("#verificationDetails").append('<span class="label bg-success">Done!</span> No problems found with your order.<br>');
-     }
-   }
- }
-// }
+function getTrackingNumberLine(data){
+  switch((data + "").toLowerCase())
+  {
+    case "cnrpost": 
+    tracking_url = '<a style="color:blue" target="_blank" href="http://www.17track.net/en/result/post.shtml?nums={0}">{0} (Click here)</a>'.f(data.tracking_number);
+    break;
+    case "pfc post":
+    tracking_url = '<a style="color:blue" target="_blank" href="http://www.17track.net/en/result/post.shtml?nums={0}">{0} (Click here)</a>'.f(data.tracking_number);
+    break;
+    default: 
+    tracking_url = (data? data.tracking_number: "No Tracking Details");
+    break;
+  }
+  return tracking_url;
+}
 
-	if(response.data.length<10){
-	 $("#increment").removeAttr('href');
-	}
-	drawDatatable(response.data);
+function populateTrackingDetails(data){
+// display the tracking information
+var status = getShipmentStatusLine(data.shipping_status);
+var tracking_url = getTrackingNumberLine(data.shipping_service);
 
-	if(getRoles()!="admin"){
-		getTrackingInfo();
-	}
-	else
-	{
-		getTrackingInfo2(response.data[0].backer_id);
-	}
+$("#trackingDetails").empty();
+$("#trackingDetails").append(status);
+if (data.shipping_service) $("#trackingDetails").append('Shipping Service: <strong>{0}</strong><br>'.f(data.shipping_service));
+if (data.tracking_number) $("#trackingDetails").append('Tracking Number: <strong>{0}</strong><br>'.f(tracking_url));
+if (data.shipping_date) $("#trackingDetails").append('Shipping Date: <strong>{0}</strong><br>'.f( $.formatDateTime("MM dd, yy", new Date(data.shipping_date))));
+}
+
+function populateAddressDetails(data){
+  $("#addressDetails").empty();
+  if (data.address.name) $("#addressDetails").append('Name: <strong>{0}</strong><br>'.f(data.address.name));
+  if (data.address.address_line_1) $("#addressDetails").append('Address: <br>     <strong>{0}</strong><br>'.f(data.address.address_line_1));
+  if (data.address.address_line_2) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(data.address.address_line_2));
+  if (data.address.city) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(data.address.city));
+  if (data.address.state) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(data.address.state));
+  if (data.address.country) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(data.address.country));
+  if (data.address.zip_code) $("#addressDetails").append('Postal Code: <strong>{0}</strong><br>'.f(data.address.zip_code));
+  if (data.address.phone) $("#addressDetails").append('Phone/Mobile: <strong>{0}</strong><br>'.f(data.address.phone));
+
+  var str= data.address.country;
+
+  if (str){
+    str = str.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+      return letter.toUpperCase();
+    });
+  }
+
+  $("#select2-option > option").each(function() {
+    if(str==this.value)
+      document.getElementById('select2-option').selectedIndex = this.index;
+  });
+
+  if (data.address_confirmed)
+  {
+    $("#changeAddress").hide();
+    $("#confirmAddress").hide();
+    $("#addressConfirmed").show();
+
+    if(getRoles()=="admin"){
+      $("#unConfirmAddress").show();
+    }
+  }
+  else
+  {
+    $("#changeAddress").show();
+    $("#confirmAddress").show();
+    $("#unConfirmAddress").hide();
+    $("#addressConfirmed").hide();
+  }
+}
+
+function populateEditorForm(data){
+// populate the editor form
+$("#name").val(data.address.name);
+$("#address_id").val(data.address.id);
+$("#address_line_1").val(data.address.address_line_1);
+$("#address_line_2").val(data.address.address_line_2);
+$("#city").val(data.address.city);
+$("#state").val(data.address.state);
+$("#zip_code").val(data.address.zip_code);
+$("#phone_no").val(data.address.phone);
+$("#updateAddress_authentication_token").val(getKey()); 
+}
+
+function populateVerificationDetails(data){
+// show the verification messages
+$("#shipping_not_paid").hide();
+$("#split_required").hide();
+$("#address_not_confirmed").hide()
+$("#perk_is_undefined").hide();
+$("#no_problems").hide();
+
+var errorList = data.verification_details;
+if (errorList)
+{
+  if (errorList.length == 0) 
+  {
+    $("#no_problems").show();
+  }
+  else
+  {
+    for(var i=0; i < errorList.length; i++)
+    {
+      $("#" + errorList[i]).show();
+    }
+  }
+}
+else
+{
+  $("#no_problems").show();
+}  
 }
 
 function updateAddresses()
@@ -367,269 +275,53 @@ function updateAddresses()
 }
 
 function  updateBackerAddresses(id,param){
- callAPI("/v1/addresses/{0}.json".f(id), "PUT", param, onSuccessUpdateBackerAddresses, onApiError);
+  callAPI("/v1/addresses/{0}.json".f(id), "PUT", param, onSuccessUpdateBackerAddresses, onApiError);
 }
 
 function onSuccessUpdateBackerAddresses(response){
-	window.location=window.location.href;
+  window.location=window.location.href;
 }
 
 function orderStatus(){
- id=getOrderStatusId();
- notes=$("#myNotes").val();
- if(filters.length==0){
-  bootbox.alert("Please select the checkbox");
-}
-else{
-  a=filters.toString();
-  var param = {
-   "order_ids" : a,
-   "notes":notes,
-   "order_status_id" : id
- };
- param=JSON.stringify(param);
- callAPI("/v1/orders/update_order_status.json", "PUT",param, onSuccessOrderStatus, onApiError);  
-}
+  id=getOrderStatusId();
+  notes=$("#myNotes").val();
+  if(filters.length==0){
+    bootbox.alert("Please select the checkbox");
+  }
+  else{
+    a=filters.toString();
+    var param = {
+      "order_ids" : a,
+      "notes":notes,
+      "order_status_id" : id
+    };
+    param=JSON.stringify(param);
+    callAPI("/v1/orders/update_order_status.json", "PUT",param, onSuccessOrderStatus, onApiError);  
+  }
 }
 
 function onSuccessOrderStatus(response){
- window.location=window.location.href;
+  window.location=window.location.href;
 }
 
 function order(i){
   setOrderStatusId(i);
 }
 
-function saveOrderChanges(){
- callAPI("/v1/orders/{0}/update_status_geckoteam.json".f(getKey()), "PUT","", onSuccessSaveOrderChanges, onApiError); 
-}
-
-function displaySaveOrderChangesForBackers(){
-
- callAPI("/v1/orders/{0}/update_status_geckoteam.json".f(getKey()), "PUT","",onSuccessDisplaySaveOrderChanges, onApiError1); 
-}
-
-function onSuccessDisplaySaveOrderChanges(response){
-}
-
-function onSuccessSaveOrderChanges(response){
-  bootbox.alert("Changes have been saved successfully", function(result) 
-  {  
-    if(result==undefined){
-      window.location=window.location.href;
-    }
-  });
-}
-
-function getInformation(){
-  order_status= urlParameterValue('orderStatus');
-  switch(order_status)
-  {
-    case '1':
-    $("#addOrder").hide();
-
-    $("#emailBlock").hide();
-    getPendingOrderAccepted();
-    break;
-    case '2':
-    $("#addOrder").hide();
-
-    $("#emailBlock").hide();
-    pendingActionCustomer();
-    break;
-    case '3':
-    $("#addOrder").hide();
-    pendingActionGeckoTeam();
-    $("#emailBlock").hide();
-    break;
-    case '4':
-    $("#addOrder").hide();
-
-    $("#emailBlock").hide();
-    pendingShipment();
-    break;
-    case '5':
-    $("#addOrder").hide();
-
-    $("#emailBlock").hide();
-    shipmentDone();
-    break;
-    case '6':
-    $("#addOrder").hide();
-
-    $("#emailBlock").hide();
-    inCompleteAddress();
-    break;
-    case '7':
-    $("#addOrder").hide();
-
-    $("#emailBlock").hide();
-    perkNotMentioned();
-    break;
-    case '8':
-    $("#addOrder").hide();
-
-    $("#emailBlock").hide();
-    shippingNotPaid();
-    break;
-    case '9':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    getgecko_2Orders();
-    break;
-    case '10':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    getgecko_6Orders();
-    break;
-    case '11':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    getgecko_4Orders();
-    break;
-    case '12':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    getgeckoOrders();
-    break;
-    case '13':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    getearly_geckoOrders();
-    break;
-    case '14':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    getpink_geckoOrders();
-    break;
-    case '15':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    getgecko_gateway_couponOrders();
-    break;
-    case '16':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    getvb_geckoOrders();
-    break;
-    case '17':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    getluggage_tagOrders();
-    break;
-    case '18':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    getkey_chainOrders();
-    break;
-    case '19':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    getgecko_trioOrders();
-    break;
-    case '20':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    getgecko_reseller_packOrders();
-    break;
-    case '21':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    getgecko_geekOrders();
-    break;
-    case '22':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    getdslr_cameraOrders();
-    break;
-    case '23':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    getundefinedOrders();
-    break;
-    case '24':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    getshipping_chargesOrders();
-    break;
-    default:
-    if(id==""){
-      $("#addOrder").hide();
-    }
-    else{
-     $("#addOrder").show();
-   }
-   $("#action").show(); 
- }
-}
-
 function addNewPerk(){
- var $form = $("#addPerk");
- var $inputs = $form.find("input, select, button, textarea");
- var param =  $form.serializeObject(); 
- param["api_key"] = getKey();
- addPerk(param.order_id,JSON.stringify(param));
-
-
-
-}
-
-function addPerk(id,param){
-  callAPI("/v1/orders/{0}/update_perk.json".f(id), "PUT",param, onSuccessAddPerk, onApiError);
+  var $form = $("#addPerk");
+  var $inputs = $form.find("input, select, button, textarea");
+  var param =  $form.serializeObject(); 
+  param["api_key"] = getKey();
+  callAPI("/v1/orders/{0}/update_perk.json".f(param.order_id), "PUT",JSON.stringify(param), onSuccessAddPerk, onApiError);
 }
 
 function onSuccessAddPerk(response){
   bootbox.alert("Perk has been added successfully", function(result) 
   {  
- 		location.reload();
- });
+    location.reload();
+  });
 }  
-
-
-function inCompleteAddress() {
-  callAPI("/v1/orders/order_status_details2.json?status=Incomplete address&page="+page, "GET","", onSuccessInCompleteData, onApiError);
-}
-
-function inCompleteAddressSearch() {
-  searchPledge_id=getSearchPledgeId();
-  
-  callAPI("/v1/orders/order_status_details2.json?status=Incomplete address&page="+page+"&q[reference_no_cont]="+searchPledge_id, "GET","", onSuccessSearchData, onApiError);
-}
-
-
-function perkNotMentioned() {
-  callAPI("/v1/orders/order_status_details2.json?status=Perk not mentioned&page="+page, "GET","", onSuccessInCompleteData, onApiError);
-}
-
-function perkNotMentionedSearch() {
-  searchPledge_id=getSearchPledgeId();
-  callAPI("/v1/orders/order_status_details2.json?status=Perk not mentioned&page="+page+"&q[reference_no_cont]="+searchPledge_id, "GET","", onSuccessSearchData, onApiError);
-}
-
-
-function shippingNotPaid() {
-  callAPI("/v1/orders/order_status_details2.json?status=Shipping not paid&page="+page, "GET","", onSuccessInCompleteData, onApiError);
-}
-
-function shippingNotPaidSearch() {
-  searchPledge_id=getSearchPledgeId();
-  callAPI("/v1/orders/order_status_details2.json?status=Shipping not paid&page="+page+"&q[reference_no_cont]="+searchPledge_id, "GET","", onSuccessSearchData, onApiError);
-}
-
-function onSuccessInCompleteData(response) {  
-  $("#loading").hide();
-  if(response.data.length<10){
-    $("#increment").removeAttr('href');
-  }
-  drawDatatable(response.data);
-}
-function onSuccessSearchData(response) {  
-  $("#loading").hide();
-  drawDatatable(response.data);
-}
-for (var i = perkArray.length - 1; i >= 0; i--) {
-  perkArray[i]=0;
-};
 
 function resetPerkValueArray(){
   for (var i =perkValue.length - 1; i >= 0; i--) {
@@ -637,22 +329,31 @@ function resetPerkValueArray(){
   };
 }
 
+function selectedPerk(index, i,val){
+  console.log(index);
+  console.log(i);
+  console.log(val);
+  perkArray[index]=i;
+  $("#perkValue{0}".f(index)).html("$"+i);
+  perkValue[index]=val;
+}
+
 function selectedPerk1(i,val){
- perkArray[0]=i;
- $("#perkValue1").html("$"+i);
- perkValue[0]=val;
+  perkArray[0]=i;
+  $("#perkValue1").html("$"+i);
+  perkValue[0]=val;
 }
 
 function selectedPerk2(i,val){
- perkArray[1]=i; 
- perkValue[1]=val;
- $("#perkValue2").html("$"+i);
+  perkArray[1]=i; 
+  perkValue[1]=val;
+  $("#perkValue2").html("$"+i);
 }
 
 function selectedPerk3(i,val){
- perkArray[2]=i;
- perkValue[2]=val;
- $("#perkValue3").html("$"+i);
+  perkArray[2]=i;
+  perkValue[2]=val;
+  $("#perkValue3").html("$"+i);
 }
 
 function selectedPerk4(i,val){
@@ -675,10 +376,14 @@ function selectedPerk6(i,val){
 
 function onDeleteOrder()
 {
+  callAPI("/v1/orders/{0}/delete.json?api_key={1}".f(addPerkOrderId, getKey()), "DELETE",  "" , onSuccessDeleteOrder, onApiError);
+}
 
-   callAPI("/v1/orders/{0}/delete.json?api_key={1}".f(addPerkOrderId, getKey()), "DELETE",  "" , onSuccessDeleteOrder, onApiError);
-
-
+function onSuccessDeleteOrder(response){
+  bootbox.alert("Order is deleted successfully.", function(result) 
+  {  
+    location.reload();
+  });
 }
 
 function addPerks(){
@@ -700,35 +405,26 @@ function addPerks(){
     j=0;
     for (var i = 0; i < perkValue.length; i++) {
 
-     if(perkValue[i]!=0){
-       perksIds[j]=perkValue[i];
-       j++;
-     }
-   };
-   var param={
-     order_id: addPerkOrderId,
-     perk_ids: perksIds.toString(),
-     api_key: getKey()
-   }
+      if(perkValue[i]!=0){
+        perksIds[j]=perkValue[i];
+        j++;
+      }
+    };
+    var param={
+      order_id: addPerkOrderId,
+      perk_ids: perksIds.toString(),
+      api_key: getKey()
+    }
 
-   callAPI("/v1/orders/split_the_order.json", "POST",JSON.stringify(param), onSuccessSplitPerk, onApiError);
-
- }
+    callAPI("/v1/orders/split_the_order.json", "POST",JSON.stringify(param), onSuccessSplitPerk, onApiError);
+  }
 }
 
 function onSuccessSplitPerk(response){
   bootbox.alert("Perks have been successfully added", function(result) 
   { 
-  	location.reload(); 
-    
-     });
-}
-
-function onSuccessDeleteOrder(response){
-  bootbox.alert("Order is deleted successfully.", function(result) 
-  {  
-  	location.reload();
- });
+    location.reload(); 
+  });
 }
 
 function clearPerksModalDialog()
@@ -750,201 +446,12 @@ function clearPerksAmount(){
   $("#perkValue6").empty();
 }
 
-$( "#search" ).click(function() {
-  //searchemail=$("#searchEmail").val();
-  searchPledge_id=$("#searchPledge").val();
- //searchPerk=$("#searchPerk").val();
- setSearchPledgeId(searchPledge_id);
- order_status= urlParameterValue('orderStatus');
- window.location="orders.html?orderStatus="+order_status+"&page="+page+"&search=1";
-});
-
-function getSearchInformation(){
-  order_status= urlParameterValue('orderStatus');
-  switch(order_status)
-  {
-    case '1':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    getPendingOrderAcceptedSearch();
-    break;
-    case '2':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    pendingActionCustomerSearch();
-    break;
-    case '3':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    getPendingActionGeckoTeamSearch();
-    break;
-    case '4':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    pendingShipmentSearch();
-    break;
-    case '5':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    shipmentDoneSearch();
-    break;
-    case '6':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    inCompleteAddressSearch();
-    break;
-    case '7':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    perkNotMentionedSearch();
-    break;
-    case '8':
-    $("#addOrder").hide();
-    $("#emailBlock").hide();
-    shippingNotPaidSearch();
-    break;
-    default:
-    if(id==""){
-      $("#addOrder").hide();
-    }
-    else{
-     $("#addOrder").show();
-   }
-   $("#action").show(); 
- }
-
-
-}
-
-function    getgecko_2Orders(){
- callAPI("/v1/orders/orders_filter.json?order_types=5&page="+page, "GET","", onSuccessInCompleteData, onApiError);
-
-}
-
-
-function  getgecko_6Orders(){
- callAPI("/v1/orders/orders_filter.json?order_types=7&page="+page, "GET","", onSuccessInCompleteData, onApiError);
-}
-
-function  getgecko_4Orders(){
-  callAPI("/v1/orders/orders_filter.json?order_types=6&page="+page, "GET","", onSuccessInCompleteData, onApiError);
-}
-function getgeckoOrders(){
-  callAPI("/v1/orders/orders_filter.json?order_types=4&page="+page, "GET","", onSuccessInCompleteData, onApiError);
-}
-
-function getearly_geckoOrders(){
- callAPI("/v1/orders/orders_filter.json?order_types=3&page="+page, "GET","", onSuccessInCompleteData, onApiError);
-}
-
-function getpink_geckoOrders(){
- callAPI("/v1/orders/orders_filter.json?order_types=13&page="+page, "GET","", onSuccessInCompleteData, onApiError);
-}
-
-function getgecko_gateway_couponOrders(){
- callAPI("/v1/orders/orders_filter.json?order_types=8&page="+page, "GET","", onSuccessInCompleteData, onApiError);
-}
-
-function getvb_geckoOrders(){
- callAPI("/v1/orders/orders_filter.json?order_types=14&page="+page, "GET","", onSuccessInCompleteData, onApiError);
-}
-
-function getluggage_tagOrders(){
- callAPI("/v1/orders/orders_filter.json?order_types=12&page="+page, "GET","", onSuccessInCompleteData, onApiError);
-} 
-
-function getkey_chainOrders(){
- callAPI("/v1/orders/orders_filter.json?order_types=1&page="+page, "GET","", onSuccessInCompleteData, onApiError);
-}
-function getgecko_trioOrders(){
- callAPI("/v1/orders/orders_filter.json?order_types=11&page="+page, "GET","", onSuccessInCompleteData, onApiError);
-}
-
-function getgecko_reseller_packOrders(){
-  callAPI("/v1/orders/orders_filter.json?order_types=10&page="+page, "GET","", onSuccessInCompleteData, onApiError);
-}
-
-function getgecko_geekOrders(){
-  callAPI("/v1/orders/orders_filter.json?order_types=9&page="+page, "GET","", onSuccessInCompleteData, onApiError);
-}
-
-function getdslr_cameraOrders(){
-  callAPI("/v1/orders/orders_filter.json?order_types=2&page="+page, "GET","", onSuccessInCompleteData, onApiError);
-}
-
-function getundefinedOrders(){
- callAPI("/v1/orders/orders_filter.json?order_types=15&page="+page, "GET","", onSuccessInCompleteData, onApiError);
-}
-
-function getshipping_chargesOrders(){
- callAPI("/v1/orders/orders_filter.json?order_types=16&page="+page, "GET","", onSuccessInCompleteData, onApiError);
-}
-
-function filterOrder(){
-  var $form = $("#filterOrder");
-  var $inputs = $form.find("input, select, button, textarea");
-  var param =  $form.serializeObject(); 
-
-  a=filterPerk.toString();
-  var param={
-    "order_types" : a,
-    "address_completion":param.address_completion,
-    "perk_completion" :param.perk_completion,
-    "shipping_completion":param.shipping_completion,
-    "shipping_status":param.shipping_status
-  };
-  setFilterPerk(param);
-  order_status= urlParameterValue('orderStatus');
-  window.location="orders.html?orderStatus="+order_status+"&page="+page+"&filter=1";
-  
-}
-
 function selectedPerk(i,val){
-
   var found = jQuery.inArray(val, filterPerk);
   if (found >= 0) {
-    // Element was found, remove it.
     filterPerk.splice(found, 1);
   } else {
-            // Element was not found, add it.
-            filterPerk.push(val);
-          }
+    filterPerk.push(val);
+  }
+}
 
-        }
-
-        function uncheckTheCheckbox() {
-         document.getElementById("check1").checked = false;
-         document.getElementById("check2").checked = false;
-         document.getElementById("check3").checked = false;
-         document.getElementById("check4").checked = false;
-         document.getElementById("check5").checked = false;
-         document.getElementById("check6").checked = false;
-         document.getElementById("check7").checked = false;
-         document.getElementById("check8").checked = false;
-         document.getElementById("check9").checked = false;
-         document.getElementById("check10").checked = false;
-         document.getElementById("check11").checked = false;
-         document.getElementById("check12").checked = false;
-         document.getElementById("check13").checked = false;
-         document.getElementById("check14").checked = false;
-         document.getElementById("check15").checked = false;
-       }
-
-
-       function getFilteredData(){
-        param=getFilterPerk();
-        callAPI("/v1/orders/orders_filter.json", "GET",param, onSuccessGetFilterData, onApiError);
-      }
-
-      function  onSuccessGetFilterData(response){
-        $("#addOrder").hide();
-        $("#emailBlock").hide();
-        $("#loading").hide();
-      //setPendingShipment(response.data);
-      if(response.data.length<10){
-        $("#increment").removeAttr('href');
-      }
-      drawDatatable(response.data)
-    }
-
-    
