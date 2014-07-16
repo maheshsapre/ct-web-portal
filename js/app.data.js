@@ -365,11 +365,6 @@ $('[data-ride="datatables2"]').each(function() {
 			});
 		},
 		"aoColumns": [
-		// {
-			// "mData": null,
-			// "sClass": "center",
-			// "sDefaultContent": '<input id="checked" type="checkbox" </input>'
-		// },
 		{ "mData": "id", "bVisible":    false  },
 		{ "mData": "first_name" },
 		{ "mData": "last_name" },

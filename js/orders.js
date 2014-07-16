@@ -328,16 +328,6 @@ function resetPerkValueArray(){
     perkValue[i]=0;
   };
 }
-
-function selectedPerk(index, i,val){
-  console.log(index);
-  console.log(i);
-  console.log(val);
-  perkArray[index]=i;
-  $("#perkValue{0}".f(index)).html("$"+i);
-  perkValue[index]=val;
-}
-
 function selectedPerk1(i,val){
   perkArray[0]=i;
   $("#perkValue1").html("$"+i);

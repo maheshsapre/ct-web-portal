@@ -3,6 +3,31 @@ var page=1;
 
 $(document).ready(function()
 {
+	// $('#data-table-ex').DataTable( {
+ //          dom: 'T<"clear">lfrtip',
+ //          "tableTools": {
+ //            "aButtons": [ "copy", "print" ]
+ //        	}
+ //        } );
+
+    $('#data-table-ex').dataTable( {
+        "sDom": 'T<"clear">lfrtip',
+        "oTableTools": {
+            "aButtons": [
+                "copy",
+                "print",
+                {
+                    "sExtends":    "collection",
+                    "sButtonText": "Save",
+                    "aButtons":    [ "csv", "xls", "pdf" ]
+                }
+            ]
+        }
+    } );
+
+
+
+
 	$('#adminBackers').addClass("active");
 	setCurrentUserName();
 	var search = urlParameterValue( 'search' );
@@ -40,20 +65,10 @@ function onSuccessSearchGetBackerInfo(response) {
 }
 
 function onSearchBacker() {
-	var url = "";
-	switch ($("#searchAddressConfirmed").text())
-	{
-		case "Confirmed": url = url + "&q[address_confirmed_eq]=1"; break;
-		case "Not Confirmed": url = url + "&q[address_confirmed_eq]=0"; break;
-	}
-	
-	switch ($("#searchShippingStatus").text())
-	{
-		case "No Information": url = url + "&q[shipping_status_eq]=0"; break;
-		case "Scheduled": url = url + "&q[shipping_status_eq]=1"; break;
-		case "Shipped": url = url + "&q[shipping_status_eq]=2"; break;
-	}
-	
+	var url = "";	
+	if ($.trim($("#shipment-status").val()).length > 0) url = url + "&q[shipping_status_eq]="+ encodeURIComponent($.trim($("#shipment-status").val()));    	
+	if ($.trim($("#address_confirmed").val()).length > 0) url = url + "&q[address_confirmed_eq]="+ encodeURIComponent($.trim($("#address_confirmed").val()));    	
+
 	if ($.trim($("#searchEmail").val()).length > 0) url = url + "&q[email_cont]="+ encodeURIComponent($.trim($("#searchEmail").val()));
 	if ($.trim($("#searchCountry").val()).length > 0) url = url + "&q[addresses_country_cont]="+ encodeURIComponent($.trim($("#searchCountry").val()));
 	if ($.trim($("#searchNotCountry").val()).length > 0) url = url + "&q[addresses_country_not_cont]="+ encodeURIComponent($.trim($("#searchNotCountry").val()));
@@ -62,7 +77,6 @@ function onSearchBacker() {
 
 	if ($.trim($("#shipping_date_gteq").val()).length > 0) url = url + "&q[shipping_date_gteq]="+ encodeURIComponent($.trim($("#shipping_date_gteq").val()));    	
 	if ($.trim($("#shipping_date_lteq").val()).length > 0) url = url + "&q[shipping_date_lteq]="+ encodeURIComponent($.trim($("#shipping_date_lteq").val()));    	
-
 
 	if ($.trim($("#data_format").val()).length > 0) url = url + "&data_format="+ encodeURIComponent($.trim($("#data_format").val()));    	
 	if ($.trim($("#report_to").val()).length > 0) url = url + "&report_to="+ encodeURIComponent($.trim($("#report_to").val()));    	
@@ -79,24 +93,12 @@ function searchBackerInfo() {
 	$("#shipping_date_gteq").val(decodeURIComponent(urlParameterValue('q[shipping_date_gteq]')))
 	$("#shipping_date_lteq").val(decodeURIComponent(urlParameterValue('q[shipping_date_lteq]')))
 
+	$("#shipment-status").val(decodeURIComponent(urlParameterValue('q[shipping_status_eq]')))
+	$("#address_confirmed").val(decodeURIComponent(urlParameterValue('q[address_confirmed_eq]')))
 
 	$("#data_format").val(decodeURIComponent(urlParameterValue('data_format')))
 	$("#report_to").val(decodeURIComponent(urlParameterValue('report_to')))
 
-	switch (urlParameterValue('q[address_confirmed_eq]'))
-	{
-		case "1": $("#searchAddressConfirmed").text("Confirmed"); break;
-		case "0": $("#searchAddressConfirmed").text("Not Confirmed"); break;
-		default: $("#searchAddressConfirmed").text("All"); break;
-	}
-
-	switch (urlParameterValue('q[shipping_status_eq]'))
-	{
-		case "0": $("#searchShippingStatus").text("No Information"); break;
-		case "1": $("#searchShippingStatus").text("Scheduled"); break;
-		case "2": $("#searchShippingStatus").text("Shipped"); break;
-		default: $("#searchShippingStatus").text("All"); break;
-	}
 	var url = "/v1/backers.json" + window.location.search;
 	callAPI(url, "GET", getApiKeyQueryFormat(), onSuccessSearchGetBackerInfo, onApiError);
 }
