@@ -386,6 +386,11 @@ function cancel(){
 	}
 }
 
+function showHelp()
+{
+  window.open("https://geckotag.zendesk.com", "_blank");
+}
+
 
   
   

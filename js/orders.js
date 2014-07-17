@@ -1,3 +1,5 @@
+var addPerkOrderId;
+var addPerkTotalAmount;
 var searchemail;
 var searchPerk;
 var perkArray=new Array(6);

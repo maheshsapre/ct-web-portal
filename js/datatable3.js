@@ -1,3 +1,4 @@
+var filters=new Array();
 var pendingInfo;
 var page=1;
 var orderId;
@@ -77,23 +78,12 @@ drawDatatable(response.data);
   var param =  $form.serializeObject(); 
    $("#updateAddress_authentication_token").val(getKey()); 
   updateBackerAddresses(param.address_id,JSON.stringify(param));
-  
-  
  }
 
 function  updateBackerAddresses(id,param){
-	
-	alert(id);
-	
 	  callAPI("/v1/addresses/address_details.json", "PUT", param, onSuccessUpdateBackerAddresses, onApiError);
-	  
-	  
 }
-
 function onSuccessUpdateBackerAddresses(response){
-	
-   
-
 }
 
 function addOrder(){
@@ -113,43 +103,6 @@ function onSuccessAddNewOrder(response){
     bootbox.alert("Order has been added successfully", function(result) 
     {  
     location.reload();
-       //window.location=window.location.href;      
      });
-
-
-}
-
-// function order(i){
-//   orderId=i;
-//   //setOrderStatusId(i);
-//  } 
-
-// function orderStatus(){
-//   notes=$("#myNotes").val();
-//   if(filters.length==0){
-//     bootbox.alert("Please select the checkbox");
-//   }
-// 	else{
-// 	a=filters.toString();
-// 	 var param = {
-//                "order_ids" : a,
-//                "notes":notes,
-//                "order_status_id" : orderId
-//                 };
-               
-//                 param=JSON.stringify(param);
-//     callAPI("/v1/orders/update_order_status.json", "PUT",param, onSuccessOrderStatus, onApiError);  
-//   }        
-// }
-
-// function onSuccessOrderStatus(response){
-// window.location="pendingActionGeckoTeam.html?page=1";
-// }
-
-
-
- 
-
-function sendNotifiction(i){
 }
 
