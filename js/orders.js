@@ -8,7 +8,11 @@ var iPerk=-1;
 var id= urlParameterValue( 'id' );
 
 $(document).ready(function(){
-  $("#adminPanel").hide();
+  $("#orderContents").load("orderContents.html", onSuccessContentsLoad);
+});
+
+function onSuccessContentsLoad(){
+ $("#adminPanel").hide();
   $("#tracking-wizard").hide();
   $("#orderstable").hide();
   $("#addressConfirmedText").hide();
@@ -19,10 +23,7 @@ $(document).ready(function(){
   $("#changeAddress").show();
   $("#confirmAddress").show();
   $('#admin3').addClass("active");
-
-  //$("#orderSelection").append('<div class="m-b"><div class="row"><div class="col-lg-6"><select id="select{0}-option" class="col-xs-12 form-control" name="perk"><optgroup label="Select a perk"><option value="">Select aaaa</option><option onClick="javascript:selectedPerk({0}, 5,1);" value="1">Detachable Key Chain</option><option onClick="javascript:selectedPerk({0}, 8,2);" value="2">DSLR Camera Trigger Cable</option><option onClick="javascript:selectedPerk({0}, 8,25);" value="25">DSLR Canon Camera</option><option onClick="javascript:selectedPerk({0}, 8,26);" value="26">DSLR Nikon 1 Camera</option><option onClick="javascript:selectedPerk({0}, 8,27);" value="27">DSLR Nikon 2 Camera</option> <option onClick="javascript:selectedPerk({0}, 8,28);" value="28">DSLR Nikon 3 Camera</option><option onClick="javascript:selectedPerk({0}, 20,3);" value="3">Early Gecko</option><option onClick="javascript:selectedPerk({0}, 25,4);" value="4">Gecko </option><option onClick="javascript:selectedPerk({0}, 40,5);" value="5">Gecko * 2</option><option onClick="javascript:selectedPerk({0}, 75,6);" value="6">Gecko * 4</option><option onClick="javascript:selectedPerk({0}, 100,7);" value="7">Gecko * 6</option><option onClick="javascript:selectedPerk({0}, 7,8);" value="8">Gecko Gateway Coupon</option><option onClick="javascript:selectedPerk({0}, 995,9);" value="9">Gecko Geek</option><option onClick="javascript:selectedPerk({0}, 995,10);" value="10">Gecko Re-Seller Pack</option><option onClick="javascript:selectedPerk({0}, 60,11);" value="11">Gecko Trio </option><option onClick="javascript:selectedPerk({0}, 5,12);" value="12">Luggage Tag</option><option onClick="javascript:selectedPerk({0}, 25,13);" value="13">Pink Gecko * 1 </option><option onClick="javascript:selectedPerk({0}, 200,14);" value="14">VB Geeks </option><option onClick="javascript:selectedPerk({0}, 8,16);" value="16">Shipping Charges </option><option onClick="javascript:selectedPerk({0}, 0,17);" value="17">Donation </option></optgroup></select></div><div class="col-lg-2"><div id="perkValue{0}"></div></div></div></div>'.f(0));
-  // $("#orderSelection").append('<div class="m-b"><div class="row"><div class="col-lg-6"><select id="select{0}-option" class="col-xs-12 form-control" name="perk"><optgroup label="Select a perk"><option value="1">Detachable Key Chain</option><option value="2">DSLR Camera Trigger Cable</option></optgroup></select></div><div class="col-lg-2"><div id="perkValue{0}"></div></div></div></div>'.f(0));
-
+  myFunction();
   setCurrentUserName();
   loggedInrole();
 
@@ -37,8 +38,11 @@ $(document).ready(function(){
   }
   
   clearPerksModalDialog();
-  resetPerkValueArray();
-});
+  resetPerkValueArray();   
+}
+  //$("#orderSelection").append('<div class="m-b"><div class="row"><div class="col-lg-6"><select id="select{0}-option" class="col-xs-12 form-control" name="perk"><optgroup label="Select a perk"><option value="">Select aaaa</option><option onClick="javascript:selectedPerk({0}, 5,1);" value="1">Detachable Key Chain</option><option onClick="javascript:selectedPerk({0}, 8,2);" value="2">DSLR Camera Trigger Cable</option><option onClick="javascript:selectedPerk({0}, 8,25);" value="25">DSLR Canon Camera</option><option onClick="javascript:selectedPerk({0}, 8,26);" value="26">DSLR Nikon 1 Camera</option><option onClick="javascript:selectedPerk({0}, 8,27);" value="27">DSLR Nikon 2 Camera</option> <option onClick="javascript:selectedPerk({0}, 8,28);" value="28">DSLR Nikon 3 Camera</option><option onClick="javascript:selectedPerk({0}, 20,3);" value="3">Early Gecko</option><option onClick="javascript:selectedPerk({0}, 25,4);" value="4">Gecko </option><option onClick="javascript:selectedPerk({0}, 40,5);" value="5">Gecko * 2</option><option onClick="javascript:selectedPerk({0}, 75,6);" value="6">Gecko * 4</option><option onClick="javascript:selectedPerk({0}, 100,7);" value="7">Gecko * 6</option><option onClick="javascript:selectedPerk({0}, 7,8);" value="8">Gecko Gateway Coupon</option><option onClick="javascript:selectedPerk({0}, 995,9);" value="9">Gecko Geek</option><option onClick="javascript:selectedPerk({0}, 995,10);" value="10">Gecko Re-Seller Pack</option><option onClick="javascript:selectedPerk({0}, 60,11);" value="11">Gecko Trio </option><option onClick="javascript:selectedPerk({0}, 5,12);" value="12">Luggage Tag</option><option onClick="javascript:selectedPerk({0}, 25,13);" value="13">Pink Gecko * 1 </option><option onClick="javascript:selectedPerk({0}, 200,14);" value="14">VB Geeks </option><option onClick="javascript:selectedPerk({0}, 8,16);" value="16">Shipping Charges </option><option onClick="javascript:selectedPerk({0}, 0,17);" value="17">Donation </option></optgroup></select></div><div class="col-lg-2"><div id="perkValue{0}"></div></div></div></div>'.f(0));
+  // $("#orderSelection").append('<div class="m-b"><div class="row"><div class="col-lg-6"><select id="select{0}-option" class="col-xs-12 form-control" name="perk"><optgroup label="Select a perk"><option value="1">Detachable Key Chain</option><option value="2">DSLR Camera Trigger Cable</option></optgroup></select></div><div class="col-lg-2"><div id="perkValue{0}"></div></div></div></div>'.f(0));
+
 
 function changeEmail()
 {
@@ -72,7 +76,8 @@ function onSuccessGetBackerOrders(response) {
     $("#address_Orderid").val(response.data[0].address_id);
     $("#backer_id").val(response.data[0].backer_id);
     $("#email").html(response.data[0].backer.email);
-    $("#current-email").val(response.data[0].backer.email);
+    $("#current-email").empty();
+    $("#current-email").append(response.data[0].backer.email);
     if(getRoles()!="admin"){
       callAPI("/v1/backers/backer_information.json", "GET", getKeyQueryFormat(), onSuccessGetTrackerInfo, onApiError);
     }
@@ -181,28 +186,32 @@ if (data.shipping_date) $("#trackingDetails").append('Shipping Date: <strong>{0}
 
 function populateAddressDetails(data){
   $("#addressDetails").empty();
-  if (data.address.name) $("#addressDetails").append('Name: <strong>{0}</strong><br>'.f(data.address.name));
-  if (data.address.address_line_1) $("#addressDetails").append('Address: <br>     <strong>{0}</strong><br>'.f(data.address.address_line_1));
-  if (data.address.address_line_2) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(data.address.address_line_2));
-  if (data.address.city) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(data.address.city));
-  if (data.address.state) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(data.address.state));
-  if (data.address.country) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(data.address.country));
-  if (data.address.zip_code) $("#addressDetails").append('Postal Code: <strong>{0}</strong><br>'.f(data.address.zip_code));
-  if (data.address.phone) $("#addressDetails").append('Phone/Mobile: <strong>{0}</strong><br>'.f(data.address.phone));
+  if (data.address == null){
+    $("#addressDetails").append("No address details available");
+  }
+  else{
+    if (data.address.name) $("#addressDetails").append('Name: <strong>{0}</strong><br>'.f(data.address.name));
+    if (data.address.address_line_1) $("#addressDetails").append('Address: <br>     <strong>{0}</strong><br>'.f(data.address.address_line_1));
+    if (data.address.address_line_2) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(data.address.address_line_2));
+    if (data.address.city) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(data.address.city));
+    if (data.address.state) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(data.address.state));
+    if (data.address.country) $("#addressDetails").append('&#09;<strong>{0}</strong><br>'.f(data.address.country));
+    if (data.address.zip_code) $("#addressDetails").append('Postal Code: <strong>{0}</strong><br>'.f(data.address.zip_code));
+    if (data.address.phone) $("#addressDetails").append('Phone/Mobile: <strong>{0}</strong><br>'.f(data.address.phone));
 
-  var str= data.address.country;
+    var str= data.address.country;
 
-  if (str){
-    str = str.toLowerCase().replace(/\b[a-z]/g, function(letter) {
-      return letter.toUpperCase();
+    if (str){
+      str = str.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+        return letter.toUpperCase();
+      });
+    }
+
+    $("#select2-option > option").each(function() {
+      if(str==this.value)
+        document.getElementById('select2-option').selectedIndex = this.index;
     });
   }
-
-  $("#select2-option > option").each(function() {
-    if(str==this.value)
-      document.getElementById('select2-option').selectedIndex = this.index;
-  });
-
   if (data.address_confirmed)
   {
     $("#changeAddress").hide();
@@ -220,19 +229,21 @@ function populateAddressDetails(data){
     $("#unConfirmAddress").hide();
     $("#addressConfirmed").hide();
   }
+
 }
 
 function populateEditorForm(data){
-// populate the editor form
-$("#name").val(data.address.name);
-$("#address_id").val(data.address.id);
-$("#address_line_1").val(data.address.address_line_1);
-$("#address_line_2").val(data.address.address_line_2);
-$("#city").val(data.address.city);
-$("#state").val(data.address.state);
-$("#zip_code").val(data.address.zip_code);
-$("#phone_no").val(data.address.phone);
-$("#updateAddress_authentication_token").val(getKey()); 
+  if (data != null && data.address != null){
+    $("#name").val(data.address.name);
+    $("#address_id").val(data.address.id);
+    $("#address_line_1").val(data.address.address_line_1);
+    $("#address_line_2").val(data.address.address_line_2);
+    $("#city").val(data.address.city);
+    $("#state").val(data.address.state);
+    $("#zip_code").val(data.address.zip_code);
+    $("#phone_no").val(data.address.phone);
+    $("#updateAddress_authentication_token").val(getKey()); 
+  }
 }
 
 function populateVerificationDetails(data){
@@ -445,3 +456,89 @@ function selectedPerk(i,val){
   }
 }
 
+
+function drawDatatable(tableData){
+
+/*  Render the Orders table */
+$('[data-ride="datatables3"]').each(function() {
+  var isAdmin = getRoles()=="admin"? true : false;
+  var oTable = $(this).dataTable( {
+    "bDestroy":true,
+    "bProcessing": true,
+    "info": false,
+    "bInfo": false, 
+    "paging": false,
+    "aaData":tableData,
+    "ordering": false,
+    "bRetrieve":true,
+    "sDom": "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'row'<'col-sm-6'i><'col col-sm-6'p>>",
+    "sPaginationType": "full_numbers",
+    "bFilter": false,
+    "bPaginate": false,
+    "bPaginate": false,
+    "autoWidth": true,
+    "aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] }],
+    "fnDrawCallback": function () {
+      $("#example tbody tr td:nth-child(8)").click(function () {
+        var position = oTable.fnGetPosition(this); 
+        RowID = oTable.fnGetData(position[0]); 
+        $("#address_id").val(RowID.address_id);
+        $("#address_Orderid").val(RowID.address_id);
+        $("#backer_id").val(RowID.backer_id);
+        $("#order_source").val(RowID.order_source);
+        $("#refrence_number").val(RowID.reference_no);
+      });
+
+      $("#example tbody tr td:nth-child(4)").click(function () {
+        var position = oTable.fnGetPosition(this); 
+        RowID = oTable.fnGetData(position[0]); 
+        $("#order_idPerk").val(RowID.id);
+        addPerkOrderId=RowID.id;
+        addPerkTotalAmount=RowID.amount;
+        clearPerksModalDialog();
+        clearPerksAmount();
+        resetPerkValueArray()
+      });
+
+      $("#example tbody tr td:nth-child(5)").click(function () {
+        var position = oTable.fnGetPosition(this); 
+        RowID = oTable.fnGetData(position[0]); 
+        $("#order_idPerk").val(RowID.id);
+        addPerkOrderId=RowID.id;
+        addPerkTotalAmount=RowID.amount;
+        clearPerksModalDialog();
+        clearPerksAmount();
+        resetPerkValueArray()
+      });
+    },
+    "aaSorting": [],
+    "aoColumns": [
+    { "mData": "reference_no", "sTitle" : "Pledge Id", "bSortable" : true, "bVisible": true , "sWidth" : "10%"} ,
+    { "mData": "perk.name", "sTitle" : "Product", "bSortable" : true, "bVisible": true } ,
+    { "mData": "quantity",  "sTitle" : "Qty", "bSortable" : false, "bVisible": true, "sWidth" : "5%"},
+    { "mData": null , "sTitle" : "Amount", "bSortable" : false, "bVisible": true  } ,
+    { "mData": null, "sTitle" : "Control", "bSortable" : false,  "bVisible":    isAdmin ,   "sClass": "center",
+    "sDefaultContent": '<a  class="icon-edit" data-toggle="modal"  href="#modalAddPerk"></a><a id="splitPerkButton"  class="icon-strikethrough" data-toggle="modal"  href="#modalSelectPerks"></a><a  class="icon-remove" data-toggle="modal"  href="javascript:onDeleteOrder();"></a>'
+  }
+  ],
+  "aoColumnDefs":[
+  {
+    "aTargets": [ 1 ],
+
+    "mRender": function ( url, type, full )  {
+      return   full.perk.name;
+    }
+  }
+  ,
+  {
+    "aTargets": [ 3 ],
+    "sWidth" : "10%"
+    , "mRender": function ( url, type, full )  {
+      return "<span>" + full.currency + "</span><span class='pull-right'>" +  full.amount + '</span>';
+    }
+  }]
+  });
+});
+
+
+}

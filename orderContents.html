@@ -1,0 +1,122 @@
+<html>
+<body>
+	<div class="row">
+		<div class="col-sm-6" id="orderstable">
+			<div  class="table-responsive panel">
+				<table  class="table table-striped m-b-none" id="example" data-ride="datatables3">
+
+				</table>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<input id="backer_id" type="hidden" name="backer_id" value="" />
+			<section id="tracking-wizard" class="panel"> 
+				<div class="wizard wizard-vertical clearfix" id="form-wizard">
+					<ul class="steps">
+						<li data-target="#step1"  class="active"><span class="badge badge-info" >1</span>Verification</li>
+						<li data-target="#step2"><span  class="badge">2</span>Address</li>
+						<li data-target="#step3"><span class="badge" >3</span>Shipping</li>
+					</ul>
+				</div>
+				<div class="step-content">
+					<form>
+						<div class="step-pane " id="step2">
+							<h3 class="m-t-none">
+								<a id="changeAddress" class="btn btn-white btn-xs" data-toggle="modal"  href="#modal">Change</a> 
+								<a id="confirmAddress" class="btn btn-xs btn-info" href="javascript:confirmBackerAddress(true); ">Confirm</a>
+								<a id="addressConfirmed" class="btn btn-white btn-xs icon-thumbs-up disabled" href="javascript:onConfirmClick(); ">Confirmed!</a>
+								<a id="unConfirmAddress" class="btn btn-xs btn-info" href="javascript:confirmBackerAddress(false); ">Unlock Now!</a>
+							</h3>
+							<div class="line line-dashed m-t-large"></div>
+							<p id="addressDetails" class="m-t m-b"></p>
+							<input type="text" id="addressConfirmedText"  class="input-sm form-control" data-trigger="change"/>
+						</div>
+						<div class="step-pane active"  id="step1">
+							<h3 class="m-t-none"></h3>    
+							<div class="list-group">
+								<a id="no_problems" href="#" class="list-group-item">
+									<i ></i>
+									<span class="badge"></span>
+									<i class="icon-info-sign"></i>There are no problems with your order.
+								</a>
+								<a id="shipping_not_paid" href="http://store.geckotag.me/products/indiegogo-shipping-contribution-individual" class="list-group-item">
+									<i class="icon-chevron-right"></i>
+									<span class="badge bg-info">Fix</span>
+									<i class="icon-warning-sign"></i>Shipping is not paid. Please click here to pay shipping. Then send the order details to support@geckotag.me. It will take 48 hours to reflect the changes in the backer portal.
+								</a>
+
+								<a id="split_required" href="mailto:support@geckotag.me" class="list-group-item">
+									<i class="icon-chevron-right"></i>
+									<span class="badge bg-info"></span>
+									<i class="icon-warning-sign grey"></i>Order amount does not match with the selected perk for in one or more orders. Please send an email to support@geckotag.me with your order details.
+								</a>
+								<a id="address_not_confirmed" href="mailto:support@geckotag.me" class="list-group-item">
+									<i class="icon-chevron-right"></i>
+									<span class="badge bg-info"></span>
+									<i class="icon-warning-sign grey"></i>Your address is not confirmed. Please review the address in the 'Address' section. Change if needed and then click 'Confirm'.
+								</a>
+								<a id="perk_is_undefined" href="mailto:support@geckotag.me" class="list-group-item">
+									<i class="icon-chevron-right"></i>
+									<span class="badge bg-info"></span>
+									<i class="icon-warning-sign grey"></i>Perk is undefined in one or more pledges. Please send an email to support@geckotag.me with your order details.
+								</a>
+							</div>
+						</div>
+						<div class="step-pane" id="step3">
+							<h3 class="m-t-none"></h3>          
+							<p id="trackingDetails" class="m-t m-b"></p>
+						</div>                
+					</form>
+					<div class="line line-dashed m-t-large"></div>
+					<div class="actions m-t">
+						<button type="button" class="btn btn-white btn-sm btn-prev" data-target="#form-wizard" data-wizard="previous" disabled="disabled">Prev</button>
+						<button type="button" class="btn btn-white btn-sm btn-next" data-target="#form-wizard" data-wizard="next" data-last="Finish">Next</button>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+	<div class="row" id="adminPanel">
+		<div class="col-lg-6">
+			<section class="panel">
+				<header class="panel-heading">
+					<ul class="nav nav-tabs pull-right">
+						<li class="active"><a href="#changeEmail"  data-toggle="tab"><i class="icon-envelope icon-large text-default"></i>Change Email</a></li>
+						<li ><a href="#otherOptions" data-toggle="tab"><i class="icon-gear icon-large text-default"></i>Other Options</a></li>
+					</ul>
+					<span>
+						<i class="icon-key icon-large text-default"></i>Admin Panel
+					</span>
+				</header>
+				<div class="panel-body">
+					<div class="tab-content">
+						<div class="tab-pane active" id="changeEmail">
+							<form action="javascript:changeEmail();"  class="form-horizontal" id="change-email-form" data-validate="parsley">
+								<div class="form-group">
+									<label class="col-lg-3 control-label">Current Email Id:</label>
+									<div class="col-lg-8">
+										<div class="col-lg-3 control-label" id="current-email"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-lg-3 control-label">New Email Id:</label>
+									<div class="col-lg-8">
+									<input data-type="email" id="merge-to" placeholder="new.email@example.com" name="email"  class="form-control" data-required="true"/>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="submit" class="btn btn-info">Update</button>
+								</div>
+							</form>
+						</div>
+						<div class="tab-pane" id="otherOptions">
+							<button   data-toggle="modal" href="#modalDeleteBackerAccount" class="btn btn-danger">Delete Backer Account</button>
+							<button  id="addOrder" data-toggle="modal" href="#modalShipping" class="btn btn-primary">Add Order</button>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</body>
+</html>

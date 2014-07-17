@@ -103,3 +103,79 @@ function searchBackerInfo() {
 	callAPI(url, "GET", getApiKeyQueryFormat(), onSuccessSearchGetBackerInfo, onApiError);
 }
 
+function drawDatatable(tableData){
+
+/* Render the backers table */
+$('[data-ride="datatables2"]').each(function() {
+  var oTable = $(this).dataTable( {
+    "bProcessing": true,
+    "aaData":tableData,
+    "info": true,
+    "bInfo": true, 
+    "paging": true,
+    "bFilter": true,
+    "ordering": true,
+    "bRetrieve":true,
+    "sDom": "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'row'<'col-sm-6'i><'col col-sm-6'p>>",
+    "sPaginationType": "full_numbers",
+    "bPaginate": true,
+    "fnDrawCallback": function () {
+      $("[data-ride='datatables2'] tbody tr td:nth-child(3)").click(function () {
+        var position = oTable.fnGetPosition(this); 
+        RowID = oTable.fnGetData(position); 
+        sessionStorage.setItem("ModuleDetailID", RowID.ModuleDetailID); 
+      });
+    },
+    "aoColumns": [
+    { "mData": null, "sTitle" : "Name", "bSortable" : true, "bVisible": true } ,
+    { "mData": "email", "sTitle" : "Email", "bSortable" : true, "bVisible": true , "sWidth" : "15%"} ,
+    { "mData": "address_confirmed", "sTitle" : "Address Confirmed", "bSortable" : true, "bVisible": true , "sWidth" : "15%"} ,
+    { "mData": "shipping_status", "sTitle" : "Shipping Status", "bSortable" : true, "bVisible": true , "sWidth" : "20%"} ,
+    { "mData": "address.country", "sTitle" : "Country", "bSortable" : true, "bVisible": true , "sWidth" : "15%"} 
+    ],
+    "aoColumnDefs":[
+    {
+      "aTargets": [ 0 ],
+
+      "mRender": function ( url, type, full )  {
+        return   full.first_name + " " + full.last_name;
+      }
+    },
+    {
+      "aTargets": [ 1 ]
+      , "bSortable": false
+      , "mRender": function ( url, type, full )  {
+        return  '<a style="color:blue" target="_blank" href="orders.html?id='+full.id+'&page=1">' + url + '</a>';
+      }
+    },
+    {
+      "aTargets": [ 3 ]
+      , "bSortable": false
+      , "mRender": function ( url, type, full )  {
+        var tracking_url = null;
+        switch(full.shipping_service)
+        {
+          case "CNRPOST": 
+          tracking_url = '<a style="color:blue" target="_blank" href="http://www.17track.net/en/result/post.shtml?nums={0}">{1}</a>'.f(full.tracking_number, full.tracking_number);
+          break;
+          case "PFC Post":
+          tracking_url = '<a style="color:blue" target="_blank" href="http://www.17track.net/en/result/post.shtml?nums={0}">{1}</a>'.f(full.tracking_number, full.tracking_number);
+          break;
+          default: 
+          if (full.shipping_service != null){
+            tracking_url = "{0}<br>{1}<br>{2}".f(full.shipping_status, full.shipping_service, full.tracking_number);
+          }
+          else
+          {
+            tracking_url = full.shipping_status;
+          }
+          break;
+        }
+
+        return  tracking_url;
+      }
+    }
+    ]
+  } );
+});
+}
