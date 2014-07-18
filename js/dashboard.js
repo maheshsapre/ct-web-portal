@@ -7,60 +7,59 @@ $(document).ready(function()
 		beforeSend: function() 
 		{
 			$("#progress").show();
-      //clear everything
-      $("#bar").width('0%');
-      $("#message").html("");
-      $("#percent").html("0%");
-  },
-  uploadProgress: function(event, position, total, percentComplete) 
-  {
-  	$("#bar").width(percentComplete+'%');
-  	$("#percent").html(percentComplete+'%');
-  },
-  success: function() 
-  {
+			$("#bar").width('0%');
+			$("#message").html("");
+			$("#percent").html("0%");
+		},
+		uploadProgress: function(event, position, total, percentComplete) 
+		{
+			$("#bar").width(percentComplete+'%');
+			$("#percent").html(percentComplete+'%');
+		},
+		success: function() 
+		{
 
-  	alert("hi");
-  	$("#bar").width('100%');
-  	$("#percent").html('100%');
+			alert("hi");
+			$("#bar").width('100%');
+			$("#percent").html('100%');
 
-  },
-  error: function()
-  {       $("#loader").remove();
-  $("#message").html("<font color='red'> ERROR: unable to upload files</font>");
+		},
+		error: function()
+		{       $("#loader").remove();
+		$("#message").html("<font color='red'> ERROR: unable to upload files</font>");
 
-},
-complete: function(response) 
-{   $("#loader").remove();
+	},
+	complete: function(response) 
+	{   $("#loader").remove();
 
 
-alert(response);
-if(response.status==200){  
-	$("#uploadError").css('display','none');
-	$("#uploadSuccess").css('display','block');
-}
-else {
-	$("#uploadResult").append(response.status + ": " + response.statusText + "<br/>");
-	$("#uploadSuccess").css('display','none');
-	$("#uploadError").css('display','block');
+	alert(response);
+	if(response.status==200){  
+		$("#uploadError").css('display','none');
+		$("#uploadSuccess").css('display','block');
+	}
+	else {
+		$("#uploadResult").append(response.status + ": " + response.statusText + "<br/>");
+		$("#uploadSuccess").css('display','none');
+		$("#uploadError").css('display','block');
 
-	if (response.responseText != "")
-	{
-		var obj = JSON.parse(response.responseText);
-		if(obj.code==9107){
-			$("#basicInfo").empty().append("<tr><th>Line</th><th>Error</th></tr>");
-			for(i=0;i<obj.message.length;i++){
-				basic=obj.message[i];
-				$("#basicInfo").append("<tr><td>"+basic.line+"</td><td>"+ basic.error+"</td></tr>");
+		if (response.responseText != "")
+		{
+			var obj = JSON.parse(response.responseText);
+			if(obj.code==9107){
+				$("#basicInfo").empty().append("<tr><th>Line</th><th>Error</th></tr>");
+				for(i=0;i<obj.message.length;i++){
+					basic=obj.message[i];
+					$("#basicInfo").append("<tr><td>"+basic.line+"</td><td>"+ basic.error+"</td></tr>");
+				}
 			}
-}
-else
-{
-	$("#uploadResult").append(obj.message + "<br/>");
-}
-}
-return;
-}
+			else
+			{
+				$("#uploadResult").append(obj.message + "<br/>");
+			}
+		}
+		return;
+	}
 }
 
 }; 
@@ -98,7 +97,7 @@ $( "#select-upload-type" ).change(function() {
 		break;
 		default:
 		csv = "#";
-		
+
 		$("#uploadButton").hide();
 		break;
 	}
@@ -221,15 +220,15 @@ function onSuccessPerksummary(response){
 
 }
 $( "#massNotification" ).click(function() {
-		$("#validateText").val("");
+	$("#validateText").val("");
 
-	});
+});
 
 
-	$( "#deleteButton" ).click(function() {
-		$("#validateDeleteText").val("")
+$( "#deleteButton" ).click(function() {
+	$("#validateDeleteText").val("")
 
-	});
+});
 
 $(document).ready(function() {
 	$("#loading").hide();
@@ -241,28 +240,28 @@ $(document).ready(function() {
 	$('#admin').addClass("active");
 });
 
-	function submitUploadForm(){
-		$("#api_key").val(getKey());
-		$("#backerCsv").append('<div id="loader"></div> ');
-		$("#fileButton").click();
-	}
-	function submit(option){
-		$("#data_type").val(option);
-		$("#api_key").val(getKey());
-		$("#backerCsv").append('<div id="loader"></div> ');
-		$("#fileButton-" + option).click();
-	}
+function submitUploadForm(){
+	$("#api_key").val(getKey());
+	$("#backerCsv").append('<div id="loader"></div> ');
+	$("#fileButton").click();
+}
+function submit(option){
+	$("#data_type").val(option);
+	$("#api_key").val(getKey());
+	$("#backerCsv").append('<div id="loader"></div> ');
+	$("#fileButton-" + option).click();
+}
 
-	function checkText(){
-		var txt=$("#validateText").val();
-		if(txt=="Send email now"){
-			$("#loading").show();
-			sendEmailToBackers();
-		}
-		else{
-			bootbox.alert("Enter the proper text");
-		}
+function checkText(){
+	var txt=$("#validateText").val();
+	if(txt=="Send email now"){
+		$("#loading").show();
+		sendEmailToBackers();
 	}
+	else{
+		bootbox.alert("Enter the proper text");
+	}
+}
 
 
 
@@ -305,7 +304,7 @@ function mergeEmailAccounts(param)
 }
 
 function onSuccessEmailAccounts(response){
-	  bootbox.alert("Done! Accounts merged.");
+	bootbox.alert("Done! Accounts merged.");
 }
 
 function deleteBackerData(){

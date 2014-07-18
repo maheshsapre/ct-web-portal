@@ -41,11 +41,6 @@ var SERVER_RESPONSE =
 	"Default" : ""
 }
 
-
-
-
-
-
 function onServerAPIError(jResponse, sException)
 {  
 	var sMessage = "";  
