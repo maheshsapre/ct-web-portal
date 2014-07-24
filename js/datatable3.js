@@ -56,19 +56,7 @@ searchPledge_id=getSearchPledgeId();
  callAPI("/v1/orders/order_status_details.json?order_status_type=Pending Action - Gecko Team&page="+page+"&q[reference_no_cont]="+searchPledge_id, "GET",getApiKeyQueryFormat(), onSuccessSearchPendingActionGeckoTeam, onApiError);
 }
 
-function onSuccessSearchPendingActionGeckoTeam(response){
- $("#loading").hide();
-drawDatatable(response.data);
-}
 
-function onSuccessgetPendingActionGeckoTeam(response) {  
- $("#loading").hide();
-//setPendingActionGeckoTeam(response.data);
-if(response.data.length<10){
-$("#increment").removeAttr('href');
-}
-drawDatatable(response.data);
-  }
 
  function updateAddresses()
  {

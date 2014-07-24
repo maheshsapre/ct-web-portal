@@ -159,7 +159,7 @@ function getShipmentStatusLine(data){
 }
 
 function getTrackingNumberLine(data){
-  switch((data + "").toLowerCase())
+  switch((data.shipping_service + "").toLowerCase())
   {
     case "cnrpost": 
     tracking_url = '<a style="color:blue" target="_blank" href="http://www.17track.net/en/result/post.shtml?nums={0}">{0} (Click here)</a>'.f(data.tracking_number);
@@ -167,6 +167,14 @@ function getTrackingNumberLine(data){
     case "pfc post":
     tracking_url = '<a style="color:blue" target="_blank" href="http://www.17track.net/en/result/post.shtml?nums={0}">{0} (Click here)</a>'.f(data.tracking_number);
     break;
+    case "india post": 
+      tracking_url = '<a style="color:blue" target="_blank" href="http://services.cept.gov.in/Speednettracking/Track.aspx?articlenumber={0}">{0} (Click here)</a>'.f(data.tracking_number);
+      break;
+
+    case "speed post": 
+      tracking_url = '<a style="color:blue" target="_blank" href="http://services.cept.gov.in/Speednettracking/Track.aspx?articlenumber={0}">{0} (Click here)</a>'.f(data.tracking_number);
+      break;
+    
     default: 
     tracking_url = (data? data.tracking_number: "No Tracking Details");
     break;
@@ -177,7 +185,7 @@ function getTrackingNumberLine(data){
 function populateTrackingDetails(data){
 // display the tracking information
 var status = getShipmentStatusLine(data.shipping_status);
-var tracking_url = getTrackingNumberLine(data.shipping_service);
+var tracking_url = getTrackingNumberLine(data);
 
 $("#trackingDetails").empty();
 $("#trackingDetails").append(status);

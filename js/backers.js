@@ -80,6 +80,7 @@ function searchBackerInfo() {
 
 function drawDatatable(tableData){
   /* Render the backers table */
+
   $('[data-ride="datatables2"]').each(function() {
     var oTable = $(this).dataTable( {
       "bProcessing": true,
@@ -127,14 +128,24 @@ function drawDatatable(tableData){
         , "bSortable": false
         , "mRender": function ( url, type, full )  {
           var tracking_url = null;
-          switch(full.shipping_service)
+          switch((full.shipping_service + "").toLowerCase())
           {
-            case "CNRPOST": 
+            case "india post": 
+            tracking_url = '<a style="color:blue" target="_blank" href="http://services.cept.gov.in/Speednettracking/Track.aspx?articlenumber={0}">{1}</a>'.f(full.tracking_number, full.tracking_number);
+            break;
+
+            case "speed post": 
+            tracking_url = '<a style="color:blue" target="_blank" href="http://services.cept.gov.in/Speednettracking/Track.aspx?articlenumber={0}">{1}</a>'.f(full.tracking_number, full.tracking_number);
+            break;
+
+            case "cnrpost": 
             tracking_url = '<a style="color:blue" target="_blank" href="http://www.17track.net/en/result/post.shtml?nums={0}">{1}</a>'.f(full.tracking_number, full.tracking_number);
             break;
-            case "PFC Post":
+
+            case "pfc post":
             tracking_url = '<a style="color:blue" target="_blank" href="http://www.17track.net/en/result/post.shtml?nums={0}">{1}</a>'.f(full.tracking_number, full.tracking_number);
             break;
+
             default: 
             if (full.shipping_service != null){
               tracking_url = "{0}<br>{1}<br>{2}".f(full.shipping_status, full.shipping_service, full.tracking_number);
